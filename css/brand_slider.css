@@ -1,0 +1,27 @@
+
+.brand_slider_section {
+    width: 100%;
+    margin-top: 30px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand_slider_placeholder {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 75%;
+    height: 100px;
+    background-color: #d9d9d9;
+    overflow: hidden; /* Skryje štvorce, ktoré sa posúvajú mimo */
+    /* position: relative; */
+}
+
+.brand_slider_image {
+    width: 10%;
+    height: 80%;
+    background-color: #7b7b7b;
+    transition: transform 0.5s ease;
+}
