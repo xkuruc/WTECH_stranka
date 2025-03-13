@@ -1,0 +1,35 @@
+
+.banner_hlavna_ponuka {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner_hlavna_ponuka_container {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.tenisky_banner, .kopacky_banner, .lopty_banner {
+    width: 30%;
+    height: 300px;
+    background-color: gray;
+    display: flex;
+    align-items: center;      /* Vertikálne centrovanie */
+    justify-content: center;  /* Horizontálne centrovanie */
+    transition: transform 0.3s ease-in-out;
+}
+
+.tenisky_banner:hover, 
+.tenisky_banner:active,
+.kopacky_banner:hover, 
+.kopacky_banner:active,
+.lopty_banner:hover, 
+.lopty_banner:active{
+    transform: scale(1.1); /* Zväčší element na 110% */
+}
