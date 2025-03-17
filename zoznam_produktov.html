@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranka</title>
+
+    <link rel="stylesheet" href="./css/menu_bar.css">
+    <link rel="stylesheet" href="./css/main_image.css">
+    <link rel="stylesheet" href="./css/filter_menu.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav">
+            <div class="logo">Logo</div>
+            <a href="#home">Tenisky</a>
+            <a href="#novinky">Kopacky</a>
+            <a href="#kontakt">Lopty</a>
+            <a href="#onas">Vypredaj</a>
+        </div>
+        <div class="right_part">
+            <input class="vyhladaj_input"/>
+            <div class="profil">PROFIL </div>
+            <div class="kosik last">KOSIK </div>
+        </div>
+    </nav>
+
+    
+    <section class="text_filter">
+
+        <h1>Tenisky</h1>
+        <div class="filter_menu">
+
+            <button class="filter_menu_item special">Filter</button>
+
+
+            <button class="filter_sipka", id="left_arrow"><img src="./icons/filter_sipka.svg"></button> 
+
+
+
+            <div class="filter_kategorie", id="sliding_filter">
+                <button class="filter_menu_item">Značka</button>
+                <button class="filter_menu_item">Veľkosť</button>
+                <button class="filter_menu_item">Farba</button>
+                <button class="filter_menu_item">Dostupnosť</button>
+                <button class="filter_menu_item">Cena</button> 
+                <button class="filter_menu_item">Pohlavie</button> 
+            </div>
+
+
+
+            <button class="filter_opacna_sipka", id="right_arrow"><img src="./icons/filter_sipka.svg"></button>
+            <script src="./javascript/filter_slider.js"></script>
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
