@@ -1,0 +1,37 @@
+
+
+
+.orderby_menu {
+
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 10px;
+	text-wrap: nowrap;
+
+    align-self: flex-start; /* Zabezpečí, že tento prvok nebude zarovnaný na stred */
+    padding-left: 6%;
+    font-size: 20px;
+}
+
+
+
+
+
+.orderby_menu select {
+	padding: 5px;
+	background-color: white;
+	width: 220px;
+	border: 1px solid #D9D9D9;
+	color: #808080;
+	font-size: 20px;
+	height: 45px;
+	padding-left: 10px;
+
+
+}
+
+
+
+
+
