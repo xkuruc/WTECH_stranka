@@ -28,11 +28,11 @@ function set_slider(type,value) {
 
 /* vykreslí/upraví ten vyfarbený slider medzi thumbs sliderov */
 function update_filled_slider() {
-  let min_percent = ((min_slider.value - min_slider.min) / (max_slider.max - min_slider.min)) * 100;
-  let max_percent = ((max_slider.value - min_slider.min) / (max_slider.max - min_slider.min)) * 100;
+  let min_percent = ((min_slider.value - slider_min) / (slider_max - slider_min)) * 100;
+  let max_percent = ((max_slider.value - slider_min) / (slider_max - slider_min)) * 100;
 
   filled_track.style.left = min_percent + 1 +"%" ;
-  filled_track.style.width = (max_percent - min_percent) - 2 + "%";
+  filled_track.style.width = Math.max((max_percent - min_percent) - 2,0) + "%"; /* bol tu problém, že ak boli na rovnakom mieste, tak bola záporná šírka */
 }
 
 
@@ -70,6 +70,33 @@ max_slider.addEventListener("input", (event) => {
   price_input_max.value = event.target.value;
   update_filled_slider();
 });
+
+
+
+/* zmena slidera keď píšem do inputu */
+price_input_min.addEventListener("keyup", (event) => {
+  if (event.target.value === "" || isNaN(event.target.value )) { /* prázdny input dáva NaN */
+    min_slider.value = 0;
+  }
+  else {
+    min_slider.value = Math.min(parseInt(event.target.value),parseInt(max_slider.value));
+    update_filled_slider();
+  }
+});
+
+
+price_input_max.addEventListener("keyup", (event) => {
+  if (event.target.value === "" || isNaN(event.target.value )) { /* prázdny input dáva NaN */
+      min_slider.value = 0;
+    }
+  else {
+    max_slider.value = Math.max(parseInt(event.target.value),parseInt(min_slider.value));
+    update_filled_slider();
+  }
+});
+
+
+
 
 
 

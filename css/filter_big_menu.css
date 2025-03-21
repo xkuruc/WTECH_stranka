@@ -297,7 +297,7 @@
 
 
 
-.cat_entry_btn:hover, .cat_entry_btn_size:hover {
+.cat_entry_btn:hover, .cat_entry_btn_size:hover, .min_price:hover, .max_price:hover {
   border: 1px solid black;
   color: black;
 }
@@ -322,7 +322,7 @@
 
 
 /* filter btn pre veľkosti */
-.cat_entry_btn_size {
+.cat_entry_btn_size, .min_price, .max_price {
   display: flex;
   height: 45px;
   width: 100px;
@@ -420,13 +420,31 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
+/* input pre slidery */
+.min_price, .max_price { /* veľmi podobné na cat_entry_btn_size */
+  height: 40px;
+  padding-left: 10px;
+}
 
 
+.input_wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input_wrapper input {
+  padding-right: 20px; /* Priestor pre eur znak */
+}
 
 
-
-
-
+.input_wrapper .currency {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 0.9em;
+}
 
 
 

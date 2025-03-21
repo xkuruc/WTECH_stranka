@@ -306,9 +306,6 @@
                             <div class="cat_btn_container_sizes">
                             
                             </div>
-
-
-
                         </div>
                     </section>
 
@@ -387,38 +384,63 @@
                                 <h3>Cena</h3>
                                 
                                 <div class="min_max_filter">
-                                    <input type="number" class="min_price" value="0" min="10" max="1000"/>
-                                    <input type="number" class="max_price" value="1000" min="10" max="1000"/>
+
+                                    <div class="input_wrapper">
+                                        <input type="number" class="min_price" value="0" min="10" max="1000"/>
+                                        <span class="currency">€</span>
+                                    </div>
+
+                                    <div class="input_wrapper">
+                                        <input type="number" class="max_price" value="1000" min="10" max="1000"/>
+                                        <span class="currency">€</span>
+                                    </div>
+
+
                                 </div>
                                 <div class="slider_container">
                                     <span class="slider_track"></span>
                                     <div class="filled_track" id="filled_track"></div>
-                                    <input type="range" class="min_slider" data-value="min_price" min="0" max="1000" value="0" step="20">
-                                    <input type="range" class="max_slider" data-value="max_price" min="0" max="1000" value="1000" step="20">
-                                    
+                                    <input type="range" class="min_slider" min="0" max="1000" value="0" step="20">
+                                    <input type="range" class="max_slider" min="0" max="1000" value="1000" step="20">
                                 </div>
-
-
-
-
-
-
-                               
-
                             </div>
                         
 
-
-
-
-
-
-
-
+                            <!--  data-op je operátor pre zľavu, od/do pre data-value  -->
                             <div class="category_entry_list" data-category="sale"> 
                                 <h3>Zľavy</h3>
                                 
+                                <div class="checkbox_entry" data-op="do" data-value="20">
+                                    <label class="custom-checkbox">
+                                      <input type="checkbox" />
+                                      <span class="checkmark"></span>
+                                      <span class="category_text">do 20%</span>
+                                    </label>
+                                </div>
 
+                                <div class="checkbox_entry" data-op="od" data-value="20">
+                                    <label class="custom-checkbox">
+                                      <input type="checkbox" />
+                                      <span class="checkmark"></span>
+                                      <span class="category_text">od 20%</span>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox_entry" data-op="do" data-value="40">
+                                    <label class="custom-checkbox">
+                                      <input type="checkbox" />
+                                      <span class="checkmark"></span>
+                                      <span class="category_text">do 40%</span>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox_entry" data-op="do" data-value="100">
+                                    <label class="custom-checkbox">
+                                      <input type="checkbox" />
+                                      <span class="checkmark"></span>
+                                      <span class="category_text">Všetky zľavy</span>
+                                    </label>
+                                </div>
 
 
 
