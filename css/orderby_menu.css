@@ -1,21 +1,14 @@
-
-
-
 .orderby_menu {
-
 	display: flex;
 	align-items: center;
 	gap: 20px;
-	padding: 10px;
+	padding-bottom: 10px;
 	text-wrap: nowrap;
-
-    align-self: flex-start; /* Zabezpečí, že tento prvok nebude zarovnaný na stred */
-    padding-left: 6%;
+	user-select: none;
+    align-self: flex-start; /* nezarovná sa podľa parenta na stred, ale ostane vľavo */
+    padding-left: 5.86vw;
     font-size: 20px;
 }
-
-
-
 
 
 .orderby_menu select {
@@ -27,11 +20,6 @@
 	font-size: 20px;
 	height: 45px;
 	padding-left: 10px;
-
+	user-select: none; /* aby sa to nedalo s myšou selectnut text */
 
 }
-
-
-
-
-

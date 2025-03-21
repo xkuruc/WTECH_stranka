@@ -3,24 +3,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const leftArrow = document.getElementById("prevBtn");
     const rightArrow = document.getElementById("nextBtn");
 
-    // Nastavíme hodnotu posunu
     const scrollAmount = 84; // Posunie o šírku tlačidla
 
+    function checkButtons() {
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+        //vypni ak sme na začiatku
+        leftArrow.disabled = container.scrollLeft <= 0;
+
+        //vypni ak sme na konci
+        rightArrow.disabled = container.scrollLeft >= maxScrollLeft - 1;
+    }
+
     leftArrow.addEventListener("click", function () {
-        container.scrollLeft -= scrollAmount;
+        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     });
 
     rightArrow.addEventListener("click", function () {
-        container.scrollLeft += scrollAmount;
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
 
-    // Funkcia na kontrolu viditeľnosti šípok
-    
-
-    // Sledujeme scroll a upravujeme šípky
-    container.addEventListener("scroll", checkArrows);
-    window.addEventListener("resize", checkArrows);
-
-    // Inicializácia kontroly pri načítaní stránky
-    checkArrows();
+    container.addEventListener("scroll", checkButtons);
 });

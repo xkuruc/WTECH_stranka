@@ -1,47 +1,39 @@
 
-
+/* používam 100vw namiesto 100%, aby som nebol ovplyvnený scrollbarom, keď ho odstránim */
 
 .produkty_kontajner {
-
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 100vw;
 	align-items: center;
 	padding-top: 60px;
 	background-color: white;
-
 }
 
 
+
 .produkty_kontajner .orderby_menu {
-
 	justify-content: left;
-
-
 }
 
 
 
 .product_list {
-
-	display: grid;
 	
-	width: 90%;
+	display: grid;
+	width: 90vw;
 	margin-bottom: 50px;
 	height: auto;
 
-
 	row-gap: 1px;
 	column-gap: 1px;
-	grid-template-columns: repeat(auto-fit, 365px);
+	grid-template-columns: repeat(auto-fit, 366px);
 	grid-template-rows: repeat(auto-fit, 450px);
 	
 	align-items: center;
 	justify-content: center;
 
-
 }
-
 
 
 
