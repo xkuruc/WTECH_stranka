@@ -1,89 +1,76 @@
+/* variables */
+const min_slider = document.querySelector(".min_slider");
+const max_slider = document.querySelector(".max_slider");
+const price_input_min = document.querySelector(".min_price");
+const price_input_max = document.querySelector(".max_price");
+let filled_track = document.getElementById("filled_track");
+
+const slider_min = min_slider.min;
+const slider_max = max_slider.max;
 
 
 
-const minSlider = document.querySelector(".minSlider");
-const maxSlider = document.querySelector(".maxSlider");
-const priceInputMin = document.querySelector(".minPrice");
-const priceInputMax = document.querySelector(".maxPrice");
-let filledTrack = document.getElementById("filledTrack");
-
-
-const min = minSlider.min;
-const max = maxSlider.max;
-
-
-const minGap = 1500;
-const range = document.querySelector(".slider-track");
-
-
-
-
-let timeout;
+/* funkcie */
+function set_slider(type,value) {
+  if (type === "min") {
+    min_slider.value = value;
+    price_input_min.value = value;
+  }
+  else {
+    max_slider.value = value;
+    price_input_max.value = value;
+  }
+}
 
 
 
 
 
+/* vykreslí/upraví ten vyfarbený slider medzi thumbs sliderov */
+function update_filled_slider() {
+  let min_percent = ((min_slider.value - min_slider.min) / (max_slider.max - min_slider.min)) * 100;
+  let max_percent = ((max_slider.value - min_slider.min) / (max_slider.max - min_slider.min)) * 100;
+
+  filled_track.style.left = min_percent + 1 +"%" ;
+  filled_track.style.width = (max_percent - min_percent) - 2 + "%";
+}
 
 
-minSlider.addEventListener("input", (event) => {
 
-    if (parseInt(minSlider.value) >= parseInt(maxSlider.value)) {
-      minSlider.value = maxSlider.value - 1; // aby neprekročil maximum
+
+
+/* event handling */
+min_slider.addEventListener("input", (event) => {
+    if (parseInt(min_slider.value) >= parseInt(max_slider.value)) {
+      min_slider.value = max_slider.value - 1; // aby neprekročil maximum
     }
-    priceInputMin.value = event.target.value;
 
+    price_input_min.value = event.target.value;
     update_filled_slider();
 });
 
 
-/* uloženie filtra */
-minSlider.addEventListener("change", function() {
+/* uloženie min filtra */
+min_slider.addEventListener("change", function() {
   add_filter("price",parseInt(this.value),"min");
 });
 
-maxSlider.addEventListener("change", function() {
+max_slider.addEventListener("change", function() {
   add_filter("price",parseInt(this.value),"max");
 });
 
 
 
+/* uloženie max filtra */
+max_slider.addEventListener("input", (event) => {
+  if (parseInt(max_slider.value) <= parseInt(min_slider.value)) {
+    max_slider.value = parseInt(min_slider.value) + 1; // aby neprekročil minimum
+  }
 
-maxSlider.addEventListener("input", (event) => {
-    if (parseInt(maxSlider.value) <= parseInt(minSlider.value)) {
-      maxSlider.value = parseInt(minSlider.value) + 1; // aby neprekročil minimum
-    }
-
-    priceInputMax.value = event.target.value;
-    update_filled_slider();
-  
-
+  price_input_max.value = event.target.value;
+  update_filled_slider();
 });
 
 
 
-
-add_filter("price",700,"max");
-
-
-
-
-
-
-
-function update_filled_slider() {
-  let minPercent = ((minSlider.value - minSlider.min) / (maxSlider.max - minSlider.min)) * 100;
-  let maxPercent = ((maxSlider.value - minSlider.min) / (maxSlider.max - minSlider.min)) * 100;
-
-  filledTrack.style.left = minPercent + 1 +"%" ;
-  filledTrack.style.width = (maxPercent - minPercent) - 2 + "%";
-
-
-
-}
-
-
-
 update_filled_slider();
-
-

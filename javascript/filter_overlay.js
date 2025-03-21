@@ -8,9 +8,9 @@ const close_btns = [document.getElementById('close_btn'),document.getElementById
 const clear_filter = document.getElementById('resetFilters');
 const open_filter = document.getElementById('filter_open_btn');
 
-
 const filter_content = document.querySelector('.filter_content');
-
+const minPrice = 0; 
+const maxPrice = 1000;
 
 
 let filters = { /* aktívne filtre */
@@ -18,12 +18,12 @@ let filters = { /* aktívne filtre */
   size: [],
   color: [],
   available: [],
-  price: { min: 0, max: 1000},
+  price: { min: minPrice, max: maxPrice},
   gender: []
 };
 
 
-filters.price.min = 500;
+
 
 
 /* funkcie */
@@ -106,7 +106,14 @@ function add_filter(cat, value, priceArg = "min") {
 
   if (cat === "price") {
     filters.price[priceArg] = value;
-    button.setAttribute("data-slider", priceArg);
+    button.setAttribute("data-price-arg", priceArg);
+
+    let selector = `button[data-category="${cat}"][data-price-arg="${priceArg}"]`;
+    const active_filter = added_filters.querySelector(selector);
+
+    if (active_filter) {
+      return;
+    }
   }
 
   else {
@@ -120,51 +127,85 @@ function add_filter(cat, value, priceArg = "min") {
   }
 
 
-  //nastavenie atribútov
-  button.setAttribute("onclick", `remove_filter('${cat}', '${value}','${priceArg}')`);
+  //nastavenie atribútov pre spätné vymazanie
   button.setAttribute("data-category", cat);
   button.setAttribute("data-value", value);
 
 
   //formát výpisu
-  if (cat === "size") {
-    button.textContent = cat + ': ' + value;
+  if (cat === "size") { //Veľkosť: 20
+    button.textContent = 'Veľkosť' + ': ' + value;
   }
-  else if (cat === "price") {
+  else if (cat === "price") { //max: 900
     button.textContent = priceArg + ': ' + value;
   } 
-  else {
+  else { //Červená
     button.textContent = value;
   }
 
+  console.log(filters);
   added_filters.appendChild(button);
 }
 
 
-function remove_filter(cat, value, priceArg = "min") {
+
+/* odstráni element, konkrétne vybraný filter */
+function remove_filter(btn, cat, value, priceArg = "min") { 
+  if (cat === "price") { //pre cenu sa nemaže prvok, ale nastaví sa pôvodná hodnota, niečo ako reset
+    console.log(priceArg);
+    if (priceArg === "min") {
+      filters.price[priceArg] = minPrice;
+      set_slider("min",minPrice);
+    }
+    else {
+      filters.price[priceArg] = maxPrice;
+      set_slider("max",maxPrice);
+    }
+    update_filled_slider();
+  }
+  else { /* ostatné kategorie */
+    if (Array.isArray(filters[cat])) {
+      const index = filters[cat].indexOf(value);
+      if (index !== -1) {  // ak existuje
+        filters[cat].splice(index, 1);  //odstráni filter
+      }
+    }
+
+  }
 
 
+  /* odškrtnutie tlačidla */
+  if (cat != "price") {
+    
+    /* nájdem si najprv kontajner a potom v nom nájdem požadovanú value a tej odstránim triedu clicked */
+    const element_container = document.querySelector(`.category_entry_list[data-category="${cat}"]`);
+  
+    let clicked_btn = element_container.querySelector(`.clicked[data-value="${value}"]`);
+
+    if (!clicked_btn) { /* potrebujem odceknut checkbox a odstrániť "active" checkmarku */
+      const checkbox_entry = element_container.querySelector(`.checkbox_entry[data-value="${value}"]`);
+
+      const checkbox = checkbox_entry.querySelector('input[type="checkbox"]');
+      const checkmark = checkbox_entry.querySelector('.checkmark');
+
+      
+      checkmark.classList.remove("clicked");
+      setTimeout(() => {
+        checkbox.checked = false;
+      }, 10);
+      checkbox.dispatchEvent(new Event("change"));
+      console.log("Odškrtnuté:", checkbox.checked);
+
+    }
+    else {
+      clicked_btn.classList.remove('clicked');   
+    }
+
+
+  }
+
+  btn.remove();
 }
-
-
-
-function removeElement(element) { /* odstráni element, konkrétne vybraný filter, okrem toho ten filter nič nerobí */
-  element.remove();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -190,9 +231,34 @@ close_btns.forEach(
 
 
 
-clear_filter.addEventListener('click', (event) => { /* vymaže všetky filtre */
+/* vymaže všetky filtre */
+clear_filter.addEventListener('click', (event) => { 
+
+  /* potrebujem odstrániť triedu clicked pre všetky aktívne filtery */
+  for (let i = added_filters.children.length-1; i >= 0; i--) { /* vymazávam od konca, lebo sa mi mení zoznam mazaním */
+    
+    const child = added_filters.children[i];
+    const category = child.dataset.category;
+    const value = child.dataset.value;
+    const priceArg = child.dataset.priceArg;
+  
+    remove_filter(child,category,value, priceArg);
+  }
+
+
   sel_filters = document.getElementById("sel_filter_container");
   sel_filters.innerHTML = ''; /* odstráni všetkých childov */
+
+  filters = { /* zresetuje filtre */
+    brand: [],
+    size: [],
+    color: [],
+    available: [],
+    price: { min: minPrice, max: maxPrice},
+    gender: []
+  };
+
+
 });
 
 
@@ -203,16 +269,11 @@ open_filter.addEventListener('click', (event) => { /* vymaže všetky filtre */
 
 
 
-
-added_filters.addEventListener('click', (event) => { /* odstránia sa vybraté filtre, len ten kliknutý */
-  
-
-
-
-
+/* odstránia sa vybraté filtre, len ten kliknutý */
+added_filters.addEventListener('click', (event) => { 
+  const target = event.target;
+  remove_filter(target,target.dataset.category,target.dataset.value,target.dataset.priceArg);
 });
-
-
 
 
 
@@ -245,10 +306,8 @@ filter_menu.addEventListener('click', (event) => {
 
 
 
-/* to isté ale pre filter big menu záložky */
 
-
-
+/* eventy pre big menu, prepínanie tabov + stláčanie filter tlačidiel */
 filter_content.addEventListener('click', (event) => {
   const target = event.target;
 
@@ -275,15 +334,13 @@ filter_content.addEventListener('click', (event) => {
     }
   }
   else if (target.matches('.category_text, .checkmark, .checkbox, .cat_entry_btn, .cat_entry_btn_size')) { /* ide o stlačenie filter buttonu */
-    
+    let category;
+    let value;
 
     let categoryContainer = target.parentElement.classList.contains("category_entry_list") 
       ? target.parentElement 
       : target.parentElement.parentElement;
 
-
-    let category;
-    let value;
 
 
     if (target.matches('.cat_entry_btn, .cat_entry_btn_size')) {
@@ -292,37 +349,31 @@ filter_content.addEventListener('click', (event) => {
       
     }
     else if (target.matches('.category_text, .checkmark, .checkbox')) {
-      value = categoryContainer.dataset.value;
       category = categoryContainer.parentElement.dataset.category; /* category entry list, musím prejsť cez checkbox-entry */
-      
-    
+      value = categoryContainer.dataset.value;
+
     }
 
-    add_filter(category,value);
 
-    console.log(category,value);
+    if (target.classList.contains('clicked')) {
+      target.classList.remove('clicked'); /* odstráni sa trieda clicked, akože sa odklikne */
+
+      /* odstráni sa vybraný filter, potrebujem nájsť tlačidlo v added_filters */
+      let selector = `button[data-category="${category}"][data-value="${value}"]`;
+      const active_filter = added_filters.querySelector(selector);
+
+      remove_filter(active_filter,category,value);
+
+    }
+    else {
+      add_filter(category,value);
+      target.classList.add('clicked');
+    }
 
     /* zoberieme kategoriu z toho categoryContainer a value z tlačidla samotného */
-   
-    //add_filter(categoryContainer.dataset.category,target.dataset.value);
-
-
-
-
-
   }
 
-
-
-
-
-
-
-
 });
-
-
-
 
 
 
