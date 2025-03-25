@@ -1,0 +1,36 @@
+
+.fotokolaz_section{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.fotokolaz {
+    width: 80%;
+    height: 400px;
+    /* background-color: #5151ff; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.obr {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(72, 72, 72);
+}
+.grid-container {
+    display: grid;
+    /* grid-template-columns: repeat(6, 1fr); 6 stĺpcov rovnakej šírky */
+    grid-template-columns: repeat(6, 200px);
+    grid-template-rows: repeat(2, auto);   /* 2 riadky */
+    gap: 0;                                /* žiadne medzery medzi položkami */
+  }
+  .grid-container img {
+    width: 100%;    /* obrázok zaberie 100% šírky bunky */
+    display: block; /* odstráni sa medzera pod obrázkom */
+  }
+
+.obr:hover {
+    background-color: rgb(173, 173, 173);
+}
