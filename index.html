@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
+    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+
+      
+
 </head>
 <body>
     <nav class="navbar">
@@ -110,10 +114,13 @@
 
     <section class="newsletter">
         <div class="newsletter_obsah">  
-            <div class="newsletter_label"> Prihlas sa na newsletter bratu </div>
+            <div class="newsletter_label"> Nezmeškaj veľkú šancu </div>
+            <div class="newsletter_label2"> Prihláste sa do newslettera a získajte výhodné ponuky</div>
             <div class="newsletter_button_input">
-                <input class="newsletter_input" />
-                <button class="prihlasit_button"> Prihlasit sa </button>
+                <form onsubmit="alert('Zadaný e-mail: ' + this.email.value); return false;">
+                    <input class="newsletter_input" type="email" name="email" placeholder="Vložte svoj e-mail" required/>
+                    <button class="prihlasit_button" type="submit"> <span class="emoji">👟</span> PRIHLÁSIŤ SA </button>
+                </form>
             </div>
         </div>
     </section>
@@ -136,6 +143,10 @@
             </div>
         </div>
         
+    </section>
+
+    <section class="footer_asi">
+        <div></div>
     </section>
 
 
