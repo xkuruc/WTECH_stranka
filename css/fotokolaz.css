@@ -45,9 +45,16 @@
     background-color: rgb(173, 173, 173);
 }
 
-@media (max-width: 768px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
+@media (max-width: 900px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
     .grid-container {
         grid-template-columns: repeat(4, 1fr);  /* 4 stlpce */
         grid-template-rows: repeat(3, 1fr);  /* 3 riadky */
+    }
+}
+
+@media (max-width: 700px) { 
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);  /* 3 stlpce */
+        grid-template-rows: repeat(4, 1fr);  /* 4 riadky */
     }
 }
