@@ -3,7 +3,7 @@
     margin-top: 20px;
     background-color: black;
     width: 100%;
-    height: 250px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,8 @@
 
 .footer_container{
     width: 95%;
-    height: 100%;
+    height: 250px;
+    background-color: black;
     display: flex;
     /*justify-content: space-between;*/ /* Rozmiestniť divy na kraje */
     justify-content:center;
@@ -23,8 +24,8 @@
 .obchod {
     background-color: rgb(49, 49, 49);
     /* width: 200px; */
+    min-width: 200px;
     flex: 1;
-    /* height: 400px; */
     height: 90%;
     display: flex;
     align-items: center;
@@ -107,4 +108,69 @@
     color: rgb(169, 98, 255);
     font-weight: bold;
     font-size: 20px;   
+}
+
+.fa-facebook-f {
+    color: rgb(169, 98, 255);
+    font-size: 50px;
+    margin-left: -50px;
+}
+
+.fa-instagram, .fa-x-twitter, .fa-linkedin-in {
+    color: rgb(169, 98, 255);
+    font-size: 50px;   
+    margin-left: 20px;
+}
+
+
+.fa-facebook-f:hover, .fa-instagram:hover, .fa-x-twitter:hover, .fa-linkedin-in:hover {
+    color: rgb(255, 255, 255);   
+}
+
+
+@media (max-width: 1024px) {
+    .footer_container {
+        flex-direction: column;
+        gap: 50px;
+        height: auto;
+        padding: 20px 0;
+    }
+    .footer_asi{
+        height: auto;
+    }
+    .obchod_info .druhy{
+        border-right: 0px solid #D9D9D9; 
+        border-left: 0px solid #D9D9D9; 
+        border-top: 1px solid #D9D9D9; 
+        border-bottom: 1px solid #D9D9D9; 
+    }
+
+    .obchod_info {
+        flex-direction: column;
+        width: 50%;
+        max-width: 300px;
+        min-width: 100px;
+        gap: 20px;
+    }
+
+    .obchod {
+        width: 90%;
+        padding: 20px 0;
+    }
+
+    .podmienky {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .podmienky1, .podmienky2 {
+        width: 100%;
+    }
+
+    .fa-facebook-f, .fa-instagram, .fa-x-twitter, .fa-linkedin-in {
+        font-size: 40px;
+        margin: 10px;
+    }
 }

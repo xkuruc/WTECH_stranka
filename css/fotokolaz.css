@@ -2,36 +2,52 @@
 .fotokolaz_section{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 
 .fotokolaz {
     width: 80%;
-    height: 400px;
+    /* height: 400px; */
     /* background-color: #5151ff; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    align-items: start; /* Upravi vysku podla obsahu */
 }
 
 .obr {
-    width: 200px;
-    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 100px;
+    min-height: 100px;
+    aspect-ratio: 1 / 1;
     background-color: rgb(72, 72, 72);
+    border: 1px solid black;
 }
 
 .grid-container {
+    width: 100%;
+    height: auto;  /* Dynamicka vyska podla obsahu */
     display: grid;
-    /* grid-template-columns: repeat(6, 1fr); 6 stĺpcov rovnakej šírky */
-    grid-template-columns: repeat(6, 200px);
-    grid-template-rows: repeat(2, auto);   /* 2 riadky */
-    gap: 0;                                /* žiadne medzery medzi položkami */
-  }
+    grid-template-columns: repeat(6, 1fr);
+    /*grid-template-rows: repeat(2, 1fr); */  /* 2 riadky */
+    grid-auto-rows: 1fr;
+    gap: 0;
+}
+
 .grid-container img {
-    width: 100%;    /* obrázok zaberie 100% šírky bunky */
-    display: block; /* odstráni sa medzera pod obrázkom */
-  }
+    width: 100%;    /* obrazok zaberie 100% sirky bunky */
+    display: block; /* odstrani sa medzera pod obrazkom */
+}
 
 .obr:hover {
     background-color: rgb(173, 173, 173);
+}
+
+@media (max-width: 768px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);  /* 4 stlpce */
+        grid-template-rows: repeat(3, 1fr);  /* 3 riadky */
+    }
 }
