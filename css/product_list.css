@@ -1,10 +1,10 @@
-
 /* používam 100vw namiesto 100%, aby som nebol ovplyvnený scrollbarom, keď ho odstránim */
+
 
 .produkty_kontajner {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
+	width: 100%;
 	align-items: center;
 	padding-top: 60px;
 	background-color: white;
@@ -19,7 +19,6 @@
 
 
 .product_list {
-	
 	display: grid;
 	width: 90vw;
 	margin-bottom: 50px;
@@ -27,17 +26,20 @@
 
 	row-gap: 1px;
 	column-gap: 1px;
-	grid-template-columns: repeat(auto-fit, 366px);
+	grid-template-columns: repeat(auto-fit, clamp(320px, 100%, 365px));
 	grid-template-rows: repeat(auto-fit, 450px);
 	
 	align-items: center;
 	justify-content: center;
-
 }
 
 
 
-
+@media (max-width: 425px) {
+    .product_list {
+    	width: 100%;
+    } 
+}
 
 
 

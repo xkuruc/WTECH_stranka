@@ -1,6 +1,5 @@
 
 .page_number_list {
-
 	display: flex;
 	gap: 10px;
 	height: auto;
@@ -43,25 +42,24 @@
 
 
 
-#prevBtn img, #nextBtn img {
+#prev_page_btn img, #next_page_btn img {
 	height: 17px;
-
 }
 
 
 
-#nextBtn {
+#next_page_btn {
 	transform: scaleX(-1);
 }
 
 
-#prevBtn img:enabled:hover, #nextBtn img:enabled:hover { /* len ak je zapnutá, tak bude hover povolený */
+#prev_page_btn img:enabled:hover, #next_page_btn img:enabled:hover { /* len ak je zapnutá, tak bude hover povolený */
 	filter: drop-shadow(0 0 5px black);
 }
 
 
 
-#prevBtn:disabled, #nextBtn:disabled {
+#prev_page_btn:disabled, #next_page_btn:disabled {
 	opacity: 0.5;
 }
 

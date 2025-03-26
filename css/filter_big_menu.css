@@ -1,14 +1,18 @@
+
+
+
+
 /* overlay pre menu */
 .filter_overlay {
   position: fixed; 
   top: 0;
-  right: 0;
+  
   width: 100%;
-  height: 100vh; /* výška celej obrazovky */
+  height: 100%; /* výška celej obrazovky */
   background: rgba(0, 0, 0, 0.5);
   
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
 
   transition: 0.2s;
@@ -25,11 +29,11 @@
   justify-content: center; 
   align-items: center;
   width: 1000px;
-  height: 80%;
+  
+  height: 90vh;
   background-color: white;
   z-index: 1002;
 }
-
 
 
 
@@ -38,13 +42,14 @@
 .top_filter_menu {
   display: flex;
   flex-direction: column;
-  height: 110px;
+  
+  min-height: 121px;
   border-bottom: 1px solid #D9D9D9;
   width: 100%;
 }
 
 
-.top_filter_menu h2,p {
+.top_filter_menu h2 {
   padding-left: 20px;
 }
 
@@ -57,6 +62,7 @@
 .filt_top {
   display: flex;
   height: 60px;
+  min-height: 60px;
   padding-top: 10px;
   width: 100%;
 
@@ -65,44 +71,91 @@
 }
 
 
+#resize_back_btn {
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  margin-top: 3px;
+  margin-left: 10px;
+}
+
+
+#resize_back_btn.active {
+  display: block !important;
+}
+
+
+#resize_back_btn img {
+  width: 30px;
+  height: 30px;
+}
+
+
+
 #close_btn {
   background-color: transparent;
   border: none;
+  margin-top: 3px;
 }
 
 
-#close_btn:hover {
+#close_btn:hover, #resize_back_btn:hover {
   filter: drop-shadow(0 0 1px black);
 }
+
+
+#filter_placeholder.noindent {
+  padding-left: 0px;
+}
+
 
 
 
 /* sekcia vybraných filterov */
 .selected_filters {
+  position: relative;
   display: flex;
-  height: 30px;
-  padding-bottom: 6px;
-  align-items: center;
+
+  gap: 15px;
+  align-items: flex-start;
   text-wrap: nowrap;
 }
+
+.selected_filters p {
+  padding-left: 20px;
+}
+
 
 
 /* kontajner aktívych filterov */
 #sel_filter_container {
   display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  padding-left: 15px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  
+  
+  
+  margin: 10px 0px;
+  
   gap: 5px;
+  scroll-behavior: smooth;
 }
 
 
 #sel_filter_container button {
   background-color: #F0F0F0;
   padding: 5px 10px;
+
   border-radius: 20px;
   color: #5A5A5A;
   border: none;
+  height: 30px;
 }
 
 
@@ -111,14 +164,51 @@
 }
 
 
+/* posúvne čípky pre sel_filter_container */
+#filter_back_btn, #filter_next_btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #d9d9d9;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+#filter_back_btn {
+  left: 14.5%;
+}
+
+#filter_next_btn {
+  right: 1%;
+}
+
+
+#filter_back_btn:hover, #filter_next_btn:hover {
+  border: 1px solid #b3b3b3; 
+  transition: border 0.1s ease; 
+}
 
 
 
+#filter_back_btn img, #filter_next_btn img {
+  display: flex;
+  height: 12px;
+  width: 12px;
+  margin-left: 2px;
 
+}
 
+#filter_back_btn img {
+  margin-right: 1px;
+}
 
-
-
+#filter_next_btn img {
+  transform: scale(-1);
+}
 
 
 
@@ -127,7 +217,10 @@
 .filter_content {
   display: flex;
   width: 100%;
-  height: 100%;
+  
+  flex: 1 1 auto; 
+  min-height: 0;
+  height: auto;
   justify-content: left;
 }
 
@@ -137,10 +230,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
   gap: 1px;
-  width: 35%;
+  justify-content: flex-start;
+  
+  flex: 1 1 350px;
+  
+  overflow-y: auto;
   height: auto;
   border-right: 1px solid #D9D9D9;
+  z-index: 1;
 }
 
 
@@ -149,6 +248,7 @@
   margin-top: 12px;
   height: 50px;
   width: 95%;
+  margin-left: 9px;
   background-color: transparent;
 
   border: none;
@@ -156,10 +256,7 @@
   font-weight: bold;
   font-size: 15px;
   padding-top: 3px;
-  padding-left: 20px;
-
-
-
+  padding-left: 13px;
 }
 
 
@@ -177,9 +274,13 @@
 
 /* css pre obsah kategorii */
 .category_content {
+  flex: 1 1 auto;
   padding-left: 15px;
   display: none;
+  overflow-y: auto;
+  justify-content: center;
   width: 65%;
+  z-index: 2;
 
 }
 
@@ -189,22 +290,17 @@
 
 
 
-
-
-
-
-
 /* custom checkbox */
-.custom-checkbox {
+.custom_checkbox {
   user-select: none; /* aby sa nedal označovať checkbox */
 }
 
 
-.custom-checkbox input {
+.custom_checkbox input {
   display: none;
 }
 
-.custom-checkbox .checkmark {
+.custom_checkbox .checkmark {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -220,15 +316,15 @@
 
 
 /* aby sa pri hover myšou cez checkmark text zvýraznil checkmark */
-.custom-checkbox:hover .checkmark,
-.custom-checkbox .category_text:hover + .checkmark {
+.custom_checkbox:hover .checkmark,
+.custom_checkbox .category_text:hover + .checkmark {
   border: 1px solid black;
 }
 
 
 
 /* zaškrtnutie checkmarku */
-.custom-checkbox input:checked + .checkmark::after {
+.custom_checkbox input:checked + .checkmark::after {
   content: ''; /* musí tu byť, aby sa vykreslil pseudo element */
   position: absolute;
   top: 1px;
@@ -241,16 +337,10 @@
 }
 
 
-.custom-checkbox input:checked + .checkmark {
+.custom_checkbox input:checked + .checkmark {
   background-color: black;
   border-color: black;
 }
-
-
-
-
-
-
 
 
 
@@ -264,23 +354,39 @@
 .category_entry_list {
   display: flex;
   flex-direction: column;
+  
+  justify-content: flex-start;
   gap: 15px;
+  width: 100%;
 }
 
 
 
 
+/* filter button pre farby */
+.cat_entry_btn {
+  display: flex;
+  align-items: center;
+  
+  justify-content: center;
+  padding: 10px 15px 8px 10px;
 
-
-
-
-
+  border: 1px solid #ccc;
+  color: #5A5A5A;
+  background: white;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+  
+  transition: border 0.1s ease;
+}
 
 
 /* farebný štvorček v tlačidlách pre farby */
 .cat_entry_btn .color-box {
   width: 20px;
   height: 20px;
+  margin-bottom: 2px;
   margin-right: 10px;
   border-radius: 0px;
   border: 1px solid #D9D9D9;
@@ -290,9 +396,15 @@
 /* kontajnery pre tlačidlá */
 .cat_btn_container, .cat_btn_container_sizes {
   display: flex;
+  
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 10px;
-  width: 95%;
+
+  width: 100%;
+
+  height: auto;
+  padding: 2px;
 }
 
 
@@ -305,26 +417,11 @@
 
 
 
-/* filter button pre farby */
-.cat_entry_btn {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  color: #5A5A5A;
-  background: white;
-  text-align: center;
-  cursor: pointer;
-  font-size: 15px;
-  width: 140px;
-  transition: border 0.1s ease;
-}
-
-
 /* filter btn pre veľkosti */
 .cat_entry_btn_size, .min_price, .max_price {
   display: flex;
   height: 45px;
+
   width: 100px;
   align-items: center;
   justify-content: center;
@@ -356,23 +453,20 @@
 
 
 
-
-
-
-
-
-
 /* custom slider */
 .slider_container {
   position: relative;
   width: 92%;
   margin: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 /* spoločný slider */
 .slider_track {
   position: absolute;
-  width: 99%;
+  width: 98%;
   left: 1%;
   height: 5px;
   background-color: #ccc;
@@ -388,7 +482,8 @@
   background: #5A5A5A;
   border-radius: 5px;
   top: 50%;
-  width: 50%;
+
+   /* lebo sa to nedá zarovnať ten thumb na okraj */
   transform: translateY(-50%);
   z-index: 2;
 }
@@ -400,8 +495,6 @@ input[type="range"] {
   background: none;
   pointer-events: none;
   top: 50%;
-  
-  
   appearance: none;
   z-index: 3;
 }
@@ -421,9 +514,20 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 /* input pre slidery */
+
+.min_max_filter {
+  display: flex;
+  justify-content: space-between;
+  width: 92%;
+  margin-left: 20px;
+
+}
+
+
 .min_price, .max_price { /* veľmi podobné na cat_entry_btn_size */
   height: 40px;
   padding-left: 10px;
+
 }
 
 
@@ -448,19 +552,13 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 
-
-
-
-
-
-
-
-
-
 /* spodná časť filter menu */
 .bottom_filter_menu {
+  position: relative;
   display: flex;
-  height: 100px;
+  
+  gap: 10px;
+  min-height: 73px;
   border-top: 1px solid #D9D9D9;
   width: 100%;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -474,7 +572,7 @@ input[type="range"]::-webkit-slider-thumb {
 #resetFilters { /* vymazat filtre tlačítko */
   border: none;
   font-size: 16px;
-  
+  margin-left: 15px;
   background-color: transparent;
   text-decoration: underline;
 }
@@ -495,6 +593,9 @@ input[type="range"]::-webkit-slider-thumb {
   height: 40px;
   font-size: 18px;
   
+  min-width: 220px;
+  margin-right: 10px;
+
   border-radius: 0;
   border: none;
   background-color: black;
@@ -509,3 +610,82 @@ input[type="range"]::-webkit-slider-thumb {
 #applyFilter:hover {
   background-color: #333;
 }
+
+
+
+/* media queries */
+@media (max-width: 1000px) {
+    #filter_container {
+        width: 100%; /* Pri šírke 1000px a menej sa zväčší na 100% */
+        height: 100%;
+    }
+
+
+    .filter_kategorie {
+      display: none;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+    
+    
+    .fil_cat {
+      width: 95vw;
+    }
+
+    .category_content, .category_content.selected {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+
+    .filter_category {
+      width: 100%;
+    }
+
+
+    .cat_entry_btn_size {
+      width: 70px;
+    }
+
+    .category_identifier {
+      display: none;
+    }
+
+}
+
+
+@media (max-width: 426px) {
+    
+    
+    #sel_filter_container {
+      margin-left: 20px;
+    }
+
+    .category_content, .category_content.selected {
+      padding-left: 12.5px;
+      
+    }
+
+    .selected_filters p {
+      display: none;
+    }
+
+    .cat_entry_btn_size {
+      width: 50px;
+      height: 40px;
+    }
+
+
+    .cat_btn_container, .cat_btn_container_sizes {
+      justify-content: left;
+    }
+
+
+
+}
+
+
+
