@@ -189,7 +189,7 @@
 
     .obchod_info {
         flex-direction: column;
-        width: 50%;
+        width: 80%;
         max-width: 300px;
         min-width: 100px;
         gap: 20px;

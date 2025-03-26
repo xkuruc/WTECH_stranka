@@ -1,0 +1,40 @@
+/* CSS */
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu li {
+    display: inline-block;
+    position: relative;
+  }
+  
+.menu .main_category {
+    font-weight: bold;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 800px;  /* zväčšená šírka */
+    height: 300px;
+    padding: 20px; /* väčší vnútorný priestor */
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: #333;
+  }
+  
+.dropdown-menu li a {
+    padding: 10px 15px;
+    white-space: nowrap;
+  }
+  
+.main_category:hover .dropdown-menu {
+    display: block;
+  }
+  

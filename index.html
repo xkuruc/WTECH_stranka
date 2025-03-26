@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/newsletter.css">
     <link rel="stylesheet" href="./css/fotokolaz.css">
     <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/dropdown.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -23,13 +24,28 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav">
-            <div class="logo">Logo</div>
+    <!-- <div class="logo">Logo</div>
             <a href="#home">Tenisky</a>
             <a href="#novinky">Kopacky</a>
             <a href="#kontakt">Lopty</a>
-            <a href="#onas">Vypredaj</a>
+            <a href="#onas">Vypredaj</a> -->
+    <nav class="navbar">
+        <div class="nav">
+            <ul class="menu">
+                <li class="main_category"><div class="logo">Logo</div></li>
+                <li class="main_category">
+                    <a href="#Tenisky">Tenisky</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Sportové tenisky</a></li>
+                        <li><a href="#">Nike</a></li>
+                        <li><a href="#">Adidas</a></li>
+                    </ul>
+                </li>
+                <li class="main_category"><a href="#Kopacky">Kopacky</a></li>
+                <li class="main_category"><a href="#Lopty">Lopty</a></li>
+                <li class="main_category"><a href="#Vypredaj">Vypredaj</a></li>
+            </ul>
+
         </div>
         <div class="right_part">
             <input class="vyhladaj_input"/>
@@ -37,6 +53,7 @@
             <div class="kosik last">KOSIK </div>
         </div>
     </nav>
+  
     
     <section class="main_image_section">
         <div class="main_image_placeholder"></div>
