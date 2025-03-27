@@ -1,6 +1,4 @@
 /* používam 100vw namiesto 100%, aby som nebol ovplyvnený scrollbarom, keď ho odstránim */
-
-
 .produkty_kontajner {
 	display: flex;
 	flex-direction: column;
@@ -11,11 +9,9 @@
 }
 
 
-
 .produkty_kontajner .orderby_menu {
 	justify-content: left;
 }
-
 
 
 .product_list {
@@ -29,14 +25,7 @@
 	grid-template-columns: repeat(auto-fit, clamp(320px, 100%, 365px));
 	grid-template-rows: repeat(auto-fit, 450px);
 	
-
 	align-items: center;
 	justify-content: center;
 	
 }
-
-
-
-
-
-
