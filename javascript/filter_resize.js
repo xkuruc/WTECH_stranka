@@ -8,6 +8,7 @@ const no_filter = document.getElementById('no_filter');
 
 
 const media_query = window.matchMedia('(max-width: 760px)');
+const media_mobile_query = window.matchMedia('(max-width: 426px)');
 
 
 /* vždy sa strieda kto je vykreslený medzi filter_category a category_content */
@@ -23,11 +24,9 @@ function change_filter_identifier() {
 
 
 
-function media_query_change(e) {
-  
+function media_query_change(e) { /* čo sa má stať ak sa zmení media query v css, buď sa naplní alebo z neho odídeme */
   let current_selected = document.querySelector('.category_content.selected'); //aktívny filter content
-  if (e.matches) { // Ak je šírka okna <= 1000px
-    
+  if (e.matches) { //ak je šírka menšia ako určuje query, napr. menej ako 760px
     
     if (no_filter.classList.contains('selected')) { /* aby sa neprepol, ak je aktívny no_filter */
       no_filter.classList.remove('selected');
@@ -43,7 +42,7 @@ function media_query_change(e) {
       change_filter_identifier();
     }
 
-  } else {
+  } else { /* vrátime sa do pôvodného stavu, zmizne šipka, vráti sa placeholder aká tam bol a pod */
 
     back_btn.classList.remove('active');
     placeholder.classList.remove('noindent'); 
@@ -51,66 +50,56 @@ function media_query_change(e) {
     filter_cat_container.style.display = 'block';
 
 
-
     if (current_selected === null) {
       no_filter.classList.add('selected');
     }
+  }
+}
 
 
+/* ak prepneme na veľkosť mobilu, tj. 426px (<=425px) */
+/* tento skript robí len to, že keď som na mobile, tak sa mi skráti názov aktívneho filtra z "Veľkosť: 18" na "V: 18", aby 
+sa tam zmestilo viac filtrov a bolo to krajšie, platí aj opačne */
+function media_mobile_change(e) {
+  if (e.matches) { //ak je šírka menej ako 426px
+    Array.from(added_filters.children).forEach(child => {
+      if (child.dataset.category === "size") {
+        child.textContent = 'V: ' + child.dataset.value;
+      }
+    });
+    
 
+  } else { //zase sa zväčší obrazovka
+    Array.from(added_filters.children).forEach(child => {
+      if (child.dataset.category === "size") {
+        child.textContent = 'Veľkosť: ' + child.dataset.value;
+      }
+    });
   }
 }
 
 
 
-back_btn.addEventListener("click", (event) => {
-    
-  if (back_btn.classList.contains('active')) {
+
+back_btn.addEventListener("click", (event) => { /* šipka späť */
+  if (back_btn.classList.contains('active')) { /* môžem ju kliknúť len, ak je viditeľná */
     const current_selected = document.querySelector('.category_content.selected'); //aktívny filter content
     current_selected.classList.remove('selected');
 
 
-    const cat_selected = document.querySelector('.fil_cat.selected');
+    const cat_selected = document.querySelector('.fil_cat.selected'); /* vybraté tlačidlo v menu */
     cat_selected.classList.remove('selected');
 
-    placeholder.classList.remove('noindent');
+    placeholder.classList.remove('noindent'); /* estetické pridanie odsadenia späť */
 
-    filter_cat_container.style.display = 'block';
-    placeholder.textContent = default_placeholder_value;
-    back_btn.classList.remove('active');
-
+    filter_cat_container.style.display = 'block'; /* zobrazí sa sidebar v menu s tlačidlami */
+    placeholder.textContent = default_placeholder_value; /* vráti sa pôvodný text placeholdera */
+    back_btn.classList.remove('active'); /* zmizne šipka */
   }
-
-
-
 });
 
 
 
-
-/* 
-todo:
-prerobiť category entry list, aby nemal data-category, ale nech to ide cez content id, zbytočné, asi potom closest()
-sub 1000px zmizne úplne filter menu
-ked je malý mobil, tak sa skracuje meno aktívneho filtra
-*/
-
-
-
-/* 
-spravené:
-
-active_filter_slider som dal preč
-spravené responzivny layout pre filter
-fixed checkbox, fixed slider event
-added filters bude dvojriadkový a viac
-
-*/
-
-
-
-
-media_query_change(media_query);
-
 //pri zmene veľkosti okna sa to skontroluje
 media_query.addEventListener('change', media_query_change);
+media_mobile_query.addEventListener('change', media_mobile_change);

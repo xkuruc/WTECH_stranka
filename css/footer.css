@@ -191,7 +191,7 @@
         flex-direction: column;
         width: 80%;
         max-width: 300px;
-        min-width: 100px;
+        min-width: 250px;
         gap: 20px;
     }
 
@@ -222,4 +222,8 @@
         grid-column: span 1;
         justify-self: center;
     }
+}
+
+.joined_footer .footer_asi { /* keď sú spolu newsletter a footer, tak nech nie je medzera medzi nimi */
+    margin-top: 0px;
 }

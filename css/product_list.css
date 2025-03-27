@@ -4,7 +4,7 @@
 .produkty_kontajner {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 100vw;
 	align-items: center;
 	padding-top: 60px;
 	background-color: white;
@@ -20,7 +20,7 @@
 
 .product_list {
 	display: grid;
-	width: 90vw;
+	width: 100%;
 	margin-bottom: 50px;
 	height: auto;
 
@@ -29,17 +29,14 @@
 	grid-template-columns: repeat(auto-fit, clamp(320px, 100%, 365px));
 	grid-template-rows: repeat(auto-fit, 450px);
 	
+
 	align-items: center;
 	justify-content: center;
+	
 }
 
 
 
-@media (max-width: 425px) {
-    .product_list {
-    	width: 100%;
-    } 
-}
 
 
 

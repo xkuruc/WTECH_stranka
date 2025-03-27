@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	padding-top: 50px;
+	width: 99vw;
 }
 
 
@@ -13,11 +14,10 @@
 .filter_menu { /* obsahuje filter tlačidlá */
 	display: flex;
 	justify-content: left;
-	width: 100vw;
+	width: 100%;
 	gap: clamp(5px, 2vw, 10px);
 	box-sizing: border-box;
 	padding: 0px 20px 20px 20px;
-	overflow: hidden;
 }
 
 
@@ -27,8 +27,13 @@
 	width: 100%;
 	justify-content: space-around;
 	gap: clamp(5px, 2vw, 2px);
-	overflow: hidden;
-	scroll-behavior: smooth;
+	overflow: auto;
+	scrollbar-width: none; /* skryje scrollbar vo Firefoxe */
+    -ms-overflow-style: none;
+}
+
+.filter_kategorie::-webkit-scrollbar {
+    display: none; /* skryje scrollbar v Chrome/Safari */
 }
 
 
@@ -44,6 +49,7 @@
 	font-family: Arial;
 	font-size: 20px;
 	user-select: none; /* aby sa to nedalo označiť myšou */
+	transition: width 0.3s ease-in-out; /* animácia pre zmenšenie/zväčšenie v mobilnej veľkosti */
 }
 
 
@@ -66,39 +72,20 @@
 }
 
 
-.filter_sipka, .filter_opacna_sipka {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: transparent;
-	border: none;
-	user-select: none;
-}
 
-
-.filter_sipka img, .filter_opacna_sipka img {
-	height: 17px;
-}
-
-
-.filter_opacna_sipka {
-	transform: scaleX(-1);
-}
-
-
-.filter_sipka img:hover, .filter_opacna_sipka img:hover {
-	filter: drop-shadow(0 0 5px black);
-}
-
-
-
-
-
-@media (max-width: 426px) {
+@media (max-width: 500px) {
     .filter_menu_item.special {
-    	width: 100%;
+    	width: calc(100% - 40px);
+    	margin-left: 20px;
     } 
 
+
+    .filter_menu {
+    	padding: 0px 0px 20px 0px;
+    }
+
+    .filter_kategorie {
+      display: none;
+    }
+
 }
-
-

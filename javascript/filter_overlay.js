@@ -160,7 +160,12 @@ function add_filter(cat, value, price_arg = "min", operator = "od") {
   //formát výpisu
   switch(cat) {
     case "size": //Veľkosť: 20
-      button.textContent = 'Veľkosť' + ': ' + value;
+      if (window.innerWidth <= 425) {
+        button.textContent = 'V' + ': ' + value;
+      }
+      else {
+        button.textContent = 'Veľkosť' + ': ' + value;
+      }
       break;
 
     case "price": //max: 900
@@ -336,9 +341,13 @@ filter_menu.addEventListener('click', (event) => {
       const currentTab = document.querySelector('.fil_cat.selected'); //teraz zvolený v menu
       const newTab = document.querySelector(`.fil_cat[data-category="${targetId}"]`);
       
+
       /* odstráni sa trieda selected od aktuálneho tabu a stlačeného tlačidla*/
       currentSelected.classList.remove('selected');
-      currentTab.classList.remove('selected');
+      if (currentTab) {
+        currentTab.classList.remove('selected');
+      }
+      
 
       /* pridá sa na nové tlačidlo a nový tab */
       newSelected.classList.add('selected');
@@ -400,9 +409,6 @@ filter_content.addEventListener('click', (event) => {
 
     }
       
-      
-
-      
 
       if (targetId === "size") { /* ak sa prepne size, tak sa vykreslí */
         render_filter_sizes();
@@ -411,11 +417,11 @@ filter_content.addEventListener('click', (event) => {
         render_filter_color_content(); /* vykreslí farby, sú vykreslované cez skript, čiže musím takto */
       }
 
-      if (window.innerWidth <= 760) {
+      if (window.innerWidth <= 760) { /* pri malom okne sa zobrazí šipka späť a upravia sa placeholdery */
         filter_cat_container.style.display = 'none';
         back_btn.classList.add('active');
         placeholder.classList.add('noindent');
-        change_filter_identifier();
+        change_filter_identifier(); /* hore vypíše aká je to kategória namiesto default "Filtre" */
       }
 
   }
@@ -451,7 +457,6 @@ filter_content.addEventListener('click', (event) => {
 
 
 
-
     /* prepínanie triedy clicked */
     if (clicked.classList.contains('clicked')) {
       
@@ -472,24 +477,3 @@ filter_content.addEventListener('click', (event) => {
   }
 
 });
-
-
-
-/* 
-  spravené: 
-  posunutie cena buttonov,
-  fixnutá vypln slidera ceny,
-  slidera pre aktívne filtre
-  opísaný a upravený kod
-  ked odkliknem z cena bunka, tak nech sa tam napíše min/max
-
-*/
-
-
-
-/* todo
-  rozdelit velke cssko na menšie? na custom slider a checkbox minimálne
-  opisat nejake css ak som nespravil a html trochu upraviť, možno tagy
-  responzivnosť filtra nejak
-*/
-
