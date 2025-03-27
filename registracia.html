@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stranka</title>
-
+    <title>Document</title>
     <link rel="stylesheet" href="./css/menu_bar.css">
-    <link rel="stylesheet" href="./css/main_image.css">
-    <link rel="stylesheet" href="./css/brand_slider.css">
-    <link rel="stylesheet" href="./css/banner_hlavna_ponuka.css">
-    <link rel="stylesheet" href="./css/product_slider.css">
-    <link rel="stylesheet" href="./css/newsletter.css">
-    <link rel="stylesheet" href="./css/fotokolaz.css">
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
+    <link rel="stylesheet" href="./css/profile_intro.css">
+    <link rel="stylesheet" href="./css/newsletter.css">
+    <link rel="stylesheet" href="./css/registracia.css">
+    <link rel="stylesheet" href="./css/profile_intro.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-    
 
+    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -173,7 +170,6 @@
             <div class="kosik last">KOSIK </div>
         </div>
     </nav>
-
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar_header">
@@ -373,124 +369,79 @@
                     <span class="sidebar_main komunita_vypredaj_item" href="#">Komunita </span> 
                 </div>
             </li>
-
-
         </ul>
-      </div>
-      <div class="overlay" onclick="toggleSidebar()"></div>
-  
+    </div>
+    <div class="overlay" onclick="toggleSidebar()"></div>
     
-    <section class="main_image_section">
-        <div class="main_image_placeholder"></div>
-    </section>
 
-    <section class="brand_slider_section">
-        <div class="brand_slider_mechanism">
-            <div class="brand_slider_placeholder">
-                <div class="brand_slider_image" style="background-color: aqua;"> 1</div>
-                <div class="brand_slider_image" >2</div>
-                <div class="brand_slider_image" >3</div>
-                <div class="brand_slider_image" >4</div>
-                <div class="brand_slider_image" >5</div>
-                <div class="brand_slider_image" >6</div>
-                <div class="brand_slider_image" >7</div>
-                <div class="brand_slider_image" >8</div>
-            </div>
-        </div>
-    </section>
+    <section class="osobne_udaje_section">
+        <form>
+            <h3 class="reg_nadpis">Osobné informácie</h3>
+            <div class="osobne_udaje_container">
+                <input class="registration_input" type="text" name="meno"  placeholder="Meno*" required/>
+                <input class="registration_input" type="text" name="priezvisko" placeholder="Priezvisko*" required/>
+                <input class="registration_input" type="email" name="email" placeholder="E-mail*" required/> 
+                <input class="registration_input" type="password" name="password" placeholder="Heslo*" required/> 
+                
+                <select>
+                    <option value=""></option>
+                    <option value="male">Chlop</option>
+                    <option value="female">Princesska</option>
+                </select>
+                
+                <input class="registration_input" type="password" name="password" placeholder="Potvrdiť heslo*" required/> 
 
-    <section class="banner_hlavna_ponuka">
-        <div class="banner_hlavna_ponuka_container">
-            <a href="#tenisky" class="tenisky_banner" > <div> TENISKY</div> </a>
-            <a href="#kopacky" class="kopacky_banner"> <div > KOPACKY</div> </a>
-            <a href="#lopty" class="lopty_banner"> <div > LOPTY</div> </a>
-        </div>
-    </section>
-
-    <section class="product_sliders">
-        <div class="label"> Zlavy</div>
-        <section class="product_slider">
-            <div class="slider-container">
-                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
-                <div class="owl-carousel">
-                    <div class="item">1</div>
-                    <div class="item">2</div>
-                    <div class="item">3</div>
-                    <div class="item">4</div>
-                    <div class="item">5</div>
-                    <div class="item">6</div>
+                <div class="date-input">
+                    <span class="label">Dátum narodenia</span>
+                    <input class="daco" type="date">
+                </div>
+                <div class="newsletter_reg">
+                    <label>
+                        <input class="registration_input" type="checkbox" name="newsletter">
+                        Prihlásiť sa k odberu newslettera
+                    </label>
                 </div>
             </div>
-        </section>
-        
-        <div class="label"> Todays pick</div>
-        <section class="product_slider">
-            <div class="slider-container">
-                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
-                <div class="owl-carousel">
-                    <div class="item">1</div>
-                    <div class="item">2</div>
-                    <div class="item">3</div>
-                    <div class="item">4</div>
-                    <div class="item">5</div>
-                    <div class="item">6</div>
-                </div>
-            </div>
-        </section>
 
-        <div class="label"> Adidas botaski</div>
-        <section class="product_slider">
-            <div class="slider-container">
-                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
-                <div class="owl-carousel">
-                    <div class="item">1</div>
-                    <div class="item">2</div>
-                    <div class="item">3</div>
-                    <div class="item">4</div>
-                    <div class="item">5</div>
-                    <div class="item">6</div>
-                </div>
+            <h3 class="reg_nadpis">Kontaktné údaje</h3>
+            <div class="kontaktne_udaje_container">
+                <input class="registration_input div1" type="tel" name="telephone" placeholder="Telefónne číslo*" required/> 
+                <input class="registration_input div2" type="text" name="adresa" placeholder="Ulica*" required/> 
+                <input class="registration_input div3" type="text" name="cisloDomu" placeholder="Číslo domu*" required/> 
+                <input class="registration_input div4" type="text" name="mesto" placeholder="Mesto*" required/> 
+                <input class="registration_input div5" type="text" name="psc" placeholder="PSČ*" required required pattern="[0-9]{5}" /> 
+                <select class="div6">
+                    <option value="Slovensko">Slovensko</option>
+                </select>
             </div>
-        </section>
+            <div class="button_placeholder">
+                <button class="Vytvorit_ucet_button" type="submit"> Vytvoriť účet </button>
+            </div>
+            
+        </form>
+
     </section>
 
-    <section class="newsletter">
-        <div class="newsletter_obsah">  
-            <div class="newsletter_label"> Nezmeškaj veľkú šancu </div>
-            <div class="newsletter_label2"> Prihláste sa do newslettera a získajte výhodné ponuky</div>
-            <div class="newsletter_button_input">
-                <form onsubmit="alert('Zadaný e-mail: ' + this.email.value); return false;">
-                    <input class="newsletter_input" type="email" name="email" placeholder="Vložte svoj e-mail" required/>
-                    <button class="prihlasit_button" type="submit"> <span class="emoji">👟</span> PRIHLÁSIŤ SA </button>
-                </form>
+    <section class="info_section">
+        <div class="info_nadpis">DORUČENIE A VRÁTENIE TOVARU </div>
+        <div class="info">
+            <div class="info1">
+                <div class="info_mininadpis"> O nás</div>
+                <div>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
+                </div>
+                <div><br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
+                </div>
+            </div>
+            <div class="info2">
+                <div class="info_mininadpis"> Doručenie</div>
+                <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
+                <div class="info_mininadpis"> Ako vrátim tovar ? </div>
+                <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
             </div>
         </div>
     </section>
-
-    <section class="fotokolaz_section">
-        <div class="fotokolaz">
-            <div class="grid-container">
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-                <div class="obr"></div>
-            </div>
-        </div>
-        
-    </section>
-
-    <div style="height:1000px ;"></div>
-
-
-
     <footer class="footer_asi">
         <div class="footer_container">
             <div class="obchod_info">
@@ -557,13 +508,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="javascript/product_slider.js"></script>
-    <script src="./javascript/slider_moj.js"></script>
-    <script src="./javascript/product_slider.js"></script>
-    <script src="./javascript/side_menubar.js"></script>
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,109 @@
+.osobne_udaje_section {
+    width: 70%;
+    margin: 100px auto;
+}
+
+.date-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+    position: relative;
+}
+
+.label {
+    color: #ccc;
+    font-size: 14px;
+    margin-right: auto;
+}
+
+.daco {
+    border: none;
+    outline: none;
+    flex: 1;
+    text-align: right;
+    font-size: 14px;
+}
+
+
+.osobne_udaje_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 20px;
+}
+
+.registration_input {
+    height: 40px;   
+    outline: none;
+}
+
+.newsletter_reg {
+    grid-column: span 2;
+}
+
+.reg_nadpis {
+    margin-top: 50px;
+}
+
+.kontaktne_udaje_container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 15px;
+}
+.div1 {
+    grid-column: span 5 / span 5;
+}
+
+.div2 {
+    grid-column: span 4 / span 4;
+    grid-row-start: 2;
+}
+
+.div3 {
+    grid-column-start: 5;
+    grid-row-start: 2;
+}
+
+.div4 {
+    grid-column: span 3 / span 3;
+    grid-row-start: 3;
+}
+
+.div5 {
+    grid-column: span 2 / span 2;
+    grid-column-start: 4;
+    grid-row-start: 3;
+}
+
+.div6 {
+    grid-column: span 5 / span 5;
+    grid-row-start: 4;
+}
+
+.Vytvorit_ucet_button {
+    background-color: black;
+    width: 300px;
+    height: 60px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 50px auto;
+}
+
+
+.Vytvorit_ucet_button:hover {
+    background-color: rgb(169, 98, 255);
+    color: black;
+    
+}
+
+.button_placeholder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
