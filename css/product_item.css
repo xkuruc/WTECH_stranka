@@ -14,7 +14,7 @@
 }
 
 
-.product_item_sale {
+.product_item_relative {
 	display: flex;
 	position: relative;
 	flex-direction: column;
@@ -26,10 +26,9 @@
 }
 
 
-.product_item_sale:hover {
+.product_item_relative:hover {
 	outline: 1px solid #D9D9D9;
 }
-
 
 
 .sale_placeholder {
@@ -41,6 +40,22 @@
 	border-radius: 12px;
 	padding: 5px 10px;
 }
+
+.trash_can {
+	position: absolute;
+	top: 18px;
+	left: 15px;
+	background-color: transparent;
+	border: none;
+	
+	z-index: 2;
+	width: 45px;
+}
+
+.trash_can img {
+	pointer-events: none;
+}
+
 
 
 .item_img {
@@ -55,4 +70,8 @@
     height: 100%;
 	object-fit: cover;
 	user-select: none;
+}
+
+#add_product {
+	outline: 1px solid #d9d9d9;
 }
