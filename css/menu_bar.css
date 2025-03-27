@@ -4,11 +4,10 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     margin-top: 80px; /* Posunies vsetko, aby obsah nebol zakryty navbarom */
-  }
+}
   
 .navbar {
     display: flex;
-    align-items: center;
     /* justify-content: flex-start; */
     justify-content: space-between;
     padding: 1rem 5vw;
@@ -20,21 +19,24 @@ body {
     top: 0;
     left: 0;
     width: 100%; 
-    z-index: 1000;
+    z-index: 99;
     padding: 0;
 }
 
 .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 30px;
     font-weight: bold;
-    margin-left: -30px;
+    /* margin-left: -30px; */
 }
 
 .nav {
     display: flex;
     gap: min(10vw, 50px);
-    align-items: center;
+    align-items:end;
     padding: 0 5vw; 
 }
 
@@ -47,19 +49,18 @@ body {
     margin-left: auto; 
 }
 
-
 .nav a , .right-items a {
     text-decoration: none;
     color: white;
-    padding: 10px 15px;
-    font-size: clamp(14px, 1.2vw, 18px); /* Dynamická veľkosť textu */
+    padding: 2px 0px;
+    font-size: clamp(14px, 20px, 20px);
 }
 
 /* Hover efekt */
 .nav a:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
     color: black;
-    border-radius: 5px;
+    border-bottom: 5px solid white;
 }
 
 .vyhladaj_input{
@@ -76,3 +77,23 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.menu_icon {
+    color: white;
+    font-size: 50px;
+    margin-left: 30px;
+    display: none;
+}
+
+@media (max-width: 945px) {
+    .nav{
+        display: none;
+    }    
+    .menu_icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+

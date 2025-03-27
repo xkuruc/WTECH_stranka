@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/fotokolaz.css">
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/dropdown.css">
+    <link rel="stylesheet" href="./css/menu_sidebar.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -30,15 +31,69 @@
             <a href="#kontakt">Lopty</a>
             <a href="#onas">Vypredaj</a> -->
     <nav class="navbar">
+        <div class="logo main_category" >Logo </div>
+        <div class="menu_icon" onclick="toggleSidebar()"> 
+            <i class="fa-solid fa-bars"></i>
+        </div>
         <div class="nav">
             <ul class="menu">
-                <li class="main_category"><div class="logo">Logo</div></li>
-                <li class="main_category">
+                <li class="main_category" id="tenisky">
                     <a href="#Tenisky">Tenisky</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sportové tenisky</a></li>
-                        <li><a href="#">Nike</a></li>
-                        <li><a href="#">Adidas</a></li>
+                        <li class="inside_category">
+                            <span class="inside_category_name"><a href="#panskeTenisky"> Pánske tenisky </a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Pánske sportove tenisky </span>
+                                <span class="konkretna_moznost" >Pánske livestyle tenisky</span>
+                                <span class="konkretna_moznost">Nike</span>
+                                <span class="konkretna_moznost">Jordan</span>
+                                <span class="konkretna_moznost">Adidas</span>
+                                <span class="konkretna_moznost">Converse</span>
+                                <span class="konkretna_moznost">New balance</span>
+                                <span class="konkretna_moznost">Reebok</span>
+                                <span class="konkretna_moznost">Puma</span>
+                                <span class="konkretna_moznost">Vans</span>
+                            </div>
+                        </li>
+                        <li class="inside_category">
+                            <span class="inside_category_name"><a href="#damskeTenisky"> Dámske tenisky</a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Dámske sportove tenisky </span>
+                                <span class="konkretna_moznost">Dámske livestyle tenisky</span>
+                                <span class="konkretna_moznost">Nike</span>
+                                <span class="konkretna_moznost">Jordan</span>
+                                <span class="konkretna_moznost">Adidas</span>
+                                <span class="konkretna_moznost">Converse</span>
+                                <span class="konkretna_moznost">New balance</span>
+                                <span class="konkretna_moznost">Reebok</span>
+                                <span class="konkretna_moznost">Puma</span>
+                                <span class="konkretna_moznost">Vans</span>
+                            </div>
+                        </li>
+                        <li class="inside_category">
+                            <span class="inside_category_name"> Značky</span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Nike</span>
+                                <span class="konkretna_moznost">Jordan</span>
+                                <span class="konkretna_moznost">Adidas</span>
+                                <span class="konkretna_moznost">Converse</span>
+                                <span class="konkretna_moznost">New balance</span>
+                                <span class="konkretna_moznost">Reebok</span>
+                                <span class="konkretna_moznost">Puma</span>
+                                <span class="konkretna_moznost">Vans</span>
+                            </div>
+                        </li>
+                        <li class="inside_category inside_category_posledny">
+                            <span class="inside_category_name"><a href="#detskeTenisky"> Tenisky detské </a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Tenisky detské - bábätká (TD) </span>
+                                <span class="konkretna_moznost">Tenisky detské - mladšie deti (PS) </span>
+                                <span class="konkretna_moznost">Tenisky detské - staršie deti (GS) </span>
+                                <span class="konkretna_moznost">Nike</span>
+                                <span class="konkretna_moznost">Jordan</span>
+                                <span class="konkretna_moznost">Adidas</span>
+                            </div>
+                        </li>
                     </ul>
                 </li>
                 <li class="main_category"><a href="#Kopacky">Kopacky</a></li>
@@ -53,6 +108,106 @@
             <div class="kosik last">KOSIK </div>
         </div>
     </nav>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar_header">
+            <p class="sidebar_header_item"> Ponuka</p>
+            <div >
+                <i class="fa-solid fa-arrow-left sidebar_header_item" onclick="toggleSidebar(event)"></i>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <div class="sidebar_item" onclick="toggleSubmenu(event)">
+                    <span class="sidebar_main" > TENISKY </span> 
+                    <span class="sidebar_main plus"> + </span>
+                </div>
+                <ul class="submenu">
+                  <ul class="submenu2">
+                    <li>
+                        <div class="sidebar_item" onclick="toggleSubmenuPanskeTenisky(event)">
+                            <span class="sidebar2_main" > Panske tenisky </span> 
+                            <span class="sidebar_main plus"> + </span>
+                        </div>
+                        <ul class="submenu3 submenuPanskeTenisky ">
+                            <li> <span class="submenu_item">Pánske sportove tenisky </span> </li>
+                            <li> <span class="submenu_item">Pánske livestyle tenisky </span> </li>
+                            <li> <span class="submenu_item">Nike </span> </li>
+                            <li> <span class="submenu_item">Jordan </span> </li>
+                            <li> <span class="submenu_item">Adidas </span> </li>
+                            <li> <span class="submenu_item">Converse </span> </li>
+                            <li> <span class="submenu_item">New Balance </span> </li>
+                            <li> <span class="submenu_item">Rebook  </span> </li>
+                            <li> <span class="submenu_item">Puma </span> </li>
+                            <li> <span class="submenu_item">Vans </span> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="sidebar_item" onclick="toggleSubmenuDamskeTenisky(event)">
+                            <span class="sidebar2_main" > Damske tenisky </span> 
+                            <span class="sidebar_main plus"> + </span>
+                        </div>
+                        <ul class="submenu3 submenuDamskeTenisky">
+                            <li> <span class="submenu_item">Dámske sportove tenisky </span> </li>
+                            <li> <span class="submenu_item">Dámske livestyle tenisky </span> </li>
+                            <li> <span class="submenu_item">Nike </span> </li>
+                            <li> <span class="submenu_item">Jordan </span> </li>
+                            <li> <span class="submenu_item">Adidas </span> </li>
+                            <li> <span class="submenu_item">Converse </span> </li>
+                            <li> <span class="submenu_item">New Balance </span> </li>
+                            <li> <span class="submenu_item">Rebook  </span> </li>
+                            <li> <span class="submenu_item">Puma </span> </li>
+                            <li> <span class="submenu_item">Vans </span> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="sidebar_item" onclick="toggleSubmenuZnacky(event)">
+                            <span class="sidebar2_main" > Znacky </span> 
+                            <span class="sidebar_main plus"> + </span>
+                        </div>
+                        <ul class="submenu3 submenuZnacky">
+                            <li> <span class="submenu_item">Nike </span> </li>
+                            <li> <span class="submenu_item">Jordan </span> </li>
+                            <li> <span class="submenu_item">Adidas </span> </li>
+                            <li> <span class="submenu_item">Converse </span> </li>
+                            <li> <span class="submenu_item">New Balance </span> </li>
+                            <li> <span class="submenu_item">Rebook  </span> </li>
+                            <li> <span class="submenu_item">Puma </span> </li>
+                            <li> <span class="submenu_item">Vans </span> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="sidebar_item" onclick="toggleSubmenuDetskeTenisky(event)">
+                            <span class="sidebar2_main" > Detske tenisky </span> 
+                            <span class="sidebar_main plus"> + </span>
+                        </div>
+                        <ul class="submenu3 submenuDetskeTenisky">
+                            <li> <span class="submenu_item">Tenisky detské - bábätká (TD)  </span> </li>
+                            <li> <span class="submenu_item">Tenisky detské - mladšie deti (PS) </span> </li>
+                            <li> <span class="submenu_item">Tenisky detské - staršie deti (GS) </span> </li>
+                            <li> <span class="submenu_item">Nike </span> </li>
+                            <li> <span class="submenu_item">Jordan </span> </li>
+                            <li> <span class="submenu_item">Adidas  </span> </li>
+                        </ul>
+                    </li>
+                  </ul>  
+                  
+                </ul>
+              </li>
+          <li>
+            <div class="sidebar_item">
+                <span class="sidebar_main" href="#">KOPACKY </span> 
+                <span class="sidebar_main plus"> + </span>
+            </div>
+        </li>
+            <li>
+                <div class="sidebar_item">
+                    <span class="sidebar_main" href="#">LOPTY </span> 
+                    <span class="sidebar_main plus"> + </span>
+                </div>
+            </li>
+        </ul>
+      </div>
+      <div class="overlay" onclick="toggleSidebar()"></div>
   
     
     <section class="main_image_section">
@@ -238,5 +393,6 @@
     <script src="javascript/product_slider.js"></script>
     <script src="./javascript/slider_moj.js"></script>
     <script src="./javascript/product_slider.js"></script>
+    <script src="./javascript/side_menubar.js"></script>
 </body>
 </html>
