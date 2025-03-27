@@ -9,6 +9,7 @@
     transition: left 0.3s ease;
     padding: 20px;
     z-index: 100;
+    overflow: auto;
 }
 
 /* Keď je sidebar aktívny */
@@ -56,7 +57,11 @@
     padding-left: 20px; /* odsadenie pre vizuálnu hierarchiu */
 }
 
-.submenuPanskeTenisky.open, .submenuDamskeTenisky.open, .submenuZnacky.open, .submenuDetskeTenisky.open {
+.submenuPanskeTenisky.open, .submenuDamskeTenisky.open, .submenuZnacky.open, .submenuDetskeTenisky.open,
+ .submenuMUZI.open,
+ .submenuZENY.open,
+ .submenuDETI.open,
+ .submenuZnackyOBLECENIE.open {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -151,4 +156,13 @@ transition: all 0.3s ease;
         width: 95vw;
         height: 100%;
     }   
+}
+
+.sidebar_vypredaj_item{
+    color: rgb(240, 63, 63);
+}
+
+.komunita_vypredaj_item{
+    color: rgb(169, 98, 255);
+    margin-bottom: 30px;
 }

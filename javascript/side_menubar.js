@@ -53,9 +53,58 @@ function toggleSubmenuZnacky(event) {
 }
 
 function toggleSubmenuDetskeTenisky(event) {
-    //event.preventDefault();
     var li = event.target.closest("li"); 
     var submenu = li.querySelector(".submenuDetskeTenisky");
+    var plusMinus = li.querySelector(".plus");
+    if (submenu) {
+        submenu.classList.toggle('open');
+        plusMinus.textContent = submenu.classList.contains('open') ? "-" : "+";
+    }
+}
+
+function toggleSubmenuDetskeTenisky(event) {
+    var li = event.target.closest("li"); 
+    var submenu = li.querySelector(".submenuDetskeTenisky");
+    var plusMinus = li.querySelector(".plus");
+    if (submenu) {
+        submenu.classList.toggle('open');
+        plusMinus.textContent = submenu.classList.contains('open') ? "-" : "+";
+    }
+}
+
+
+function toggleSubmenuMUZI(event) {
+    var li = event.target.closest("li"); 
+    var submenu = li.querySelector(".submenuMUZI");
+    var plusMinus = li.querySelector(".plus");
+    if (submenu) {
+        submenu.classList.toggle('open');
+        plusMinus.textContent = submenu.classList.contains('open') ? "-" : "+";
+    }
+}
+
+function toggleSubmenuZENY(event) {
+    var li = event.target.closest("li"); 
+    var submenu = li.querySelector(".submenuZENY");
+    var plusMinus = li.querySelector(".plus");
+    if (submenu) {
+        submenu.classList.toggle('open');
+        plusMinus.textContent = submenu.classList.contains('open') ? "-" : "+";
+    }
+}
+
+function toggleSubmenuDETI(event) {
+    var li = event.target.closest("li"); 
+    var submenu = li.querySelector(".submenuDETI");
+    var plusMinus = li.querySelector(".plus");
+    if (submenu) {
+        submenu.classList.toggle('open');
+        plusMinus.textContent = submenu.classList.contains('open') ? "-" : "+";
+    }
+}
+function toggleSubmenuZnackyOBLECENIE(event) {
+    var li = event.target.closest("li"); 
+    var submenu = li.querySelector(".submenuZnackyOBLECENIE");
     var plusMinus = li.querySelector(".plus");
     if (submenu) {
         submenu.classList.toggle('open');

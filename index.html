@@ -25,11 +25,6 @@
 
 </head>
 <body>
-    <!-- <div class="logo">Logo</div>
-            <a href="#home">Tenisky</a>
-            <a href="#novinky">Kopacky</a>
-            <a href="#kontakt">Lopty</a>
-            <a href="#onas">Vypredaj</a> -->
     <nav class="navbar">
         <div class="logo main_category" >Logo </div>
         <div class="menu_icon" onclick="toggleSidebar()"> 
@@ -39,7 +34,7 @@
             <ul class="menu">
                 <li class="main_category" id="tenisky">
                     <a href="#Tenisky">Tenisky</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menuTENISKY">
                         <li class="inside_category">
                             <span class="inside_category_name"><a href="#panskeTenisky"> Pánske tenisky </a></span>
                             <div class="inside_category_moznosti">
@@ -96,9 +91,82 @@
                         </li>
                     </ul>
                 </li>
-                <li class="main_category"><a href="#Kopacky">Kopacky</a></li>
-                <li class="main_category"><a href="#Lopty">Lopty</a></li>
-                <li class="main_category"><a href="#Vypredaj">Vypredaj</a></li>
+                <li class="main_category">
+                    <a href="#Oblecenie">Oblecenie</a>
+                    <ul class="dropdown-menu dropdown-menuOBLECENIE">
+                        <li class="inside_category">
+                            <span class="inside_category_name"><a href="#panskeTenisky"> MUŽI </a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Pánske tričká </span>
+                                <span class="konkretna_moznost">Pánske mikiny </span>
+                                <span class="konkretna_moznost">Pánske bundy </span>
+                                <span class="konkretna_moznost">Pánske nohavice </span>
+                                <span class="konkretna_moznost">Pánske kraťasy </span>
+
+                            </div>
+                        </li>
+                        <li class="inside_category">
+                            <span class="inside_category_name"><a href="#damskeTenisky"> ŽENY </a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Dámske tričká </span>
+                                <span class="konkretna_moznost">Dámske mikiny </span>
+                                <span class="konkretna_moznost">Dámske bundy </span>
+                                <span class="konkretna_moznost">Dámske nohavice </span>
+                                <span class="konkretna_moznost">Dámske kraťasy </span>
+                            </div>
+                        </li>
+                        <li class="inside_category">
+                            <span class="inside_category_name"> Značky</span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Nike</span>
+                                <span class="konkretna_moznost">Jordan</span>
+                                <span class="konkretna_moznost">Adidas</span>
+                                <span class="konkretna_moznost">Adidas originals</span>
+                                <span class="konkretna_moznost">Puma</span>
+                                <span class="konkretna_moznost">Pleasures</span>
+                            </div>
+                        </li>
+                        <li class="inside_category inside_category_posledny">
+                            <span class="inside_category_name"><a href="#detskeTenisky"> DETI </a></span>
+                            <div class="inside_category_moznosti">
+                                <span class="konkretna_moznost">Tričká </span>
+                                <span class="konkretna_moznost">Detské mikiny </span>
+                                <span class="konkretna_moznost">Detské bundy </span>
+                                <span class="konkretna_moznost">Detské kraťasy</span>
+                                <span class="konkretna_moznost">Detské súpravy </span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main_category">
+                    <a href="#Lopty">Doplnky</a>
+                    <ul class="dropdown-menu dropdown-menuDOPLNKY">
+                        <div class="doplnky_placeholder">
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"><a href="#LOPTY"> LOPTY </a></span>
+                            </li>
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"><a href="#BATOHY"> BATOHY </a></span>
+                            </li>
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"> <a href="#CIAPKY"> ČIAPKY </a></span></span>
+                            </li>
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"><a href="#PONOZKY"> PONOŽKY </a></span>
+                            </li>
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"><a href="#SILTOVKY"> ŠILTOVKY </a></span>
+                            </li>
+                            <li class="inside_category">
+                                <span class="inside_category_Doplnky"><a href="#LADVINKA"> ĽADVINKA </a></span>
+                            </li>
+                            <li class="inside_category inside_category_posledny">
+                                <span class="inside_category_Doplnky"><a href="#OSTATNE"> OSTATNÉ </a></span>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+                <li class="main_category"><a href="#Vypredaj">Výpredaj</a></li>
             </ul>
 
         </div>
@@ -108,6 +176,8 @@
             <div class="kosik last">KOSIK </div>
         </div>
     </nav>
+
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar_header">
             <p class="sidebar_header_item"> Ponuka</p>
@@ -125,7 +195,7 @@
                   <ul class="submenu2">
                     <li>
                         <div class="sidebar_item" onclick="toggleSubmenuPanskeTenisky(event)">
-                            <span class="sidebar2_main" > Panske tenisky </span> 
+                            <span class="sidebar2_main" > Pánske tenisky </span> 
                             <span class="sidebar_main plus"> + </span>
                         </div>
                         <ul class="submenu3 submenuPanskeTenisky ">
@@ -143,7 +213,7 @@
                     </li>
                     <li>
                         <div class="sidebar_item" onclick="toggleSubmenuDamskeTenisky(event)">
-                            <span class="sidebar2_main" > Damske tenisky </span> 
+                            <span class="sidebar2_main" > Dámske tenisky </span> 
                             <span class="sidebar_main plus"> + </span>
                         </div>
                         <ul class="submenu3 submenuDamskeTenisky">
@@ -161,7 +231,7 @@
                     </li>
                     <li>
                         <div class="sidebar_item" onclick="toggleSubmenuZnacky(event)">
-                            <span class="sidebar2_main" > Znacky </span> 
+                            <span class="sidebar2_main" > Značky </span> 
                             <span class="sidebar_main plus"> + </span>
                         </div>
                         <ul class="submenu3 submenuZnacky">
@@ -177,7 +247,7 @@
                     </li>
                     <li>
                         <div class="sidebar_item" onclick="toggleSubmenuDetskeTenisky(event)">
-                            <span class="sidebar2_main" > Detske tenisky </span> 
+                            <span class="sidebar2_main" > Detské tenisky </span> 
                             <span class="sidebar_main plus"> + </span>
                         </div>
                         <ul class="submenu3 submenuDetskeTenisky">
@@ -194,17 +264,120 @@
                 </ul>
               </li>
           <li>
-            <div class="sidebar_item">
-                <span class="sidebar_main" href="#">KOPACKY </span> 
+            <div class="sidebar_item" onclick="toggleSubmenu(event)">
+                <span class="sidebar_main" href="#">OBLEČENIE </span> 
                 <span class="sidebar_main plus"> + </span>
             </div>
-        </li>
+            <ul class="submenu">
+                <ul class="submenu2">
+                  <li>
+                      <div class="sidebar_item" onclick="toggleSubmenuMUZI(event)">
+                          <span class="sidebar2_main" > Muži </span> 
+                          <span class="sidebar_main plus"> + </span>
+                      </div>
+                      <ul class="submenu3 submenuMUZI ">
+                          <li> <span class="submenu_item">Pánske tričká </span> </li>
+                          <li> <span class="submenu_item">Pánske mikiny </span> </li>
+                          <li> <span class="submenu_item">Pánske bundy </span> </li>
+                          <li> <span class="submenu_item">Pánske nohavice </span> </li>
+                          <li> <span class="submenu_item">Pánske kraťasy </span> </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <div class="sidebar_item" onclick="toggleSubmenuZENY(event)">
+                          <span class="sidebar2_main" > Ženy </span> 
+                          <span class="sidebar_main plus"> + </span>
+                      </div>
+                      <ul class="submenu3 submenuZENY">
+                          <li> <span class="submenu_item">Dámske tričká </span> </li>
+                          <li> <span class="submenu_item">Dámske mikiny </span> </li>
+                          <li> <span class="submenu_item">Dámske bundy </span> </li>
+                          <li> <span class="submenu_item">Dámske nohavice </span> </li>
+                          <li> <span class="submenu_item">Dámske kraťasy </span> </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <div class="sidebar_item" onclick="toggleSubmenuZnackyOBLECENIE(event)">
+                          <span class="sidebar2_main" > Značky </span> 
+                          <span class="sidebar_main plus"> + </span>
+                      </div>
+                      <ul class="submenu3 submenuZnackyOBLECENIE">
+                          <li> <span class="submenu_item">Nike </span> </li>
+                          <li> <span class="submenu_item">Jordan </span> </li>
+                          <li> <span class="submenu_item">Adidas </span> </li>
+                          <li> <span class="submenu_item">Adidas Originals </span> </li>
+                          <li> <span class="submenu_item">Puma </span> </li>
+                          <li> <span class="submenu_item">Pleasures </span> </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <div class="sidebar_item" onclick="toggleSubmenuDETI(event)">
+                          <span class="sidebar2_main" > Deti </span> 
+                          <span class="sidebar_main plus"> + </span>
+                      </div>
+                      <ul class="submenu3 submenuDETI">
+                        <li> <span class="submenu_item">Detské tričká </span> </li>
+                        <li> <span class="submenu_item">Detské mikiny </span> </li>
+                        <li> <span class="submenu_item">Detské bundy </span> </li>
+                        <li> <span class="submenu_item">Detské kraťasy</span> </li>
+                        <li> <span class="submenu_item">Detské súpravy </span> </li>
+                      </ul>
+                  </li>
+                </ul>  
+                
+              </ul>
+            </li>
             <li>
-                <div class="sidebar_item">
-                    <span class="sidebar_main" href="#">LOPTY </span> 
+                <div class="sidebar_item" onclick="toggleSubmenu(event)">
+                    <span class="sidebar_main" href="#">DOPLNKY </span> 
                     <span class="sidebar_main plus"> + </span>
                 </div>
+                <ul class="submenu">
+                    <ul class="submenu2">
+                        <li>
+                            <div class="sidebar_item">
+                                <span class="sidebar2_main sidebar2_mainDOPLNKY " > Lopty </span> 
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sidebar_item">
+                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Batohy </span> 
+                        </li>
+                        <li>
+                            <div class="sidebar_item">
+                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Čiapky </span> 
+                        </li>
+                        <li>
+                            <div class="sidebar_item">
+                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ponožky </span> 
+                        </li>
+                        <li>
+                        <div class="sidebar_item">
+                            <span class="sidebar2_main sidebar2_mainDOPLNKY" > Šiltovky </span> 
+                        </li>
+                        <li>
+                        <div class="sidebar_item">
+                            <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ľadvinka </span> 
+                        </li>
+                        <li>
+                        <div class="sidebar_item">
+                            <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ostatné </span> 
+                        </li>
+                    </ul>  
+                    </ul>
             </li>
+            <li>
+                <div class="sidebar_item">
+                    <span class="sidebar_main sidebar_vypredaj_item" href="#">Výpredaj </span> 
+                </div>
+            </li>
+            <li>
+                <div class="sidebar_item">
+                    <span class="sidebar_main komunita_vypredaj_item" href="#">Komunita </span> 
+                </div>
+            </li>
+
+
         </ul>
       </div>
       <div class="overlay" onclick="toggleSidebar()"></div>

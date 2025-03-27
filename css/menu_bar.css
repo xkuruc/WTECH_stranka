@@ -85,7 +85,7 @@ body {
     display: none;
 }
 
-@media (max-width: 945px) {
+@media (max-width: 990px) {
     .nav{
         display: none;
     }    

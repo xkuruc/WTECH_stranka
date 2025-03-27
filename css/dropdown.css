@@ -39,6 +39,7 @@
   padding: 10px 15px;
   white-space: nowrap;
   color: #333;
+  height: auto;
 }
 
 .dropdown-menu li a:hover {
@@ -50,9 +51,15 @@
   /* flex-direction: row; */
 }
 
-.main_category:hover .dropdown-menu:hover {
+.main_category:hover .dropdown-menuDOPLNKY {
   display: flex;
-  /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.dropdown-menuDOPLNKY .inside_category {
+  margin: 20px 5px;
 }
   
 .dropdown-menu .inside_category {
@@ -119,4 +126,29 @@
     width: 100vw; /* ze da sa na celu obrazovku */
     padding: 10px;
   }
+}
+
+.dropdown-menuTENISKY, .dropdown-menuDOPLNKY {
+  height: auto;
+}
+
+.dropdown-menuOBLECENIE {
+  height: auto;
+}
+
+.inside_category_Doplnky a {
+  font-size: 20px;
+}
+
+.doplnky_placeholder {
+  width: 700px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.sidebar2_mainDOPLNKY {
+  margin-top: 15px;
 }
