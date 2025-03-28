@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/newsletter.css">
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/polozka.css">
+    <!-- <link rel="stylesheet" href="./css/product_slider.css"> -->
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -377,32 +378,173 @@
     <section class="product_main_info">
         <div class="product_main_info_container">
             <div class="product_images">
-
+                <div class="product_images_container">
+                    <div id="sync1" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <h1>1</h1>
+                        </div>
+                        <div class="item">
+                            <h1>2</h1>
+                        </div>
+                        <div class="item">
+                            <h1>3</h1>
+                        </div>
+                        <div class="item">
+                            <h1>4</h1>
+                        </div>
+                        <div class="item">
+                            <h1>5</h1>
+                        </div>
+                        <div class="item">
+                            <h1>6</h1>
+                        </div>
+                        <div class="item">
+                            <h1>7</h1>
+                        </div>
+                        <div class="item">
+                            <h1>8</h1>
+                        </div>
+                    </div>
+                
+                    <div id="sync2" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <h1>1</h1>
+                        </div>
+                        <div class="item">
+                            <h1>2</h1>
+                        </div>
+                        <div class="item">
+                            <h1>3</h1>
+                        </div>
+                        <div class="item">
+                            <h1>4</h1>
+                        </div>
+                        <div class="item">
+                            <h1>5</h1>
+                        </div>
+                        <div class="item">
+                            <h1>6</h1>
+                        </div>
+                        <div class="item">
+                            <h1>7</h1>
+                        </div>
+                        <div class="item">
+                            <h1>8</h1>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
+
+
             <div class="product_information">
                 <h1 class="product_name">Air Jordan 4 RM "University Blue"</h1>
                 <div class="product_brand">Značka: <span id="product_brand_specified" class="specified">Jordan</span></div>
+                <div class="cena"> <span id="prize_specified" class="specified"> 150,00</span>€ </div>
                 <form class="form_div" action="">
-                    <input class="velkost_input" placeholder="vyber velkost" required/>
-                    <button class="pridat_do_kosika_button" type="submit">PRIDAŤ DO KOŠíKA</button>
+                    <select id="size" class="velkost_input">
+                        <option value="" disabled selected>Veľkosť (US)</option>
+                    </select>
+                    <button type="submit" class="pridat_do_kosika_button">Pridať do košíka</button>
                 </form>
-                <div class="odkaz"> Potrebujes poradit velkost ? Klikni sem</div>
-                <div class="avaibility"> <span id="avaibility_specified" class="specified"> Skladom Online</span> </div>
+                <div class="odkaz"> <a href="daco">Potrebujes poradit velkost ? Klikni sem </a></div>
+                <div class="avaibility"><i class="fa-solid fa-globe"></i> <span id="avaibility_specified" class="specified"> Skladom Online</span> </div>
                 <div class="other_information">
                     <div class="SKU">SKU: <span id="SKU_specified" class="specified">FQ7939-104</span></div>
                     <div class="pohlavie">Pohlavie: <span id="pohlavie_specified" class="specified"> Pánske</span></div>
                     <div class="farba">Farba: <span id="farba_specified" class="specified"> Biela </span></div>
                     <div class="typ_produktu">Typ produktu: <span id="typ_produktu_specified" class="specified"> Tenisky</span></div>
                 </div>
-                
-                
-
             </div>
 
         </div>
-
     </section>
 
+    <section class="suvisiacie_kategorie_section">
+        <div class="suvisiacie_kategorie_container">
+            <div class="label_container">
+                <h2>SÚVISIACIE KATEGÓRIE A ZNAČKY</h2>
+            </div>
+            <div class="category_container">
+                <div class="category_container_element">
+                    <h1 class="category_label">Top kategórie </h1>
+                    <div class="category_container_element_kategorie">
+                        <a>Tenisky</a>
+                        <a>Pánske tenisky</a>
+                        <a>Air Jordan</a>
+                        <a>Pánske livestyle tenisky</a>
+                    </div>
+                    
+                </div>
+                
+                <div class="category_container_element">
+                    <h1 class="category_label">Top značky </h1>
+                    <div class="category_container_element_znacky">
+                        <div class="category_container_element_znacky_item">
+                            <a>Jordan</a>
+                            <a>Nike</a>
+                            <a>Adidas</a>
+                            <a>Vans</a>
+                        </div>
+                        <div class="category_container_element_znacky_item">
+                            <a>Jordan</a>
+                            <a>Nike</a>
+                            <a>Adidas</a>
+                            <a>Vans</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <section class="product_sliders">
+        <div class="label"> Zlavy</div>
+        <section class="product_slider">
+            <div class="slider-container">
+                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
+                <div class="owl-carousel">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="label"> Todays pick</div>
+        <section class="product_slider">
+            <div class="slider-container">
+                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
+                <div class="owl-carousel">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="label"> Nedávno pozreté</div>
+        <section class="product_slider">
+            <div class="slider-container">
+                <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
+                <div class="owl-carousel">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                    <div class="item">6</div>
+                </div>
+            </div>
+        </section>
+    </section>
 
     <div style="height:1000px ;"></div>
 
@@ -489,6 +631,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="./javascript/side_menubar.js"></script>
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Splide/3.6.8/splide.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Splide/3.6.8/splide.min.js" defer></script>
+
+
+
+    <script src="./javascript/polozka.js"></script>
+    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous" defer></script>
+    <!-- <script src="./javascript/product_slider.js"></script> -->
 </body>
 </html>
