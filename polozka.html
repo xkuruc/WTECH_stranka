@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./css/menu_bar.css">
-    <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
-    <link rel="stylesheet" href="./css/profile_intro.css">
+        
     <link rel="stylesheet" href="./css/newsletter.css">
-    <link rel="stylesheet" href="./css/registracia.css">
-    <link rel="stylesheet" href="./css/profile_intro.css">
-
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/polozka.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -27,7 +25,7 @@
         <div class="nav">
             <ul class="menu">
                 <li class="main_category" id="tenisky">
-                    <a href="#Tenisky">Tenisky</a>
+                    <a href="zoznam_produktov.html">Tenisky</a>
                     <ul class="dropdown-menu dropdown-menuTENISKY">
                         <li class="inside_category">
                             <span class="inside_category_name"><a href="#panskeTenisky"> Pánske tenisky </a></span>
@@ -86,7 +84,7 @@
                     </ul>
                 </li>
                 <li class="main_category">
-                    <a href="#Oblecenie">Oblecenie</a>
+                    <a href="zoznam_produktov.html">Oblecenie</a>
                     <ul class="dropdown-menu dropdown-menuOBLECENIE">
                         <li class="inside_category">
                             <span class="inside_category_name"><a href="#panskeTenisky"> MUŽI </a></span>
@@ -133,7 +131,7 @@
                     </ul>
                 </li>
                 <li class="main_category">
-                    <a href="#Lopty">Doplnky</a>
+                    <a href="zoznam_produktov.html">Doplnky</a>
                     <ul class="dropdown-menu dropdown-menuDOPLNKY">
                         <div class="doplnky_placeholder">
                             <li class="inside_category">
@@ -160,7 +158,7 @@
                         </div>
                     </ul>
                 </li>
-                <li class="main_category"><a href="#Vypredaj">Výpredaj</a></li>
+                <li class="main_category"><a href="vypredaj.html">Výpredaj</a></li>
             </ul>
 
         </div>
@@ -369,124 +367,58 @@
                     <span class="sidebar_main komunita_vypredaj_item" href="#">Komunita </span> 
                 </div>
             </li>
+
+
         </ul>
     </div>
     <div class="overlay" onclick="toggleSidebar()"></div>
-    
 
-    <section class="osobne_udaje_section">
-        <form>
-            <h3 class="reg_nadpis">Osobné informácie</h3>
-            <div class="osobne_udaje_container">
-                <input class="registration_input" type="text" name="meno"  placeholder="Meno*" required/>
-                <input class="registration_input" type="text" name="priezvisko" placeholder="Priezvisko*" required/>
-                <input class="registration_input" type="email" name="email" placeholder="E-mail*" required/> 
-                <input class="registration_input" type="password" name="password" placeholder="Heslo*" required/> 
-                
-                <select class="registration_input">
-                    <option value="" disabled selected>Pohlavie*</option>
-                    <option value="male">Chlop</option>
-                    <option value="female">Princesska</option>
-                </select>
-                
-                <input class="registration_input" type="password" name="password" placeholder="Potvrdiť heslo*" required/> 
 
-                <div class="date-input">
-                    <span class="label">Dátum narodenia</span>
-                    <input class="daco" type="date">
+    <section class="product_main_info">
+        <div class="product_main_info_container">
+            <div class="product_images">
+
+            </div>
+            <div class="product_information">
+                <h1 class="product_name">Air Jordan 4 RM "University Blue"</h1>
+                <div class="product_brand">Značka: <span id="product_brand_specified" class="specified">Jordan</span></div>
+                <form class="form_div" action="">
+                    <input class="velkost_input" placeholder="vyber velkost" required/>
+                    <button class="pridat_do_kosika_button" type="submit">PRIDAŤ DO KOŠíKA</button>
+                </form>
+                <div class="odkaz"> Potrebujes poradit velkost ? Klikni sem</div>
+                <div class="avaibility"> <span id="avaibility_specified" class="specified"> Skladom Online</span> </div>
+                <div class="other_information">
+                    <div class="SKU">SKU: <span id="SKU_specified" class="specified">FQ7939-104</span></div>
+                    <div class="pohlavie">Pohlavie: <span id="pohlavie_specified" class="specified"> Pánske</span></div>
+                    <div class="farba">Farba: <span id="farba_specified" class="specified"> Biela </span></div>
+                    <div class="typ_produktu">Typ produktu: <span id="typ_produktu_specified" class="specified"> Tenisky</span></div>
                 </div>
-                <div class="newsletter_reg">
-                    <label>
-                        <input class="registration_input" type="checkbox" name="newsletter">
-                        Prihlásiť sa k odberu newslettera
-                    </label>
-                </div>
-            </div>
-
-            <h3 class="reg_nadpis">Kontaktné údaje</h3>
-            <div class="kontaktne_udaje_container">
-                <input class="registration_input div1" type="tel" name="telephone" placeholder="Telefónne číslo*" required/> 
-                <input class="registration_input div2" type="text" name="adresa" placeholder="Ulica*" required/> 
-                <input class="registration_input div3" type="text" name="cisloDomu" placeholder="Číslo domu*" required/> 
-                <input class="registration_input div4" type="text" name="mesto" placeholder="Mesto*" required/> 
-                <input class="registration_input div5" type="text" name="psc" placeholder="PSČ*" required required pattern="[0-9]{5}" /> 
-                <select class="div6">
-                    <option value="Slovensko">Slovensko</option>
-                </select>
-            </div>
-
-            <h3 class="reg_nadpis">Personalizácia</h3>
-            <div class="personalizacia_container">
-                <input class="registration_input personalizacia_div1" type="text" name="tiktok" placeholder="Tik-tok profil"/> 
-                <input class="registration_input personalizacia_div2" type="text" name="instagram" placeholder="Instagramový profil"/> 
-            
-                <select id="height" class="registration_input personalizacia_div3">
-                    <option value="" disabled selected>Tvoja výška</option>
-                </select>
                 
-                <select id="weight" class="registration_input personalizacia_div4">
-                    <option value="" disabled selected>Tvoja hmotnosť</option>
-                </select>
-
-                <select id="shoesize" class="registration_input personalizacia_div5">
-                    <option value="" disabled selected>Veľkosť topánok vo US</option>
-                </select>
-
                 
-                <div class="personalizacia_div6">
-                    <div class="dropdown registration_select" onclick="toggleDropdown('sizesDropdown')">
-                        <input type="text" id="selectedSizes" placeholder="Preferovaná veľkosť oblečenia" readonly>
-                        <div id="sizesDropdown" class="dropdown-content">
-                            <div onclick="selectOption('sizes', 'XXS')">XXS</div>
-                            <div onclick="selectOption('sizes', 'XS')">XS</div>
-                            <div onclick="selectOption('sizes', 'S')">S</div>
-                            <div onclick="selectOption('sizes', 'M')">M</div>
-                            <div onclick="selectOption('sizes', 'L')">L</div>
-                            <div onclick="selectOption('sizes', 'XL')">XL</div>
-                            <div onclick="selectOption('sizes', 'XXL')">XXL</div>
-                            <div onclick="selectOption('sizes', 'XXXL')">XXXL</div>
-                        </div>
-                    </div>
-                    
-                    <div class="dropdown registration_select personalizacia_div7" onclick="toggleDropdown('brandsDropdown')">
-                        <input type="text" id="selectedBrands" placeholder="Preferovaná značka" readonly>
-                        <div id="brandsDropdown" class="dropdown-content">
-                            <div onclick="selectOption('brands', 'Nike')">Nike</div>
-                            <div onclick="selectOption('brands', 'Adidas')">Adidas</div>
-                            <div onclick="selectOption('brands', 'Puma')">Puma</div>
-                            <div onclick="selectOption('brands', 'Reebok')">Reebok</div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
-            <div class="button_placeholder">
-                <button class="Vytvorit_ucet_button" type="submit"> Vytvoriť účet </button>
-            </div>
-            
-        </form>
+        </div>
+
     </section>
 
-    <section class="info_section">
-        <div class="info_nadpis">DORUČENIE A VRÁTENIE TOVARU </div>
-        <div class="info">
-            <div class="info1">
-                <div class="info_mininadpis"> O nás</div>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
-                </div>
-                <div><br>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
-                </div>
-            </div>
-            <div class="info2">
-                <div class="info_mininadpis"> Doručenie</div>
-                <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
-                <div class="info_mininadpis"> Ako vrátim tovar ? </div>
-                <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
+
+    <div style="height:1000px ;"></div>
+
+    <section class="newsletter">
+        <div class="newsletter_obsah">  
+            <div class="newsletter_label"> Nezmeškaj veľkú šancu </div>
+            <div class="newsletter_label2"> Prihláste sa do newslettera a získajte výhodné ponuky</div>
+            <div class="newsletter_button_input">
+                <form onsubmit="alert('Zadaný e-mail: ' + this.email.value); return false;">
+                    <input class="newsletter_input" type="email" name="email" placeholder="Vložte svoj e-mail" required/>
+                    <button class="prihlasit_button" type="submit"> <span class="emoji">👟</span> PRIHLÁSIŤ SA </button>
+                </form>
             </div>
         </div>
     </section>
+
     <footer class="footer_asi">
         <div class="footer_container">
             <div class="obchod_info">
@@ -554,6 +486,9 @@
         </div>
     </footer>
 
-    <script src="./javascript/registracia.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="./javascript/side_menubar.js"></script>
+    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </body>
 </html>

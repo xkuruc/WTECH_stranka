@@ -1,0 +1,60 @@
+
+.product_main_info {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+}
+
+.product_main_info_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.product_images, .product_information {
+    background-color: #d9d9d9;
+    width: 600px;
+    height: 600px;
+    
+}
+
+
+.product_information h1{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.specified {
+    font-weight: bold;
+    color: black;
+    
+}
+
+
+
+.product_information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.velkost_input {
+    display: block;
+    width: 90%;
+}
+
+.pridat_do_kosika_button {
+    width: 91%;
+    height: 40px;
+    font-size: 15px;
+}
+
+.form_div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

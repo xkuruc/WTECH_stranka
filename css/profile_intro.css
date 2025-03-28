@@ -139,8 +139,23 @@ body {
     }
 }
 
+@media (max-width: 900px) {
+    .login_input {
+        width: 70vw;
+    }
+    .login_button {
+        width: 71vw;
+    }
+}
 
-
+@media (max-width: 600px) {
+    .login_input {
+        width: 90vw;
+    }
+    .login_button {
+        width: 91vw;
+    }
+}
 
 
 .newsletter {
