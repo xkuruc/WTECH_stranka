@@ -22,7 +22,7 @@
     position:relative;
 }
 
-.owl-carousel .item{
+.owl-carousel .itemBRATU{
     /* margin: 3px; */
     color: #ff0000;
     background-color: #616161;
@@ -73,13 +73,14 @@
     font-size: 50px;
 }
 
-.owl-carousel .owl-item {
+
+.owl-carouselBRATU .owl-item {
     display: flex;
     justify-content: center;
     margin-right: 50px;
 }
 
-.owl-carousel .owl-stage {
+.owl-carouselBRATU .owl-stage {
     display: flex;
     justify-content: center;
 }
