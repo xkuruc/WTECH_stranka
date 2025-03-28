@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
     <link rel="stylesheet" href="./css/text_divider.css">
+    <link rel="stylesheet" href="./css/popup_overlay.css">
 
 </head>
 <body>
@@ -709,7 +710,7 @@
 
 
         <!-- filter overlay -->
-        <section class="filter_overlay">
+        <div class="filter_overlay">
             <div id="filter_container">
                 <div class="top_filter_menu">
                     <div class="filt_top">
@@ -733,11 +734,11 @@
                 <div class="filter_content">
                     <aside class="filter_category" id="cat_filter">
                         <button class="fil_cat selected" data-category ="brand">Značka</button>
-                        <button class="fil_cat" data-category ="size">Veľkosť</button>
-                        <button class="fil_cat" data-category ="color">Farba</button>
-                        <button class="fil_cat" data-category ="available">Dostupnosť</button>
-                        <button class="fil_cat" data-category ="price_sale">Cena</button>
-                        <button class="fil_cat" data-category ="gender">Pohlavie</button>
+                        <button class="fil_cat" data-category="size">Veľkosť</button>
+                        <button class="fil_cat" data-category="color">Farba</button>
+                        <button class="fil_cat" data-category="available">Dostupnosť</button>
+                        <button class="fil_cat" data-category="price_sale">Cena</button>
+                        <button class="fil_cat" data-category="gender">Pohlavie</button>
                     </aside>
 
 
@@ -948,11 +949,8 @@
                     <section class="category_content" id="no_filter">
                         <h3 class="category_identifier">No filter selected.</h3>
                     </section>
-
                 </div>
-                
-
-
+            
 
                 <div class="bottom_filter_menu">
                     <button id="resetFilters"><p>Vymazať filtre</p></button>
@@ -960,15 +958,39 @@
                 </div>
 
 
-                <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="./javascript/side_menubar.js"></script>
-                <script src="./javascript/filter_overlay.js"></script>
-                <script src="./javascript/price_slider.js"></script>
-                <script src="./javascript/filter_resize.js"></script>
-                <script src="./javascript/admin_dash.js"></script>
+               
             </div>
-        </section>
+        </div>
+
+
+        <!-- popup okno -->
+        <div class="popup_overlay">
+            <div class="popup_container">
+                <div class="popup_content">
+                    <div class="popup_message">
+                        <h2>Ste si istý?</h2>
+                        <p>Chcete vymazať produkt s ID: 1</p>
+                    </div>
+                    
+                    <div class="popup_buttons">
+                        <button id="confirm_popup">Áno</button>
+                        <button id="cancel_popup">Nie</button>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./javascript/side_menubar.js"></script>
+        <script src="./javascript/filter_overlay.js"></script>
+        <script src="./javascript/price_slider.js"></script>
+        <script src="./javascript/filter_resize.js"></script>
+        <script src="./javascript/admin_dash.js"></script>
     </main>
 
 
