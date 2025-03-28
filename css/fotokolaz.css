@@ -7,7 +7,7 @@
 }
 
 .fotokolaz {
-    width: 80%;
+    width: 85%;
     /* height: 400px; */
     /* background-color: #5151ff; */
     display: flex;
@@ -19,9 +19,8 @@
 .obr {
     max-width: 200px;
     max-height: 200px;
-    min-width: 100px;
-    min-height: 100px;
-    aspect-ratio: 1 / 1;
+    min-width: 33%;
+    aspect-ratio: 1 / 1; /* výška sa nastaví sama */
     background-color: rgb(72, 72, 72);
     border: 1px solid black;
 }
