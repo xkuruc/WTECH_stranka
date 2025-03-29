@@ -204,4 +204,10 @@
     .newsletter_reg {
         grid-column: span 1;
     }
+    .registration_input{
+        width: 100%;
+    }
+    .osobne_udaje_section{
+        width: 90%;
+    }
 }

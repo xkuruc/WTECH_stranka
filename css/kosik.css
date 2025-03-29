@@ -1,0 +1,314 @@
+
+.pokladna_section {
+    width: 99%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: auto;
+    margin: auto auto;
+}
+
+.pokladna_nadpis {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+    width: 100%;
+    text-align: center;
+}
+
+.hviezdicka {
+    color: rgb(169, 98, 255);
+}
+
+
+.pokladna_container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 90%;
+}
+
+.pokladna_informacie_container {
+    
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-content: center;
+}
+
+
+.element_napis {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.pokladna_input , .krajina_select{
+    display: block;
+    width: 100%;
+    height: 40px;   
+    outline: none;
+    border: 1px solid rgb(212, 210, 210);
+    
+}
+.pokladna_input:hover {
+    border-color: rgb(169, 98, 255);
+}
+
+.emial_container {
+    padding: 30px 0;
+    border-bottom: 1px solid rgb(212, 210, 210);
+}
+
+.information_dodacia_adresa {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.dalsie_info_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.dalsie_info_div1 {
+    grid-column: span 2 / span 2;
+}
+
+.dalsie_info_div2 {
+    grid-column: span 2 / span 2;
+    grid-column-start: 3;
+}
+
+.dalsie_info_div3 {
+    grid-column: span 4 / span 4;
+    grid-row-start: 2;
+}
+
+.dalsie_info_div4 {
+    grid-column: span 3 / span 3;
+    grid-row-start: 3;
+}
+
+.dalsie_info_div5 {
+    grid-column-start: 4;
+    grid-row-start: 3;
+}
+
+.dalsie_info_div6 {
+    grid-column: span 2 / span 2;
+    grid-row-start: 4;
+}
+
+.dalsie_info_div7 {
+    grid-column: span 2 / span 2;
+    grid-column-start: 3;
+    grid-row-start: 4;
+}
+
+.dalsie_info_div8 {
+    grid-column: span 4 / span 4;
+    grid-row-start: 5;
+}
+
+.dalsie_info_container label {
+    font-size: 13px;   
+}
+.emial_container_odkaz {
+    color: rgb(212, 210, 210);   
+}
+
+.pokladna_input::placeholder {
+    color: rgb(168, 165, 165);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+
+
+
+
+
+.moznosti label {
+    background-color: rgb(245, 245, 245);
+    
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    height: 90px;
+    justify-content: space-between;
+    align-items: center; /* Zmenené z align-content */
+}
+
+.moznosti label span {
+    flex-grow: 1; /* Posunie všetko ostatné doprava */
+    text-align: left;
+}
+
+.moznosti {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+input[type="radio"]:checked {
+    accent-color: rgb(169, 98, 255);
+}
+
+.sposob_dopravy_a_platba {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.fa-credit-card, .fa-box,.fa-paypal {
+    color: rgb(169, 98, 255);
+    margin-right: 10px;
+}
+
+
+.moznosti label:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.suhrn_objednavky {
+    width: 100%;
+    background-color: azure;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.element_napis2 {
+    text-transform: uppercase;
+    width: 80%;
+    text-align: left;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+#item_image {
+    width: 100px;
+    background-color: red;
+    aspect-ratio: 1;
+    flex: 1;
+}
+
+.polozky_vo_kosiku_item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#item_description {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.cast2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#item_amount {
+    width: 30px;
+    outline: none;
+    text-align: center;
+}
+
+.cast2 div {
+    width: 100%;
+}
+
+#item_price {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.item_price_div {
+    text-align: right;
+}
+.mnozstvo_div {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.item_size_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+#item_size {
+    font-weight: normal;
+}
+
+.icon_div {
+    text-align: right;
+}
+
+.polozky_vo_kosiku_item {
+    width: 90%;
+    border-bottom: 1px solid black;
+    padding: 20px 0;
+}
+
+.polozky_vo_kosiku {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+.objednavka_information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.objednavka_information div{
+    width: 100%;
+}
+.medzisucet_div, .celkom_so_dph, .celkom_bez_dph, .doprava_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+#medzisucet_specified, #celkom_so_dph_specified, #celkom_bez_dph_specified, #doprava_specified {
+    font-weight: normal;
+}
+
+#doprava_typ {
+    color: gray;
+}
