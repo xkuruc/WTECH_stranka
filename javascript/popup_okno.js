@@ -1,3 +1,6 @@
+const body2 = document.body;
+
+
 const popup_menu = document.getElementById("popup_overlay");
 const popup_accept = document.getElementById('popup_accept');
 const popup_cancel = document.getElementById('popup_cancel');
@@ -34,12 +37,12 @@ function show_popup(message) {
 
 
 function open_popup() {
-	body.style.overflow = 'hidden';
+	body2.style.overflow = 'hidden';
     popup_menu.classList.add('active');
 }
 
 
 function close_popup() {
-    body.style.overflow = 'visible';
+    body2.style.overflow = 'visible';
 	popup_menu.classList.remove('active');
 }

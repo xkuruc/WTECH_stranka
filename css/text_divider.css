@@ -3,7 +3,7 @@
 	margin-bottom: 50px;
 	margin-top: 60px;
 	font-size: 35px;
-	width: 100%;
+	width: 100vw;
 }
 
 .text_divider.padded {
@@ -40,6 +40,8 @@
     font-size: 20px;
     background: transparent;
     cursor: pointer;
+    text-decoration: none;
+	color: black;
 }
 
 
@@ -59,7 +61,13 @@
 
 }
 
-.h1_buttons button:hover {
+.h1_buttons a {
+	color: black;
+	text-decoration: none;
+}
+
+
+.h1_buttons a:hover, #logout_btn:hover, #admin_dash_btn:hover  {
 	text-decoration: underline;
 }
 

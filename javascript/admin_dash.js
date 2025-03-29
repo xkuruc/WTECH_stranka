@@ -26,7 +26,7 @@ logout.addEventListener('click', async function(event) {
     const confirmed = await show_popup('Chcete opustiť administrátorské rozhranie'); /* čaká sa na odpoved, skript čaká */
 
     if (confirmed) { /* klikol na odhlásenie */
-        window.location.href = "./index.html" /* presmeruje na index.html */
+        window.location.href = "./profil.html" /* presmeruje na index.html */
     }
 });
 
@@ -38,21 +38,10 @@ logout.addEventListener('click', async function(event) {
 
 todo:
 
-sablona pre zoznam objednávok
+
 sablona pre objednavku
-
-*možno tlačidlo na vstup do dashboardu, to čo je, ale další login
-
-je účet označený ako admin, klikne v profile na Admin Dashboard a musí sa zase prihlásiť
 upravenie existujúceho produktu - to isté ako pridať produkt, ale dá sa meniť všetko
 
-nákup bez prihlásenia
-prenostielnost košíka
-
-popup na odhlásenie -- treba najprv profil 
-
-profil
-login do dashboardu
 
 */
 
@@ -60,6 +49,9 @@ login do dashboardu
 /* 
 
 spravené:
+profil
+popup na odhlásenie -- treba najprv profil 
+admin dash login sablona
 
 */
 
