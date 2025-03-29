@@ -7,17 +7,19 @@
 
     <link rel="stylesheet" href="./css/menu_bar.css">
     <link rel="stylesheet" href="./css/main_image.css">
-    
+    <link rel="stylesheet" href="./css/filter_menu.css">
+    <link rel="stylesheet" href="./css/product_list.css">
+    <link rel="stylesheet" href="./css/orderby_menu.css">
+    <link rel="stylesheet" href="./css/product_item.css">
+    <link rel="stylesheet" href="./css/page_number_list.css">
+    <link rel="stylesheet" href="./css/filter_big_menu.css">
     <link rel="stylesheet" href="./css/newsletter.css">
     <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/profile_intro.css">
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
     <link rel="stylesheet" href="./css/text_divider.css">
-    <link rel="stylesheet" href="./css/newsletter_sablona.css">
-    <link rel="stylesheet" href="./css/custom_radio_btn.css">
-    <link rel="stylesheet" href="./css/kosik_sidebar.css">
-
+    <link rel="stylesheet" href="./css/popup_overlay.css">
+    <link rel="stylesheet" href="./css/profil.css">
 
 </head>
 <body>
@@ -170,9 +172,11 @@
         <div class="right_part">
             <input class="vyhladaj_input"/>
             <a href="prihlasenie.html" class="logo_link"><div class="profil">PROFIL </div></a>
-            <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div>
+            <div class="kosik last">KOSIK </div>
         </div>
     </nav>
+
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar_header">
             <p class="sidebar_header_item"> Ponuka</p>
@@ -374,208 +378,131 @@
         </ul>
       </div>
       <div class="overlay" onclick="toggleSidebar()"></div>
-      <div class="kosik_sidebar" id="kosik_sidebar">
-        <div class="kosik_sidebar_header">
-            <p>MôJ KOŠÍK  </p>
-            <div >
-                <i class="fa-solid fa-arrow-right" onclick="toggleSidebarKosik(event)"></i>
-            </div>
-        </div>
-        <div class="kosik_sidebar_items_container">
-            <div class="kosik_sidebar_item">
-                <div id="kosik_sidebar_item_photo"></div>
-                <div class="kosik_sidebar_item_information">
-                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-                </div>
-            </div>
-            <div class="kosik_sidebar_item">
-                <div id="kosik_sidebar_item_photo"></div>
-                <div class="kosik_sidebar_item_information">
-                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-                </div>
-            </div>
-            <div class="kosik_sidebar_item">
-                <div id="kosik_sidebar_item_photo"></div>
-                <div class="kosik_sidebar_item_information">
-                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-                </div>
-            </div>
-            <div class="kosik_sidebar_item">
-                <div id="kosik_sidebar_item_photo"></div>
-                <div class="kosik_sidebar_item_information">
-                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-                </div>
-            </div>
-            <div class="kosik_sidebar_item">
-                <div id="kosik_sidebar_item_photo"></div>
-                <div class="kosik_sidebar_item_information">
-                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="kosik_sidebar_zaverecne_info">
-            <div class="kosik_sidebar_zaverecne_info_medzisucet">
-                <div class="kosik_sidebar_zaverecne_info_medzisucet1">Medzisúčet košíka </div>
-                <div class="kosik_sidebar_zaverecne_info_medzisucet2"><span id="kosik_sidebar_zaverecne_info_medzisucet_specified">150.00</span> </div>
-                
-            </div>
-            <a href="kosik.html" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
-        </div>
-    </div>
-    <div class="overlay2" onclick="toggleSidebarKosik()"></div>
     </header>
 
 
 
     <main>
-        <section class="text_divider padded"> 
-            <h1>Odoberanie noviniek</h1>
+    
+        <section class="text_divider padded"> <!-- text admin dashboard a potom oddelovať čiara -->
+            <div class="h1_buttons">
+                
+                <h1>Môj účet</h1>
+                <button id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></button>
+                <button id="logout_btn">Opustiť rozhranie</button>
+            </div>
             <hr class="hr_divider">
         </section>
 
 
-        <!-- dynamicky sa doplní, či ide o prihlásenie/odhlásenie z odberu noviniek -->
-        <section class="newsletter_submit">
-            <form id="radio_form" action="profil.html">
-                
-                <label class="custom_radio_checkbox">
-                    <input type="checkbox" name="option" value="yes">
-                    <span class="radio_btn"></span>
-                    Prihlásiť sa na odber noviniek.
-                </label>
 
-                <button id="submit_btn" type="submit"><strong>Uložiť</strong></button>    
-                
-                
-            </form>
-        </section>
+        <div class="profil_info_wrapper">
+            <div class="profil_info_container">
+                <div class="osobne_udaje_adresa">
+                    <section class="osobne_udaje_pers">
+                        <section class="osobne">
+                            <h1>Osobné informácie</h1>
 
+                            <ul class="info_ul">
+                                <li>Meno Priezvisko</li>
+                                <li>E-mailová adresa</li>
+                                <li>Telefónne číslo</li>
+                                <li>Pohlavie</li>
+                                <li>Dátum narodenia</li>
+                            </ul>
+                        </section>
 
-        <section class="info_section">
-            <div class="info_nadpis">DORUČENIE A VRÁTENIE TOVARU </div>
-            <div class="info">
-                <div class="info1">
-                    <div class="info_mininadpis"> O nás</div>
-                    <div>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
-                    </div>
-                    <div><br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veniam hic, animi corrupti nulla eius pariatur modi consequatur quo nisi magni? Voluptatem, perferendis. Sed, exercitationem est adipisci delectus repellendus dolore.
-                    </div>
+                        <section class="personalizacia">
+                            <h1>Personalizované údaje</h1>
+
+                            <ul class="info_ul">
+                                <li>Výška: 170 cm</li>
+                                <li>Hmotnosť: 90 kg</li>
+                                <li>Veľkosť topánok: 43</li>
+                                <li>Veľkosť oblečenia: M</li>
+                                <li>Značka: Adidas</li>
+                                <li>Tiktok: @tiktokprofil</li>
+                                <li>IG: @instagramprofil</li>
+                            </ul>
+
+                        </section>
+                    </section>
+
+                    <section class="adresa_dorucenia">
+                        <h1>Adresa doručenia</h1>
+
+                        <ul class="info_ul">
+                            <li>Ulica:</li>
+                            <li>Číslo domu:</li>
+                            <li>Mesto:</li>
+                            <li>PSČ:</li>
+                            <li>Krajina:</li>
+                            <li>Dátum narodenia</li>
+                        </ul>
+                    </section>
                 </div>
-                <div class="info2">
-                    <div class="info_mininadpis"> Doručenie</div>
-                    <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
-                    <div class="info_mininadpis"> Ako vrátim tovar ? </div>
-                    <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, sequi. Voluptas cumque et, id inventore odio nobis enim iure dicta autem fuga veritatis, ullam iste possimus eos. Eum, ratione voluptas?</div>
+
+                <div class="newsletter_objednavky">
+                    <section class="newsletter_odber">
+                        <h1>Newsletter</h1>
+                        <span>Nie ste prihlásený k odberu noviniek.</span>
+                        <a href="newsletter_sablona.html">Upraviť</a>
+                    </section>
+
+
+                    <section class="objednavky">
+                        <h1>Moje objednávky</h1>
+                        <span>Tu sa nachádza podrobný prehľad vašich objednávok.</span>
+                        <a href="zoznam_objednavok.html">Zobraziť moje objednávky</a>
+                    </section>
                 </div>
+
             </div>
-        </section>
+        </div>
 
 
-    </main>
+
+
+
+
 
     
-
-
-    <footer class="joined_footer">
-        <section class="newsletter">
-            <div class="newsletter_obsah">  
-                <div class="newsletter_label"> Nezmeškaj veľkú šancu </div>
-                <div class="newsletter_label2"> Prihláste sa do newslettera a získajte výhodné ponuky</div>
-                <div class="newsletter_button_input">
-                    <form onsubmit="alert('Zadaný e-mail: ' + this.email.value); return false;">
-                        <input class="newsletter_input" type="email" name="email" placeholder="Vložte svoj e-mail" required/>
-                        <button class="prihlasit_button" type="submit"> <span class="emoji">👟</span> PRIHLÁSIŤ SA </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="footer_asi">
-            <div class="footer_container">
-                <div class="obchod_info">
-                        <div class="obchod">
-                            <div class="obchod_label"> Obchod- Praha </div>
-                            <div class="obchod_text">Martinská 2, 110 00 </div>
-                            <div>
-                                <div class="obchod_hodiny_text"> Otvaracie hodiny </div>
-                                <div class="obchod_text" style="white-space: pre;">PO - SO       11:00-19:00</div>
-                                <div class="obchod_text" style="white-space: pre;">NE:              ZATVORENE</div>
-                            </div>
-                            
-                        </div>
-                        <div class="obchod druhy">
-                            <div class="obchod_label">Obchod- Bratislava </div>
-                            <div class="obchod_text">Mlynské Nivy 10, 821 09</div>
-                            <div>
-                                <div class="obchod_hodiny_text"> Otvaracie hodiny </div>
-                                <div class="obchod_text" style="white-space: pre;">PO - SO       10:00-20:00</div>
-                                <div class="obchod_text" style="white-space: pre;">NE:              ZATVORENE</div>
-                            </div>
-
-                        </div>
-                        <div class="obchod">
-                            <div class="obchod_label">Obchod- Kosice </div>
-                            <div class="obchod_text">Kukučínova 2, 040 01</div>
-                            <div>
-                                <div class="obchod_hodiny_text"> Otvaracie hodiny </div>
-                                <div class="obchod_text" style="white-space: pre;">PO - SO       11:00-19:00</div>
-                                <div class="obchod_text" style="white-space: pre;">NE:              ZATVORENE</div>
-                            </div>
-                            
-                        </div>
-                </div>
-                <div class="podmienky">
-                    <div class="podmienky1"> 
-                        <div class="podmienky_label"> The Blocks </div>
-                        <br>
-                        <div class="footer_text">  Obchody The Blocks </div>
-                        <div class="footer_text">   Ochrana osobných údajov </div>
-                        <div class="footer_text">   Ochranné podmienky </div>
-                        <div class="footer_text">   Cookies </div>
-                        <div class="footer_text">   Naše značky </div>
-                        <div class="footer_text">   Eco Mission </div>
-                        <div class="footer_text">   Affiliate </div>
+        <!-- popup okno -->
+        <div id="popup_overlay">
+            <div class="popup_container">
+                <div class="popup_content">
+                    <div class="popup_message">
+                        <h2>Ste si istý?</h2>
+                        <p></p>
                     </div>
-                    <div class="podmienky2"> 
-                        <div class="podmienky_label"> FAQ </div>
-                        <br>
-                        <div class="footer_text"> The Blocks family </div>
-                        <div class="footer_text"> Platba a doručenie </div>
-                        <div class="footer_text"> Reklamácia a vrátenie </div>
-                        <div class="footer_text"> Blog </div>
-                        <div class="footer_text"> Kontakt </div>
-                        <div class="footer_text">  > </div>
-                        <br>
-                        <!-- <i class="fa-brands fa-linkedin-in"></i> -->
-                    </div>
-                    <div class="footer_social">
-                        <i class="fa-brands fa-facebook-f"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
+                    
+                    <div class="popup_buttons">
+                        <button id="popup_accept">Áno</button>
+                        <button id="popup_cancel">Nie</button>
+                    
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+
+
+
+        <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./javascript/side_menubar.js"></script>
+        
+        
+        <script src="./javascript/popup_okno.js"></script>
+    </main>
+
+
+
+
+    
+    <footer>
     </footer>
 
 
-
-
-    
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./javascript/kosik_sidebar.js"></script>
-    <script src="./javascript/side_menubar.js"></script>
-    
-    
 </body>
 </html>

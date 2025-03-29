@@ -1,0 +1,204 @@
+.profil_info_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+.profil_info_container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	width: 75%;
+	flex-direction: column;
+	row-gap: 50px;
+	margin-bottom: 50px;
+}
+
+
+/* zmeníme defautl h1 padding a margin */
+.profil_info_container h1 {
+	font-size: 27px;
+	margin: 0;
+	padding: 0;
+	color: #262626;
+}
+
+
+/* tie dva vedla seba, osobne info a adresa */
+.osobne_udaje_adresa {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+
+/* nastavíme nech sú tak široké, aby sa tam zmestilo ešte 50px medzera*/
+.osobne_udaje_pers, .adresa_dorucenia {
+	border: 1px solid black;
+	width: calc((100% - 50px)/2);
+	height: 550px;
+	min-width: 400px;
+}
+
+.newsletter_odber, .objednavky {
+	width: 100%;
+	height: 200px;
+	border: 1px solid black;
+}
+
+
+/* ul zoznam kde sú tie informácie */
+.info_ul {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	padding-top: 15px;
+	font-size: 20px;
+	color: #404040;
+}
+
+
+/* spoločná sekcia pre tie 2 sekcie */
+.osobne_udaje_pers {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 20px;
+}
+
+
+.osobne_udaje_pers section {
+	margin-left: 30px;
+	margin-top: 30px;
+	padding-bottom: 15px;
+	justify-content: center;
+}
+
+
+.adresa_dorucenia h1, .adresa_dorucenia ul {
+	margin-left: 30px;
+	margin-top: 29px;
+}
+
+
+.adresa_dorucenia ul {
+	margin-top: 0;
+}
+
+
+
+
+/* newsletter a moje objednávky sekcie */
+.newsletter_odber, .objednavky {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 30px;
+	align-items: center;
+}
+
+
+
+.newsletter_objednavky {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	text-align: center;
+}
+
+
+.newsletter_objednavky span {
+	font-size: 20px;
+}
+
+
+.newsletter_objednavky a {
+	text-decoration: none;
+	color: black;
+    padding: 0px 12px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+    cursor: pointer;
+}
+
+.newsletter_objednavky a:hover {
+	text-decoration: underline;
+}
+
+
+
+/* media querička*/
+@media (max-width: 1080px) {
+	.osobne_udaje_pers, .adresa_dorucenia {
+		width: 90%;
+		min-width: 318px;
+		padding-bottom: 20px;
+	}
+
+	.osobne_udaje_adresa {
+		display: flex;
+		justify-content: center;
+	}
+
+	.adresa_dorucenia {
+		margin-top: 50px;
+	}
+
+	.osobne_udaje_pers {
+		border: none;
+		margin-bottom: 50px;
+	}
+
+	.osobne_udaje_pers section {
+		margin-left: 0px;
+	}
+
+
+	.osobne, .personalizacia {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		border: none;
+		outline: 1px solid black;
+		padding-top: 30px;
+		
+	}
+
+	
+	.osobne h1, .osobne ul, .personalizacia h1, .personalizacia ul  {
+		margin-left: 30px;
+	}
+
+	.osobne ul, .personalizacia ul {
+		margin-bottom: 20px;
+	}
+
+	.profil_info_container {
+		width: 100%;
+		justify-content: center;
+	}
+
+
+	.adresa_dorucenia {
+		height: 250px;
+	}
+
+
+
+
+	/* newsletter a objednavky */
+	.newsletter_objednavky {
+		width: 90%;
+		min-width: 318px;
+		margin: 0px auto;
+	}
+
+}

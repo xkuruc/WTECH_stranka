@@ -51,6 +51,9 @@ prenostielnost košíka
 
 popup na odhlásenie -- treba najprv profil 
 
+profil
+login do dashboardu
+
 */
 
 
