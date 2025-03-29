@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/kosik.css">
     <link rel="stylesheet" href="./css/profile_intro.css">
+    <link rel="stylesheet" href="./css/kosik_sidebar.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -164,7 +165,7 @@
         <div class="right_part">
             <input class="vyhladaj_input"/>
             <a href="prihlasenie.html" class="logo_link"><div class="profil">PROFIL </div></a>
-            <div class="kosik last">KOSIK </div>
+            <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div>
         </div>
     </nav>
 
@@ -372,6 +373,61 @@
         </ul>
     </div>
     <div class="overlay" onclick="toggleSidebar()"></div>
+    <div class="kosik_sidebar" id="kosik_sidebar">
+        <div class="kosik_sidebar_header">
+            <p>MôJ KOŠÍK  </p>
+            <div >
+                <i class="fa-solid fa-arrow-right" onclick="toggleSidebarKosik(event)"></i>
+            </div>
+        </div>
+        <div class="kosik_sidebar_items_container">
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="kosik_sidebar_zaverecne_info">
+            <div class="kosik_sidebar_zaverecne_info_medzisucet">
+                <div class="kosik_sidebar_zaverecne_info_medzisucet1">Medzisúčet košíka </div>
+                <div class="kosik_sidebar_zaverecne_info_medzisucet2"><span id="kosik_sidebar_zaverecne_info_medzisucet_specified">150.00</span> </div>
+                
+            </div>
+            <a href="kosik.html" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
+        </div>
+    </div>
+    <div class="overlay2" onclick="toggleSidebarKosik()"></div>
 
     
     <section class="pokladna_section">
@@ -507,6 +563,22 @@
                                 <div class="icon_div"> <i class="fa-solid fa-trash"></i> </div>
                             </div>
                         </div>
+                        <div class="polozky_vo_kosiku_item">
+                            <div class="cast1">
+                                <div id="item_image"></div>
+                            </div>
+                            <div class="cast2">
+                                <div id="item_description">Air Jordan 4 RM "University Blue" </div>
+                                <div class="item_price_div"> <span id="item_price"> 150,00 </span></div>
+                                <div class="mnozstvo_div"> Množstvo <input type="text" value="1" id="item_amount"> </span> </div>
+                                <div class="item_size_div"> EUR: <span id="item_size">40.5</span> </div>
+                                <div class="icon_div"> <i class="fa-solid fa-trash"></i> </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
                     </div>
                     <div class="objednavka_information">
                         <div class="medzisucet_div">Medzisúčet košíka <span id="medzisucet_specified">150.00 </span></div>
@@ -516,7 +588,7 @@
                                 <div id="doprava_typ"> Packeta - Kuriér (2-3 dni) </div>
                             </div>
                             <div class="doprava2"></div>
-                             <span id="doprava_specified">150.00 </span>
+                             <span id="doprava_specified">4.00 </span>
                         </div>
                         <div class="celkom_so_dph">
                             <div>Celkom so DPH</div>
@@ -527,14 +599,13 @@
                             <span id="celkom_bez_dph_specified"> 125.20</span>
                         </div>
                     </div>
-                    
+                    <button class="objednat_button"> OBJEDNAŤ </button>
                 </div>
             </div>
 
         </div>
 
     </section>
-    <div style="height:1000px ;"></div>
 
     <section class="info_section">
         <div class="info_nadpis">DORUČENIE A VRÁTENIE TOVARU </div>
@@ -642,7 +713,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+    <script src="./javascript/kosik_sidebar.js"></script>
     <script src="./javascript/side_menubar.js"></script>
     <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </body>

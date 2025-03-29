@@ -8,6 +8,7 @@
     margin: auto auto;
 }
 
+
 .pokladna_nadpis {
     font-weight: bold;
     font-size: 20px;
@@ -30,7 +31,6 @@
 }
 
 .pokladna_informacie_container {
-    
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 30px;
 }
 
@@ -181,12 +181,16 @@ input[type="radio"]:checked {
 
 .suhrn_objednavky {
     width: 100%;
-    background-color: azure;
+    /* background-color: rgb(232, 232, 232); */
+    background-color: rgb(244, 240, 250);
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
     gap: 20px;
+    border: 1px solid gray;
+    padding: 10px;
+
 }
 
 .element_napis2 {
@@ -270,18 +274,19 @@ input[type="radio"]:checked {
 
 .polozky_vo_kosiku_item {
     width: 90%;
-    border-bottom: 1px solid black;
+    
     padding: 20px 0;
 }
 
 .polozky_vo_kosiku {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    
     align-items: center;
+    border-bottom: 1px solid black;
+    max-height: 300px;
+    overflow: auto;
 }
-
-
 
 
 
@@ -311,4 +316,31 @@ input[type="radio"]:checked {
 
 #doprava_typ {
     color: gray;
+}
+
+.objednat_button {
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    width: 90%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease; /* Transition pre farby */
+}
+
+.objednat_button:hover {
+    background-color: rgb(169, 98, 255);
+    color: black;
+}
+
+
+
+@media (max-width: 1000px) {
+    .pokladna_informacie_container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        justify-content: center;
+    }
 }

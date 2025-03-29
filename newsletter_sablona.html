@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./css/text_divider.css">
     <link rel="stylesheet" href="./css/newsletter_sablona.css">
     <link rel="stylesheet" href="./css/custom_radio_btn.css">
+    <link rel="stylesheet" href="./css/kosik_sidebar.css">
 
 
 </head>
@@ -169,11 +170,9 @@
         <div class="right_part">
             <input class="vyhladaj_input"/>
             <a href="prihlasenie.html" class="logo_link"><div class="profil">PROFIL </div></a>
-            <div class="kosik last">KOSIK </div>
+            <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div>
         </div>
     </nav>
-
-
     <div class="sidebar" id="sidebar">
         <div class="sidebar_header">
             <p class="sidebar_header_item"> Ponuka</p>
@@ -375,6 +374,61 @@
         </ul>
       </div>
       <div class="overlay" onclick="toggleSidebar()"></div>
+      <div class="kosik_sidebar" id="kosik_sidebar">
+        <div class="kosik_sidebar_header">
+            <p>MôJ KOŠÍK  </p>
+            <div >
+                <i class="fa-solid fa-arrow-right" onclick="toggleSidebarKosik(event)"></i>
+            </div>
+        </div>
+        <div class="kosik_sidebar_items_container">
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+            <div class="kosik_sidebar_item">
+                <div id="kosik_sidebar_item_photo"></div>
+                <div class="kosik_sidebar_item_information">
+                    <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
+                    <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="kosik_sidebar_zaverecne_info">
+            <div class="kosik_sidebar_zaverecne_info_medzisucet">
+                <div class="kosik_sidebar_zaverecne_info_medzisucet1">Medzisúčet košíka </div>
+                <div class="kosik_sidebar_zaverecne_info_medzisucet2"><span id="kosik_sidebar_zaverecne_info_medzisucet_specified">150.00</span> </div>
+                
+            </div>
+            <a href="kosik.html" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
+        </div>
+    </div>
+    <div class="overlay2" onclick="toggleSidebarKosik()"></div>
     </header>
 
 
@@ -517,6 +571,7 @@
     
     <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./javascript/kosik_sidebar.js"></script>
     <script src="./javascript/side_menubar.js"></script>
     
     
