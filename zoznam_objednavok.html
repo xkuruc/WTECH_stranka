@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
     <link rel="stylesheet" href="./css/text_divider.css">
-    <link rel="stylesheet" href="./css/newsletter_sablona.css">
-    <link rel="stylesheet" href="./css/custom_radio_btn.css">
+    <link rel="stylesheet" href="./css/zoznam_objednavok.css">
 
 
 </head>
@@ -381,23 +380,112 @@
 
     <main>
         <section class="text_divider padded"> 
-            <h1>Odoberanie noviniek</h1>
-            <hr class="hr_divider">
+            <h1>Moje objednávky</h1>
+            <hr class="hr_divider long">
         </section>
 
 
-        <!-- dynamicky sa doplní, či ide o prihlásenie/odhlásenie z odberu noviniek -->
-        <section class="newsletter_submit">
-            <form id="radio_form">
-                
-                <label class="custom_radio_checkbox">
-                    <input type="checkbox" name="option" value="yes">
-                    <span class="radio_btn"></span>
-                    Prihlásiť sa na odber noviniek.
-                </label>
+        <section class="objednavky_wrapper">
+            <div class="objednavky_container">
+                <button class="objednavka_btn description">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">Číslo objednávky:</li>
+                      <li class="datum">Dátum:</li>
+                      <li class="sposob_platby">Spôsob platby:</li>
+                      <li class="sposob_dopravy">Spôsob dopravy:</li>
+                    </ul>
+                </button>
 
-                <button id="submit_btn" type="submit"><strong>Uložiť</strong></button>
-            </form>
+                <button class="objednavka_btn" data-order-id="102168916416">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">102168916416</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - Košice Kukučínova 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="103545691671">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">103545691671</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="103123691564">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">103123691564</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="111155691688">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">111155691688</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Dobierka</li>
+                      <li class="sposob_dopravy">Kuriér</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="125654486771">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">125654486771</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Paypal Express</li>
+                      <li class="sposob_dopravy">Osobný odber - Bratislava Mlynské Nivy 10</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="102168916416">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">102168916416</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - Košice Kukučínova 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="103545691671">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">103545691671</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="103123691564">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">103123691564</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Platba kartou</li>
+                      <li class="sposob_dopravy">Osobný odber - 2</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="111155691688">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">111155691688</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Dobierka</li>
+                      <li class="sposob_dopravy">Kuriér</li>
+                    </ul>
+                </button>
+
+                <button class="objednavka_btn" data-order-id="125654486771">
+                    <ul class="order_info">
+                      <li class="cislo_objednavky">125654486771</li>
+                      <li class="datum">12.5.2025</li>
+                      <li class="sposob_platby">Paypal Express</li>
+                      <li class="sposob_dopravy">Osobný odber - Bratislava Mlynské Nivy 10</li>
+                    </ul>
+                </button>
+            </div>
         </section>
 
 
@@ -518,7 +606,7 @@
     <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./javascript/side_menubar.js"></script>
-    
+    <script src="./javascript/zoznam_objednavok.js"></script>
     
 </body>
 </html>

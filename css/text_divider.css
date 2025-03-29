@@ -17,12 +17,62 @@
 }
 
 
+.h1_buttons {
+	display: flex;
+	position: relative;
+	justify-content: center;
+}
+
+
+.h1_buttons h1 {
+	position: relative;
+	justify-content: center; 
+    align-items: center;
+}
+
+
+#logout_btn {
+	position: absolute;
+    right: 10%;
+    padding: 8px 12px;
+    border: none;
+    font-size: 20px;
+    background: transparent;
+    cursor: pointer;
+}
+
+
+#logout_btn:hover {
+	text-decoration: underline;
+}
+
+
 .hr_divider {
 	width: 85%;
 	stroke-width: 3px;
 }
 
+.hr_divider.long {
+	width: 89%;
+}
+
+
 .produkty_kontajner {
 	padding-top: 0px;
+}
+
+
+
+@media (max-width: 800px) {
+    .h1_buttons {
+
+    	flex-direction: column;
+    }
+    
+    #logout_btn {
+    	position: relative;
+    	right: 0px;
+    }
+
 }
 

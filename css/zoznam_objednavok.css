@@ -1,0 +1,131 @@
+/* jednotný wrapper pre celú sekciu*/
+.objednavky_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 400px;
+}
+
+
+
+/* kontajner tlačidiel */
+.objednavky_container {
+	display: flex;
+	flex-direction: column;
+	
+	width: 90%;
+	gap: 10px;
+	align-items: center;
+}
+
+
+/* tlačidlo v objednávke */
+.objednavka_btn {
+	display: flex;
+	width: 100%;
+	height: 50px;
+	gap: 20px;
+	
+	background-color: transparent;
+	border: none;
+	outline: 1px solid #ccc;
+	transition: 0.05s background-color ease-in;
+}
+
+
+/* ked prejdem myšou, tak sa vyfarbí */
+.objednavka_btn:hover {
+	cursor: pointer;
+	background-color: #f4f4f4;
+}
+
+
+.order_info {
+	padding: 0px;
+	text-align: left;
+}
+
+
+/* texty v tlačidle */
+.objednavka_btn .order_info {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	font-weight: bold;
+	list-style-type: none;
+	padding-left: 5px;
+}
+
+
+/* texty pre popisy */
+.objednavka_btn.description .order_info {
+	font-size: 19px;
+	font-weight: normal;
+	padding-left: 0px;
+	text-align: center;
+
+}
+
+
+/* špeciálne tlačidlo pre popisy*/
+.objednavka_btn.description {
+	outline: none;
+	height: 35px;
+	margin-bottom: 5px;
+}
+
+
+.objednavka_btn.description:hover {
+	cursor: default;
+	background-color: transparent;
+}
+
+
+/* len polohovanie a centrovanie tlačidiel */
+.cislo_objednavky {
+	min-width: 150px;
+}
+
+
+.objednavka_btn.description .datum {
+	text-align: center;
+	padding-right: 10px;
+}
+
+
+.datum {
+	min-width: 100px;
+}
+
+
+.objednavka_btn.description .sposob_platby {
+	text-align: left;
+	
+}
+
+
+.sposob_platby {
+	min-width: 160px;
+}
+
+
+.sposob_dopravy {
+	min-width: 410px; 
+}
+
+
+
+/* media query */
+@media (max-width: 1150px) { /* zmizne 4.ty stlpec */
+    .sposob_dopravy, .doprava_stlpec {
+    	display: none;
+    }
+}
+
+@media (max-width: 650px) { /* zmizne 3. stlpec */
+    .sposob_platby, .platba_stlpec {
+    	display: none;
+    }
+}
