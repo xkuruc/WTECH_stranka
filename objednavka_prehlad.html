@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="./css/text_divider.css">
     <link rel="stylesheet" href="./css/popup_overlay.css">
     <link rel="stylesheet" href="./css/profil.css">
+    <link rel="stylesheet" href="./css/profile_intro.css">
+    <link rel="stylesheet" href="./css/objednavka_prehlad.css">
 
 </head>
 <body>
@@ -384,80 +386,129 @@
 
     <main>
     
-        <section class="text_divider padded"> <!-- text admin dashboard a potom oddelovať čiara -->
-            <div class="h1_buttons">
-                
-                <h1>Môj účet</h1>
-                <a href="./admin_dash_login.html" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
-                <a id="logout_btn">Odhlásiť sa</a>
-            </div>
-            <hr class="hr_divider">
-        </section>
+        <div class="objednavka_prehlad_wrapper">
+            
+            <section class="objednavka_info">
+                <h1>Objednávka</h1>
+
+                <ul class="info_ul">
+                    <li>Číslo objednávky: <strong>102456123202</strong></li>
+                    <li>Dátum vytvorenia: <strong>10.5.2025</strong></li>
+                    <li>Spôsob platby <strong>Dobierka</strong></li>
+                    <li>Spôsob dopravy: <strong>Osobný odber - Košice Kukučínova 2</strong></li>
+                </ul>
+            </section>
+            
+
+
+            <section class="kosik_produkty">
+                <hr class="hr_divider full">
+
+                    <div class="produkty_container">
+                        
+                        <div class="product">
+                            <div class="product_obrazok"> 
+                                <img src="./images/sample_topanka2.jpg">
+                            </div>
+                            <div class="product_info">
+                                <ul class="nazov_cena">
+                                    <li><strong>NIKE SABRINA 2 “FRESH MINT” WMNS</strong></li>
+                                    <li class="cena">130,00 €</li>
+                                </ul>
+                                <div class="mnozstvo">
+                                    Množstvo:
+                                    <div class="mnozstvo_btn">1</div>
+                                </div>
+                                <div class="velkost"><strong>EUR:</strong> 38</div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product_obrazok"> 
+                                <img src="./images/sample_topanka3.jpg">
+                            </div>
+                            <div class="product_info">
+                                <ul class="nazov_cena">
+                                    <li><strong>NIKE SABRINA 2 “FRESH MINT” WMNS</strong></li>
+                                    <li class="cena">300,00 €</li>
+                                </ul>
+                                <div class="mnozstvo">
+                                    Množstvo:
+                                    <div class="mnozstvo_btn">1</div>
+                                </div>
+                                <div class="velkost"><strong>EUR:</strong> 38</div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product_obrazok"> 
+                                <img src="./images/sample_topanka4.jpg">
+                            </div>
+                            <div class="product_info">
+                                <ul class="nazov_cena">
+                                    <li><strong>NIKE SABRINA 2 “FRESH MINT” WMNS</strong></li>
+                                    <li class="cena">215,00 €</li>
+                                </ul>
+                                <div class="mnozstvo">
+                                    Množstvo:
+                                    <div class="mnozstvo_btn">1</div>
+                                </div>
+                                <div class="velkost"><strong>EUR:</strong> 38</div>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="product_obrazok"> 
+                                <img src="./images/sample_topanka5.jpg">
+                            </div>
+                            <div class="product_info">
+                                <ul class="nazov_cena">
+                                    <li><strong>NIKE SABRINA 2 “FRESH MINT” WMNS</strong></li>
+                                    <li class="cena">510,00 €</li>
+                                </ul>
+                                <div class="mnozstvo">
+                                    Množstvo:
+                                    <div class="mnozstvo_btn">1</div>
+                                </div>
+                                <div class="velkost"><strong>EUR:</strong> 38</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    
+                <hr class="hr_divider full">
+            </section>
 
 
 
-        <div class="profil_info_wrapper">
-            <div class="profil_info_container">
-                <div class="osobne_udaje_adresa">
-                    <section class="osobne_udaje_pers">
-                        <section class="osobne">
-                            <h1>Osobné informácie</h1>
+            <section class="adresa_cena">
+                <section class="adresa">
+                    <h1>Adresa doručenia</h1>
 
-                            <ul class="info_ul">
-                                <li>Meno Priezvisko</li>
-                                <li>E-mailová adresa</li>
-                                <li>Telefónne číslo</li>
-                                <li>Pohlavie</li>
-                                <li>Dátum narodenia</li>
-                            </ul>
-                        </section>
+                    <ul class="info_ul">
+                        <li>Adresa: <strong>Záhradná 53</strong></li>
+                        <li>Mesto: <strong>Bratislava</strong></li>
+                        <li>PSČ: <strong>12345</strong></li>
+                        <li>Krajina: <strong>Slovensko</strong></li>
+                    </ul>
+                </section>
 
-                        <section class="personalizacia">
-                            <h1>Personalizované údaje</h1>
+                <section class="cena_section">
+                    <h1>Celková cena</h1>
 
-                            <ul class="info_ul">
-                                <li>Výška: 170 cm</li>
-                                <li>Hmotnosť: 90 kg</li>
-                                <li>Veľkosť topánok: 43</li>
-                                <li>Veľkosť oblečenia: M</li>
-                                <li>Značka: Adidas</li>
-                                <li>Tiktok: @tiktokprofil</li>
-                                <li>IG: @instagramprofil</li>
-                            </ul>
-
-                        </section>
-                    </section>
-
-                    <section class="adresa_dorucenia">
-                        <h1>Adresa doručenia</h1>
-
-                        <ul class="info_ul">
-                            <li>Ulica:</li>
-                            <li>Číslo domu:</li>
-                            <li>Mesto:</li>
-                            <li>PSČ:</li>
-                            <li>Krajina:</li>
-                            <li>Dátum narodenia</li>
-                        </ul>
-                    </section>
-                </div>
-
-                <div class="newsletter_objednavky">
-                    <section class="newsletter_odber">
-                        <h1>Newsletter</h1>
-                        <span>Nie ste prihlásený k odberu noviniek.</span>
-                        <a href="newsletter_sablona.html">Upraviť</a>
-                    </section>
+                    <ul class="info_ul">
+                        <li>Medzisúčet košíka: <strong>500,00 €</strong></li>
+                        <li>Doprava: <strong>4,00 €</strong></li>
+                        <li>Daň: <strong>115,00 €</strong></li>
+                        <li>Celkom s DPH: <strong>500,00 €</strong></li>
+                        <li>Celkom bez DPH: <strong>385,00 €</strong></li>
+                    </ul>
+                </section>
+            </section>
 
 
-                    <section class="objednavky">
-                        <h1>Moje objednávky</h1>
-                        <span>Tu sa nachádza podrobný prehľad vašich objednávok.</span>
-                        <a href="zoznam_objednavok.html">Zobraziť moje objednávky</a>
-                    </section>
-                </div>
-
-            </div>
         </div>
 
 
@@ -492,7 +543,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./javascript/side_menubar.js"></script>
         
-        <script src="./javascript/profil.js"></script>
         <script src="./javascript/popup_okno.js"></script>
     </main>
 

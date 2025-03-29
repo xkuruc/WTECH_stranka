@@ -81,6 +81,9 @@
 	width: 89%;
 }
 
+.hr_divider.full {
+	width: 100%;
+}
 
 .produkty_kontajner {
 	padding-top: 0px;

@@ -36,7 +36,7 @@
 
 /* nastavíme nech sú tak široké, aby sa tam zmestilo ešte 50px medzera*/
 .osobne_udaje_pers, .adresa_dorucenia {
-	border: 1px solid black;
+	outline: 1px solid black;
 	width: calc((100% - 50px)/2);
 	height: 550px;
 	min-width: 400px;
@@ -45,7 +45,7 @@
 .newsletter_odber, .objednavky {
 	width: 100%;
 	height: 200px;
-	border: 1px solid black;
+	outline: 1px solid black;
 }
 
 
@@ -58,7 +58,7 @@
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	padding-top: 15px;
+	padding-top: 10px;
 	font-size: 20px;
 	color: #404040;
 }
@@ -73,6 +73,7 @@
 }
 
 
+/* všetky sekcie v tomto budú odsadené a vycentrované */
 .osobne_udaje_pers section {
 	margin-left: 30px;
 	margin-top: 30px;
@@ -81,16 +82,17 @@
 }
 
 
+/* vlastné odsadenie h1 a ul, čiže všetko vnútro */
 .adresa_dorucenia h1, .adresa_dorucenia ul {
 	margin-left: 30px;
 	margin-top: 29px;
 }
 
 
+/* zrušíme default odsadenie */
 .adresa_dorucenia ul {
 	margin-top: 0;
 }
-
 
 
 
@@ -118,6 +120,7 @@
 }
 
 
+/* všetky tlačidlá v sekcii */
 .newsletter_objednavky a {
 	text-decoration: none;
 	color: black;
@@ -129,6 +132,7 @@
     cursor: pointer;
 }
 
+
 .newsletter_objednavky a:hover {
 	text-decoration: underline;
 }
@@ -137,6 +141,7 @@
 
 /* media querička*/
 @media (max-width: 1080px) {
+
 	.osobne_udaje_pers, .adresa_dorucenia {
 		width: 90%;
 		min-width: 318px;
@@ -152,16 +157,20 @@
 		margin-top: 50px;
 	}
 
+
+	/* zrušíme veľký border, pre ilúziu rozloženia divu */
 	.osobne_udaje_pers {
 		border: none;
 		margin-bottom: 50px;
 	}
+
 
 	.osobne_udaje_pers section {
 		margin-left: 0px;
 	}
 
 
+	/* tvária sa ako samostatné prvky teraz */
 	.osobne, .personalizacia {
 		display: flex;
 		flex-direction: column;
@@ -169,29 +178,32 @@
 		border: none;
 		outline: 1px solid black;
 		padding-top: 30px;
-		
 	}
 
 	
+	/* všetky odsadíme od ľava*/
 	.osobne h1, .osobne ul, .personalizacia h1, .personalizacia ul  {
 		margin-left: 30px;
 	}
 
+
+	/* ul zoznamy odsadíme zo spodu, nech odtlačia border nižšie */
 	.osobne ul, .personalizacia ul {
 		margin-bottom: 20px;
 	}
 
+
+	/* teraz budú zaberať 100% parenta namiesto vyššie tých okolo 50% */
 	.profil_info_container {
 		width: 100%;
 		justify-content: center;
 	}
 
 
+	/* zmenší sa výška, aby nezaberala veľa */
 	.adresa_dorucenia {
 		height: 250px;
 	}
-
-
 
 
 	/* newsletter a objednavky */

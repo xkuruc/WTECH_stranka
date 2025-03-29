@@ -39,7 +39,7 @@ logout.addEventListener('click', async function(event) {
 todo:
 
 
-sablona pre objednavku
+
 upravenie existujúceho produktu - to isté ako pridať produkt, ale dá sa meniť všetko
 
 
@@ -49,9 +49,8 @@ upravenie existujúceho produktu - to isté ako pridať produkt, ale dá sa meni
 /* 
 
 spravené:
-profil
-popup na odhlásenie -- treba najprv profil 
-admin dash login sablona
+
+sablona pre objednavku
 
 */
 
