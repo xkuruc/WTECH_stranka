@@ -17,6 +17,15 @@ product_container.addEventListener('click', async function(event)  {
             target.parentElement.remove();
         } 
     }
+
+
+    if (event.target.closest(".product_item_relative")) {
+        
+        window.location.href = "./polozka_produktu.html" /* presmeruje na index.html */
+        
+    }
+
+
 });
 
 
@@ -29,31 +38,3 @@ logout.addEventListener('click', async function(event) {
         window.location.href = "./profil.html" /* presmeruje na index.html */
     }
 });
-
-
-
-
-
-/* 
-
-todo:
-
-
-
-upravenie existujúceho produktu - to isté ako pridať produkt, ale dá sa meniť všetko
-
-
-*/
-
-
-/* 
-
-spravené:
-
-sablona pre objednavku
-
-*/
-
-
-
-
