@@ -23,6 +23,8 @@
     aspect-ratio: 1 / 1; /* výška sa nastaví sama */
     background-color: rgb(72, 72, 72);
     border: 1px solid black;
+    margin: 0;
+    padding: 0;
 }
 
 .grid-container {
@@ -33,7 +35,21 @@
     /*grid-template-rows: repeat(2, 1fr); */  /* 2 riadky */
     grid-auto-rows: 1fr;
     gap: 0;
+    margin: 0;
 }
+
+.grid-container .obr {
+    max-width: 100%;  /* Uistíme sa, že obrázky nezaberajú viac ako svoj dostupný priestor */
+    max-height: 100%;
+    min-width: 0;  /* Odstráni možné problémy s minimálnou šírkou */
+    aspect-ratio: 1 / 1;
+    background-color: rgb(72, 72, 72);
+    border: 0;  /* Zrušíme okraje, ktoré môžu spôsobovať medzery */
+    margin: 0;  /* Zbavíme sa akýchkoľvek medzier */
+    padding: 0;
+    border: 1px solid black;
+}
+
 
 .grid-container img {
     width: 100%;    /* obrazok zaberie 100% sirky bunky */
@@ -44,7 +60,7 @@
     background-color: rgb(173, 173, 173);
 }
 
-@media (max-width: 900px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
+@media (max-width: 1000px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
     .grid-container {
         grid-template-columns: repeat(4, 1fr);  /* 4 stlpce */
         grid-template-rows: repeat(3, 1fr);  /* 3 riadky */

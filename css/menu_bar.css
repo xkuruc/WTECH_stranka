@@ -94,8 +94,17 @@ body {
         align-items: center;
         justify-content: center;
     }
+    
+    .vyhladaj_input{
+        display: none;
+    }
 }
-
+.fa-magnifying-glass{
+    display: block;
+    color: white;
+    font-size: 30px;
+    margin: 20px;
+}
 
 
 
