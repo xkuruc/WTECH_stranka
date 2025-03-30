@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./css/menu_bar.css">
-    <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="./css/dropdown.css">
     <link rel="stylesheet" href="./css/menu_sidebar.css">
-    <link rel="stylesheet" href="./css/profile_intro.css">
+        
     <link rel="stylesheet" href="./css/newsletter.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/polozka.css">
+    <link rel="stylesheet" href="./css/product_slider.css">
+    <link rel="stylesheet" href="./css/profile_intro.css">
     <link rel="stylesheet" href="./css/kosik_sidebar.css">
+    <link rel="stylesheet" href="./css/polozka_produktu.css">
+    <link rel="stylesheet" href="./css/admin_pridanie.css">
+    <link rel="stylesheet" href="./css/registracia.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    
     <header>
         <nav class="navbar">
             <a href="index.html" class="logo_link"> <div class="logo main_category" >Logo </div> </a>
@@ -431,26 +437,178 @@
         <div class="overlay2" onclick="toggleSidebarKosik()"></div>
     </header>
 
+
+
+
     <main>
-        <section class="main">
-            <div class="options">
-                <div class="option_prihlasitsa">Admin Dashboard</div>    
-            </div>
-            <div>
-                <form class="login_placeholder" onsubmit="window.location.href = './admin_dashboard.html'; return false;">
-                    <input class="login_input" type="email" name="email" placeholder="E-mail*" required/>
-                    <input class="login_input" type="password" name="password" placeholder="Heslo*" required />
-                    <button class="login_button" type="submit">PRIHLÁSIŤ SA </button>
-                </form>
-                <p class="Zabudliheslo"> <a href="a">Zabudli ste heslo ? </a> </p>
-                <div class="povinne_policka">
-                    <p>*Povinné políčka</p>
+        <section class="product_main_info">
+            <div class="product_main_info_container">
+                <div class="product_images">
+                    <div class="product_images_kontajner">
+                        
+                        <div class="big_images" id="sliding_container">
+                            
+                            <div class="big_img selected" data-img-id=1>
+                                <img>
+                                <span class="plusko"></span>
+                            </div>
+                                       
+                            <div class="big_img" data-img-id=2>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+
+                            
+                            <div class="big_img" data-img-id=3>
+                                <img>
+                                <span class="plusko"></span>
+                            </div>
+
+                            <div class="big_img" data-img-id=4>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+
+                            <div class="big_img" data-img-id=5>
+                                <img>  
+                                <span class="plusko"></span>
+                            </div>
+
+                            <div class="big_img" data-img-id=6>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="small_images" id="small_slider">
+                            <div class="small_img selected" data-img-id=1>
+                                <img>   
+                                <span class="plusko"></span>
+                            </div>
+
+                            <div class="small_img" data-img-id=2>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+
+                            
+                            <div class="small_img" data-img-id=3>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+
+                            <div class="small_img" data-img-id=4>
+                                <img>
+                                <span class="plusko"></span> 
+                            </div>
+
+                            <div class="small_img" data-img-id=5>
+                                <img> 
+                                <span class="plusko"></span>  
+                            </div>
+
+                            <div class="small_img" data-img-id=6>
+                                <img> 
+                                <span class="plusko"></span>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+
+
+
+                <div class="produkt_information">
+                    <div class="custom_input">
+                        <span class="label_edit">Názov:</span>
+                        <input class="input_edit">
+                    </div>
+
+                    <div class="custom_input">
+                        <span class="label_edit">Stručný popis:</span>
+                        <textarea class="input_edit_popis"></textarea>
+                    </div>
+
+
+                    <div class="select_label">
+                        <span class="label_edit">Značka:</span>
+                        <select class="select_edit">
+                            <option value="adidas" selected>Adidas</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Puma">Puma</option>
+                            <option value="Vans">Vans</option>
+                        </select>
+                    </div>
+
+                    <div class="select_label">
+                        <span class="label_edit">Pohlavie:</span>
+                        <select class="select_edit">
+                            <option value="" disabled selected>Pohlavie*</option>
+                            <option value="male">Chlop</option>
+                            <option value="female">Princesska</option>
+                        </select>
+                    </div>
+
+                    <div class="select_label">
+                        <span class="label_edit">Farba:</span>
+                        <select class="select_edit">
+                            <option value="Červená" selected>Červená</option>
+                            <option value="Modrá">Modrá</option>
+                            <option value="Zelená">Zelená</option>
+                            <option value="Čierna">Čierna</option>
+                            <option value="Viacfarebná">Viacfarebná</option>
+                        </select>
+                    </div>
+
+
+                    <div class="select_label">
+                        <span class="label_edit">Typ produktu:</span>
+                        <select class="select_edit">
+                            <option value="Tenisky" selected>Tenisky</option>
+                            <option value="Kopačky">Kopačky</option>
+                            <option value="Lopty">Lopty</option>
+                        </select>
+                    </div>
+
+
+
+
+                    <div class="joined_input">
+                        <div class="custom_input">
+                            <span class="label_edit">Cena:</span>
+                            <input class="input_edit" type="number">
+                        </div>
+
+                        <div class="custom_input">
+                            <span class="label_edit">Zľava:</span>
+                            <input class="input_edit" type="number">
+                        </div>
+                    </div>
+
+
+                    <div class="select_label">
+                        <span class="label_edit">Dostupné veľkosti:</span>
+                        <select class="select_edit">
+                            <option value="38" selected>38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                        </select>
+                    </div>
+
+                    <a href="./admin_dashboard.html" class="button_pridat">Pridať</a>
                 </div>
             </div>
-
         </section>
     </main>
+    
 
+    
+
+    
     <footer class="joined_footer">
         <section class="info_section">
             <div class="info_nadpis">DORUČENIE A VRÁTENIE TOVARU </div>
@@ -556,9 +714,27 @@
         </section>
     </footer>
 
+
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="./javascript/side_menubar.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Splide/3.6.8/splide.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Splide/3.6.8/splide.min.js" defer></script>
+
+
+
+    
+    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous" defer></script>
+    <script src="./javascript/product_slider.js"></script>
     <script src="./javascript/kosik_sidebar.js"></script>
-    <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+    <script src="./javascript/drag_polozka.js"></script>
+   
+
 </body>
 </html>

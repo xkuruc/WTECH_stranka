@@ -24,15 +24,6 @@ for (let i = 3; i <= 18; i+=0.5) {
 }
 
 
-let select_clothingsize = document.getElementById("clothingsize");
-for (let i = 3; i <= 18; i+=0.5) {
-    let option = document.createElement("option");
-    option.value = i;
-    option.textContent = i;
-    select_clothingsize.appendChild(option);
-}
-
-
 
 
 

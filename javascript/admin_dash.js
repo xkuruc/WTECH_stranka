@@ -20,12 +20,13 @@ product_container.addEventListener('click', async function(event)  {
 
 
     if (event.target.closest(".product_item_relative")) {
-        
-        window.location.href = "./polozka_produktu.html" /* presmeruje na index.html */
-        
+        if (event.target.closest(".product_item_relative").id === 'add_product') {
+            window.location.href = "./admin_pridanie_polozky.html" /* presmeruje na pridanie_polozky.html */
+        }
+        else {
+            window.location.href = "./polozka_produktu.html"
+        } 
     }
-
-
 });
 
 

@@ -142,11 +142,9 @@ async function scroll_big(e, x_a) {
     isDown = false;
     
     const x = x_a;
-
-
     const diff = x - startX; //rozdiel miesta kde som ťukol prvý krát a posledný
 
-    console.log(x_a,startX,diff);
+
     if (Math.abs(diff) < 5){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
         return;
     }
@@ -226,22 +224,6 @@ async function scroll_big(e, x_a) {
     new_selected.classList.add('selected');
     new_big_selected.classList.add('selected');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -341,7 +323,7 @@ document.addEventListener("touchend", async (e) => {
 /* ked kliknem na malé okienko */
 small_img_container.addEventListener('pointerdown', async (event) => {
     const target = event.target;
-    console.log("hej");
+    
     /* ak som klikol na malé tlačitko */
     if (target.classList.contains('small_img')) {
         /* čo je teraz označené a na čo som klikol */
