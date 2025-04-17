@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/menu_bar.css">
-    <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/dropdown.css">
-    <link rel="stylesheet" href="./css/menu_sidebar.css">
-    <link rel="stylesheet" href="./css/profile_intro.css">
-    <link rel="stylesheet" href="./css/newsletter.css">
-    <link rel="stylesheet" href="./css/kosik_sidebar.css">
+    <link rel="stylesheet" href="{{ asset('css/menu_bar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu_sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profile_intro.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/newsletter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/kosik_sidebar.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -335,29 +335,35 @@
                             <li>
                                 <div class="sidebar_item">
                                     <span class="sidebar2_main sidebar2_mainDOPLNKY" > Batohy </span>
+                                </div>
                             </li>
                             <li>
                                 <div class="sidebar_item">
                                     <span class="sidebar2_main sidebar2_mainDOPLNKY" > Čiapky </span>
+                                </div>
                             </li>
                             <li>
                                 <div class="sidebar_item">
                                     <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ponožky </span>
+                                </div>
                             </li>
                             <li>
-                            <div class="sidebar_item">
-                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Šiltovky </span>
+                                <div class="sidebar_item">
+                                    <span class="sidebar2_main sidebar2_mainDOPLNKY" > Šiltovky </span>
+                                </div>
                             </li>
                             <li>
-                            <div class="sidebar_item">
-                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ľadvinka </span>
+                                <div class="sidebar_item">
+                                    <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ľadvinka </span>
+                                </div>
                             </li>
                             <li>
-                            <div class="sidebar_item">
-                                <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ostatné </span>
+                                <div class="sidebar_item">
+                                    <span class="sidebar2_main sidebar2_mainDOPLNKY" > Ostatné </span>
+                                </div>
                             </li>
                         </ul>
-                        </ul>
+                    </ul>
                 </li>
                 <li>
                     <div class="sidebar_item">
