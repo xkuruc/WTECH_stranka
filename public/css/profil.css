@@ -162,7 +162,7 @@
 	/* zrušíme veľký border, pre ilúziu rozloženia divu */
 	.osobne_udaje_pers {
 		border: none;
-		/*outline: none;*/
+		outline: none;
 		margin-bottom: 50px;
 	}
 
@@ -182,7 +182,7 @@
 		padding-top: 30px;
 	}
 
-	
+
 	/* všetky odsadíme od ľava*/
 	.osobne h1, .osobne ul, .personalizacia h1, .personalizacia ul  {
 		margin-left: 30px;

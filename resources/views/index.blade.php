@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stranka</title>
 
+    <!-- stylesheets -->
     <link rel="stylesheet" href="{{ asset('css/menu_bar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main_image.css') }}">
     <link rel="stylesheet" href="{{ asset('css/brand_slider.css') }}">
@@ -16,14 +17,12 @@
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu_sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/kosik_sidebar.css') }}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
     <!--
     dizajn stránky je inšpirovaný stránkou thestreets.sk a filter je inšpirovaný filtrom stránky https://www.footshop.sk/
     -->
-
 
 </head>
 <body>
@@ -130,22 +129,21 @@
             </div>
 
         </section>
-
         <div style="height:1000px ;"></div>
-
     </main>
 
-
+    <!-- footer -->
     @include('components.footer')
 
-
+    <!-- externé skripty -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="javascript/product_slider.js"></script>
-    <script src="./javascript/slider_moj.js"></script>
-    <script src="./javascript/product_slider.js"></script>
-    <script src="./javascript/side_menubar.js"></script>
-    <script src="./javascript/kosik_sidebar.js"></script>
     <script src="https://kit.fontawesome.com/39951b4cb0.js" crossorigin="anonymous"></script>
+
+    <!-- naše skripty -->
+    <script src="{{ asset('javascript/product_slider.js') }}"></script>
+    <script src="{{ asset('javascript/slider_moj.js') }}"></script>
+    <script src="{{ asset('javascript/side_menubar.js') }}"></script>
+    <script src="{{ asset('javascript/kosik_sidebar.js') }}"></script>
 </body>
 </html>
