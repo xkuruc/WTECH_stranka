@@ -28,15 +28,15 @@
         <section class="main">
             <div class="options">
                 <div class="option_prihlasitsa">Prihlásiť sa</div>
-                <div class="option_registracia"> <a href="registracia.blade.php">Registrácia </a> </div>
+                <div class="option_registracia"> <a href="{{ url('/register') }}">Registrácia </a> </div>
             </div>
             <div>
-                <form class="login_placeholder" onsubmit="alert('Zadaný e-mail: ' + this.email.value); window.location.href = 'profil.blade.php'; return false;">
+                <form class="login_placeholder" onsubmit="window.location.href = '{{ url('/profil') }}'; return false;">
                     <input class="login_input" type="email" name="email" placeholder="E-mail*" required/>
                     <input class="login_input" type="password" name="password" placeholder="Heslo*" required />
                     <button class="login_button" type="submit">PRIHLÁSIŤ SA </button>
                 </form>
-                <p class="Zabudliheslo"> <a href="a">Zabudli ste heslo ? </a> </p>
+                <p class="Zabudliheslo"> <a href="">Zabudli ste heslo ? </a> </p>
                 <div class="povinne_policka">
                     <p>*Povinné políčka</p>
                 </div>

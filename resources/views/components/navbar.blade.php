@@ -145,7 +145,25 @@
     </div>
     <div class="right_part">
         <input class="vyhladaj_input"/>
-        <a href="prihlasenie.blade.php" class="logo_link"><div class="profil">PROFIL </div></a>
+        <!-- <a href="prihlasenie.blade.php" class="logo_link"><div class="profil">PROFIL </div></a> -->
+
+        <ul>
+            <!-- Ak je používateľ prihlásený, zobrazí sa Profil -->
+            @auth
+                <a href="{{ route('profil') }}" class="logo_link">
+                    <div class="profil">PROFIL</div>
+                </a>
+            @endauth
+
+            <!-- Ak používateľ nie je prihlásený, zobrazí sa Login -->
+            @guest
+                <a href="{{ route('login') }}" class="logo_link">
+                    <div class="profil">LOGIN</div>
+                </a>
+            @endguest
+        </ul>
+
+
         <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div>
     </div>
 </nav>
