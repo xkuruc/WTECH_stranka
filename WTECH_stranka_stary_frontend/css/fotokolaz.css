@@ -1,0 +1,75 @@
+
+.fotokolaz_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.fotokolaz {
+    width: 85%;
+    /* height: 400px; */
+    /* background-color: #5151ff; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    align-items: start; /* Upravi vysku podla obsahu */
+}
+
+.obr {
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 33%;
+    aspect-ratio: 1 / 1; /* výška sa nastaví sama */
+    background-color: rgb(72, 72, 72);
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    width: 100%;
+    height: auto;  /* Dynamicka vyska podla obsahu */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /*grid-template-rows: repeat(2, 1fr); */  /* 2 riadky */
+    grid-auto-rows: 1fr;
+    gap: 0;
+    margin: 0;
+}
+
+.grid-container .obr {
+    max-width: 100%;  /* Uistíme sa, že obrázky nezaberajú viac ako svoj dostupný priestor */
+    max-height: 100%;
+    min-width: 0;  /* Odstráni možné problémy s minimálnou šírkou */
+    aspect-ratio: 1 / 1;
+    background-color: rgb(72, 72, 72);
+    border: 0;  /* Zrušíme okraje, ktoré môžu spôsobovať medzery */
+    margin: 0;  /* Zbavíme sa akýchkoľvek medzier */
+    padding: 0;
+    border: 1px solid black;
+}
+
+
+.grid-container img {
+    width: 100%;    /* obrazok zaberie 100% sirky bunky */
+    display: block; /* odstrani sa medzera pod obrazkom */
+}
+
+.obr:hover {
+    background-color: rgb(173, 173, 173);
+}
+
+@media (max-width: 1000px) {  /* Pre mensie obrazovky (napr. tablet, mobil) */
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);  /* 4 stlpce */
+        grid-template-rows: repeat(3, 1fr);  /* 3 riadky */
+    }
+}
+
+@media (max-width: 700px) { 
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);  /* 3 stlpce */
+        grid-template-rows: repeat(4, 1fr);  /* 4 riadky */
+    }
+}

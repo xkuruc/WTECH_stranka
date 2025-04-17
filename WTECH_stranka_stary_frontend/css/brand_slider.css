@@ -1,0 +1,40 @@
+
+.brand_slider_section {
+    width: 100%;
+    margin-top: 50px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand_slider_placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    gap: 100px;
+    /* width: 75%; */
+    height: 100px;
+    background-color: #d9d9d9;
+    /* overflow: hidden; */
+    /* position: relative; */
+    
+    /* --d: 6s; */
+}
+
+.brand_slider_image {
+    flex: 0 0 auto;
+    /* width: 8vw; */
+    /* width: 10%; */
+    width: 100px;
+    min-width: 100px;
+    height: 80%;
+    background-color: #7b7b7b;
+    transition: transform 0.5s ease-in-out;
+}
+
+.brand_slider_mechanism {
+    width: 80%;
+    overflow: hidden;
+    
+}

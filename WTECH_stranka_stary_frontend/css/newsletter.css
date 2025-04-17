@@ -1,0 +1,77 @@
+
+.newsletter {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    /* min-width: 580px; */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.newsletter_label{
+    color: white;
+    /* margin-top: 50px; */
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(169, 98, 255);
+}
+
+.newsletter_label2{
+    color: white;
+}
+
+.newsletter_obsah {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Nastavuje medzery medzi prvkami */
+}
+
+.newsletter_input {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 40px;
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.prihlasit_button {
+    margin: 0 auto;
+    width: 310px;
+    height: 40px;
+    margin-top: 7px;
+    border: 1px solid rgb(169, 98, 255);
+    color: rgb(169, 98, 255);
+    background-color: black;
+    font-weight: bold;
+    font-size: 20px;
+    /* display: flex;
+    text-align: center;
+    justify-content: center; */
+
+}
+.prihlasit_button:hover {
+    background-color: rgb(169, 98, 255);
+    color: black;
+}
+
+.emoji {
+    color: red;
+    font-size: 25px;
+    margin-right: 30px;   
+    margin-left: -20px;
+}
+
+
+@media (max-width: 800px) {
+    .newsletter {
+        height: 380px;
+    }
+}
+

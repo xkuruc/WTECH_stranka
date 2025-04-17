@@ -1,0 +1,129 @@
+.product_images {
+	display: flex;
+}
+
+
+.product_images_kontajner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 25px;
+    gap: clamp(10px, 2vw, 20px);
+  
+    flex-shrink: 1; 
+    min-width: 320px; 
+    max-width: 600px; 
+    
+    height: 700px;
+    
+    width: 100%; 
+
+}
+
+.product_images_kontajner img {
+	
+	height: 100%;
+
+	object-fit: contain;
+	width: 100%;
+	background-color: white;
+	pointer-events: none;
+	user-select: none;
+
+}
+
+
+
+.small_images, .big_images {
+	display: flex;
+	width: 100%;
+	flex-wrap: nowrap;
+	overflow: hidden;
+	
+}
+
+
+.big_images {
+	width: 100%;
+	height: 100%;
+
+
+}
+
+
+.big_img {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-shrink: 0;
+	
+	box-sizing: border-box;
+
+}
+
+.big_images img {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	
+	
+}
+
+
+.big_images.active {
+	cursor: pointer;
+}
+
+
+
+.small_images {
+	gap: 10px;
+}
+
+
+
+.small_img {
+	display: flex;
+	width: calc((100% - 20px)/3); /* aby boli 3 a medzi nimi boli 2 medzery po 10px */
+	box-sizing: border-box;
+	/*height: 170px;*/
+
+	aspect-ratio: 190/170;
+	flex-shrink: 0;
+	transition: 0.1s border ease-in-out;
+}
+
+
+.small_img.selected {
+	border: 2px solid #ff5101;
+	box-sizing: border-box;
+}
+
+
+
+
+
+@media (max-width: 850px) { 
+	.product_images {
+		
+		margin-bottom: 50px;
+
+	}
+}
+
+
+
+
+@media (max-width: 426px) {
+    .product_images_kontajner {
+    	height: 300px;
+    }
+
+    .product_images {
+        height: auto;
+        padding-bottom: 50px;
+        margin-bottom: 0;
+    }
+
+}
+

@@ -1,0 +1,162 @@
+.main {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 200px auto;
+    flex-direction: column;
+}
+
+
+.options {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.login_input {
+    width: 40vw;
+    height: 40px;
+    display: block;
+    border:1px solid gray;
+    outline: none;
+}
+
+.login_placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.login_button {
+    width: 41vw;
+    height: 40px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.login_button:hover {
+    background-color: rgb(169, 98, 255);
+    color: black;
+}
+
+.povinne_policka {
+    color: rgb(255, 100, 100);
+    width: 100%;
+    text-align: left;
+}
+
+.Zabudliheslo {
+    text-align: center;
+}
+
+.option_prihlasitsa {
+    color: black;
+    font-weight: bold;
+}
+
+.option_registracia {
+    color: rgb(165, 164, 164);
+}
+
+.option_registracia:hover{
+    text-decoration: underline;
+}
+
+.options a {
+    all: unset;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.info_section {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* gap: 20px; */
+    margin: 50px auto;
+    margin-top: 200px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    gap: 30px;
+}
+
+.info_nadpis {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    border-bottom: 1px solid rgb(179, 179, 179);
+    padding: 20px;
+}
+
+.info_mininadpis {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+    .info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .login_input {
+        width: 70vw;
+    }
+    .login_button {
+        width: 71vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .login_input {
+        width: 90vw;
+    }
+    .login_button {
+        width: 91vw;
+    }
+}
+
+
+.newsletter {
+    margin: 0px;
+}
+
+.footer_asi {
+    margin: 0px;
+}

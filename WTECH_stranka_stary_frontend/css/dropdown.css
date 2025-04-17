@@ -1,0 +1,154 @@
+/* CSS */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+  
+.menu li {
+  display: inline-block;
+  position: relative;
+}
+  
+.menu .main_category {
+  font-weight: bold;
+  color: #333;
+  padding: 10px 15px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: fixed;
+  top: 80px; /* podľa výšky navbaru */
+  left: 50%;
+  transform: translateX(-50%); /* Vycentruje element */
+  width: 95vw;
+  margin: auto 0;
+  height: 300px;
+  padding: 20px; /* väčší vnútorný priestor */
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  color: #333;
+}
+
+#tenisky {
+  color: black;
+}
+  
+.dropdown-menu li a {
+  padding: 10px 15px;
+  white-space: nowrap;
+  color: #333;
+  height: auto;
+}
+
+.dropdown-menu li a:hover {
+  background-color: transparent;
+}
+
+.main_category:hover .dropdown-menu {
+  display: flex;
+  /* flex-direction: row; */
+}
+
+.main_category:hover .dropdown-menuDOPLNKY {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.dropdown-menuDOPLNKY .inside_category {
+  margin: 20px 5px;
+}
+  
+.dropdown-menu .inside_category {
+  display: flex;
+  justify-items: center;
+  /* align-items: center; */
+   flex: 1; /*Každý element zaberie rovnaký priestor */
+  /* height: 900px; */
+  /* flex-direction: row; */
+  text-align: center;
+}
+
+.inside_category {
+  border-right: 1px solid rgb(182, 182, 182);
+  display: flex;
+  justify-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+.inside_category_moznosti{
+  display: flex;
+  justify-items: center;
+  text-align: left;
+  flex-direction: column;
+  padding: 0 30px;
+  color: rgb(11, 11, 11);
+  gap: 2px;
+  font-weight: normal;
+}
+
+.konkretna_moznost:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.inside_category_posledny {
+  border-right: none;
+}
+
+
+.inside_category_name a, .inside_category_name {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+
+}
+
+
+/* Pre stredne veľké obrazovky */
+@media (max-width: 1024px) {
+  .dropdown-menu {
+    width: 98vw;
+    padding: 15px;
+  }
+}
+
+/* Pre menšie zariadenia */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    top: 70px; /* môžeš upraviť podľa výšky navbaru */
+    width: 100vw; /* ze da sa na celu obrazovku */
+    padding: 10px;
+  }
+}
+
+.dropdown-menuTENISKY, .dropdown-menuDOPLNKY {
+  height: auto;
+}
+
+.dropdown-menuOBLECENIE {
+  height: auto;
+}
+
+.inside_category_Doplnky a {
+  font-size: 20px;
+}
+
+.doplnky_placeholder {
+  width: 700px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.sidebar2_mainDOPLNKY {
+  margin-top: 15px;
+}

@@ -1,0 +1,92 @@
+.text_filter { /* div pre text stránky a filter menu */
+	display: flex;
+	flex-direction: column;
+	padding-top: 50px;
+	width: 99vw;
+	background-color: #f4f4f4;
+}
+
+
+.text_filter h1 { /* odsadenie nadpisu */
+	padding-left: 20px;
+}
+
+
+.filter_menu { /* obsahuje filter tlačidlá */
+	display: flex;
+	justify-content: left;
+	width: 100%;
+	gap: clamp(5px, 2vw, 10px);
+	box-sizing: border-box;
+	padding: 0px 20px 20px 20px;
+}
+
+
+
+.filter_kategorie {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	gap: clamp(5px, 2vw, 2px);
+	overflow: auto;
+	scrollbar-width: none; /* skryje scrollbar vo Firefoxe */
+    -ms-overflow-style: none;
+}
+
+.filter_kategorie::-webkit-scrollbar {
+    display: none; /* skryje scrollbar v Chrome/Safari */
+}
+
+
+.filter_menu_item {
+	min-width: 160px;
+	
+	background-color: white;
+	line-height: 170%;
+	border: 1px solid #D9D9D9;
+	color: #808080;
+	padding-left: 10px;
+	text-align: left;
+	font-family: Arial;
+	font-size: 20px;
+	user-select: none; /* aby sa to nedalo označiť myšou */
+	transition: width 0.3s ease-in-out; /* animácia pre zmenšenie/zväčšenie v mobilnej veľkosti */
+}
+
+
+.filter_menu_item.special {
+	flex-grow: 0;
+	width: 140px;
+	color: white;
+	background-color: black;
+}
+
+
+.filter_menu_item:hover { /* hover pre menu item */
+	color: black; 
+	border-color: black;
+}
+
+
+.filter_menu_item.special:hover { /* pre Filter tlačidlo zvlášť */
+	background-color: white;
+}
+
+
+
+@media (max-width: 500px) {
+    .filter_menu_item.special {
+    	width: calc(100% - 40px);
+    	margin-left: 20px;
+    } 
+
+
+    .filter_menu {
+    	padding: 0px 0px 20px 0px;
+    }
+
+    .filter_kategorie {
+      display: none;
+    }
+
+}

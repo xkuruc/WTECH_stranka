@@ -1,0 +1,23 @@
+.newsletter_submit {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 350px;
+}
+
+#radio_form {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}
+
+
+#submit_btn {
+	width: 220px;
+	height: 50px;
+	background-color: black;
+	color: white;
+	font-size: 17px;
+}
+

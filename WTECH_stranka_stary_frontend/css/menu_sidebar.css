@@ -1,0 +1,168 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -900px; /* skrytý vľavo */
+    width: 550px;
+    height: 100%;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    transition: left 0.3s ease;
+    padding: 20px;
+    z-index: 100;
+    overflow: auto;
+}
+
+/* Keď je sidebar aktívny */
+.sidebar.active {
+    left: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Polopriehľadná čierna */
+    display: none;
+    z-index: 99;
+}
+
+/* Keď je sidebar aktívny, zobraz overlay */
+.sidebar.active ~ .overlay {
+    display: block;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+  /* Štýl pre submenu */
+.submenu {
+    display: none; /* skryté submenu */
+    padding-left: 20px; /* odsadenie pre vizuálnu hierarchiu */
+}
+  
+  /* Ak je submenu otvorené, zobrazíme ho */
+.submenu.open {
+    display: block;
+}
+
+.submenu3 {
+    display: none; /* skryté submenu */
+    padding-left: 20px; /* odsadenie pre vizuálnu hierarchiu */
+}
+
+.submenuPanskeTenisky.open, .submenuDamskeTenisky.open, .submenuZnacky.open, .submenuDetskeTenisky.open,
+ .submenuMUZI.open,
+ .submenuZENY.open,
+ .submenuDETI.open,
+ .submenuZnackyOBLECENIE.open {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+  /* Možno pridáte aj jednoduchý prechod */
+.submenu {
+transition: all 0.3s ease;
+}
+
+.sidebar_main {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.sidebar li {
+    /* margin-top: 20px; */
+    border-bottom: 1px solid rgb(198, 194, 194);
+    padding: 20px;
+}
+
+.sidebar_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plus {
+    font-size: 30px;
+}
+
+.submenu_item {
+    all: unset;
+    font-size: 16px;
+    color: black;
+    font-weight: normal;
+    padding: 0px;
+    margin: 0px;
+    gap: 0;
+    border: none !important;
+}
+
+.submenu li {
+    all: unset;
+    font-size: 16px;
+    color: black;
+    font-weight: normal;
+    padding: 0px;
+    margin: 0px;
+    gap: 0;
+    border: none !important;
+}
+
+.submenu2 {
+    margin-left: 20px !important;
+}
+
+.submenu3 {
+    margin-left: 20px !important;
+}
+
+
+.sidebar2_main{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar_header{
+    width: 100%;
+    background-color: black;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar_header p{
+    color: white;
+}
+
+.fa-arrow-left {
+    color: white;
+}
+.sidebar_header_item {
+    padding: 20px;
+    font-size: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 95vw;
+        height: 100%;
+    }   
+}
+
+.sidebar_vypredaj_item{
+    color: rgb(240, 63, 63);
+}
+
+.komunita_vypredaj_item{
+    color: rgb(169, 98, 255);
+    margin-bottom: 30px;
+}
