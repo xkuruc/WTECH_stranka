@@ -37,27 +37,34 @@
         <section class="main_image_section">
             <div class="main_image_placeholder"></div>
         </section>
-
+        
         <section class="brand_slider_section">
-            <div class="brand_slider_mechanism">
-                <div class="brand_slider_placeholder">
-                    <div class="brand_slider_image" style="background-color: aqua;"> 1</div>
-                    <div class="brand_slider_image" >2</div>
-                    <div class="brand_slider_image" >3</div>
-                    <div class="brand_slider_image" >4</div>
-                    <div class="brand_slider_image" >5</div>
-                    <div class="brand_slider_image" >6</div>
-                    <div class="brand_slider_image" >7</div>
-                    <div class="brand_slider_image" >8</div>
+                <div class="slider-containerBRAND">
+                    <div class="owl-carouselBRAND">
+                        <div class="itemBRAND">1</div>
+                        <div class="itemBRAND">2</div>
+                        <div class="itemBRAND">3</div>
+                        <div class="itemBRAND">4</div>
+                        <div class="itemBRAND">5</div>
+                        <div class="itemBRAND">6</div>
+                        <div class="itemBRAND">7</div>
+                        <div class="itemBRAND">8</div>
+                        <div class="itemBRAND">9</div>
+                    </div>
                 </div>
-            </div>
         </section>
 
         <section class="banner_hlavna_ponuka">
             <div class="banner_hlavna_ponuka_container">
-                <a href="zoznam_produktov.blade.php" class="tenisky_banner" > <div> TENISKY</div> </a>
-                <a href="zoznam_produktov.blade.php" class="kopacky_banner"> <div > KOPACKY</div> </a>
-                <a href="zoznam_produktov.blade.php" class="lopty_banner"> <div > LOPTY</div> </a>
+                <a href="{{ route('produkty.index') }}" class="tenisky_banner">
+                    <div>TENISKY</div>
+                </a>
+                <a href="{{ route('produkty.index') }}" class="kopacky_banner">
+                    <div>KOPAČKY</div>
+                </a>
+                <a href="{{ route('produkty.index') }}" class="lopty_banner">
+                    <div>LOPTY</div>
+                </a>
             </div>
         </section>
 
@@ -129,7 +136,7 @@
             </div>
 
         </section>
-        <div style="height:1000px ;"></div>
+        <!-- <div style="height:1000px ;"></div> -->
     </main>
 
     <!-- footer -->

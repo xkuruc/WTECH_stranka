@@ -9,10 +9,13 @@ Route::get('/', function () {
 });
 
 
+// Route::get('/zoznam-produktov', function () {
+//     return view('zoznam_produktov');
+// });
+
 Route::get('/zoznam-produktov', function () {
     return view('zoznam_produktov');
-});
-
+})->name('produkty.index');
 
 Route::get('/login', function () {
     return view('prihlasenie');

@@ -48,15 +48,6 @@
 }
 
 
-/* .customNavigation a{
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-} */
-
 .customNavigation a {
     display: inline-block;
     font-size: 2rem; /* alebo inú veľkosť podľa potreby */
