@@ -14,13 +14,18 @@ return new class extends Migration
         // Users
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id'); // Vlastný primárny kľúč
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('meno');
+            $table->string('priezvisko');
             $table->string('email')->unique(); // Unikátna emailová adresa
             $table->string('password'); // Heslo
-            $table->string('phone')->nullable();
+            $table->string('telephone')->nullable();
+
+            $table->string('pohlavie')->nullable(); // Muž / Žena
+            $table->boolean('newsletter')->default(false); // 1 = áno, 0 = nie
+            $table->date('datum_narodenia')->nullable();
+
             $table->date('registration_date');
-            $table->timestamps(); // Timestamps pre created_at a updated_at
+            $table->timestamps(); // created_at a updated_at
         });
 
 
@@ -42,27 +47,32 @@ return new class extends Migration
         });
 
 
-
-
-
-
-
-
-
-
-
         // Addresses
         Schema::create('addresses', function (Blueprint $table) {
             $table->id('address_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
             $table->enum('address_type', ['billing', 'shipping']);
-            $table->string('street');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->string('country');
+            $table->string('ulica');
+            $table->string('mesto');
+            $table->integer('psc');
+            $table->string('krajina');
+            $table->string('cisloDomu');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
+
+
+        // Personalizácia
+        Schema::create('personalizacia', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
+            $table->string('vyska')->nullable();
+            $table->string('hmotnost')->nullable();
+            $table->string('velkost_topanok')->nullable();
+            $table->string('znacka')->nullable();
+            $table->timestamps();
+        });
+
 
         // Categories
         Schema::create('categories', function (Blueprint $table) {
@@ -212,6 +222,7 @@ return new class extends Migration
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('personalizacia');
         Schema::dropIfExists('users');
     }
 };

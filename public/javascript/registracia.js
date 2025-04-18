@@ -16,7 +16,7 @@ for (let i = 40; i <= 130; i++) {
 }
 
 let select_shoesize = document.getElementById("shoesize");
-for (let i = 3; i <= 18; i+=0.5) {
+for (let i = 17; i <= 50; i+=0.5) {
     let option = document.createElement("option");
     option.value = i;
     option.textContent = i;
@@ -35,15 +35,19 @@ function toggleDropdown(dropdownId) {
 
 function selectOption(type, option) {
     let input = document.getElementById(`selected${capitalizeFirstLetter(type)}`);
+    let hiddenInput = document.getElementById(`${type}Hidden`);
+
     let selected = input.value ? input.value.split(", ") : [];
-    
+
     if (!selected.includes(option)) {
         selected.push(option);
     } else {
         selected = selected.filter(s => s !== option);
     }
 
-    input.value = selected.join(", ");
+    const value = selected.join(", ");
+    input.value = value;
+    hiddenInput.value = value;
 }
 
 function capitalizeFirstLetter(string) {

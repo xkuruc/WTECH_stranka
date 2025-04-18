@@ -10,6 +10,8 @@
     border-radius: 5px;
     padding: 10px;
     width: 300px;
+    height: 45px;
+    box-sizing: border-box;
     position: relative;
 }
 
@@ -36,12 +38,19 @@
 }
 
 .registration_input {
-    height: 40px;   
+    height: 45px;
+    padding-left: 5px;
+    box-sizing: border-box;
     outline: none;
 }
 
 .newsletter_reg {
     grid-column: span 2;
+}
+
+.newsletter_reg label {
+    display: flex;
+    align-items: center;
 }
 
 .reg_nadpis {
@@ -98,7 +107,7 @@
 .Vytvorit_ucet_button:hover {
     background-color: rgb(169, 98, 255);
     color: black;
-    
+
 }
 
 .button_placeholder {
@@ -119,6 +128,8 @@
 .dropdown input {
     width: 100%;
     padding: 8px;
+    height: 45px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
@@ -149,10 +160,10 @@
 .personalizacia_container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 8px;
 }
-    
+
 .personalizacia_div1 {
     grid-column: span 3 / span 3;
 }
@@ -164,24 +175,24 @@
 
 .personalizacia_div3 {
     grid-column: span 2 / span 2;
-    grid-row-start: 2;
+    grid-row-start: 1;
 }
 
 .personalizacia_div4 {
     grid-column: span 2 / span 2;
     grid-column-start: 3;
-    grid-row-start: 2;
+    grid-row-start: 1;
 }
 
 .personalizacia_div5 {
     grid-column: span 2 / span 2;
     grid-column-start: 5;
-    grid-row-start: 2;
+    grid-row-start: 1;
 }
 
 .personalizacia_div6 {
     grid-column: span 6 / span 6;
-    grid-row-start: 3;
+    grid-row-start: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -204,9 +215,11 @@
     .newsletter_reg {
         grid-column: span 1;
     }
-    .registration_input{
+
+    .registration_input:not(.newsletter_reg .registration_input) {
         width: 100%;
     }
+
     .osobne_udaje_section{
         width: 90%;
     }

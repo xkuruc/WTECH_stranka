@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistrationController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -23,3 +25,7 @@ Route::get('/register', function () {
 Route::get('/profil', function () {
     return view('profil');
 })->name('profil');
+
+
+Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
+

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    protected $fillable = ['user_id', 'address_type', 'street', 'city', 'postal_code', 'country', 'is_default'];
+    protected $primaryKey = 'address_id'; // Tu špecifikuj, že primárny kľúč je 'address_id'
+    public $incrementing = true;
+    protected $fillable = ['user_id', 'address_type', 'ulica', 'cisloDomu', 'mesto', 'psc', 'krajina', 'is_default'];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

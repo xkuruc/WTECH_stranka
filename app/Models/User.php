@@ -6,14 +6,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Address;
+
 
 class User extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'phone', 'registration_date'];
+    protected $fillable = ['meno', 'priezvisko', 'email', 'password', 'telephone', 'pohlavie', 'datum_narodenia', 'newsletter', 'registration_date'];
+    protected $primaryKey = 'user_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    public function addresses()
+
+    public function address()
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(Address::class, 'user_id', 'user_id');
     }
 
     public function orders()
@@ -35,6 +42,11 @@ class User extends Model
     public function promotionUsages()
     {
         return $this->hasMany(PromotionUsage::class);
+    }
+
+    public function personalizacia()
+    {
+        return $this->hasOne(Personalizacia::class, 'user_id', 'user_id');
     }
 }
 
