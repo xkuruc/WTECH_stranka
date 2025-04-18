@@ -30,3 +30,5 @@ Route::post('/register', [RegistrationController::class, 'store'])->name('regist
 
 Route::get('/profil', [ProfilController::class, 'showProfile'])->name('profil')->middleware('auth');
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+require base_path('routes/routes1.php');
+require base_path('routes/routes2.php');

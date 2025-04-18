@@ -33,7 +33,9 @@
             <div class="h1_buttons">
 
                 <h1>Môj účet</h1>
-                <a href="admin_dash_login.blade.php" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
+                @if($user->is_admin)
+                    <a href="admin_dash_login.blade.php" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
+                @endif
                 <a id="logout_btn" data-logout-url="{{ route('logout') }}">Odhlásiť sa</a>
             </div>
             <hr class="hr_divider">
@@ -86,36 +88,39 @@
                             </ul>
                         </section>
 
+                        <!-- ak nemá takú adresu, tak sa nevykreslí -->
+                        @if($user->address->where('address_type', 'billing')->isNotEmpty())
+                            <section class="adresa_billing">
 
-                        <section class="adresa_billing">
-                            <h1>Adresa fakturácie</h1>
-
-                            <ul class="info_ul">
-                                @foreach($user->address as $address)
-                                    @if($address->address_type === 'shipping')
-                                        <li>Ulica: {{ $address->ulica }}</li>
-                                        <li>Číslo domu: {{ $address->cisloDomu }}</li>
-                                        <li>Mesto: {{ $address->mesto }}</li>
-                                        <li>PSČ: {{ $address->psc }}</li>
-                                        <li>Krajina: {{ $address->krajina }}</li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </section>
-
+                                <h1>Adresa fakturácie</h1>
+                                <ul class="info_ul">
+                                    @foreach($user->address as $address)
+                                        @if($address->address_type === 'billing')
+                                            <li>Ulica: {{ $address->ulica }}</li>
+                                            <li>Číslo domu: {{ $address->cisloDomu }}</li>
+                                            <li>Mesto: {{ $address->mesto }}</li>
+                                            <li>PSČ: {{ $address->psc }}</li>
+                                            <li>Krajina: {{ $address->krajina }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </section>
+                        @endif
 
                     </section>
-
-
-
-
                 </div>
 
                 <div class="newsletter_objednavky">
                     <section class="newsletter_odber">
                         <h1>Newsletter</h1>
-                        <span>Nie ste prihlásený k odberu noviniek.</span>
-                        <a href="newsletter_sablona.blade.php">Upraviť</a>
+
+                        @if($user->newsletter)
+                            <span>Ste prihlásený na odber noviniek.</span>
+                        @else
+                            <span>Nie ste prihlásený k odberu noviniek.</span>
+                        @endif
+
+                        <a href="{{ route('newsletter') }}">Upraviť</a>
                     </section>
 
                     <section class="objednavky">

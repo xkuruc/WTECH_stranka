@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('pohlavie')->nullable(); // Muž / Žena
             $table->boolean('newsletter')->default(false); // 1 = áno, 0 = nie
             $table->date('datum_narodenia')->nullable();
-
+            $table->boolean('is_admin')->default(false);
             $table->date('registration_date');
             $table->timestamps(); // created_at a updated_at
         });
