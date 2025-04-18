@@ -33,10 +33,19 @@
             <div>
                 <form class="login_placeholder"  method="POST">
                     @csrf
-                    <input class="login_input" type="email" name="email" placeholder="E-mail*" required/>
-                    <input class="login_input" type="password" name="password" placeholder="Heslo*" required />
+
+                    <input class="login_input @error('email') is-invalid @enderror" type="email" name="email" placeholder="E-mail*" required/>
+                    <input class="login_input @error('email') is-invalid @enderror" type="password" name="password" placeholder="Heslo*" required />
                     <button class="login_button" type="submit">PRIHLÁSIŤ SA </button>
                 </form>
+
+                @if($errors->has('email'))
+                    <div class="alert alert-danger" style="color: red;">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
+
+
                 <p class="Zabudliheslo"> <a href="">Zabudli ste heslo ? </a> </p>
                 <div class="povinne_policka">
                     <p>*Povinné políčka</p>

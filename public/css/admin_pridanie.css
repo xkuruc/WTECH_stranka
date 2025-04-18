@@ -15,7 +15,13 @@
 	align-items: center;
 }
 
+.file-input {
+    display: none;
+}
 
+#largeImageInput1 {
+    pointer-events: none;
+}
 
 .plusko {
 	display: flex;
@@ -23,7 +29,7 @@
     width: 80px;
     height: 80px;
     z-index: 2;
-    
+    pointer-events: none;
 }
 
 .small_img .plusko {
@@ -48,6 +54,7 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+
 }
 
 .plusko::after {
@@ -98,7 +105,7 @@
 	border-radius: 0px;
 	border: 1px solid #d9d9d9;
 	color: #404040;
-	
+
 	box-sizing: border-box;
 
 }
@@ -177,7 +184,7 @@
 
 
 
-@media (max-width: 950px) { 
+@media (max-width: 950px) {
 
 
 	.product_images {
@@ -190,7 +197,7 @@
 
 	.produkt_information {
 		width: 100%;
-		
+
 	}
 
 
@@ -203,7 +210,7 @@
 
 
 
-@media (max-width: 500px) { 
+@media (max-width: 500px) {
 
 	.product_images {
 		height: 350px;

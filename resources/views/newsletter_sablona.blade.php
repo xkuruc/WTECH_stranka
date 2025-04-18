@@ -32,14 +32,19 @@
             <hr class="hr_divider">
         </section>
 
-        <!-- dynamicky sa doplní, či ide o prihlásenie/odhlásenie z odberu noviniek -->
         <section class="newsletter_submit">
-            <form id="radio_form" action="profil.blade.php">
+            <!-- dynamicky sa doplní, či ide o prihlásenie/odhlásenie z odberu noviniek -->
+            <form id="radio_form" method="POST" action="{{ route('newsletter.update') }}">
+                @csrf
 
                 <label class="custom_radio_checkbox">
-                    <input type="checkbox" name="option" value="yes">
+                    <input type="checkbox" name="newsletter" value="1" {{ $user->newsletter ? 'checked' : '' }}>
                     <span class="radio_btn"></span>
-                    Prihlásiť sa na odber noviniek.
+                    @if($user->newsletter)
+                        Ste prihlásený na odber noviniek.
+                    @else
+                        Prihlásiť sa na odber noviniek.
+                    @endif
                 </label>
 
                 <button id="submit_btn" type="submit"><strong>Uložiť</strong></button>

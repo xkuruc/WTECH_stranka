@@ -1,6 +1,6 @@
 const product_container = document.querySelector(".product_list");
 const body = document.body;
-const logout = document.getElementById("logout_btn");
+const logout_btn = document.getElementById("logout_btn");
 
 
 
@@ -19,7 +19,7 @@ product_container.addEventListener('click', async function(event)  {
     }
     else if (event.target.closest(".product_item_relative")) {
         if (event.target.closest(".product_item_relative").id === 'add_product') {
-            window.location.href = "./admin_pridanie_polozky.html" /* presmeruje na pridanie_polozky.html */
+            window.location.href = "/admin_add_product" /* presmeruje na pridanie_polozky.html */
         }
         else {
             window.location.href = "./polozka_produktu.html"
@@ -30,10 +30,31 @@ product_container.addEventListener('click', async function(event)  {
 
 
 /* keď kliknem na Odhásiť sa, tak vyskočí zase popup menu */
-logout.addEventListener('click', async function(event) {
+logout_btn.addEventListener('click', async function(event) {
     const confirmed = await show_popup('Chcete opustiť administrátorské rozhranie'); /* čaká sa na odpoved, skript čaká */
+    const logoutUrl = event.target.getAttribute('data-logout-url');
 
     if (confirmed) { /* klikol na odhlásenie */
-        window.location.href = "./profil.html" /* presmeruje na index.html */
+        logout(logoutUrl) /* presmeruje na index.html */
     }
 });
+
+
+function logout(logoutUrl) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+
+    form.action = logoutUrl; // Route pre odhlásenie
+
+    // Vytvorenie CSRF token inputu
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
+
+    // Pridanie formulára do tela a odoslanie
+    document.body.appendChild(form);
+    form.submit();
+}

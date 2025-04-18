@@ -4,8 +4,8 @@ const small_img_container = document.querySelector('.small_images');
 let window_width = window.innerWidth;
 
 
-
-let children;  //všetky obrázky
+/* variables */
+let children;
 let children_len;
 let curr_big_selected;
 let first_img_id = 1;
@@ -14,14 +14,17 @@ let max_id;
 let scroll_distance;
 
 
+/* gap malých imagov pre posun*/
+const styles = getComputedStyle(small_img_container);
+const small_gap = parseInt(styles.getPropertyValue('column-gap'));
+
 
 /* pre eventy */
 let isDown = false;
 let startX;
 let scrollLeft;
 let actual_scroll;
-
-
+let can_open_input = false;
 
 
 function scroll_init() { /* potrebujem na začiatok dať posledného childa */
@@ -52,14 +55,14 @@ function scroll_init() { /* potrebujem na začiatok dať posledného childa */
         curr_big_selected = sliding_container.firstElementChild;
         sliding_container.prepend(child_to_move);
         sliding_container.scrollLeft = scroll_distance;
-        
+
     }
 }
 
 
 
 /* vráti ďalší prvok v zozname detí */
-function get_next_child(currentElement, direction) { 
+function get_next_child(currentElement, direction) {
     children = Array.from(sliding_container.children);
     const currentIndex = children.indexOf(currentElement); // Nájdeme aktuálny index
 
@@ -73,25 +76,25 @@ function get_next_child(currentElement, direction) {
 
 
 /* načíta ďalší prvok ak treba */
-function load_next(id_change, new_big_selected) { 
+function load_next(id_change, new_big_selected) {
     /* idem doľava a pridám začiatočný prvok na koniec */
-    if (id_change === 1 && new_big_selected === sliding_container.lastElementChild) { 
+    if (id_change === 1 && new_big_selected === sliding_container.lastElementChild) {
         const first_child = sliding_container.firstElementChild; //prvý child
 
         /* pridaj na koniec prvého childa */
-        sliding_container.appendChild(first_child); 
+        sliding_container.appendChild(first_child);
         sliding_container.scrollLeft -= scroll_distance;
     }
 
 
     /* idem doprava a pridám posledný prvok na začiatok */
-    if (id_change === -1 && new_big_selected === sliding_container.firstElementChild) { 
+    if (id_change === -1 && new_big_selected === sliding_container.firstElementChild) {
         const lastChild = sliding_container.lastElementChild; //posledný child
 
 
         /* pridaj na začiatok posledného childa */
-        sliding_container.prepend(lastChild); 
-        sliding_container.scrollLeft += scroll_distance; 
+        sliding_container.prepend(lastChild);
+        sliding_container.scrollLeft += scroll_distance;
     }
 }
 
@@ -140,18 +143,19 @@ async function scroll_big(e, x_a) {
     }
 
     isDown = false;
-    
+
     const x = x_a;
     const diff = x - startX; //rozdiel miesta kde som ťukol prvý krát a posledný
 
 
     if (Math.abs(diff) < 5){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
+        can_open_input = true;
         return;
     }
 
 
     /* cieľ, kde sa mám posunúť */
-    let target_position = (diff > 0) ? actual_scroll - scroll_distance : actual_scroll + scroll_distance; 
+    let target_position = (diff > 0) ? actual_scroll - scroll_distance : actual_scroll + scroll_distance;
     const current_selected = document.querySelector('.small_img.selected'); //teraz zvolený v menu
 
 
@@ -164,7 +168,7 @@ async function scroll_big(e, x_a) {
     const new_big_selected = get_next_child(curr_big_selected,id_change);
     let new_id = parseInt(new_big_selected.dataset.imgId);
     const new_selected = document.querySelector(`.small_img[data-img-id="${new_id}"]`);
-    
+
 
     /* odstránime teraz označený prvok */
     current_selected.classList.remove('selected'); /* malý obrázok */
@@ -174,11 +178,11 @@ async function scroll_big(e, x_a) {
 
 
     /* animácia pohybu, posunieme sa želaným smerom */
-    await smoothScrollTo(sliding_container, target_position); 
+    await smoothScrollTo(sliding_container, target_position);
 
 
     /* čekni či treba načítať ďalší prvok */
-    load_next(id_change,new_big_selected); 
+    load_next(id_change,new_big_selected);
 
 
     /* čekneme, či sa nezmenšilo okno */
@@ -196,7 +200,7 @@ async function scroll_big(e, x_a) {
     }
     /* som na pravom okraji malého okienka */
     else if (new_id > first_img_id + 2) {
-        await smoothScrollTo(small_img_container, small_img_container.scrollLeft + scroll_distance + 10);
+        await smoothScrollTo(small_img_container, small_img_container.scrollLeft + scroll_distance + small_gap);
 
 
         /* ak sa viem posunúť viac ako 3, tak sa posuniem, ináč sa posuniem cez vzorec */
@@ -211,12 +215,13 @@ async function scroll_big(e, x_a) {
     }
     /* ak idem naspäť */
     else if (new_id < first_img_id) {
-        await smoothScrollTo(small_img_container, small_img_container.scrollLeft - (scroll_distance + 9));
+        console.log(small_img_container.scrollLeft);
+        await smoothScrollTo(small_img_container, small_img_container.scrollLeft - (scroll_distance) - small_gap);
 
 
         /* ak sa dá, posuniem sa o 3, ináč na začiatok */
         const id_diff = first_img_id - min_id;
-        first_img_id = (id_diff > 3) ? first_img_id - 3 : 1;  
+        first_img_id = (id_diff > 3) ? first_img_id - 3 : 1;
     }
 
 
@@ -233,6 +238,10 @@ async function scroll_big(e, x_a) {
 window.addEventListener('resize', function() { /* keď sa zmenší obrazovka, tak nech sa to zarovná */
     scroll_distance = sliding_container.clientWidth;
     sliding_container.scrollLeft = Math.round(sliding_container.scrollLeft / scroll_distance) * scroll_distance;
+
+    /* pre malé obrázky */
+    const add_gap = (small_img_container.scrollLeft === 0) ? 0 : 2*small_gap;
+    small_img_container.scrollLeft = Math.round((small_img_container.scrollLeft) / scroll_distance) * scroll_distance + add_gap;
 });
 
 
@@ -240,9 +249,9 @@ window.addEventListener('resize', function() { /* keď sa zmenší obrazovka, ta
 /* eventy pre myš */
 sliding_container.addEventListener("mousedown", (e) => { /* klikol som a taham */
     isDown = true;
-   
+
     startX = e.pageX;
-    
+
     scrollLeft = sliding_container.scrollLeft;
     actual_scroll = sliding_container.scrollLeft; /* uložím si začiatok obrázka */
 });
@@ -250,24 +259,24 @@ sliding_container.addEventListener("mousedown", (e) => { /* klikol som a taham *
 
 sliding_container.addEventListener("touchstart", (e) => {
     isDown = true;
-    const touch = e.touches[0]; 
+    const touch = e.touches[0];
     startX = touch.pageX;
 
-    
+
     scrollLeft = sliding_container.scrollLeft;
-    actual_scroll = sliding_container.scrollLeft; 
+    actual_scroll = sliding_container.scrollLeft;
     e.preventDefault();
 });
 
 
 
 /* vypnem natívne tahanie obrázka */
-sliding_container.addEventListener("dragstart", (e) => { 
+sliding_container.addEventListener("dragstart", (e) => {
     e.preventDefault();
 });
 
 /* vypnem natívne tahanie obrázka */
-small_slider.addEventListener("dragstart", (e) => { 
+small_slider.addEventListener("dragstart", (e) => {
     e.preventDefault();
 });
 
@@ -276,18 +285,18 @@ small_slider.addEventListener("dragstart", (e) => {
 
 
 /* keď pohybujem, tak nech sa to ťahá */
-document.addEventListener("mousemove", (e) => { 
+document.addEventListener("mousemove", (e) => {
     if (!isDown) return;
-    const walk = (e.pageX - startX); 
-    sliding_container.scrollLeft = scrollLeft - walk;  
+    const walk = (e.pageX - startX);
+    sliding_container.scrollLeft = scrollLeft - walk;
 });
 
 
 /* keď pohybujem, tak nech sa to ťahá */
 sliding_container.addEventListener("touchmove", (e) => {
     if (!isDown) return;
-    
-    const touch = e.touches[0]; 
+
+    const touch = e.touches[0];
     const walk = touch.pageX - startX;
 
     sliding_container.scrollLeft = scrollLeft - walk;
@@ -323,7 +332,7 @@ document.addEventListener("touchend", async (e) => {
 /* ked kliknem na malé okienko */
 small_img_container.addEventListener('pointerdown', async (event) => {
     const target = event.target;
-    
+
     /* ak som klikol na malé tlačitko */
     if (target.classList.contains('small_img')) {
         /* čo je teraz označené a na čo som klikol */
@@ -336,6 +345,9 @@ small_img_container.addEventListener('pointerdown', async (event) => {
         const diff = clicked_id - curr_id;
         const id_change = (diff > 0 ? 1 : -1);
 
+        if (diff === 0) { /* klikol som na to, čo už je selected */
+            can_open_input = true;
+        }
 
         /* čekneme, či sa nezmenšilo okno */
         if (window.innerWidth != window_width) {
@@ -347,7 +359,7 @@ small_img_container.addEventListener('pointerdown', async (event) => {
         /* posuniem sa o ten rozdiel čo som vyššie vypočítal, po 1nom obrázku idem */
         for (let i = 0; i < Math.abs(diff); i++) {
             curr_id += id_change;
-            
+
 
             //vyberie sa aktuálny prvok
             const prev_selected = document.querySelector('.small_img.selected');
@@ -370,9 +382,9 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 
 
             /* nová pozícia, posuniem sa o scroll_distance daným smerom */
-            const target_position = sliding_container.scrollLeft + ((scroll_distance+2) * id_change); // scroll_distance = šírka karty
-            
-            
+            const target_position = sliding_container.scrollLeft + ((scroll_distance) * id_change); // scroll_distance = šírka karty
+
+
             /* čakáme na koniec animácie */
             await smoothScrollTo(sliding_container, target_position);
 
@@ -387,7 +399,7 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 
 
 /* ako to funguje? */
-/* 
+/*
     vždy presuniem o jeden další prvok z konca/začiatku na začiatok/koniec
     čiže napr. mám 1,2,3 a chcem ísť dolava z 2tky, tak ked sa posuniem na 1, tak zoberiem 3 z konca a dam na začiatok
     že nikdy nebudem na konci kontajnera, vždy bude niekto pred alebo za mnou

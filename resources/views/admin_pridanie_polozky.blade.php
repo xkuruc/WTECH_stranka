@@ -37,33 +37,40 @@
 
                         <div class="big_images" id="sliding_container">
 
+
                             <div class="big_img selected" data-img-id=1>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="big_img" data-img-id=2>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
 
                             <div class="big_img" data-img-id=3>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="big_img" data-img-id=4>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="big_img" data-img-id=5>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="big_img" data-img-id=6>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
@@ -72,32 +79,38 @@
 
                         <div class="small_images" id="small_slider">
                             <div class="small_img selected" data-img-id=1>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="small_img" data-img-id=2>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
 
                             <div class="small_img" data-img-id=3>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="small_img" data-img-id=4>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="small_img" data-img-id=5>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
 
                             <div class="small_img" data-img-id=6>
+                                <input type="file" class="file-input" accept="image/*">
                                 <img>
                                 <span class="plusko"></span>
                             </div>
@@ -204,5 +217,6 @@
     <script src="{{ asset('javascript/product_slider.js') }}"></script>
     <script src="{{ asset('javascript/kosik_sidebar.js') }}"></script>
     <script src="{{ asset('javascript/drag_polozka.js') }}"></script>
+    <script src="{{ asset('javascript/admin_pridanie.js') }}"></script>
 </body>
 </html>

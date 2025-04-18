@@ -73,17 +73,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
-        // Categories
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id('category_id');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('parent_category_id')->nullable();
-            $table->foreign('parent_category_id')->references('category_id')->on('categories')->nullOnDelete();
-            $table->timestamps();
-        });
-
         // Products
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id');
@@ -92,7 +81,9 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->decimal('discount', 5, 2)->default(0);
             $table->string('SKU')->unique();
-            $table->foreignId('category_id')->constrained('categories', 'category_id')->onDelete('cascade');
+
+            $table->enum('category', ['tenisky', 'kopacky', 'lopty']);
+
             $table->integer('stock_quantity');
             $table->string('brand')->nullable();
             $table->timestamps();

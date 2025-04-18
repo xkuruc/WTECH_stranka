@@ -34,7 +34,7 @@
 
                 <h1>Môj účet</h1>
                 @if($user->is_admin)
-                    <a href="admin_dash_login.blade.php" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
+                    <a href="{{ route('admin_dashboard') }}" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
                 @endif
                 <a id="logout_btn" data-logout-url="{{ route('logout') }}">Odhlásiť sa</a>
             </div>
@@ -120,7 +120,7 @@
                             <span>Nie ste prihlásený k odberu noviniek.</span>
                         @endif
 
-                        <a href="{{ route('newsletter') }}">Upraviť</a>
+                        <a href="{{ route('newsletter.edit') }}">Upraviť</a>
                     </section>
 
                     <section class="objednavky">

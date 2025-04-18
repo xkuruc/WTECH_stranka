@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    protected $redirectTo = '/';
     public function showSablona() {
         return view('prihlasenie');
     }
@@ -17,11 +19,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/profil');
+            return redirect('/');
         }
 
         return back()->withErrors([
-            'email' => 'Nesprávne prihlasovacie údaje.',
+            'email' => 'Nesprávny email alebo heslo.',
         ]);
     }
 
@@ -34,5 +36,10 @@ class LoginController extends Controller
         return redirect('/'); // Presmeruje na domovskú stránku po odhlásení
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        // Po prihlásení presmeruj na domovskú stránku alebo inú stránku podľa tvojej potreby
+        return redirect()->route('/');  // Alebo iná route podľa tvojich potrieb
+    }
 
 }

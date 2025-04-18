@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Stranka</title>
 
     <!-- stylesheets -->
@@ -31,26 +32,14 @@
     </header>
 
     <main>
-        <aside class="text_filter">
-            <div class="filter_menu">
-                <button class="filter_menu_item special" id="filter_open_btn">Filter</button>
-                <div class="filter_kategorie", id="sliding_filter">
-                    <button class="filter_menu_item" data-category ="brand">Značka</button>
-                    <button class="filter_menu_item" data-category ="size">Veľkosť</button>
-                    <button class="filter_menu_item" data-category ="color">Farba</button>
-                    <button class="filter_menu_item" data-category ="available">Dostupnosť</button>
-                    <button class="filter_menu_item" data-category ="price_sale">Cena</button>
-                    <button class="filter_menu_item" data-category ="gender">Pohlavie</button>
-                </div>
-            </div>
-        </aside>
-
+        <!-- filter menu -->
+        @include('components.filter_menu')
 
         <section class="produkty_kontajner">
             <section class="text_divider"> <!-- text admin dashboard a potom oddelovať čiara -->
                 <div class="h1_buttons">
                     <h1>Admin Dashboard</h1>
-                    <a id="logout_btn">Opustiť rozhranie</a>
+                    <a id="logout_btn" data-logout-url="{{ route('admin_leave_dash') }}">Opustiť rozhranie</a>
                 </div>
                 <hr class="hr_divider">
             </section>

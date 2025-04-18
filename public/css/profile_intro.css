@@ -18,9 +18,11 @@
 .login_input {
     width: 40vw;
     height: 40px;
+    box-sizing: border-box;
     display: block;
     border:1px solid gray;
     outline: none;
+    padding-left: 5px;
 }
 
 .login_placeholder {
@@ -33,10 +35,11 @@
 }
 
 .login_button {
-    width: 41vw;
+    width: 40vw;
     height: 40px;
     border: none;
     background-color: black;
+    box-sizing: border-box;
     color: white;
     font-weight: bold;
     font-size: 15px;
@@ -45,6 +48,19 @@
 .login_button:hover {
     background-color: rgb(169, 98, 255);
     color: black;
+}
+
+/* ak je nesprávne email alebo heslo */
+.is-invalid {
+    border: 1px solid red;
+}
+
+
+/* text s chybou*/
+.alert-danger {
+    color: red;
+    font-size: 14px;
+    padding: 5px;
 }
 
 .povinne_policka {
