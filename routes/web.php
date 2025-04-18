@@ -23,8 +23,6 @@ Route::get('/register', function () {
 });
 
 
-
-
 Route::get('/login', [LoginController::class, 'showSablona'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
