@@ -1,4 +1,4 @@
-
+/* 
 .brand_slider_section {
     width: 100%;
     margin-top: 50px;   
@@ -13,19 +13,12 @@
     justify-content: space-between;
     white-space: nowrap;
     gap: 100px;
-    /* width: 75%; */
     height: 100px;
     background-color: #d9d9d9;
-    /* overflow: hidden; */
-    /* position: relative; */
-    
-    /* --d: 6s; */
 }
 
 .brand_slider_image {
     flex: 0 0 auto;
-    /* width: 8vw; */
-    /* width: 10%; */
     width: 100px;
     min-width: 100px;
     height: 80%;
@@ -35,6 +28,92 @@
 
 .brand_slider_mechanism {
     width: 80%;
+    overflow: hidden;    
+} */
+
+
+
+#owl-carouselBRAND {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    height: 100px;
+    /* background-color: #d9d9d9; */
+}
+
+.itemBRAND {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    height: 80%;
+    background-color: #f30000;
+    /* transition: transform 0.5s ease-in-out; */
+}
+
+.brand_slider_section {
+    width: 100%;
+    margin-top: 50px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.owl-carouselBRAND .itemBRAND{
+    /* margin: 3px; */
+    color: #ff0000;
+    background-color: #616161;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; 
+    text-align: center;
+    /* width: 300px;
+    height: 300px; */
+    /* max-width: 300px;
+    min-width: 280px;
+    width: 20vw; */
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1 / 1;
+
+}
+
+
+.owl-carouselBRAND .owl-item {
+    display: flex;
+    justify-content: center;
+}
+
+.owl-carouselBRAND .owl-stage {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.slider-containerBRAND {
+    width: 95%;
+    margin: 0 auto;          /* dvojitá istota, že je na strede */
     overflow: hidden;
-    
+  }
+
+  /* 2) Rozostupy medzi jednotlivými položkami */
+.owl-carouselBRAND .itemBRAND {
+    /* ak to má byť presne 20px medzi obrázkami, dáme margin */
+    margin: 0 10px;
+    /* prípadne nastaviť aj šírku/nastavenie box-sizing */
+    box-sizing: border-box;
+}
+.customNavigation a{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.owl-nav, .owl-dots {
+    display: none !important;
 }
