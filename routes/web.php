@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfilController;
 
 
 Route::get('/', function () {
@@ -11,21 +13,22 @@ Route::get('/', function () {
 
 Route::get('/zoznam-produktov', function () {
     return view('zoznam_produktov');
-});
+})->name('produkty.index');
 
 
-Route::get('/login', function () {
-    return view('prihlasenie');
-})->name('login');
+
 
 Route::get('/register', function () {
     return view('registracia');
 });
 
-Route::get('/profil', function () {
-    return view('profil');
-})->name('profil');
 
+
+
+Route::get('/login', [LoginController::class, 'showSablona'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
 
+Route::get('/profil', [ProfilController::class, 'showProfile'])->name('profil')->middleware('auth');
+Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');

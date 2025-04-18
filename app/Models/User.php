@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Address;
 
 
-class User extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
     protected $fillable = ['meno', 'priezvisko', 'email', 'password', 'telephone', 'pohlavie', 'datum_narodenia', 'newsletter', 'registration_date'];
     protected $primaryKey = 'user_id';
     public $incrementing = true;

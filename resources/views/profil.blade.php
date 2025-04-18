@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Stranka</title>
 
     <!-- stylesheets -->
@@ -32,7 +34,7 @@
 
                 <h1>Môj účet</h1>
                 <a href="admin_dash_login.blade.php" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
-                <a id="logout_btn">Odhlásiť sa</a>
+                <a id="logout_btn" data-logout-url="{{ route('logout') }}">Odhlásiť sa</a>
             </div>
             <hr class="hr_divider">
         </section>
@@ -46,11 +48,11 @@
                             <h1>Osobné informácie</h1>
 
                             <ul class="info_ul">
-                                <li>Meno Priezvisko</li>
-                                <li>E-mailová adresa</li>
-                                <li>Telefónne číslo</li>
-                                <li>Pohlavie</li>
-                                <li>Dátum narodenia</li>
+                                <li>{{ $user->meno }} {{ $user->priezvisko }}</li>
+                                <li>{{ $user->email }}</li>
+                                <li>{{ $user->telephone }}</li>
+                                <li>{{ $user->pohlavie }}</li>
+                                <li>{{ $user->datum_narodenia }}</li>
                             </ul>
                         </section>
 
@@ -58,30 +60,55 @@
                             <h1>Personalizované údaje</h1>
 
                             <ul class="info_ul">
-                                <li>Výška: 170 cm</li>
-                                <li>Hmotnosť: 90 kg</li>
-                                <li>Veľkosť topánok: 43</li>
-                                <li>Veľkosť oblečenia: M</li>
-                                <li>Značka: Adidas</li>
-                                <li>Tiktok: @tiktokprofil</li>
-                                <li>IG: @instagramprofil</li>
+                                <li>Výška: {{ $user->personalizacia->vyska }} cm</li>
+                                <li>Hmotnosť: {{ $user->personalizacia->hmotnost }} kg</li>
+                                <li>Veľkosť topánok: {{ $user->personalizacia->velkost_topanok }}</li>
+                                <li>Značka: {{ $user->personalizacia->znacka }}</li>
                             </ul>
 
                         </section>
                     </section>
 
                     <section class="adresa_dorucenia">
-                        <h1>Adresa doručenia</h1>
+                        <section class="adresa_shipping">
+                            <h1>Adresa doručenia</h1>
 
-                        <ul class="info_ul">
-                            <li>Ulica:</li>
-                            <li>Číslo domu:</li>
-                            <li>Mesto:</li>
-                            <li>PSČ:</li>
-                            <li>Krajina:</li>
-                            <li>Dátum narodenia</li>
-                        </ul>
+                            <ul class="info_ul">
+                                @foreach($user->address as $address)
+                                    @if($address->address_type === 'shipping')
+                                        <li>Ulica: {{ $address->ulica }}</li>
+                                        <li>Číslo domu: {{ $address->cisloDomu }}</li>
+                                        <li>Mesto: {{ $address->mesto }}</li>
+                                        <li>PSČ: {{ $address->psc }}</li>
+                                        <li>Krajina: {{ $address->krajina }}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </section>
+
+
+                        <section class="adresa_billing">
+                            <h1>Adresa fakturácie</h1>
+
+                            <ul class="info_ul">
+                                @foreach($user->address as $address)
+                                    @if($address->address_type === 'shipping')
+                                        <li>Ulica: {{ $address->ulica }}</li>
+                                        <li>Číslo domu: {{ $address->cisloDomu }}</li>
+                                        <li>Mesto: {{ $address->mesto }}</li>
+                                        <li>PSČ: {{ $address->psc }}</li>
+                                        <li>Krajina: {{ $address->krajina }}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </section>
+
+
                     </section>
+
+
+
+
                 </div>
 
                 <div class="newsletter_objednavky">

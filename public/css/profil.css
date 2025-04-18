@@ -38,7 +38,7 @@
 .osobne_udaje_pers, .adresa_dorucenia {
 	outline: 1px solid black;
 	width: calc((100% - 50px)/2);
-	height: 550px;
+	height: 500px;
 	min-width: 400px;
 }
 
@@ -66,12 +66,13 @@
 
 
 /* spoločná sekcia pre tie 2 sekcie */
-.osobne_udaje_pers {
+.osobne_udaje_pers, .adresa_dorucenia {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	gap: 20px;
+
 }
+
 
 
 /* všetky sekcie v tomto budú odsadené a vycentrované */
@@ -80,7 +81,15 @@
 	margin-top: 30px;
 	padding-bottom: 15px;
 	justify-content: center;
+    height: 50%;
 }
+
+.adresa_dorucenia section {
+    height: 50%;
+}
+
+
+
 
 
 /* vlastné odsadenie h1 a ul, čiže všetko vnútro */

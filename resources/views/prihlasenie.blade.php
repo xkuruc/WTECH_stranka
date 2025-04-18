@@ -31,7 +31,8 @@
                 <div class="option_registracia"> <a href="{{ url('/register') }}">Registrácia </a> </div>
             </div>
             <div>
-                <form class="login_placeholder" onsubmit="window.location.href = '{{ url('/profil') }}'; return false;">
+                <form class="login_placeholder"  method="POST">
+                    @csrf
                     <input class="login_input" type="email" name="email" placeholder="E-mail*" required/>
                     <input class="login_input" type="password" name="password" placeholder="Heslo*" required />
                     <button class="login_button" type="submit">PRIHLÁSIŤ SA </button>
