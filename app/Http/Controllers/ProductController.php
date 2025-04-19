@@ -13,6 +13,10 @@ class ProductController extends Controller
     {
         //$products = Product::paginate(10);
         $products = Product::with('images')->paginate(10);
+        $discountedImages  = $products->where('discount', '>', 0)
+                                  ->pluck('images')
+                                  ->flatten();
+        
         
         return view('zoznam_produktov', compact('products')); // Odovzdanie do nového view
     }
@@ -23,7 +27,10 @@ class ProductController extends Controller
         // $product->load('images');
         $product->load(['images', 'category']);
 
+        $discountedImages  = Product::with('images')->get()->where('discount', '>', 0)
+                                  ->pluck('images')
+                                  ->flatten();
         // Vrátime view 'polozka_produktu' s atribútom $product
-        return view('polozka_produktu', compact('product'));
+        return view('polozka_produktu', compact('product', 'discountedImages'));
     }
 }

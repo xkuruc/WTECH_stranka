@@ -113,6 +113,74 @@
         </section>
 
         {{-- Sekcie so súvisiacimi kategóriami a slidermi ponechaj, stačí ich vložiť odtiaľ, kde máš statický HTML --}}
+        <section class="suvisiacie_kategorie_section">
+            <div class="suvisiacie_kategorie_container">
+                <div class="label_container">
+                    <h2>SÚVISIACIE KATEGÓRIE A ZNAČKY</h2>
+                </div>
+                <div class="category_container">
+                    <div class="category_container_element">
+                        <h1 class="category_label">Top kategórie </h1>
+                        <div class="category_container_element_kategorie">
+                            <a>Tenisky</a>
+                            <a>Pánske tenisky</a>
+                            <a>Air Jordan</a>
+                            <a>Pánske livestyle tenisky</a>
+                        </div>
+
+                    </div>
+
+                    <div class="category_container_element">
+                        <h1 class="category_label">Top značky </h1>
+                        <div class="category_container_element_znacky">
+                            <div class="category_container_element_znacky_item">
+                                <a>Jordan</a>
+                                <a>Nike</a>
+                                <a>Adidas</a>
+                                <a>Vans</a>
+                            </div>
+                            <div class="category_container_element_znacky_item">
+                                <a>Jordan</a>
+                                <a>Nike</a>
+                                <a>Adidas</a>
+                                <a>Vans</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="product_sliders">
+            <div class="label"> Zlavy</div>
+            <section class="product_slider">
+                <div class="slider-container">
+                    <div class="owl-carousel owl-carouselBRATU ">
+                    @foreach($discountedImages as $img)
+                        
+                            <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">
+                        
+                    @endforeach
+                    </div>
+                </div>
+            </section>
+
+            <div class="label"> Naposledy pozreté</div>
+            <section class="product_slider">
+                <div class="slider-container">
+                    
+                    <div class="owl-carousel owl-carouselBRATU ">
+                        <div class="itemBRATU">1</div>
+                        <div class="itemBRATU">2</div>
+                        <div class="itemBRATU">3</div>
+                        <div class="itemBRATU">4</div>
+                        <div class="itemBRATU">5</div>
+                        <div class="itemBRATU">6</div>
+                    </div>
+                </div>
+            </section>
+        </section>
     </main>
     
     <!-- <main>
