@@ -22,4 +22,8 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function category()
+    {   
+        return $this->belongsTo(Category::class);       // :contentReference[oaicite:2]{index=2}
+    }
 }

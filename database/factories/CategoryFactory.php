@@ -21,9 +21,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $moznosti = ['Športové', 'štýlové', 'Zimné', 'Jarné', 'Celorocne'];
         return [
             // Napríklad jednoslovný názov kategórie
-            'name' => $this->faker->word(),
+            'name' => $this->faker->randomElement($moznosti),
             // Voliteľný popis kategórie
             'description' => $this->faker->sentence(),
         ];

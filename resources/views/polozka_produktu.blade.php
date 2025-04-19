@@ -105,7 +105,7 @@
                             Farba: <span class="specified">{{ $product->color }}</span>
                         </div>
                         <div class="typ_produktu">
-                            Typ produktu: <span class="specified">{{ $product->type }}</span>
+                            Typ produktu: <span class="specified">{{ $product->category->name }}</span>  {{-- :contentReference[oaicite:3]{index=3} --}}
                         </div>
                     </div>
                 </div>

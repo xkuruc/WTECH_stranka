@@ -16,11 +16,12 @@ class ProductController extends Controller
         
         return view('zoznam_produktov', compact('products')); // Odovzdanie do nového view
     }
-    
+
     public function show(Product $product)
     {
         // Eager‑load vzťahy, napr. galériu obrázkov
-        $product->load('images');
+        // $product->load('images');
+        $product->load(['images', 'category']);
 
         // Vrátime view 'polozka_produktu' s atribútom $product
         return view('polozka_produktu', compact('product'));
