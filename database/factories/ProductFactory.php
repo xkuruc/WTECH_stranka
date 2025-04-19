@@ -23,12 +23,12 @@ class ProductFactory extends Factory
     {
         // Zoznam povolených obrázkov
         $images = [
-            'public/images/sample_topanka.jpg',
-            'public/images/sample_topanka2.jpg',
-            'public/images/sample_topanka3.jpg',
-            'public/images/sample_topanka4.jpg',
-            'public/images/sample_topanka5.jpg',
-            'public/images/sample_topanka6.jpg'
+            'sample_topanka.jpg',
+            'sample_topanka2.jpg',
+            'sample_topanka3.jpg',
+            'sample_topanka4.jpg',
+            'sample_topanka5.jpg',
+            'sample_topanka6.jpg'
         ];
         $nazvy = [
             'Nike Stefan janoski',
@@ -50,7 +50,7 @@ class ProductFactory extends Factory
             'stock_quantity' => $this->faker->numberBetween(0, 100),             // náhodný počet kusov na sklade :contentReference[oaicite:9]{index=9}
             'brand'          => $this->faker->company(),                         // názov firmy ako značka produktu :contentReference[oaicite:10]{index=10}
             // Tu vyberieme obrázok zo zoznamu
-            // 'image_path'     => $this->faker->randomElement($images),
+            'main_image'     => $this->faker->randomElement($images),
         ];
     }
 }

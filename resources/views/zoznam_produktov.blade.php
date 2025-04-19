@@ -260,8 +260,7 @@
                     @foreach($products as $product)                             {{-- Blade foreach slučka :contentReference[oaicite:0]{index=0} --}}
                         <article class="product_item">
                             <div class="item_img">
-                                <img src="{{ asset('storage/' . ($product->image_path ?? 'images/default.jpg')) }}"
-                                    alt="{{ $product->name }}">
+                                <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
                             </div>
                             <div class="product_info">
                                 <p>{{ $product->name }}</p>
@@ -273,11 +272,54 @@
                     @if($products->isEmpty())
                         <p>Žiadne produkty na zobrazenie.</p>
                     @endif
+                    
+                    {{-- PAGINÁCIA --}}
+                    <!-- <div class="mt-6">
+                        {{ $products->links() }}
+                    </div> -->
             </div>
+            {{-- Tvoja vlastna paginacia --}}
+            <nav class="page_number_list">
+                {{-- Predchadzajuca stranka --}}
+                @if($products->onFirstPage())
+                    <button id="prev_page_btn" disabled>
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Predchádzajúca">
+                    </button>
+                @else
+                    <button id="prev_page_btn"
+                            onclick="location.href='{{ $products->previousPageUrl() }}'">
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Predchádzajúca">
+                    </button>
+                @endif
+
+                <div id="page_list">
+                    {{-- Dynamicky generovane cisla stranok --}}
+                    @for ($page = 1; $page <= $products->lastPage(); $page++)
+                        <button class="page_number {{ $page == $products->currentPage() ? 'active' : '' }}"
+                                onclick="location.href='{{ $products->url($page) }}'">
+                            {{ $page }}
+                        </button>
+                    @endfor
+                </div>
+
+                {{-- dalsia stranka --}}
+                @if($products->hasMorePages())
+                    <button id="next_page_btn"
+                            onclick="location.href='{{ $products->nextPageUrl() }}'">
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Ďalšia">
+                    </button>
+                @else
+                    <button id="next_page_btn" disabled>
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Ďalšia">
+                    </button>
+                @endif
+            </nav>
+
+
 
 
             <!-- stránkovanie -->
-            <nav class="page_number_list">
+            <!-- <nav class="page_number_list">
                 <button id="prev_page_btn"><img src="./icons/filter_sipka.svg"></button>
                 <div id="page_list">
                     <button class="page_number active" id="page1">1</button>
@@ -286,7 +328,7 @@
                     <button class="page_number" id="page4">4</button>
                 </div>
                 <button id="next_page_btn"><img src="./icons/filter_sipka.svg" alt=""></button>
-            </nav>
+            </nav> -->
         </section>
 
         <!-- filter overlay -->

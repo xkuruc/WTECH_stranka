@@ -114,6 +114,8 @@ return new class extends Migration
             $table->unsignedInteger('stock_quantity')->default(0);   // Počet kusov na sklade
             $table->string('brand')->nullable();  // Značka produktu (voliteľné)
             $table->timestamps();  // timestampy created_at a updated_at
+            $table->text('main_image')->nullable();
+
         });
 
     }
