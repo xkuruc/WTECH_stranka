@@ -11,8 +11,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
-        // $products = Product::all();
+        //$products = Product::paginate(10);
+        $products = Product::with('images')->paginate(10);
+        
         return view('zoznam_produktov', compact('products')); // Odovzdanie do nového view
+    }
+    
+    public function show(Product $product)
+    {
+        // Eager‑load vzťahy, napr. galériu obrázkov
+        $product->load('images');
+
+        // Vrátime view 'polozka_produktu' s atribútom $product
+        return view('polozka_produktu', compact('product'));
     }
 }

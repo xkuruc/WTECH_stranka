@@ -26,8 +26,96 @@
         @include('components.kosik_sidebar')
     </header>
 
-
     <main>
+        <section class="product_main_info">
+            <div class="product_main_info_container">
+                <div class="product_images">
+                    <div class="product_images_kontajner">
+
+                        {{-- Veľké obrázky --}}
+                        <div class="big_images" id="sliding_container">
+                            @foreach($product->images as $img)
+                                <div class="big_img {{ $loop->first ? 'selected' : '' }}"
+                                     data-img-id="{{ $loop->iteration }}">
+                                    <img draggable="false"
+                                         src="{{ asset('images/'. $product->main_image) }}"
+                                         alt="{{ $product->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+
+                        {{-- Mini obrázky --}}
+                        <div class="small_images" id="small_slider">
+                            @foreach($product->images as $img)
+                                <div class="small_img {{ $loop->first ? 'selected' : '' }}"
+                                     data-img-id="{{ $loop->iteration }}">
+                                    <img src="{{ asset('images/'.$img->image_path) }}"
+                                         alt="{{ $product->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="product_information">
+                    <h1 class="product_name">{{ $product->name }}</h1>
+                    <div class="product_brand">
+                        Značka: <span class="specified">{{ $product->brand }}</span>
+                    </div>
+                    <div class="cena">
+                        <span class="specified">{{ number_format($product->price,2) }}</span> €
+                    </div>
+
+                    
+                    <form class="form_div" action="" method="POST">
+                        @csrf
+                        <select id="size" name="size" class="velkost_input" required>
+                            <option value="" disabled selected>Veľkosť (US)</option>
+                            @foreach($product->availableSizes() as $size)
+                                <option value="{{ $size }}">{{ $size }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="pridat_do_kosika_button">
+                            Pridať do košíka
+                        </button>
+                    </form>
+
+                    <div class="odkaz">
+                        <a href="">
+                            Potrebujes poradit velkost? Klikni sem
+                        </a>
+                    </div>
+
+                    <div class="avaibility">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="specified">
+                            {{ $product->in_stock ? 'Skladom Online' : 'Momentálne vypredané' }}
+                        </span>
+                    </div>
+
+                    <div class="other_information">
+                        <div class="SKU">
+                            SKU: <span class="specified">{{ $product->SKU }}</span>
+                        </div>
+                        <div class="pohlavie">
+                            Pohlavie: <span class="specified">{{ $product->gender }}</span>
+                        </div>
+                        <div class="farba">
+                            Farba: <span class="specified">{{ $product->color }}</span>
+                        </div>
+                        <div class="typ_produktu">
+                            Typ produktu: <span class="specified">{{ $product->type }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- Sekcie so súvisiacimi kategóriami a slidermi ponechaj, stačí ich vložiť odtiaľ, kde máš statický HTML --}}
+    </main>
+    
+    <!-- <main>
         <section class="product_main_info">
             <div class="product_main_info_container">
                 <div class="product_images">
@@ -164,7 +252,6 @@
             <div class="label"> Zlavy</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU ">
                         <div class="itemBRATU">1</div>
                         <div class="itemBRATU">2</div>
@@ -179,7 +266,7 @@
             <div class="label"> Naposledy pozreté</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
+                    
                     <div class="owl-carousel owl-carouselBRATU ">
                         <div class="itemBRATU">1</div>
                         <div class="itemBRATU">2</div>
@@ -191,7 +278,7 @@
                 </div>
             </section>
         </section>
-    </main>
+    </main> -->
 
     <!-- footer -->
     @include('components.footer_newsletter')

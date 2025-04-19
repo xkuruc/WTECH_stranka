@@ -25,6 +25,11 @@ class Product extends Model
         'supplier_id',
         'stock_quantity',
         'brand',
+
+        'in_stock',    // boolean (na sklade / vypredané)
+        'gender',      // string (napr. 'Pánske', 'Dámske', 'Unisex')
+        'color',       // string (napr. 'Biela', 'Čierna'...)
+        'type',        // string (napr. 'Tenisky', 'Tričko'...)
     ];  // :contentReference[oaicite:0]{index=0}
 
     /**
@@ -36,6 +41,7 @@ class Product extends Model
         'price'          => 'decimal:2',
         'discount'       => 'decimal:2',
         'stock_quantity' => 'integer',
+        'in_stock'       => 'boolean',
     ];  // :contentReference[oaicite:1]{index=1}
 
     /**
@@ -53,4 +59,14 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class);
     }  // :contentReference[oaicite:3]{index=3}
+    
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+    public function availableSizes(): array
+    {
+        // Tu si zadefinuj veľkosti podľa potrieb:
+        return ['6', '7', '8', '9', '10', '11'];
+    }
 }

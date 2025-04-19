@@ -34,5 +34,7 @@ Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])-
 Route::get('/zoznam-produktov', [ProductController::class, 'index'])
      ->name('products.index');
 
+Route::get('/polozka-produktu/{product}', [ProductController::class, 'show'])->name('products.show');
+
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');

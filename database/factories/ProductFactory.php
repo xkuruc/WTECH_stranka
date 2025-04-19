@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ProductImage;
 
 class ProductFactory extends Factory
 {
@@ -39,6 +40,9 @@ class ProductFactory extends Factory
             'Jorda 1 HI',
             'Jorda 1 Lo'
         ];
+        $genders = ['Pánske', 'Dámske', 'Unisex'];
+        $colors  = ['Biela', 'Čierna', 'Červená', 'Modrá', 'Zelená'];
+        $types   = ['Tenisky', 'Tričko', 'Mikina', 'Džínsová bunda', 'Šaty'];
         return [
             'name'           => $this->faker->randomElement($nazvy),                            // náhodné slovo :contentReference[oaicite:2]{index=2}
             'description'    => $this->faker->sentence(),                        // náhodná veta :contentReference[oaicite:3]{index=3}
@@ -49,8 +53,23 @@ class ProductFactory extends Factory
             'supplier_id'    => \App\Models\Supplier::factory(),                 // vytvorí aj dodávateľa cez jeho továrničku :contentReference[oaicite:8]{index=8}
             'stock_quantity' => $this->faker->numberBetween(0, 100),             // náhodný počet kusov na sklade :contentReference[oaicite:9]{index=9}
             'brand'          => $this->faker->company(),                         // názov firmy ako značka produktu :contentReference[oaicite:10]{index=10}
+            
             // Tu vyberieme obrázok zo zoznamu
             'main_image'     => $this->faker->randomElement($images),
+
+            'in_stock'       => $this->faker->boolean(80),                       // 80 % šanca, že je na sklade
+            'gender'         => $this->faker->randomElement($genders),          // náhodný gender
+            'color'          => $this->faker->randomElement($colors),           // náhodná farba
+            'type'           => $this->faker->randomElement($types),            // náhodný typ produktu
         ];
+    }
+    public function configure()
+    {
+        return $this->afterCreating(function (Product $product) {
+            // pre každý produkt vytvor 3–5 obrázkov
+            ProductImage::factory()
+                ->count(rand(3,5))
+                ->create(['product_id' => $product->id]);
+        });
     }
 }

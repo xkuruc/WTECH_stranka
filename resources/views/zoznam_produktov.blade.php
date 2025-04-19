@@ -258,6 +258,7 @@
                 {{-- resources/views/zoznam_produktov.blade.php --}}
                 
                     @foreach($products as $product)                             {{-- Blade foreach slučka :contentReference[oaicite:0]{index=0} --}}
+                    <a href="{{ route('products.show', $product) }}" class="product_link">
                         <article class="product_item">
                             <div class="item_img">
                                 <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
@@ -267,17 +268,16 @@
                                 <p><strong>{{ number_format($product->price, 2) }} €</strong></p>
                             </div>
                         </article>
+                    </a>
                     @endforeach
 
                     @if($products->isEmpty())
                         <p>Žiadne produkty na zobrazenie.</p>
                     @endif
                     
-                    {{-- PAGINÁCIA --}}
-                    <!-- <div class="mt-6">
-                        {{ $products->links() }}
-                    </div> -->
+                   
             </div>
+            
             {{-- Tvoja vlastna paginacia --}}
             <nav class="page_number_list">
                 {{-- Predchadzajuca stranka --}}

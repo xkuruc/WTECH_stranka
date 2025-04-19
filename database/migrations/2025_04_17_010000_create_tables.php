@@ -115,6 +115,20 @@ return new class extends Migration
             $table->string('brand')->nullable();  // Značka produktu (voliteľné)
             $table->timestamps();  // timestampy created_at a updated_at
             $table->text('main_image')->nullable();
+            $table->boolean('in_stock')->default(true);
+            $table->string('gender')->nullable();
+            $table->string('color')->nullable();
+            $table->string('type')->nullable();
+
+        });
+        Schema::create('product_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')
+                  ->constrained()           // references 'id' on 'products'
+                  ->onDelete('cascade');
+            // cesta k obrázku
+            $table->string('image_path');
+            $table->timestamps();
 
         });
 
