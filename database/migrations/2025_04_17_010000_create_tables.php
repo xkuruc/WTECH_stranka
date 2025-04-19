@@ -73,126 +73,49 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Products
-        Schema::create('products', function (Blueprint $table) {
-            $table->id('product_id');
+
+
+
+
+        // create_categories_table.php
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->decimal('discount', 5, 2)->default(0);
-            $table->string('SKU')->unique();
-
-            $table->enum('category', ['tenisky', 'kopacky', 'lopty']);
-
-            $table->integer('stock_quantity');
-            $table->string('brand')->nullable();
             $table->timestamps();
         });
 
-        // Product Images
-        Schema::create('product_images', function (Blueprint $table) {
-            $table->id('image_id');
-            $table->foreignId('product_id')->constrained('products', 'product_id')->onDelete('cascade');
-            $table->string('image_url');
-            $table->string('alt_text')->nullable();
+        // create_suppliers_table.php
+        Schema::create('suppliers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
 
-        // Product Reviews
-        Schema::create('product_reviews', function (Blueprint $table) {
-            $table->id('review_id');
-            $table->foreignId('product_id')->constrained('products', 'product_id')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->tinyInteger('rating');
-            $table->text('comment')->nullable();
-            $table->date('review_date');
-            $table->timestamps();
+
+        // Products
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();  // Primárny kľúč (bigIncrements od Laravel 7+ skrýva $table->bigIncrements('id'))
+            $table->string('name');  // Názov produktu
+            $table->text('description')->nullable();   // Podrobný popis (môže byť prázdny)
+            $table->decimal('price', 8, 2);  // Základná cena s dvoma desatinnými miestami
+            $table->decimal('discount', 8, 2)->default(0);  // Zľava (napr. 0.00 ak bez zľavy)
+            $table->string('SKU')->unique();  // Unikátny kód produktu
+            // Vzťahy na kategóriu a dodávateľa, s kaskádnym mazaním
+            $table->foreignId('category_id')
+                  ->constrained()
+                  ->onDelete('cascade');  
+            $table->foreignId('supplier_id')
+                  ->constrained()
+                  ->onDelete('cascade');  
+            $table->unsignedInteger('stock_quantity')->default(0);   // Počet kusov na sklade
+            $table->string('brand')->nullable();  // Značka produktu (voliteľné)
+            $table->timestamps();  // timestampy created_at a updated_at
         });
 
-        // Orders
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id('order_id');
-            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->foreignId('billing_address_id')->constrained('addresses', 'address_id');
-            $table->foreignId('shipping_address_id')->constrained('addresses', 'address_id');
-            $table->date('order_date');
-            $table->string('status');
-            $table->decimal('total_amount', 10, 2);
-            $table->text('notes')->nullable();
-            $table->timestamps();
-        });
-
-        // Order Items
-        Schema::create('order_items', function (Blueprint $table) {
-            $table->id('order_item_id');
-            $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products', 'product_id');
-            $table->integer('quantity');
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('discount', 5, 2)->default(0);
-            $table->timestamps();
-        });
-
-        // Payments
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id('payment_id');
-            $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->date('payment_date');
-            $table->decimal('amount', 10, 2);
-            $table->string('payment_method');
-            $table->string('transaction_id')->nullable();
-            $table->timestamps();
-        });
-
-        // Shippings
-        Schema::create('shippings', function (Blueprint $table) {
-            $table->id('shipping_id');
-            $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->string('shipping_method');
-            $table->date('shipped_date')->nullable();
-            $table->date('delivery_date')->nullable();
-            $table->string('tracking_number')->nullable();
-            $table->string('carrier')->nullable();
-            $table->timestamps();
-        });
-
-        // Promotions
-        Schema::create('promotions', function (Blueprint $table) {
-            $table->id('promotion_id');
-            $table->string('code')->unique();
-            $table->text('description')->nullable();
-            $table->decimal('discount_percentage', 5, 2);
-            $table->date('valid_from');
-            $table->date('valid_to');
-            $table->integer('usage_limit');
-            $table->timestamps();
-        });
-
-        // Promotion Usages
-        Schema::create('promotion_usages', function (Blueprint $table) {
-            $table->id('usage_id');
-            $table->foreignId('promotion_id')->constrained('promotions', 'promotion_id')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->timestamp('used_at');
-            $table->timestamps();
-        });
-
-        // Shopping Carts
-        Schema::create('shopping_carts', function (Blueprint $table) {
-            $table->id('cart_id');
-            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->timestamps();
-        });
-
-        // Cart Items
-        Schema::create('cart_items', function (Blueprint $table) {
-            $table->id('cart_item_id');
-            $table->foreignId('cart_id')->constrained('shopping_carts', 'cart_id')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products', 'product_id');
-            $table->integer('quantity');
-            $table->timestamps();
-        });
     }
 
     public function down(): void

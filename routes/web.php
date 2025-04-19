@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProductController;
 
 
 Route::get('/', function () {
@@ -30,5 +31,8 @@ Route::post('/register', [RegistrationController::class, 'store'])->name('regist
 
 Route::get('/profil', [ProfilController::class, 'showProfile'])->name('profil')->middleware('auth');
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+Route::get('/zoznam-produktov', [ProductController::class, 'index'])
+     ->name('products.index');
+
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');

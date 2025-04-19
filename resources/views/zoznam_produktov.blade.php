@@ -49,211 +49,232 @@
 
             <!-- obrázky a info/ceny k nim pochádzajú zo stránky https://www.thestreets.sk/ -->
             <!-- zoznam produktov -->
+            <!-- <div class="product_list">
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
+                        <p><strong>130,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka2.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
+                        <p><strong>135,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka3.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
+                        <p><strong>110,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka4.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Foamposite One "Black Volt"</p>
+                        <p><strong>230,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka5.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
+                        <p><strong>200,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka6.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>New Balance U327SKC</p>
+                        <p><strong>120,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
+                        <p><strong>130,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka2.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
+                        <p><strong>135,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka3.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
+                        <p><strong>110,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka4.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Foamposite One "Black Volt"</p>
+                        <p><strong>230,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka5.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
+                        <p><strong>200,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka6.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>New Balance U327SKC</p>
+                        <p><strong>120,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
+                        <p><strong>130,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka2.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
+                        <p><strong>135,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka3.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
+                        <p><strong>110,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka4.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Foamposite One "Black Volt"</p>
+                        <p><strong>230,00 €</strong></p>
+                    </div>
+                </article>
+
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka5.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
+                        <p><strong>200,00 €</strong></p>
+                    </div>
+                </article>
+
+                <article class="product_item">
+                    <div class="item_img">
+                        <img src="./images/sample_topanka6.jpg">
+                    </div>
+
+                    <div class="product_info">
+                        <p>New Balance U327SKC</p>
+                        <p><strong>120,00 €</strong></p>
+                    </div>
+                </article>
+            </div> -->
             <div class="product_list">
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
+                {{-- resources/views/zoznam_produktov.blade.php --}}
+                
+                    @foreach($products as $product)                             {{-- Blade foreach slučka :contentReference[oaicite:0]{index=0} --}}
+                        <article class="product_item">
+                            <div class="item_img">
+                                <img src="{{ asset('storage/' . ($product->image_path ?? 'images/default.jpg')) }}"
+                                    alt="{{ $product->name }}">
+                            </div>
+                            <div class="product_info">
+                                <p>{{ $product->name }}</p>
+                                <p><strong>{{ number_format($product->price, 2) }} €</strong></p>
+                            </div>
+                        </article>
+                    @endforeach
 
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka4.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Foamposite One "Black Volt"</p>
-                        <p><strong>230,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka5.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
-                        <p><strong>200,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka6.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>New Balance U327SKC</p>
-                        <p><strong>120,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka4.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Foamposite One "Black Volt"</p>
-                        <p><strong>230,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka5.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
-                        <p><strong>200,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka6.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>New Balance U327SKC</p>
-                        <p><strong>120,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka4.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Foamposite One "Black Volt"</p>
-                        <p><strong>230,00 €</strong></p>
-                    </div>
-                </article>
-
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka5.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
-                        <p><strong>200,00 €</strong></p>
-                    </div>
-                </article>
-
-                <article class="product_item">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka6.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>New Balance U327SKC</p>
-                        <p><strong>120,00 €</strong></p>
-                    </div>
-                </article>
+                    @if($products->isEmpty())
+                        <p>Žiadne produkty na zobrazenie.</p>
+                    @endif
             </div>
+
 
             <!-- stránkovanie -->
             <nav class="page_number_list">

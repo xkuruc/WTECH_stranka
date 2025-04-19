@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <a href="" class="logo_link"> <div class="logo main_category" >Logo </div> </a>
+    <a href="/" class="logo_link"> <div class="logo main_category" >Logo </div> </a>
     <div class="menu_icon" onclick="toggleSidebar()">
         <i class="fa-solid fa-bars"></i>
     </div>
