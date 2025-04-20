@@ -60,5 +60,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');
+Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+
+
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');

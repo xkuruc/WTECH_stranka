@@ -31,7 +31,6 @@
             <div class="product_main_info_container">
                 <div class="product_images">
                     <div class="product_images_kontajner">
-
                         {{-- Veľké obrázky --}}
                         <div class="big_images" id="sliding_container">
                             @foreach($product->images as $img)

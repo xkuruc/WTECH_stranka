@@ -90,4 +90,24 @@ class CartController extends Controller
             ->route('cart.index')
             ->with('success', 'Položka bola odstránená z košíka.');
     }
+    public function increment(CartItem $item)
+    {
+        $item->quantity++;
+        $item->save();
+
+        return back();
+    }
+
+    public function decrement(CartItem $item)
+    {
+        if ($item->quantity > 1) {
+            $item->quantity--;
+            $item->save();
+        } else {
+            // ak je množstvo 1 a klikneš –, položku úplne vymaž
+            $item->delete();
+        }
+
+        return back();
+    }
 }
