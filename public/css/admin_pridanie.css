@@ -17,11 +17,9 @@
 
 .file-input {
     display: none;
-}
-
-#largeImageInput1 {
     pointer-events: none;
 }
+
 
 .plusko {
 	display: flex;
@@ -36,8 +34,6 @@
 	width: 40px;
 	height: 40px;
 }
-
-
 
 
 .plusko::before,
@@ -64,6 +60,17 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+
+.small_img.add .plusko::before, .small_img.add .plusko::after {
+    background-color: #cccccc;
+}
+
+.big_img.add .plusko::before, .big_img.add .plusko::after {
+    background-color: #cccccc;
+}
+
+
 
 
 .produkt_information {

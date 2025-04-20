@@ -112,7 +112,7 @@
                 </ul>
             </li>
             <li class="main_category">
-                <a href="zoznam_produktov.blade.php">Doplnky</a>
+                <a href="{{ url('/zoznam-produktov') }}">Doplnky</a>
                 <ul class="dropdown-menu dropdown-menuDOPLNKY">
                     <div class="doplnky_placeholder">
                         <li class="inside_category">

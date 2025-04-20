@@ -25,9 +25,6 @@ class RegistrationController extends Controller
             'mesto' => 'required',
             'psc' => 'required',
             'krajina' => 'required',
-            'vyska' => 'required',
-            'hmotnost' => 'required',
-            'velkost_topanok' => 'required',
         ]);
 
         // Vytvorenie používateľa
@@ -68,7 +65,7 @@ class RegistrationController extends Controller
 
 
 
-        return redirect()->back()->with('success', 'Účet bol úspešne vytvorený!');
+        return redirect()->route('login')->with('success', 'Účet bol úspešne vytvorený!');
     }
 
 }

@@ -63,7 +63,7 @@
                     <input class="registration_input div2" type="text" name="ulica" placeholder="Ulica*" required/>
                     <input class="registration_input div3" type="text" name="cisloDomu" placeholder="Číslo domu*" required/>
                     <input class="registration_input div4" type="text" name="mesto" placeholder="Mesto*" required/>
-                    <input class="registration_input div5" type="text" name="psc" placeholder="PSČ*" required required pattern="[0-9]{5}" />
+                    <input class="registration_input div5" type="text" name="psc" placeholder="PSČ*" required pattern="[0-9]{5}" />
                     <select class="div6" name="krajina">
                         <option value="Slovensko">Slovensko</option>
                     </select>

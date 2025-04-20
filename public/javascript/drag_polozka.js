@@ -4,11 +4,11 @@ const small_img_container = document.querySelector('.small_images');
 let window_width = window.innerWidth;
 
 
-/* variables */
+/** VARIABLES **/
 let children;
 let children_len;
 let curr_big_selected;
-let first_img_id = 1;
+let first_img_id;
 let min_id;
 let max_id;
 let scroll_distance;
@@ -24,9 +24,14 @@ let isDown = false;
 let startX;
 let scrollLeft;
 let actual_scroll;
+
+/* pridanie súborov */
 let can_open_input = false;
+let add_img = false;
 
 
+
+/** FUNKCIE **/
 function scroll_init() { /* potrebujem na začiatok dať posledného childa */
     let child_to_move = null;
 
@@ -35,28 +40,61 @@ function scroll_init() { /* potrebujem na začiatok dať posledného childa */
     min_id = parseInt(small_img_container.firstElementChild.dataset.imgId);
     max_id = parseInt(small_img_container.lastElementChild.dataset.imgId);
     scroll_distance = sliding_container.clientWidth;
+    first_img_id = 1;
 
 
-    if (children_len == 2) {
+    if (children_len === 1) {
+        /* ten jeden prvok čo tam je */
+        const only_child = sliding_container.children[0];
+        only_child.classList.remove('selected');
+
+        /* 2 kópie prvku, majú triedu cloned */
+        const copy_prep = only_child.cloneNode(true);
+        copy_prep.classList.add('cloned');
+        const copy_append = copy_prep.cloneNode(true);
+
+
+        /* pridať kópiu pred a po */
+        sliding_container.prepend(copy_prep);
+        sliding_container.appendChild(copy_append);
+
+        /* posunúť o scroll_distance nech sme na tom 2. prvku */
+        sliding_container.scrollLeft = scroll_distance;
+
+        /* označíme selected prvok */
+        curr_big_selected = sliding_container.children[1]; /* bude selected ten prvý nenaklonovaný, čiže 3. v poradí */
+        curr_big_selected.classList.add('selected');
+    }
+    else if (children_len === 2) {
         /* sprav klona dvojky a jednotky */
 
         const elements = [...sliding_container.children]; //kópia všetkých detí -> 1,2
-        children[0].classList.remove('selected');
 
-        sliding_container.prepend(...elements.map(el => el.cloneNode(true))); /* pridanie klonov */
+
+        const clones = elements.map(el => {
+            const clone = el.cloneNode(true);
+            clone.classList.add('cloned');
+            clone.classList.remove('selected');
+            return clone;
+        });
+
+        sliding_container.prepend(...clones); /* pridanie klonov */
+
         sliding_container.scrollLeft = scroll_distance*2;
-
         curr_big_selected = sliding_container.children[2]; /* bude selected ten prvý nenaklonovaný, čiže 3. v poradí */
         curr_big_selected.classList.add('selected');
-
     }
-    else if (children_len > 2) {
+    else if (children_len > 2) { /* dám posledného na začiatok, big brain move */
         child_to_move = sliding_container.lastElementChild; // Získajte posledného potomka
+
         curr_big_selected = sliding_container.firstElementChild;
+        curr_big_selected.classList.add('selected');
+
         sliding_container.prepend(child_to_move);
         sliding_container.scrollLeft = scroll_distance;
-
     }
+
+    curr_big_selected.classList.remove('cloned');
 }
 
 
@@ -77,6 +115,7 @@ function get_next_child(currentElement, direction) {
 
 /* načíta ďalší prvok ak treba */
 function load_next(id_change, new_big_selected) {
+
     /* idem doľava a pridám začiatočný prvok na koniec */
     if (id_change === 1 && new_big_selected === sliding_container.lastElementChild) {
         const first_child = sliding_container.firstElementChild; //prvý child
@@ -90,7 +129,6 @@ function load_next(id_change, new_big_selected) {
     /* idem doprava a pridám posledný prvok na začiatok */
     if (id_change === -1 && new_big_selected === sliding_container.firstElementChild) {
         const lastChild = sliding_container.lastElementChild; //posledný child
-
 
         /* pridaj na začiatok posledného childa */
         sliding_container.prepend(lastChild);
@@ -137,7 +175,6 @@ function smoothScrollTo(element, targetPosition, duration = 250) {
 
 
 async function scroll_big(e, x_a) {
-
     if (!isDown) {
         return;
     }
@@ -148,8 +185,14 @@ async function scroll_big(e, x_a) {
     const diff = x - startX; //rozdiel miesta kde som ťukol prvý krát a posledný
 
 
-    if (Math.abs(diff) < 5){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
+    if (Math.abs(diff) === 0){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
         can_open_input = true;
+
+        /* ak som klikol na ten velký obrázok */
+        if (e.target.classList.contains('add')) {
+            add_img = true;
+        }
+
         return;
     }
 
@@ -233,8 +276,7 @@ async function scroll_big(e, x_a) {
 
 
 
-
-
+/** EVENTY **/
 window.addEventListener('resize', function() { /* keď sa zmenší obrazovka, tak nech sa to zarovná */
     scroll_distance = sliding_container.clientWidth;
     sliding_container.scrollLeft = Math.round(sliding_container.scrollLeft / scroll_distance) * scroll_distance;
@@ -282,8 +324,6 @@ small_slider.addEventListener("dragstart", (e) => {
 
 
 
-
-
 /* keď pohybujem, tak nech sa to ťahá */
 document.addEventListener("mousemove", (e) => {
     if (!isDown) return;
@@ -305,8 +345,6 @@ sliding_container.addEventListener("touchmove", (e) => {
 });
 
 
-
-
 /* pustenie myši a posunutie obrázkov veľkých */
 document.addEventListener("mouseup", async (e) => {
     x = e.pageX;
@@ -321,20 +359,18 @@ document.addEventListener("touchend", async (e) => {
 });
 
 
-
-
-
-
-
-
-
-
 /* ked kliknem na malé okienko */
 small_img_container.addEventListener('pointerdown', async (event) => {
     const target = event.target;
 
     /* ak som klikol na malé tlačitko */
     if (target.classList.contains('small_img')) {
+        if (target.classList.contains('add')) {
+            add_img = true;
+            return;
+        }
+
+
         /* čo je teraz označené a na čo som klikol */
         const clicked_id = parseInt(target.dataset.imgId);
         const current_selected = document.querySelector('.small_img.selected');
@@ -395,9 +431,7 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 });
 
 
-
-
-
+/** FUNGOVANIE **/
 /* ako to funguje? */
 /*
     vždy presuniem o jeden další prvok z konca/začiatku na začiatok/koniec
@@ -409,5 +443,5 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 */
 
 
-
+/* inicializácia */
 scroll_init();

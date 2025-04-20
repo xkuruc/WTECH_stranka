@@ -30,6 +30,7 @@ class AdminDashboardController
 
     public function admin_leave_dash(Request $request)
     {
+        session(['visited_admin_dashboard' => false]);
         return redirect('/profil'); // Presmeruje na domovskú stránku po odhlásení
     }
 
