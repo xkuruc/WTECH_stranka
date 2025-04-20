@@ -31,8 +31,10 @@ Route::post('/register', [RegistrationController::class, 'store'])->name('regist
 
 Route::get('/profil', [ProfilController::class, 'showProfile'])->name('profil')->middleware('auth');
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
-Route::get('/zoznam-produktov', [ProductController::class, 'index'])
-     ->name('products.index');
+Route::get('/zoznam-produktov', [ProductController::class, 'index'])->name('products.index');
+Route::get('/zoznam-produktov/cheapest', [ProductController::class, 'cheapest'])->name('products.cheapest');
+Route::get('/zoznam-produktov/rich', [ProductController::class, 'rich'])->name('products.rich');
+Route::get('/zoznam-produktov/latest', [ProductController::class, 'latest'])->name('products.latest');
 
 Route::get('/polozka-produktu/{product}', [ProductController::class, 'show'])->name('products.show');
 

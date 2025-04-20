@@ -33,4 +33,21 @@ class ProductController extends Controller
         // Vrátime view 'polozka_produktu' s atribútom $product
         return view('polozka_produktu', compact('product', 'discountedImages'));
     }
+     // 2) nová – vzostupne podľa ceny
+     public function cheapest()
+     {
+         $products = Product::orderBy('price', 'asc')->paginate(10);
+         return view('zoznam_produktov', compact('products'));
+     }
+     public function rich()
+     {
+         $products = Product::orderBy('price', 'desc')->paginate(10);
+         return view('zoznam_produktov', compact('products'));
+     }
+     public function latest()
+     {
+        $products = Product::orderBy('created_at', 'desc')->paginate(10);
+        return view('zoznam_produktov', compact('products'));
+     }
+
 }

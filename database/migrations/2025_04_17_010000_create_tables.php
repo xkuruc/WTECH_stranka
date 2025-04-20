@@ -119,8 +119,8 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('color')->nullable();
             $table->string('type')->nullable();
-
         });
+
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')

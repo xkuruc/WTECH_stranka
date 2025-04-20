@@ -38,11 +38,28 @@
             <!-- zoradiť podľa menučko -->
             <div class="orderby_menu">
                 <p>Zoradiť podľa: </p>
-                <select id="Najnovšie" name="ovocie">
-                  <option value="Najnovšie">Najnovšie</option>
-                  <option value="Najlacnejšie">Najlacnejšie</option>
-                  <option value="Najdrahšie">Najdrahšie</option>
-                  <option value="Najpredávanejšie">Najpredávanejšie</option>
+                <select id="sort" onchange="if (this.value) window.location.href = this.value">
+                <option value="" disabled hidden>— Vyber triedenie —</option>
+
+                <option 
+                    value="{{ route('products.latest') }}" 
+                    {{ request()->routeIs('products.latest') ? 'selected' : '' }}
+                >Najnovšie</option>
+
+                <option 
+                    value="{{ route('products.cheapest') }}" 
+                    {{ request()->routeIs('products.cheapest') ? 'selected' : '' }}
+                >Najlacnejšie</option>
+
+                <option 
+                    value="{{ route('products.rich') }}" 
+                    {{ request()->routeIs('products.rich') ? 'selected' : '' }}
+                >Najdrahšie</option>
+
+                <option 
+                    value="{{ route('products.latest') }}" 
+                    {{ request()->routeIs('products.popular') ? 'selected' : '' }}
+                >Najpredávanejšie</option>
                 </select>
             </div>
 
@@ -254,10 +271,12 @@
                     </div>
                 </article>
             </div> -->
+
             <div class="product_list">
                 {{-- resources/views/zoznam_produktov.blade.php --}}
                 
                     @foreach($products as $product)                             {{-- Blade foreach slučka :contentReference[oaicite:0]{index=0} --}}
+                    
                     <a href="{{ route('products.show', $product) }}" class="product_link">
                         <article class="product_item">
                             <div class="item_img">
@@ -274,8 +293,6 @@
                     @if($products->isEmpty())
                         <p>Žiadne produkty na zobrazenie.</p>
                     @endif
-                    
-                   
             </div>
             
             {{-- Tvoja vlastna paginacia --}}

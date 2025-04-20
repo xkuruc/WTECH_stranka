@@ -61,6 +61,8 @@ class ProductFactory extends Factory
             'gender'         => $this->faker->randomElement($genders),          // náhodný gender
             'color'          => $this->faker->randomElement($colors),           // náhodná farba
             'type'           => $this->faker->randomElement($types),            // náhodný typ produktu
+            'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now'),
+            
         ];
     }
     public function configure()

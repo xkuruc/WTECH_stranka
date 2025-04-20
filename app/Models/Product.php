@@ -43,6 +43,8 @@ class Product extends Model
         'stock_quantity' => 'integer',
         'in_stock'       => 'boolean',
     ];  // :contentReference[oaicite:1]{index=1}
+    
+    public const UPDATED_AT = null;
 
     /**
      * Vzťah na kategóriu – každý produkt patrí do jednej kategórie.
@@ -69,4 +71,15 @@ class Product extends Model
         // Tu si zadefinuj veľkosti podľa potrieb:
         return ['6', '7', '8', '9', '10', '11'];
     }
+
+    // public static function sortedByPrice(?string $sort = null)
+    // {
+    //     $direction = $sort
+    //         ?? request()->get('sort', 'asc');
+
+    //     // whitelist (len asc/desc)
+    //     $direction = strtolower($direction) === 'desc' ? 'desc' : 'asc';
+
+    //     return static::orderBy('price', $direction)->get();
+    // }
 }
