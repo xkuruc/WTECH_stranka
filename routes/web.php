@@ -5,7 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\ProductSizeController;
 
 Route::get('/', function () {
     return view('index');
@@ -37,6 +37,17 @@ Route::get('/zoznam-produktov/rich', [ProductController::class, 'rich'])->name('
 Route::get('/zoznam-produktov/latest', [ProductController::class, 'latest'])->name('products.latest');
 
 Route::get('/polozka-produktu/{product}', [ProductController::class, 'show'])->name('products.show');
+
+Route::prefix('/polozka-produktu/{product}')->group(function(){
+    Route::get('sizes',       [ProductSizeController::class, 'index'])
+         ->name('products.sizes.index');
+
+    Route::post('sizes',      [ProductSizeController::class, 'store'])
+         ->name('products.sizes.store');
+
+    Route::delete('sizes/{productSize}', [ProductSizeController::class, 'destroy'])
+         ->name('products.sizes.destroy');
+});
 
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductSize;
 
 
 
@@ -48,6 +49,12 @@ class DatabaseSeeder extends Seeder
                     ->create([
                         'product_id' => $product->id,
                     ]);
+                ProductSize::factory()
+                    ->count(rand(2, 5))
+                    ->create([
+                        'product_id' => $product->id,
+                    ]);
+
             });
     }
 }

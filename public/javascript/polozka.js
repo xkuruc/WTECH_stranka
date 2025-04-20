@@ -1,12 +1,12 @@
 let select_size = document.getElementById("size");
 
 // tu by bol kod, co by zistil jake su dostupne velkosti, a tie by zobrazil
-for (let i = 3; i <= 12; i+=0.5) {
-    let option = document.createElement("option");
-    option.value = i;
-    option.textContent = i;
-    select_size.appendChild(option);
-}
+// for (let i = 3; i <= 12; i+=0.5) {
+//     let option = document.createElement("option");
+//     option.value = i;
+//     option.textContent = i;
+//     select_size.appendChild(option);
+// }
 
 
 
