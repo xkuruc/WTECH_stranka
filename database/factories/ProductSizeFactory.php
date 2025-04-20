@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\ProductSize;
@@ -10,11 +11,9 @@ class ProductSizeFactory extends Factory
 
     public function definition()
     {
-        $usSizes = [6, 7, 8, 9, 10, 11, 12, 13];
-
         return [
-            // product_id sa prepíše v create() vyššie
-            'us_velkost' => $this->faker->randomElement($usSizes),
+            'us_velkost' => $this->faker->randomFloat(2, 5, 12),  // napr. od 5.00 do 12.00
+            'pocet'      => $this->faker->numberBetween(0, 50),   // 0–50 kusov
         ];
     }
 }

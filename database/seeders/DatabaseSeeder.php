@@ -49,12 +49,14 @@ class DatabaseSeeder extends Seeder
                     ->create([
                         'product_id' => $product->id,
                     ]);
-                ProductSize::factory()
-                    ->count(rand(2, 5))
-                    ->create([
+                $velkosti = [5, 6, 7, 8, 9, 10, 11, 12];
+                foreach ($velkosti as $size) {
+                    ProductSize::factory()->create([
                         'product_id' => $product->id,
+                        'us_velkost' => $size,
+                        'pocet'      => rand(0, 2),
                     ]);
-
+                }
             });
     }
 }

@@ -79,7 +79,6 @@
                         <select id="size" name="size" class="velkost_input" required>
                             <option value="" disabled selected>Veľkosť (US)</option>
                             @foreach($product->availableSizes() as $size)
-                                <!-- <option value="{{ $size }}">{{ $size }}</option> -->
                                 @php
                                     // prevedieme na číselný typ a otestujeme zvyšok po delení 1
                                     $sizeLabel = fmod((float) $size, 1.0) === 0.0

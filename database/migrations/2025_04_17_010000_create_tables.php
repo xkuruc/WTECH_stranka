@@ -132,13 +132,24 @@ return new class extends Migration
 
         });
 
+        // Schema::create('product_sizes', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+        //     // US veľkosť
+        //     $table->decimal('us_velkost');
+        //     $table->decimal('pocet');
+
+        // });
         Schema::create('product_sizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            // US veľkosť
-            $table->decimal('us_velkost');
-            $table->decimal('pocet');
-
+            $table->foreignId('product_id')
+                  ->constrained('products')
+                  ->onDelete('cascade');
+            // US veľkosť (napr. 6.5, 7, 8.5...)
+            $table->decimal('us_velkost', 5, 2);
+            // Počet kusov v danej veľkosti
+            $table->unsignedInteger('pocet')->default(0);
+            $table->timestamps();
         });
 
     }

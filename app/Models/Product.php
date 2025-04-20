@@ -70,7 +70,13 @@ class Product extends Model
     
     public function productSizes()
     {
-        return $this->hasMany(\App\Models\ProductSize::class);
+        return $this->hasMany(ProductSize::class);
+    }
+
+    // (Voliteľne môžeš nechať aj sizes(), ak chceš obe aliasy)
+    public function sizes()
+    {
+        return $this->hasMany(ProductSize::class);
     }
     /**
      * Pole dostupných US veľkostí (napr. ["8","10","12"]).
@@ -78,11 +84,11 @@ class Product extends Model
     public function availableSizes(): array
     {
         return $this->productSizes()
-                    ->orderBy('us_velkost')    // ak chceš zoradiť číselne
-                    ->pluck('us_velkost')
-                    ->toArray();
+                    ->where('pocet', '>', 0)      // iba tie, čo majú viac ako 0 kusov
+                    ->orderBy('us_velkost')      // zoradiť podľa veľkosti
+                    ->pluck('us_velkost')        // vybrať len stĺpec us_velkost
+                    ->toArray();                 // vrátiť ako čisté pole
     }
-
     // public static function sortedByPrice(?string $sort = null)
     // {
     //     $direction = $sort
