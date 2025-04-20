@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Address;
+use Illuminate\Database\Eloquent\Relations\HasMany; 
 
 
 class User extends Authenticatable
@@ -50,9 +51,9 @@ class User extends Authenticatable
         return $this->hasOne(Personalizacia::class, 'user_id', 'user_id');
     }
 
-    public function cartItems()
+    public function cartItems(): HasMany
     {
-        return $this->hasMany(CartItem::class);
+        return $this->hasMany(CartItem::class, 'user_id', 'user_id');
     }
 }
 

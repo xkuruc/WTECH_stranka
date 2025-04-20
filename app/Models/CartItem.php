@@ -9,10 +9,11 @@ class CartItem extends Model
     public $timestamps = false;
     protected $fillable = ['user_id', 'product_id', 'quantity', 'size'];
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
+
 
     public function product()
     {
