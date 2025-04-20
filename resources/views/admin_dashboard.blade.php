@@ -84,7 +84,7 @@
 
                     <div class="sale_placeholder">-20%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -100,7 +100,7 @@
 
                     <div class="sale_placeholder">-30%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -116,7 +116,7 @@
 
                     <div class="sale_placeholder">-50%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -133,7 +133,7 @@
 
                     <div class="sale_placeholder">-10%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -150,7 +150,7 @@
 
                     <div class="sale_placeholder">-15%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -166,7 +166,7 @@
 
                     <div class="sale_placeholder">-80%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -182,7 +182,7 @@
 
                     <div class="sale_placeholder">-20%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -198,7 +198,7 @@
 
                     <div class="sale_placeholder">-30%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -214,7 +214,7 @@
 
                     <div class="sale_placeholder">-50%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -231,7 +231,7 @@
 
                     <div class="sale_placeholder">-10%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -248,7 +248,7 @@
 
                     <div class="sale_placeholder">-15%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -264,7 +264,7 @@
 
                     <div class="sale_placeholder">-80%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -280,7 +280,7 @@
 
                     <div class="sale_placeholder">-20%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -296,7 +296,7 @@
 
                     <div class="sale_placeholder">-30%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
 
@@ -312,7 +312,7 @@
 
                     <div class="sale_placeholder">-50%</div>
                     <button class="trash_can">
-                        <img src="./icons/kos_icon.svg">
+                        <img src="./icons/kos_icon.png">
                     </button>
                 </article>
             </div>

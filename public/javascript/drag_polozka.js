@@ -38,8 +38,10 @@ function scroll_init() { /* potrebujem na začiatok dať posledného childa */
     children = Array.from(sliding_container.children);
     children_len = children.length; /* koľko ich je, aby som ich vedel naklonovať */
     min_id = parseInt(small_img_container.firstElementChild.dataset.imgId);
-    max_id = parseInt(small_img_container.lastElementChild.dataset.imgId);
-    scroll_distance = sliding_container.clientWidth;
+    max_id = Math.max(...children.map(child => parseInt(child.dataset.imgId)));
+    scroll_distance = sliding_container.getBoundingClientRect().width;
+
+
     first_img_id = 1;
 
 
@@ -92,6 +94,7 @@ function scroll_init() { /* potrebujem na začiatok dať posledného childa */
 
         sliding_container.prepend(child_to_move);
         sliding_container.scrollLeft = scroll_distance;
+        console.log(child_to_move);
     }
 
     curr_big_selected.classList.remove('cloned');
@@ -100,8 +103,8 @@ function scroll_init() { /* potrebujem na začiatok dať posledného childa */
 
 
 /* vráti ďalší prvok v zozname detí */
-function get_next_child(currentElement, direction) {
-    children = Array.from(sliding_container.children);
+function get_next_child(container, currentElement, direction) {
+    children = Array.from(container.children);
     const currentIndex = children.indexOf(currentElement); // Nájdeme aktuálny index
 
     if (direction > 0) {
@@ -141,6 +144,8 @@ function load_next(id_change, new_big_selected) {
 function smoothScrollTo(element, targetPosition, duration = 250) {
     return new Promise((resolve) => {
         const start = element.scrollLeft; /* počiatočná pozícia */
+
+
         const distance = targetPosition - start; /* koľko musím prejsť */
         const startTime = performance.now(); /* počiatočný čas */
 
@@ -185,14 +190,13 @@ async function scroll_big(e, x_a) {
     const diff = x - startX; //rozdiel miesta kde som ťukol prvý krát a posledný
 
 
-    if (Math.abs(diff) === 0){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
+    if (Math.abs(diff) < 2){ /* ak som sa neposunul o viac ako 5px, tak sa nič nestane */
         can_open_input = true;
 
         /* ak som klikol na ten velký obrázok */
         if (e.target.classList.contains('add')) {
             add_img = true;
         }
-
         return;
     }
 
@@ -208,7 +212,7 @@ async function scroll_big(e, x_a) {
 
 
     /* nový prvok, ktorý sa má selektnut */
-    const new_big_selected = get_next_child(curr_big_selected,id_change);
+    const new_big_selected = get_next_child(sliding_container,curr_big_selected,id_change);
     let new_id = parseInt(new_big_selected.dataset.imgId);
     const new_selected = document.querySelector(`.small_img[data-img-id="${new_id}"]`);
 
@@ -230,13 +234,14 @@ async function scroll_big(e, x_a) {
 
     /* čekneme, či sa nezmenšilo okno */
     if (window.innerWidth != window_width) {
-        scroll_distance = sliding_container.clientWidth;
+        scroll_distance = sliding_container.getBoundingClientRect().width;;
         window_width = window.innerWidth;
     }
 
 
     /* posúvanie malého okna ak nie je vidno prvok */
     /* ide z prvého na koniec */
+    console.log("curr id ", curr_id, new_id, min_id, max_id);
     if (curr_id === min_id && new_id === max_id) {
         await smoothScrollTo(small_img_container, small_img_container.scrollWidth);
         first_img_id = max_id - 2;
@@ -258,7 +263,6 @@ async function scroll_big(e, x_a) {
     }
     /* ak idem naspäť */
     else if (new_id < first_img_id) {
-        console.log(small_img_container.scrollLeft);
         await smoothScrollTo(small_img_container, small_img_container.scrollLeft - (scroll_distance) - small_gap);
 
 
@@ -278,12 +282,19 @@ async function scroll_big(e, x_a) {
 
 /** EVENTY **/
 window.addEventListener('resize', function() { /* keď sa zmenší obrazovka, tak nech sa to zarovná */
-    scroll_distance = sliding_container.clientWidth;
-    sliding_container.scrollLeft = Math.round(sliding_container.scrollLeft / scroll_distance) * scroll_distance;
+    /* nový scroll distance */
+    scroll_distance = sliding_container.getBoundingClientRect().width;
+
+    /* posuniem sa pomocou nového scroll_distance, chcem sa dostať tam kde som */
+    children = Array.from(sliding_container.children);
+    const big_index = children.indexOf(curr_big_selected); /* koľkí prvok to je v poli */
+    sliding_container.scrollLeft = big_index * scroll_distance;
 
     /* pre malé obrázky */
-    const add_gap = (small_img_container.scrollLeft === 0) ? 0 : 2*small_gap;
+    const add_gap = (small_img_container.scrollLeft === 0) ? 0 : 2 * small_gap;
     small_img_container.scrollLeft = Math.round((small_img_container.scrollLeft) / scroll_distance) * scroll_distance + add_gap;
+
+    console.log(big_index);
 });
 
 
@@ -354,6 +365,7 @@ document.addEventListener("mouseup", async (e) => {
 document.addEventListener("touchend", async (e) => {
     const toucha = e.changedTouches[0].pageX;
 
+
     e.preventDefault();
     scroll_big(e, toucha);
 });
@@ -387,7 +399,7 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 
         /* čekneme, či sa nezmenšilo okno */
         if (window.innerWidth != window_width) {
-            scroll_distance = sliding_container.clientWidth;
+            scroll_distance = sliding_container.getBoundingClientRect().width;
             window_width = window.innerWidth;
         }
 
@@ -408,7 +420,7 @@ small_img_container.addEventListener('pointerdown', async (event) => {
 
             /* nové prvky, ktoré treba označiť a ich označenie*/
             const new_selected = document.querySelector(`.small_img[data-img-id="${curr_id}"]`);
-            const new_big_selected = get_next_child(curr_big_selected,id_change);
+            const new_big_selected = get_next_child(sliding_container,curr_big_selected,id_change);
             new_selected.classList.add('selected');
             new_big_selected.classList.add('selected');
 

@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="{{ asset('css/newsletter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/polozka.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/product_slider.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/profile_intro.css') }}">
     <link rel="stylesheet" href="{{ asset('css/kosik_sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/polozka_produktu.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('css/product_item.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin_pridanie.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/registracia.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 </head>
@@ -42,42 +44,14 @@
                                 <input type="file" class="file-input" accept="image/*" multiple>
                                 <img>
                                 <span class="plusko"></span>
+                                <button class="trash_can_right">
+                                    <img src="./icons/kos_icon.png">
+                                </button>
                             </div>
 
-                            <!--
-                           <div class="big_img" data-img-id=2>
-                               <input type="file" class="file-input" accept="image/*">
-                               <img>
-                               <span class="plusko"></span>
-                           </div>
 
 
 
-                           <div class="big_img" data-img-id=3>
-                               <input type="file" class="file-input" accept="image/*">
-                               <img>
-                               <span class="plusko"></span>
-                           </div>
-
-                           <div class="big_img" data-img-id=4>
-                               <input type="file" class="file-input" accept="image/*">
-                               <img>
-                               <span class="plusko"></span>
-                           </div>
-
-                           <div class="big_img" data-img-id=5>
-                               <input type="file" class="file-input" accept="image/*">
-                               <img>
-                               <span class="plusko"></span>
-                           </div>
-
-                           <div class="big_img" data-img-id=6>
-                               <input type="file" class="file-input" accept="image/*">
-                               <img>
-                               <span class="plusko"></span>
-                           </div>
-
-                           -->
                         </div>
 
 
@@ -90,31 +64,7 @@
                                 <span class="plusko"></span>
                             </div>
 
-                            <!--
-                            <div class="small_img" data-img-id=3>
-                                <input type="file" class="file-input" accept="image/*">
-                                <img>
-                                <span class="plusko"></span>
-                            </div>
 
-                            <div class="small_img" data-img-id=4>
-                                <input type="file" class="file-input" accept="image/*">
-                                <img>
-                                <span class="plusko"></span>
-                            </div>
-
-                            <div class="small_img" data-img-id=5>
-                                <input type="file" class="file-input" accept="image/*">
-                                <img>
-                                <span class="plusko"></span>
-                            </div>
-
-                            <div class="small_img" data-img-id=6>
-                                <input type="file" class="file-input" accept="image/*">
-                                <img>
-                                <span class="plusko"></span>
-                            </div>
-                            -->
                         </div>
                     </div>
                 </div>

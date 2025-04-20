@@ -74,16 +74,17 @@
 
 
 .produkt_information {
-	max-width: 500px;
+	max-width: 100%;
 	min-width: 320px;
-	width: auto;
+	width: 480px;
 
-	height: 700px;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	margin-top: 40px;
+    box-sizing: border-box;
+	padding-top: 19px;
 	gap: 10px;
 }
 
@@ -98,7 +99,7 @@
 	flex-direction: column;
 	gap: 5px;
 	justify-content: left;
-	width: 80%;
+	width: 100%;
 	transition: 0.2s width ease-in-out;
 	height: auto;
 }
@@ -114,8 +115,9 @@
 	color: #404040;
 
 	box-sizing: border-box;
-
 }
+
+
 
 .input_edit_popis {
 	height: 90px;
@@ -127,7 +129,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-	width: 80%;
+	width: 100%;
 	transition: 0.2s width ease-in-out;
 }
 
@@ -150,7 +152,7 @@
 .joined_input {
 	display: flex;
 	justify-content: space-between;
-	width: 80%;
+	width: 100%;
 	transition: 0.2s width ease-in-out;
 }
 
@@ -163,12 +165,13 @@
 	padding-top: 0px;
 	padding-left: 10px;
 	color: #404040;
+    font-size: 15px;
 }
 
 
 .button_pridat {
 	display: flex;
-	width: 80%;
+	width: 100%;
 	height: 40px;
 	border: 1px solid #d9d9d9;
 	border-radius: 0px;
@@ -187,47 +190,93 @@
 }
 
 
+.trash_can_right {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+
+    z-index: 2;
+    width: 45px;
+}
+
+
+.trash_can_right img {
+    pointer-events: none;
+    background-color: transparent;
+}
+
+
+
+/* ak je koš na add elemente, tak sa schová a nebude sa dať kliknúť */
+.big_img.add .trash_can_right {
+    pointer-events: none;
+    display: none;
+}
+
+.small_img.add .trash_can_right {
+    pointer-events: none;
+    display: none;
+}
+
+
+/* media querička */
+@media (max-width: 1050px) {
+    .product_main_info_container{
+        flex-direction: column;
+
+    }
+
+    .product_images {
+        justify-content: flex-start;
+
+    }
+
+    .product_images, .produkt_information{
+        max-width: 80%;
+
+    }
 
 
 
 
-@media (max-width: 950px) {
+    .product_images {
+        height: 600px;
+        margin-bottom: 50px;
 
-
-	.product_images {
-		height: 550px;
-		margin-bottom: 100px;
-
-	}
+    }
 
 
 
-	.produkt_information {
-		width: 100%;
+    .produkt_information {
+        width: 600px;
 
-	}
+    }
 
 
     .joined_input, .button_pridat, .select_label, .custom_input {
-    	width: 95%;
+        width: 100%;
     }
+
 
 }
 
 
 
 
-@media (max-width: 500px) {
+
+@media (max-width: 600px) {
 
 	.product_images {
 		height: 350px;
 		margin-bottom: 0px;
-		padding-bottom: 0px;
+		padding-bottom: 30px;
 
 	}
 
     .joined_input, .button_pridat, .select_label, .custom_input {
-    	width: 90%;
+    	width: 100%;
     }
 
 }
