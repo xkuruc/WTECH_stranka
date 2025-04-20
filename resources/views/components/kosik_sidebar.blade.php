@@ -84,3 +84,12 @@
     </div>
 </div>
 <div class="overlay2" onclick="toggleSidebarKosik()"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    @if(session('toggle_sidebar'))
+      // zavolá tvoju funkciu a sidebar ostane otvorený
+      toggleSidebarKosik();
+    @endif
+  });
+</script>

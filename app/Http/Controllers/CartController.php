@@ -95,7 +95,7 @@ class CartController extends Controller
         $item->quantity++;
         $item->save();
 
-        return back();
+        return back()->with('toggle_sidebar', true);
     }
 
     public function decrement(CartItem $item)
@@ -108,6 +108,6 @@ class CartController extends Controller
             $item->delete();
         }
 
-        return back();
+        return back()->with('toggle_sidebar', true);
     }
 }
