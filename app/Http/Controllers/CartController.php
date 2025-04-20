@@ -9,8 +9,6 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    
-
     public function index()
     {
         $items = Auth::user()

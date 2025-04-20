@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSizeController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\KosikController;
 
 Route::get('/', function () {
     return view('index');
@@ -50,8 +52,6 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
 });
 
 
-use App\Http\Controllers\CartController;
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
@@ -62,6 +62,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+
+
+
+Route::view('/kosik', 'kosik')->name('kosik');
+Route::get('/kosik', [KosikController::class, 'index'])
+     ->name('kosik')
+     ->middleware('auth');
 
 
 require base_path('routes/routes1.php');

@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 </head>
+
+
+
 <body>
     <header>
         @include('components.navbar')
         @include('components.sidebar')
-        @include('components.kosik_sidebar')
     </header>
 
 
@@ -37,48 +39,56 @@
                         <div class="element_napis"> Dodacia adresa</div>
                         <div class="emial_container">
                             <label for="input_email"> E-mail adresa <span class="hviezdicka">*</span></label>
-                            <input class="pokladna_input" id="input_email" type="text" name="email"  placeholder="Email*" required>
+                            <!-- <input class="pokladna_input" id="input_email" type="text" name="email"  placeholder="Email*" required> -->
+                            <input class="pokladna_input" id="input_email" type="email" name="email" placeholder="Email*" required value="{{ old('email', $user->email) }}">
                             <div class="emial_container_odkaz">Po dokončení nákupu môžete vytvoriť účet. </div>
                         </div>
                         <div class="dalsie_info_container">
                             <div class="dalsie_info_div1">
                                 <label for="meno_input"> Meno <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="meno_input" type="text" name="meno"  placeholder="Meno*" required>
+                                <!-- <input class="pokladna_input" id="meno_input" type="text" name="meno"  placeholder="Meno*" required> -->
+                                <input class="pokladna_input" id="meno_input" type="text" name="meno" placeholder="Meno*" required value="{{ old('meno', $user->meno) }}" >
                             </div>
 
                             <div class="dalsie_info_div2">
                                 <label for="priezvisko_input"> Priezvisko <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko"  placeholder="Priezvisko*" required>
+                                <!-- <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko"  placeholder="Priezvisko*" required> -->
+                                <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko" placeholder="Priezvisko*" required value="{{ old('priezvisko', $user->priezvisko) }}" >
                             </div>
 
 
                             <div class="dalsie_info_div3">
                                 <label for="tel_cislo_input"> Telefónne číslo <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo"  placeholder="Tel číslo*" required>
+                                <!-- <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo"  placeholder="Tel číslo*" required> -->
+                                <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo" placeholder="Tel číslo*" required value="{{ old('tel_cislo', $user->telephone) }}" >
                             </div>
 
 
                             <div class="dalsie_info_div4">
                                 <label for="adresa_input"> Adresa <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="adresa_input" type="text" name="adresa"  placeholder="Adresa*" required>
+                                <!-- <input class="pokladna_input" id="adresa_input" type="text" name="adresa"  placeholder="Adresa*" required> -->
+                                <input class="pokladna_input" id="adresa_input" type="text" name="adresa" placeholder="Adresa*" required value="{{ old('adresa', optional($shipping)->ulica) }}" >
                             </div>
 
 
                             <div class="dalsie_info_div5">
                                 <label for="cislo_input"> Číslo <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="cislo_input" type="text" name="cislo"  placeholder="Číslo*" required>
+                                <!-- <input class="pokladna_input" id="cislo_input" type="text" name="cislo"  placeholder="Číslo*" required> -->
+                                <input class="pokladna_input" id="cislo_input" type="text" name="cislo" placeholder="Číslo*" required value="{{ old('cislo', optional($shipping)->cisloDomu) }}" >
                             </div>
 
 
                             <div class="dalsie_info_div6">
                                 <label for="mesto_input"> Mesto <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="mesto_input" type="text" name="mesto"  placeholder="Mesto*" required>
+                                <!-- <input class="pokladna_input" id="mesto_input" type="text" name="mesto"  placeholder="Mesto*" required> -->
+                                <input class="pokladna_input" id="mesto_input" type="text" name="mesto" placeholder="Mesto*" required value="{{ old('mesto', optional($shipping)->mesto) }}" >
                             </div>
 
 
                             <div class="dalsie_info_div7">
                                 <label for="psc_input"> PSČ <span class="hviezdicka">*</span></label>
-                                <input class="pokladna_input" id="psc_input" type="text" name="psc"  placeholder="PSČ*" required required pattern="[0-9]{5}">
+                                <!-- <input class="pokladna_input" id="psc_input" type="text" name="psc"  placeholder="PSČ*" required required pattern="[0-9]{5}"> -->
+                                <input class="pokladna_input" id="psc_input" type="text" name="psc" placeholder="PSČ*" required pattern="[0-9]{5}" value="{{ old('psc', optional($shipping)->psc) }}" >
                             </div>
 
 
@@ -99,26 +109,26 @@
                         <div class="element_napis"> Spôsob dopravy</div>
                         <div class="moznosti">
                             <label>
-                                <input type="radio" name="doprava" value="osobny_odber_BA">
+                                <input type="radio" name="doprava" value="osobny_odber_BA" data-price="1.00">
                                 <span>1,00 € </span>
                                 <span>Osobný odber- Bratislava Mlynské Nivy 10</span>
 
                             </label>
 
                             <label>
-                                <input type="radio" name="doprava" value="osobny_odber_KE">
+                                <input type="radio" name="doprava" value="osobny_odber_KE" data-price="1.00">
                                 <span>1,00 € </span>
                                 <span>Osobný odber- Košice Kukučínová 2</span>
                             </label>
 
                             <label>
-                                <input type="radio" name="doprava" value="packeta">
+                                <input type="radio" name="doprava" value="packeta" data-price="3.00">
                                 <span>3,00 € </span>
                                 <span>Výdajné Packeta miesto</span>
                             </label>
 
                             <label>
-                                <input type="radio" name="doprava" value="kurier">
+                                <input type="radio" name="doprava" value="kurier" data-price="4.00">
                                 <span>4,00 € </span>
                                 <span>Kuriér Packeta (2-3 dni)</span>
                             </label>
@@ -147,35 +157,76 @@
                         <div class="element_napis"> Súhrn objednávky</div>
                         <div class="element_napis2"> Položky vo košíku </div>
                         <div class="polozky_vo_kosiku">
-                            <div class="polozky_vo_kosiku_item">
-                                <div class="cast1">
-                                    <div id="item_image"></div>
-                                </div>
-                                <div class="cast2">
-                                    <div id="item_description">Air Jordan 4 RM "University Blue" </div>
-                                    <div class="item_price_div"> <span id="item_price"> 150,00 </span></div>
-                                    <div class="mnozstvo_div"> Množstvo <input type="text" value="1" id="item_amount"> </span> </div>
-                                    <div class="item_size_div"> EUR: <span id="item_size">40.5</span> </div>
-                                    <div class="icon_div"> <i class="fa-solid fa-trash"></i> </div>
-                                </div>
-                            </div>
-                            <div class="polozky_vo_kosiku_item">
-                                <div class="cast1">
-                                    <div id="item_image"></div>
-                                </div>
-                                <div class="cast2">
-                                    <div id="item_description">Air Jordan 4 RM "University Blue" </div>
-                                    <div class="item_price_div"> <span id="item_price"> 150,00 </span></div>
-                                    <div class="mnozstvo_div"> Množstvo <input type="text" value="1" id="item_amount"> </span> </div>
-                                    <div class="item_size_div"> EUR: <span id="item_size">40.5</span> </div>
-                                    <div class="icon_div"> <i class="fa-solid fa-trash"></i> </div>
-                                </div>
-                            </div>
+
+                                 
+@forelse($items as $item)
+    <div class="polozky_vo_kosiku_item">
+        <!-- 1) Obrázok produktu -->
+        <div class="cast1">
+            <img class="item_image"
+                src="{{ asset('images/' . $item->product->main_image) }}"
+                alt="{{ $item->product->name }}">
+        </div>
+
+        <!-- 2) Popis, cena, veľkosť, množstvo -->
+        <div class="cast2">
+            <!-- Názov / popis -->
+            <div class="item_description">
+                {{ $item->product->name }}
+            </div>
+
+            <!-- Cena za kus -->
+            <div class="item_price_div">
+                <span class="item_price">
+                    {{ number_format($item->product->price, 2, ',', ' ') }} €
+                </span>
+            </div>
+
+            <!-- Veľkosť -->
+            <div class="item_size_div">
+                Size:
+                <span class="item_size">
+                    {{ $item->size }}
+                </span>
+            </div>
+
+            <!-- Množstvo s + / – tlačidlami -->
+            <div class="mnozstvo_div">
+                <span class="item_category">Množstvo:</span>
+                <form action="{{ route('cart.decrement', $item->id) }}"
+                      method="POST"
+                      class="quantity-form"
+                      style="display:inline">
+                    @csrf
+                    <button type="submit" class="quantity-btn">–</button>
+                </form>
+
+                <span class="quantity-value">{{ $item->quantity }}</span>
+
+                <form action="{{ route('cart.increment', $item->id) }}"
+                      method="POST"
+                      class="quantity-form"
+                      style="display:inline">
+                    @csrf
+                    <button type="submit" class="quantity-btn">+</button>
+                </form>
+            </div>
+
+            
+        </div>
+    </div>
+@empty
+    <p>V košíku momentálne nič nie je.</p>
+@endforelse
+
 
 
                         </div>
+                        @php
+                                $total = $items->sum(fn($item) => $item->product->price * $item->quantity);
+                        @endphp
                         <div class="objednavka_information">
-                            <div class="medzisucet_div">Medzisúčet košíka <span id="medzisucet_specified">150.00 </span></div>
+                            <div class="medzisucet_div">Medzisúčet košíka <span id="medzisucet_specified">{{ number_format($total, 2) }} </span></div>
                             <div class="doprava_div">
                                 <div class="doprava1">
                                     <div class="doprava_nadpis"> Doprava </div>
@@ -186,11 +237,11 @@
                             </div>
                             <div class="celkom_so_dph">
                                 <div>Celkom so DPH</div>
-                                <span id="celkom_so_dph_specified"> 154.00</span>
+                                <span id="celkom_so_dph_specified"> {{ number_format($total, 2) }} </span>
                             </div>
                             <div class="celkom_bez_dph">
                                 <div>Celkom bez DPH</div>
-                                <span id="celkom_bez_dph_specified"> 125.20</span>
+                                <span id="celkom_bez_dph_specified"> {{ number_format($total, 2) * 0.77}} </span>
                             </div>
                         </div>
                         <button class="objednat_button"> OBJEDNAŤ </button>
@@ -198,6 +249,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
 
@@ -214,3 +266,4 @@
     <script src="{{ asset('javascript/side_menubar.js') }}"></script>
 </body>
 </html>
+

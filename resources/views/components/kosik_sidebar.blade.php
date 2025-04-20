@@ -65,10 +65,6 @@
         <p>V košíku momentálne nič nie je.</p>
     @endforelse
 </div>
-
-
-
-
     @php
         // vypočíta sumu: cena * množstvo pre každú položku
         $total = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
@@ -80,7 +76,8 @@
             <div class="kosik_sidebar_zaverecne_info_medzisucet2"><span id="kosik_sidebar_zaverecne_info_medzisucet_specified">{{ number_format($total, 2) }}</span> </div>
 
         </div>
-        <a href="kosik.blade.php" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
+        
+        <a href="{{ route('kosik') }}" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
     </div>
 </div>
 <div class="overlay2" onclick="toggleSidebarKosik()"></div>
