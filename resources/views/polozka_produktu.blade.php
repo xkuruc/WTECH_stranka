@@ -68,31 +68,48 @@
                     </div>
 
                     
-                    <form class="form_div" action="" method="POST">
-                        @csrf
-                        <!-- <select id="size" name="size" class="velkost_input" required>
-                            <option value="" disabled selected>Veľkosť (US)</option>
-                            @foreach($product->availableSizes() as $size)
-                                <option value="{{ $size }}">{{ $size }}</option>
-                            @endforeach
-                        </select> -->
-                        <select id="size" name="size" class="velkost_input" required>
-                            <option value="" disabled selected>Veľkosť (US)</option>
-                            @foreach($product->availableSizes() as $size)
-                                @php
-                                    // prevedieme na číselný typ a otestujeme zvyšok po delení 1
-                                    $sizeLabel = fmod((float) $size, 1.0) === 0.0
-                                        ? intval($size)   // ak je zvyšok 0, zobrazíme celé číslo
-                                        : $size;          // inak ponecháme desatinné miesto
-                                @endphp
+                    <form action="{{ route('cart.store') }}" method="POST" class="pridavanie-do-kosika-form">
+    @csrf
 
-                                <option value="{{ $size }}">{{ $sizeLabel }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit" class="pridat_do_kosika_button">
-                            Pridať do košíka
-                        </button>
-                    </form>
+    {{-- Skryté políčko s ID produktu --}}
+    <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+    {{-- Skryté políčko s množstvom (default = 1) --}}
+    <input type="hidden" name="quantity" value="1">
+
+    {{-- Výber veľkosti --}}
+    <label for="size" class="velkost_label">Veľkosť (US):</label>
+    <select id="size" name="size" class="velkost_input" required>
+        <option value="" disabled selected>Vyber veľkosť</option>
+        @foreach($product->availableSizes() as $size)
+            @php
+                $sizeLabel = fmod((float) $size, 1.0) === 0.0
+                    ? intval($size)
+                    : $size;
+            @endphp
+            <option value="{{ $size }}">{{ $sizeLabel }}</option>
+        @endforeach
+    </select>
+
+    {{-- Tlačidlo na odoslanie --}}
+    <button type="submit" class="pridat_do_kosika_button">
+        Pridať do košíka
+    </button>
+</form>
+
+{{-- V layout-e (napr. layouts/app.blade.php) alebo priamo nad formulárom --}}
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 
                     <div class="odkaz">
                         <a href="">

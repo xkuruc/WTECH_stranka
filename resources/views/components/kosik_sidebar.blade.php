@@ -14,34 +14,6 @@
                 <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
             </div>
         </div>
-        <div class="kosik_sidebar_item">
-            <div id="kosik_sidebar_item_photo"></div>
-            <div class="kosik_sidebar_item_information">
-                <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-            </div>
-        </div>
-        <div class="kosik_sidebar_item">
-            <div id="kosik_sidebar_item_photo"></div>
-            <div class="kosik_sidebar_item_information">
-                <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-            </div>
-        </div>
-        <div class="kosik_sidebar_item">
-            <div id="kosik_sidebar_item_photo"></div>
-            <div class="kosik_sidebar_item_information">
-                <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-            </div>
-        </div>
-        <div class="kosik_sidebar_item">
-            <div id="kosik_sidebar_item_photo"></div>
-            <div class="kosik_sidebar_item_information">
-                <div class="kosik_sidebar_item_name"> <span id="kosik_sidebar_item_name_specified"> Air Jordan 4 RM "University Blue"</span></div>
-                <div class="kosik_sidebar_item_size">EUR: <span id="kosik_sidebar_item_size_specified">40.5</span> </div>
-            </div>
-        </div>
     </div>
 
     <div class="kosik_sidebar_zaverecne_info">

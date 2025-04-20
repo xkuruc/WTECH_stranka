@@ -49,5 +49,16 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
          ->name('products.sizes.destroy');
 });
 
+
+use App\Http\Controllers\CartController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
+});
+
+
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');

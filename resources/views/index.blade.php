@@ -56,13 +56,13 @@
 
         <section class="banner_hlavna_ponuka">
             <div class="banner_hlavna_ponuka_container">
-                <a href="{{ route('produkty.index') }}" class="tenisky_banner">
+                <a href="{{ url('/zoznam-produktov') }}" class="tenisky_banner">
                     <div>TENISKY</div>
                 </a>
-                <a href="{{ route('produkty.index') }}" class="kopacky_banner">
+                <a href="{{ url('/zoznam-produktov') }}" class="kopacky_banner">
                     <div>KOPAČKY</div>
                 </a>
-                <a href="{{ route('produkty.index') }}" class="lopty_banner">
+                <a href="{{ url('/zoznam-produktov') }}" class="lopty_banner">
                     <div>LOPTY</div>
                 </a>
             </div>

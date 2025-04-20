@@ -89,14 +89,9 @@ class Product extends Model
                     ->pluck('us_velkost')        // vybrať len stĺpec us_velkost
                     ->toArray();                 // vrátiť ako čisté pole
     }
-    // public static function sortedByPrice(?string $sort = null)
-    // {
-    //     $direction = $sort
-    //         ?? request()->get('sort', 'asc');
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 
-    //     // whitelist (len asc/desc)
-    //     $direction = strtolower($direction) === 'desc' ? 'desc' : 'asc';
-
-    //     return static::orderBy('price', $direction)->get();
-    // }
 }

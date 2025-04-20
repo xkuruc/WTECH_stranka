@@ -152,6 +152,18 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('cart_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')
+            ->constrained('users', 'user_id')
+            ->onDelete('cascade');
+            $table->foreignId('product_id')
+                  ->constrained()
+                  ->onDelete('cascade');  // ak sa zmaže produkt, položka sa vymaže
+            $table->unsignedInteger('quantity')->default(1); // počet kusov
+            $table->string('size')->after('quantity');
+        });
+
     }
 
     public function down(): void
