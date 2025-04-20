@@ -1,7 +1,9 @@
+/** VARIABLES **/
 const image_kontajner = document.querySelector('.product_images_kontajner');
 
 
 
+/** FUNKCIE **/
 function remove_input_event(input) {
     input.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -14,24 +16,12 @@ function add_input_change(input) {
     });
 }
 
-image_kontajner.querySelectorAll('input[type="file"]').forEach(function(input) {
-    remove_input_event(input);
-});
-
-
-/* pridáme im možnosť pridať obrázok */
-image_kontajner.querySelectorAll('input[type="file"]').forEach(function(input) {
-    add_input_change(input);
-});
-
-
 function input_change(event) {
     const target = event.target;
     const parent = target.parentElement;
     const curr_id2 = parent.dataset.imgId;
     const img = parent.querySelector('img');
     const plusko = parent.querySelector('.plusko');
-
 
     const file = target.files[0];
 
@@ -44,10 +34,6 @@ function input_change(event) {
 
         /* vloží obrázky do placeholderov */
         reader.onload = function (e) {
-
-
-
-
 
 
             /* každému klonu sa nastaví obrázok tiež */
@@ -317,24 +303,18 @@ function delete_all_imgs() {
 }
 
 
-
 async function event_handle_img(event) {
     const target = event.target;
     const curr_id_target = target.dataset.imgId;
 
-
+    /* klikol som na koš */
     if (target.classList.contains('trash_can_right')) {
-
         delete_img(target);
-        //delete_all_imgs();
         return;
     }
 
-
-
     /* input pre súbor */
     const file_input = target.querySelector('input[type="file"]');
-
 
     /* otvorím ponuku len ak neťahám obrázok, len klik */
     if (can_open_input) {
@@ -345,202 +325,25 @@ async function event_handle_img(event) {
         can_open_input = false;
     }
 
-
     if (add_img && target.classList.contains('add')) {
         new_add_img();
     }
-
 
     add_img = false;
 }
 
 
 
-async function add_new_img(new_src='') {
-    const target = event.target;
-    const curr_id_target = target.dataset.imgId;
-    /*
-        Ak kliknem veľký obrázok, vyberie sa file a nakopíruje sa do prázdneho small_img
-        Ak kliknem malý obrázok, ten sa zase nakopíruje podľa id do veľkého a asi tak spravím aj s tým prvým
-     */
-
-
-    /* input pre súbor */
-    const file_input = target.querySelector('input[type="file"]');
-
-
-    /* otvorím ponuku len ak neťahám obrázok, len klik */
-    if (can_open_input) {
-        if (!target.classList.contains('add')) {
-            file_input.click();
-        }
-
-        can_open_input = false;
-    }
-
-
-    if (add_img && target.classList.contains('add')) {
-        /* treba pridať 1 veľký a 1 malý obrázok */
-        /* najprv malý? */
-        const target_class = target.classList;
-
-        /* ak pridám z 'cloned add', tak by sa mi vymazal nižšie */
-        if (target_class.contains('cloned')) {
-            target_class.remove('cloned');
-
-            /* sebe zoberiem 'cloned' a pridám ho ostatným, robím zo seba 'originál' */
-            const elements = document.querySelectorAll('.add:not(.selected)');
-            elements.forEach(el => {
-                el.classList.add('cloned');
-            });
-
-
-        }
-
-
-        /* odstránime cloned prvky, aby sa to správne vložilo */
-        image_kontajner.querySelectorAll('.cloned').forEach(el => el.remove());
-
-        const big_images = Array.from(sliding_container.children);
-        big_images.sort((a, b) => {
-            return Number(a.dataset.imgId) - Number(b.dataset.imgId);
-        });
-
-        /* pridáme v správnom poradí naspäť */
-        sliding_container.innerHTML = "";
-        big_images.forEach(el => sliding_container.appendChild(el));
-
-
-        const add_self_container = (target_class.contains('big_img')) ? sliding_container : small_img_container;
-        const add_other_container = (add_self_container === sliding_container) ? small_img_container : sliding_container;
-
-
-        const selektor = (target_class.contains('big_img')) ? 'small_img' : 'big_img';
-        const other_add = image_kontajner.querySelector(`.${selektor}.add[data-img-id="${curr_id_target}"]`);
-        other_add.dataset.imgId = parseInt(target.dataset.imgId) + 1;
-
-
-
-        /* klon aktuálneho prvku čo som klikol */
-        let cloned = target.cloneNode(true);
-        cloned.classList.remove('add','selected');
-
-
-        /* chceme vložiť na predposledné miesto */
-        const posledne = add_self_container.lastElementChild;
-        add_self_container.insertBefore(cloned, posledne);
-
-
-
-        const cloned_input = cloned.querySelector('input[type="file"]');
-
-        cloned_input.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-
-        cloned_input.addEventListener('change', function(event) {
-            input_change(event);
-        });
-
-
-
-        /* vložíme veľký obrázok na koniec */
-        const new_node = add_other_container.lastElementChild;
-        const cloned_new = new_node.cloneNode(true);
-
-
-
-        cloned_new.classList.remove('selected','cloned','add');
-        cloned_new.dataset.imgId = target.dataset.imgId; /* rovnaké ako malý obrázok */
-
-
-        /* ček, či nemá img na sebe */
-        const img = cloned_new.querySelector('img');
-        img.removeAttribute('src');
-
-        if (new_src != '') {
-            img.src = new_src;
-        }
-
-
-        /* treba jeho inputu zakázať klikanie a umožniť im pridanie obrázkov */
-        const big_input = cloned_new.querySelector('input[type="file"]');
-        big_input.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-
-        big_input.addEventListener('change', function(event) {
-            input_change(event);
-        });
-
-
-        /** NA ZVAZENIE **/
-        const big_plusko = cloned_new.querySelector('.plusko');
-        big_plusko.style.display = 'block';
-
-
-
-        /* pridanie nového prvku */
-        add_other_container.insertBefore(cloned_new,new_node);
-        target.dataset.imgId = parseInt(curr_id_target) + 1; /* uchovávam si aké je ďalšie id */
-
-
-
-        const small_selected = image_kontajner.querySelector('.small_img.selected');
-        const curr_small = small_selected.dataset.imgId;
-        if (small_selected.classList.contains('add')) {
-            const prev_id = (curr_small - 1) >= 1 ? curr_small - 1 : 1;
-            const prev_el = small_img_container.querySelector(`.small_img[data-img-id="${prev_id}"]`);
-
-            small_selected.classList.remove('selected');
-            prev_el.classList.add('selected');
-        }
-
-
-
-        const curr_big_add = image_kontajner.querySelector('.big_img.add.selected');
-        if (curr_big_add) {
-            curr_big_add.classList.remove('selected');
-        }
-
-
-        /* inicializovanie skriptu */
-        scroll_init();
-
-
-        const curr_big = image_kontajner.querySelector('.big_img.selected');
-        curr_big.classList.remove('selected');
-
-
-
-        const next_big = get_next_child(sliding_container,curr_big_add, -1);
-        next_big.classList.add('selected');
-
-
-
-        if (parseInt(small_selected.dataset.imgId) - 1 != first_img_id) {
-            const add_posun = max_id - parseInt(small_selected.dataset.imgId);
-            const target_pos = sliding_container.scrollWidth - add_posun * scroll_distance;
-
-
-            await smoothScrollTo(sliding_container, target_pos, 0);
-
-
-            curr_big_selected = next_big;
-            load_next(1,next_big);
-            //load_next(-1,next_big);
-        }
-
-        add_img = false;
-    }
-}
-
-
-
-
-
-
-
+/** EVENTY **/
+image_kontajner.querySelectorAll('input[type="file"]').forEach(function(input) {
+    remove_input_event(input);
+});
+
+
+/* pridáme im možnosť pridať obrázok */
+image_kontajner.querySelectorAll('input[type="file"]').forEach(function(input) {
+    add_input_change(input);
+});
 
 document.addEventListener('touchend', async function (event) {
     event_handle_img(event);
@@ -552,7 +355,6 @@ image_kontajner.addEventListener('click', async function (event) {
 
 
 /*
-*
 * TODO a PROBLEMY:
 * - pridať vela obrázkov naraz
 * - spraviť z toho formulár
