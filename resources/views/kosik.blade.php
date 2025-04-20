@@ -42,7 +42,7 @@
                                 <label for="input_email"> E-mail adresa <span class="hviezdicka">*</span></label>
                                 <!-- <input class="pokladna_input" id="input_email" type="text" name="email"  placeholder="Email*" required> -->
                                 <input class="pokladna_input" id="input_email" type="email" name="email" placeholder="Email*" required value="{{ old('email', $user->email) }}">
-                                <div class="emial_container_odkaz">Po dokončení nákupu môžete vytvoriť účet. </div>
+                                <!-- <div class="emial_container_odkaz">Po dokončení nákupu môžete vytvoriť účet. </div> -->
                             </div>
                             <div class="dalsie_info_container">
                                 <div class="dalsie_info_div1">
@@ -228,10 +228,9 @@
                                 <div class="doprava_div">
                                     <div class="doprava1">
                                         <div class="doprava_nadpis"> Doprava </div>
-                                        <div id="doprava_typ"> Packeta - Kuriér (2-3 dni) </div>
                                     </div>
                                     <div class="doprava2"></div>
-                                    <span id="doprava_specified">4.00 </span>
+                                    <span id="kamo" > - </span>
                                 </div>
                                 <div class="celkom_so_dph">
                                     <div>Celkom so DPH</div>
@@ -239,10 +238,10 @@
                                 </div>
                                 <div class="celkom_bez_dph">
                                     <div>Celkom bez DPH</div>
-                                    <span id="celkom_bez_dph_specified"> {{ number_format($total, 2) * 0.77}} </span>
+                                    <span id="celkom_bez_dph_specified"> {{ number_format($total, 2) }}</span>
                                 </div>
                             </div>
-                            <button type="submit" class="objednat_button"> OBJEDNAŤ </button>
+                            <button type="submit" class="objednat_button" onclick="window.location.href='{{ url('/') }}'"> OBJEDNAŤ </button>
                         </div>
                     </div>
                 </div>
@@ -262,6 +261,7 @@
     <!-- naše skripty -->
     <script src="{{ asset('javascript/kosik_sidebar.js') }}"></script>
     <script src="{{ asset('javascript/side_menubar.js') }}"></script>
+    <script src="{{ asset('javascript/kosik_srandy.js') }}"></script>
 </body>
 </html>
 

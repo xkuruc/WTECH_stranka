@@ -70,6 +70,5 @@ Route::get('/kosik', [KosikController::class, 'index'])
      ->name('kosik')
      ->middleware('auth');
 
-
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');
