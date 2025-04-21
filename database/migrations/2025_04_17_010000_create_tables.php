@@ -73,8 +73,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
-
+        /* farby */
+        Schema::create('colors', function (Blueprint $table) {
+            $table->id();
+            $table->string('name'); // Názov farby (Červená, Modrá, ...)
+            $table->string('hex'); // Hex kód alebo linear gradient
+            $table->timestamps();
+        });
 
 
         // create_categories_table.php
@@ -85,6 +90,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // create_season_table.php
+        Schema::create('seasons', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->timestamps();
+        });
+
+
+
         // create_suppliers_table.php
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
@@ -92,6 +107,14 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
+            $table->timestamps();
+        });
+
+
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique(); // pre URL a interné spracovanie (napr. nike)
+            $table->string('display_name');  // pre zobrazenie (napr. Nike)
             $table->timestamps();
         });
 
@@ -105,22 +128,28 @@ return new class extends Migration
             $table->decimal('discount', 8, 2)->default(0);  // Zľava (napr. 0.00 ak bez zľavy)
             $table->string('SKU')->unique();  // Unikátny kód produktu
             // Vzťahy na kategóriu a dodávateľa, s kaskádnym mazaním
-            $table->foreignId('category_id')
-                  ->constrained()
-                  ->onDelete('cascade');  
             $table->foreignId('supplier_id')
                   ->constrained()
-                  ->onDelete('cascade');  
+                  ->onDelete('cascade');
             $table->unsignedInteger('stock_quantity')->default(0);   // Počet kusov na sklade
-            $table->string('brand')->nullable();  // Značka produktu (voliteľné)
             $table->timestamps();  // timestampy created_at a updated_at
             $table->text('main_image')->nullable();
-            $table->boolean('in_stock')->default(true);
+            $table->string('available');
             $table->string('gender')->nullable();
-            $table->string('color')->nullable();
-            $table->string('type')->nullable();
+            $table->string('type')->nullable(); //tenisky, kopačky, lopty
+            $table->foreignId('season_id')
+                ->constrained()
+                ->onDelete('cascade'); //leto, zima, jar, ...
+            $table->foreignId('color_id')
+                ->constrained('colors') // Odkazuje na tabuľku colors
+                ->onDelete('set null');
+            $table->foreignId('brand_id')
+                ->constrained('brands')
+                ->onDelete('set null'); /* brand */
         });
 
+
+        /* obrázky produktov */
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')
@@ -129,17 +158,9 @@ return new class extends Migration
             // cesta k obrázku
             $table->string('image_path');
             $table->timestamps();
-
         });
 
-        // Schema::create('product_sizes', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-        //     // US veľkosť
-        //     $table->decimal('us_velkost');
-        //     $table->decimal('pocet');
 
-        // });
         Schema::create('product_sizes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')
@@ -152,14 +173,22 @@ return new class extends Migration
             $table->timestamps();
         });
 
+
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-            ->constrained('users', 'user_id')
-            ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->string('session_id')->nullable();
+
+            // tu pridáme index a FK na sessions.id
+            $table->string('session_id')->nullable()->index();
+            $table->foreign('session_id')
+                ->references('id')
+                ->on('sessions')
+                ->onDelete('cascade');
+
             $table->foreignId('product_id')
-                  ->constrained()
-                  ->onDelete('cascade');  // ak sa zmaže produkt, položka sa vymaže
+                ->constrained()
+                ->onDelete('cascade');  // ak sa zmaže produkt, položka sa vymaže
             $table->unsignedInteger('quantity')->default(1); // počet kusov
             $table->string('size')->after('quantity');
         });
@@ -177,12 +206,15 @@ return new class extends Migration
         Schema::dropIfExists('payments');
         Schema::dropIfExists('order_items');
         Schema::dropIfExists('orders');
+        Schema::dropIfExists('colors');
+        Schema::dropIfExists('brands');
         Schema::dropIfExists('product_reviews');
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('products');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('suppliers');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('personalizacia');
         Schema::dropIfExists('users');

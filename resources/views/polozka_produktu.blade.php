@@ -60,54 +60,57 @@
                 <div class="product_information">
                     <h1 class="product_name">{{ $product->name }}</h1>
                     <div class="product_brand">
-                        Značka: <span class="specified">{{ $product->brand }}</span>
+                        Značka: <span class="specified">{{ $product->brand->display_name }}</span>
                     </div>
                     <div class="cena">
                         <span class="specified">{{ number_format($product->price,2) }}</span> €
                     </div>
 
-                    
+
                     <form action="{{ route('cart.store') }}" method="POST" class="pridavanie-do-kosika-form">
-    @csrf
+                        @csrf
 
-    {{-- Skryté políčko s ID produktu --}}
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        {{-- Skryté políčko s ID produktu --}}
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-    {{-- Skryté políčko s množstvom (default = 1) --}}
-    <input type="hidden" name="quantity" value="1">
+                        {{-- Skryté políčko s množstvom (default = 1) --}}
+                        <input type="hidden" name="quantity" value="1">
 
-    {{-- Výber veľkosti --}}
-    <label for="size" class="velkost_label">Veľkosť (US):</label>
-    <select id="size" name="size" class="velkost_input" required>
-        <option value="" disabled selected>Vyber veľkosť</option>
-        @foreach($product->availableSizes() as $size)
-            @php
-                $sizeLabel = fmod((float) $size, 1.0) === 0.0
-                    ? intval($size)
-                    : $size;
-            @endphp
-            <option value="{{ $size }}">{{ $sizeLabel }}</option>
-        @endforeach
-    </select>
+                        {{-- Výber veľkosti --}}
+                        <label for="size" class="velkost_label">Veľkosť (US):</label>
 
-    {{-- Tlačidlo na odoslanie --}}
-    <button type="submit" class="pridat_do_kosika_button">
-        Pridať do košíka
-    </button>
-</form>
+                        <div class="form_div">
+                            <select id="size" name="size" class="velkost_input" required>
+                                <option value="" disabled selected>Vyber veľkosť</option>
+                                @foreach($product->availableSizes() as $size)
+                                    @php
+                                        $sizeLabel = fmod((float) $size, 1.0) === 0.0
+                                            ? intval($size)
+                                            : $size;
+                                    @endphp
+                                    <option value="{{ $size }}">{{ $sizeLabel }}</option>
+                                @endforeach
+                            </select>
 
-{{-- V layout-e (napr. layouts/app.blade.php) alebo priamo nad formulárom --}}
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                            {{-- Tlačidlo na odoslanie --}}
+                            <button type="submit" class="pridat_do_kosika_button">
+                                Pridať do košíka
+                            </button>
+                        </div>
+                    </form>
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
 
                     <div class="odkaz">
@@ -119,7 +122,7 @@
                     <div class="avaibility">
                         <i class="fa-solid fa-globe"></i>
                         <span class="specified">
-                            {{ $product->in_stock ? 'Skladom Online' : 'Momentálne vypredané' }}
+                            {{ $product->available == 'Skladom' ? 'Skladom' : 'Na predajni v: ' . $product->available }}
                         </span>
                     </div>
 
@@ -131,10 +134,11 @@
                             Pohlavie: <span class="specified">{{ $product->gender }}</span>
                         </div>
                         <div class="farba">
-                            Farba: <span class="specified">{{ $product->color }}</span>
+                            Farba: <span class="specified">{{ $product->color->name }}</span>
                         </div>
-                        <div class="typ_produktu">
-                            Typ produktu: <span class="specified">{{ $product->category->name }}</span>  {{-- :contentReference[oaicite:3]{index=3} --}}
+                        <div class="sezona">
+                            Sezóna: <span class="specified">{{ $product->season->name }}</span>
+                             (typ: <span class="specified">{{ $product->type }}</span>)
                         </div>
                     </div>
                 </div>
@@ -187,9 +191,9 @@
                 <div class="slider-container">
                     <div class="owl-carousel owl-carouselBRATU ">
                     @foreach($discountedImages as $img)
-                        
+
                             <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">
-                        
+
                     @endforeach
                     </div>
                 </div>
@@ -198,7 +202,7 @@
             <div class="label"> Naposledy pozreté</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    
+
                     <div class="owl-carousel owl-carouselBRATU ">
                         <div class="itemBRATU">1</div>
                         <div class="itemBRATU">2</div>

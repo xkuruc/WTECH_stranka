@@ -34,7 +34,7 @@
 
                 <h1>Môj účet</h1>
                 @if($user->is_admin)
-                    <a href="{{ route('admin_dashboard') }}" id="admin_dash_btn">Admin Dashboard <span>(Admin Only)</span></a>
+                    <a href="{{ route('admin_dashboard') }}" id="admin_dash_btn">Admin Dashboard</a>
                 @endif
                 <a id="logout_btn" data-logout-url="{{ route('logout') }}">Odhlásiť sa</a>
             </div>

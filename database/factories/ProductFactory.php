@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\ProductImage;
+use App\Models\Brand;
 
 class ProductFactory extends Factory
 {
@@ -41,28 +42,39 @@ class ProductFactory extends Factory
             'Jorda 1 Lo'
         ];
         $genders = ['Pánske', 'Dámske', 'Unisex'];
-        $colors  = ['Biela', 'Čierna', 'Červená', 'Modrá', 'Zelená'];
-        $types   = ['Tenisky', 'Tričko', 'Mikina', 'Džínsová bunda', 'Šaty'];
+
+
+        $types = ['Tenisky','Kopacky','Lopty'];
+        $available_miesta = ['Bratislava', 'Praha','Brno', 'Skladom'];
+        $stock_quantity =  $this->faker->numberBetween(0, 100);
+
+        if ($stock_quantity == 0) {
+            $available = 'Momentálne vypredané';
+        } else {
+            //ak je, tak si vyberie náhodne či je na sklade alebo na predajni
+            $available = $this->faker->randomElement($available_miesta);
+        }
+
         return [
-            'name'           => $this->faker->randomElement($nazvy),                            // náhodné slovo :contentReference[oaicite:2]{index=2}
-            'description'    => $this->faker->sentence(),                        // náhodná veta :contentReference[oaicite:3]{index=3}
-            'price'          => $this->faker->randomFloat(2, 1, 100),            // desaťinné číslo s dvoma des. miestami :contentReference[oaicite:4]{index=4}
-            'discount'       => $this->faker->randomFloat(2, 0, 30),             // zľava od 0 do 30 € :contentReference[oaicite:5]{index=5}
-            'SKU'            => strtoupper($this->faker->bothify('???###')),     // kombinácia písmen a čísiel :contentReference[oaicite:6]{index=6}
-            'category_id'    => \App\Models\Category::factory(),                 // vytvorí aj kategóriu cez jej továrničku :contentReference[oaicite:7]{index=7}
-            'supplier_id'    => \App\Models\Supplier::factory(),                 // vytvorí aj dodávateľa cez jeho továrničku :contentReference[oaicite:8]{index=8}
-            'stock_quantity' => $this->faker->numberBetween(0, 100),             // náhodný počet kusov na sklade :contentReference[oaicite:9]{index=9}
-            'brand'          => $this->faker->company(),                         // názov firmy ako značka produktu :contentReference[oaicite:10]{index=10}
-            
+            'name'           => $this->faker->randomElement($nazvy),             // náhodné slovo
+            'description'    => $this->faker->sentence(),                        // náhodná veta
+            'price'          => $this->faker->randomFloat(2, 1, 500),            // desaťinné číslo s dvoma des. miestami
+            'discount'       => rand(0, 1) ? $this->faker->randomFloat(2, 0.01, 30) : 0.00,  // 50% bude mať zlavu
+            'SKU'            => strtoupper($this->faker->bothify('???###')),     // kombinácia písmen a čísiel
+            'supplier_id'    => \App\Models\Supplier::factory(),                 // vytvorí aj dodávateľa cez jeho továrničku
+            'stock_quantity' => $stock_quantity,                                 // náhodný počet kusov na sklade
+            'brand_id'       => Brand::factory(),                    // názov firmy ako značka produktu
+
+
             // Tu vyberieme obrázok zo zoznamu
             'main_image'     => $this->faker->randomElement($images),
-
-            'in_stock'       => $this->faker->boolean(80),                       // 80 % šanca, že je na sklade
-            'gender'         => $this->faker->randomElement($genders),          // náhodný gender
-            'color'          => $this->faker->randomElement($colors),           // náhodná farba
-            'type'           => $this->faker->randomElement($types),            // náhodný typ produktu
+            'available'      => $available,
+            'gender'         => $this->faker->randomElement($genders),           // náhodný gender
+            'color_id'          => \App\Models\Color::inRandomOrder()->first()->id,            // náhodná farba
+            'type'           => $this->faker->randomElement($types),             // náhodný typ produktu
+            'season_id'      => \App\Models\Season::factory(),                   // sezóna
             'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now'),
-            
+
         ];
     }
     public function configure()

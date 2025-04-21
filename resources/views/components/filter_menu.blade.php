@@ -1,5 +1,5 @@
 <aside class="text_filter">
-    <h1>Výpredaj</h1>
+    <h1 id="type_placeholder">{{ $title ?? 'Tenisky' }}</h1>
     <div class="filter_menu">
         <button class="filter_menu_item special" id="filter_open_btn">Filter</button>
         <div class="filter_kategorie" id="sliding_filter">

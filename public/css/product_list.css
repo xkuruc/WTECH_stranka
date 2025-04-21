@@ -24,16 +24,22 @@
 	column-gap: 1px;
 	grid-template-columns: repeat(auto-fit, clamp(320px, 100%, 365px));
 	grid-template-rows: repeat(auto-fit, 450px);
-	
+
 	align-items: center;
 	justify-content: center;
-	
+
 }
 
 .product_link {
 	color: inherit;
 	text-decoration: none;
 }
+
+
+.product_label {
+    text-transform: uppercase;
+}
+
 
 .product_link:hover,
 .product_link:focus,

@@ -6,7 +6,7 @@
     <div class="nav">
         <ul class="menu">
             <li class="main_category" id="tenisky">
-                <a href="{{ url('/zoznam-produktov') }}">Tenisky</a>
+                <a href="{{ url('/Tenisky') }}">Tenisky</a>
                 <ul class="dropdown-menu dropdown-menuTENISKY">
                     <li class="inside_category">
                         <span class="inside_category_name"><a href="#panskeTenisky"> Pánske tenisky </a></span>
@@ -65,7 +65,7 @@
                 </ul>
             </li>
             <li class="main_category">
-                <a href="zoznam_produktov.blade.php">Oblecenie</a>
+                <a href="{{ url('/Kopacky') }}">Kopačky</a>
                 <ul class="dropdown-menu dropdown-menuOBLECENIE">
                     <li class="inside_category">
                         <span class="inside_category_name"><a href="#panskeTenisky"> MUŽI </a></span>
@@ -112,7 +112,7 @@
                 </ul>
             </li>
             <li class="main_category">
-                <a href="{{ url('/zoznam-produktov') }}">Doplnky</a>
+                <a href="{{ url('/Lopty') }}">Lopty</a>
                 <ul class="dropdown-menu dropdown-menuDOPLNKY">
                     <div class="doplnky_placeholder">
                         <li class="inside_category">
@@ -139,7 +139,7 @@
                     </div>
                 </ul>
             </li>
-            <li class="main_category"><a href="vypredaj.blade.php">Výpredaj</a></li>
+            <li class="main_category"><a href="{{ url('/Vypredaj') }}">Výpredaj</a></li>
         </ul>
 
     </div>

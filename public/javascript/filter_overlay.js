@@ -5,10 +5,15 @@ const filter_menu = document.getElementById('sliding_filter'); /* filter menu, k
 const kat_menu = document.getElementById('cat_filter'); /* sidebar kategórií */
 let size_rendered = false; /* flag či je vykreslená záložka size */
 let color_rendered = false; /* flag či je vykreslená záložka farba */
-const close_btns = [document.getElementById('close_btn'),document.getElementById('applyFilter')];
+const close_btn = document.getElementById('close_btn');
 const clear_filter = document.getElementById('resetFilters'); /* zmazať všetky filtre */
 const open_filter = document.getElementById('filter_open_btn');
 const filter_content = document.querySelector('.filter_content'); /* stredná sekcia veľkého filtra, obsah filtrov */
+const query_btn = document.getElementById('applyFilter');
+const type = document.getElementById('type_placeholder');
+const select_sort = document.getElementById('sort');
+
+
 const min_price = 0; /* dá sa nastaviť min cena cenového slidera */
 const max_price = 1000; /* dá sa nastaviť max cena cenového slidera */
 
@@ -30,12 +35,12 @@ let filters = { /* aktívne filtre */
 function render_filter_sizes() { /* vykreslí záložku veľkosti */
   if (!size_rendered) {
     const btn_container = document.querySelector(`.cat_btn_container_sizes`);
-    for (let i = 17; i <= 50; i++) {
+    for (let i = 5; i <= 13; i++) {
       const button = document.createElement("button");
       button.textContent = i;
-    
+
       button.classList.add("cat_entry_btn_size");
-      button.setAttribute("data-value", i);      
+      button.setAttribute("data-value", i);
 
       btn_container.appendChild(button);
     }
@@ -45,7 +50,7 @@ function render_filter_sizes() { /* vykreslí záložku veľkosti */
 
 
 /* vykreslí záložku farby */
-function render_filter_color_content() { 
+function render_filter_color_content() {
   if (!color_rendered) {
     const colors = [
       { name: "Červená", hex: "red" },
@@ -63,7 +68,7 @@ function render_filter_color_content() {
     const newTab = document.querySelector(`.cat_btn_container`);
     colors.forEach(color => {
         const button = document.createElement("button");
-        
+
         /* pri tom viacfarebnom ak chcem lin. gradient, tak musím použiť background */
         const property_to_add = (color.name.includes("Viacfarebný")) ? 'background: ' : 'background-color: ';
 
@@ -87,9 +92,20 @@ function render_filter_color_content() {
 
 //keď stlačím ESC, tak sa zatvorí filter menu
 function handle_ESC () {
-  if (event.key === "Escape") { 
+  if (event.key === "Escape") {
       toggle_filter(true);
     }
+}
+
+function uncheck_checkbox_entry(checkbox_entry) {
+    const checkbox = checkbox_entry.querySelector('input[type="checkbox"]');
+    const checkmark = checkbox_entry.querySelector('.checkmark');
+
+    checkmark.classList.remove("clicked");
+    setTimeout(() => {
+        checkbox.checked = false;
+        checkbox.dispatchEvent(new Event("change"));
+    }, 10); /* po 10ms sa odškrtne checkmark, je to preto, aby sa to stihlo vizuálne prejaviť */
 }
 
 
@@ -113,7 +129,7 @@ function toggle_filter(open) {
 
 
 /* pridať filter */
-function add_filter(cat, value, price_arg = "min", operator = "od") {
+function add_filter(cat, value, price_arg = "min", operator = "od", display_value="") {
   const button = document.createElement("button");
 
   if (cat === "price") { /* ak je kategória cena, tak tam sa nepridáva nový prvok, ale mení sa akt. min a max vo filtri */
@@ -134,10 +150,38 @@ function add_filter(cat, value, price_arg = "min", operator = "od") {
     }
   }
   else if (cat === "sale") { /* pre zľavy sa pridáva kombo operátor+value */
-    filters[cat].push({
-      operator: operator,
-      value: value
-    });
+      const existingIndex = filters[cat].findIndex(item => item.operator === operator);
+
+      if (existingIndex !== -1) { /* ak tam je, tak len updatni hodnotu napr. už tam je "od", tak zmením 20 -> 40 */
+          const old_value = filters[cat][existingIndex].value;
+          filters[cat][existingIndex].value = value;
+
+          /* treba odstranit ten stary */
+          let selector = `button[data-category="${cat}"][data-op="${operator}"]`;
+          const active_filter = added_filters.querySelector(selector);
+          if (active_filter) {
+              active_filter.dataset.value = value;
+
+              /* update toho čo sa tam píše */
+              active_filter.textContent = `${operator} ${value}%`;
+
+              /* odznačíme to čo sme klikli predtým */
+              const element_container = document.querySelector(`.category_entry_list[data-category="${cat}"]`);
+
+              const to_uncheck = element_container.querySelector(`.checkbox_entry[data-value="${old_value}"][data-op="${operator}"]`);
+              uncheck_checkbox_entry(to_uncheck);
+
+          }
+
+          return;
+
+      } else { /* nie je tam, tak pridaj */
+          filters[cat].push({
+              operator: operator,
+              value: value
+          });
+      }
+
     button.setAttribute("data-op", operator);
 
   }
@@ -176,6 +220,10 @@ function add_filter(cat, value, price_arg = "min", operator = "od") {
       button.textContent = operator + ' ' + value + '%';
       break;
 
+    case "brand":
+        button.textContent = display_value;
+      break;
+
     default: //Červená
       button.textContent = value;
 
@@ -189,8 +237,8 @@ function add_filter(cat, value, price_arg = "min", operator = "od") {
 
 
 /* odstráni element, konkrétne vybraný filter */
-function remove_filter(btn, cat, value, price_arg = "min", operator = "od") { 
-  
+function remove_filter(btn, cat, value, price_arg = "min", operator = "od") {
+
   if (cat === "price") { //pre cenu sa nemaže prvok, ale nastaví sa pôvodná hodnota, niečo ako reset
     if (price_arg === "min") {
       filters.price[price_arg] = min_price;
@@ -227,10 +275,9 @@ function remove_filter(btn, cat, value, price_arg = "min", operator = "od") {
 
   /* odškrtnutie tlačidla */
   if (cat != "price") {
-    
     /* nájdem si najprv kontajner a potom v nom nájdem požadovanú value a tej odstránim triedu clicked */
     const element_container = document.querySelector(`.category_entry_list[data-category="${cat}"]`);
-  
+
     let clicked_btn = element_container.querySelector(`.clicked[data-value="${value}"]`); /* ak sa nájde, tak to nie je checkbox */
 
     if (!clicked_btn) { /* potrebujem odceknut checkbox a odstrániť "active" checkmarku */
@@ -239,20 +286,11 @@ function remove_filter(btn, cat, value, price_arg = "min", operator = "od") {
       if (cat === "sale") { /* ak je to zlava, tak musím rozlišovať aj operátor, "od 20" != "do 20" */
         checkbox_entry = element_container.querySelector(`.checkbox_entry[data-value="${value}"][data-op="${operator}"]`);
       }
-      
 
-      const checkbox = checkbox_entry.querySelector('input[type="checkbox"]');
-      const checkmark = checkbox_entry.querySelector('.checkmark');
-
-      checkmark.classList.remove("clicked");
-      setTimeout(() => {
-        checkbox.checked = false;
-        checkbox.dispatchEvent(new Event("change"));
-      }, 10); /* po 10ms sa odškrtne checkmark, je to preto, aby sa to stihlo vizuálne prejaviť */
-      
+      uncheck_checkbox_entry(checkbox_entry);
     }
     else {
-      clicked_btn.classList.remove('clicked');   
+      clicked_btn.classList.remove('clicked');
     }
   }
 
@@ -260,9 +298,63 @@ function remove_filter(btn, cat, value, price_arg = "min", operator = "od") {
 }
 
 
+/** BACKEND QUERY STAVANIE **/
+function build_query(filters) {
 
 
-/* eventListeners */
+    /*** STAVANIE QUERY ***/
+    /** TYP PRODUKTOV **/
+    let url = type.textContent + '/'; // Začiatok URL
+
+
+    /** FILTER **/
+    let filterParts = [];
+
+    if (filters.brand.length > 0) {
+        filterParts.push('brand-' + filters.brand.join('-'));
+    }
+    if (filters.size.length > 0) {
+        filterParts.push('size-' + filters.size.join('-'));
+    }
+    if (filters.color.length > 0) {
+        filterParts.push('color-' + filters.color.join('-'));
+    }
+
+    if (filters.available.length > 0) {
+        filterParts.push('available-' + filters.available.join('-'));
+    }
+
+    if (filters.price.min && filters.price.max) {
+        filterParts.push('price-' + filters.price.min + '-' + filters.price.max);
+    }
+
+    if (filters.sale.length > 0) {
+        let saleParts = filters.sale.map(sale => `${sale.operator}${sale.value}`); // napr. od20, do20
+        filterParts.push('sale-' + saleParts.join('-'));
+    }
+
+
+    if (filters.gender.length > 0) {
+        filterParts.push('gender-' + filters.gender.join('-'));
+    }
+
+    /* spojenie s url */
+    url += filterParts.join('_');
+
+
+    /** ZORADENIE **/
+    const sortSelect = document.getElementById('sort');
+    let orderby = select_sort.value || 'price~asc'; // Default to 'price~asc' if no value is selected
+    url += orderby ? `?orderby=${orderby}` : '';
+
+    return url;
+}
+
+
+
+
+
+/** EVENT* **/
 //zmizne filter, keď kliknem na overlay, mimo menu
 overlay.addEventListener('click', (event) => {
   if (event.target === overlay) {
@@ -274,17 +366,26 @@ overlay.addEventListener('click', (event) => {
 
 
 /* zatvorí filter */
-close_btns.forEach(
-  button => {
-    button.addEventListener('click', (event) => {
-      toggle_filter(true);
-    });
+close_btn.addEventListener('click', (event) => {
+    toggle_filter(true);
 });
 
 
 
+query_btn.addEventListener('click', (event) => {
+    const query = build_query(filters);
+    window.location.href = `/${query}`;
+});
+
+
+select_sort.addEventListener('change', (event) => {
+    const query = build_query(filters);
+    window.location.href = `/${query}`;
+});
+
+
 /* vymaže všetky filtre */
-clear_filter.addEventListener('click', (event) => { 
+clear_filter.addEventListener('click', (event) => {
 
   /* potrebujem odstrániť triedu clicked pre všetky aktívne filtery */
   for (let i = added_filters.children.length-1; i >= 0; i--) { /* vymazávam od konca, lebo sa mi mení zoznam mazaním */
@@ -293,7 +394,7 @@ clear_filter.addEventListener('click', (event) => {
     const value = child.dataset.value;
     const price_arg = child.dataset.priceArg; /* js používa camelCase */
     const operator = child.dataset.op;
-  
+
     remove_filter(child,category,value, price_arg, operator);
   }
 
@@ -317,13 +418,13 @@ clear_filter.addEventListener('click', (event) => {
 
 
 /* otvorí filter menu */
-open_filter.addEventListener('click', (event) => { 
+open_filter.addEventListener('click', (event) => {
   toggle_filter(false);
 });
 
 
 /* odstránia sa vybraté filtre, len ten kliknutý */
-added_filters.addEventListener('click', (event) => { 
+added_filters.addEventListener('click', (event) => {
   const target = event.target;
   remove_filter(target, target.dataset.category, target.dataset.value, target.dataset.priceArg, target.dataset.op);
 });
@@ -340,25 +441,19 @@ filter_menu.addEventListener('click', (event) => {
     if (currentSelected != newSelected) { /* už to netreba znova renderovať ak idem znova na tú istú kat */
       const currentTab = document.querySelector('.fil_cat.selected'); //teraz zvolený v menu
       const newTab = document.querySelector(`.fil_cat[data-category="${targetId}"]`);
-      
+
 
       /* odstráni sa trieda selected od aktuálneho tabu a stlačeného tlačidla*/
       currentSelected.classList.remove('selected');
       if (currentTab) {
         currentTab.classList.remove('selected');
       }
-      
+
 
       /* pridá sa na nové tlačidlo a nový tab */
       newSelected.classList.add('selected');
       newTab.classList.add('selected');
 
-      if (targetId === "size") { /* ak ideme vykresľovať veľkosti, tak sa nech sa vykreslia */
-        render_filter_sizes();
-      }
-      else if (targetId === "color") {
-        render_filter_color_content(); /* vykreslí farby, sú vykreslované cez skript, čiže musím takto */
-      }
 
 
       if (window.innerWidth <= 760) { /* sme na zmenšenom filtri, treba prepnut text */
@@ -377,7 +472,7 @@ filter_menu.addEventListener('click', (event) => {
 /* eventy pre big menu, prepínanie tabov + stláčanie filter (vo veľkom menu) tlačidiel */
 filter_content.addEventListener('click', (event) => {
   const target = event.target;
-  
+
 
 
   /* pre prepínanie tabov */
@@ -396,7 +491,7 @@ filter_content.addEventListener('click', (event) => {
     newSelected.classList.add('selected');
     event.target.classList.add('selected');
 
-    
+
 
     /* ak kliknem ktaegóriu, ktorá už je vykreslená, tak sa neodznačí */
     if (currentSelected != null && currentSelected.dataset.category != targetId) {
@@ -404,18 +499,8 @@ filter_content.addEventListener('click', (event) => {
       const content_sel = document.getElementById(`${act_cat}`); //korešpondujúci filter content
 
       content_sel.classList.remove('selected');
-
       currentSelected.classList.remove('selected');
-
     }
-      
-
-      if (targetId === "size") { /* ak sa prepne size, tak sa vykreslí */
-        render_filter_sizes();
-      }
-      else if (targetId === "color") {
-        render_filter_color_content(); /* vykreslí farby, sú vykreslované cez skript, čiže musím takto */
-      }
 
       if (window.innerWidth <= 760) { /* pri malom okne sa zobrazí šipka späť a upravia sa placeholdery */
         filter_cat_container.style.display = 'none';
@@ -434,8 +519,8 @@ filter_content.addEventListener('click', (event) => {
 
     /* vieme, že buď bude category_entry_list parent alebo parent.parent z nášho layoutu */
     /* teda buď je priamy parent alebo ešte existuje btn_container a potrebujeme ísť ešte o úroveň nižšie */
-    let categoryContainer = target.parentElement.classList.contains("category_entry_list") 
-      ? target.parentElement 
+    let categoryContainer = target.parentElement.classList.contains("category_entry_list")
+      ? target.parentElement
       : target.parentElement.parentElement;
 
 
@@ -444,7 +529,7 @@ filter_content.addEventListener('click', (event) => {
     if (target.matches('.cat_entry_btn, .cat_entry_btn_size')) {
       category = categoryContainer.dataset.category;
       value = target.dataset.value;
-      
+
     }
     else { /* je to checkbox */
       category = categoryContainer.parentElement.dataset.category; /* category entry list, musím prejsť cez checkbox-entry */
@@ -459,21 +544,79 @@ filter_content.addEventListener('click', (event) => {
 
     /* prepínanie triedy clicked */
     if (clicked.classList.contains('clicked')) {
-      
       /* odstráni sa vybraný filter, potrebujem nájsť tlačidlo v added_filters */
-      let selector = `button[data-category="${category}"][data-value="${value}"]`;
-      remove_filter(added_filters.querySelector(selector),category,value, oper);
 
+      let selector = `button[data-category="${category}"][data-value="${value}"]`;
+      remove_filter(added_filters.querySelector(selector),category,value,undefined, oper);
     }
     else {
-      add_filter(category,value,undefined,oper); /* pridám filter do aktívnych filterov */
+        let display_value = "";
+        if (category === 'brand') {
+            const cat_text = categoryContainer.querySelector('.category_text');
+            display_value = cat_text.textContent;
+        }
 
-
-
+      add_filter(category,value,undefined,oper,display_value); /* pridám filter do aktívnych filterov */
       clicked.classList.add('clicked');
     }
 
     /* zoberieme kategoriu z toho categoryContainer a value z tlačidla samotného */
   }
 
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Akonáhle sa dokument načíta
+    const checkboxes = filter_content.querySelectorAll('.checkbox_entry');
+
+    checkboxes.forEach(checkbox => {
+       const checkmark = checkbox.querySelector('.checkmark');
+       if (!checkmark.classList.contains('clicked')) {
+           return;
+       }
+
+       const parent = checkbox.parentElement;
+       const category = parent.dataset.category;
+       const value = checkbox.dataset.value;
+       let display_text;
+       let operator;
+
+       if (category === 'brand') {
+           const cat_text = checkbox.querySelector('.category_text');
+           display_text = cat_text.textContent;
+       }
+
+       if (category === 'sale') {
+           operator = checkbox.dataset.op;
+       }
+
+       add_filter(category,value,undefined,operator,display_text);
+    });
+
+
+    const cat_buttons = filter_content.querySelectorAll('.cat_entry_btn, .cat_entry_btn_size');
+
+    // Spracuj všetky tlačidlá
+    cat_buttons.forEach(function(btn) {
+        if (btn.classList.contains('clicked')) {
+            const parent = btn.parentElement.parentElement;
+            const category = parent.dataset.category;
+            const value = btn.dataset.value;
+
+            add_filter(category,value);
+        }
+    });
+
+
+    /* slidery ešte treba nastaviť */
+    const min_price = filter_content.querySelector('.min_price');
+    const max_price = filter_content.querySelector('.max_price');
+
+    const min_value = parseInt(min_price.value);
+    const max_value = parseInt(max_price.value);
+
+
+    if (min_value != slider_min) { add_filter("price",min_value,"min"); }
+    if (max_value != slider_max) { add_filter("price",max_value,"max"); }
 });

@@ -2,10 +2,10 @@
     <div id="filter_container">
         <div class="top_filter_menu">
             <div class="filt_top">
-                <button id="resize_back_btn"><img src="./icons/back_arrow.svg"></button>
+                <button id="resize_back_btn"><img src="{{ asset('icons/back_arrow.svg') }}"></button>
                 <h2 id="filter_placeholder">Filtre</h2>
                 <button id="close_btn">
-                    <img src="./icons/close_btn_X.svg">
+                    <img src="{{ asset('icons/close_btn_X.svg') }}">
                 </button>
             </div>
 
@@ -34,37 +34,15 @@
                 <div class="category_entry_list" data-category="brand">
                     <h3 class="category_identifier">Značka</h3>
 
-                    <div class="checkbox_entry" data-value="Adidas">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Adidas</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Nike">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Nike</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Puma">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Puma</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Vans">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Vans</span>
-                        </label>
-                    </div>
+                    @foreach($brands as $brand)
+                        <div class="checkbox_entry" data-value="{{ $brand->name }}">
+                            <label class="custom_checkbox">
+                                <input type="checkbox" @if(in_array($brand->name, $appliedFilters['brand'] ?? [])) checked @endif />
+                                <span class="checkmark @if(in_array($brand->name, $appliedFilters['brand'] ?? []))clicked @endif"></span>
+                                <span class="category_text">{{ $brand->display_name }}</span>
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
             </section>
 
@@ -73,7 +51,11 @@
                 <div class="category_entry_list" data-category="size">
                     <h3 class="category_identifier">Veľkosť</h3>
                     <div class="cat_btn_container_sizes">
-
+                        @foreach ($sizes as $size)
+                            <button class="cat_entry_btn_size @if(in_array($size, $appliedFilters['size'] ?? [])) clicked @endif" data-value="{{ number_format($size, 0) }}">
+                                {{ number_format($size, 0) }}
+                            </button>
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -83,9 +65,17 @@
             <section class="category_content" id="color">
                 <div class="category_entry_list" data-category="color">
                     <h3 class="category_identifier">Farba</h3>
-                    <div class="cat_btn_container" >
+                    <div class="cat_btn_container">
+                        @foreach ($colors as $color)
+                            <button class="cat_entry_btn @if(in_array($color->name, $appliedFilters['color'] ?? [])) clicked @endif" data-value="{{ $color->name }}">
+                                @php
+                                    $property_to_add = strpos($color->name, 'Viacfarebný') !== false ? 'background' : 'background-color';
+                                @endphp
+                                <span class="color-box" style="{{ $property_to_add }}: {{ $color->hex }};"></span>
+                                {{ $color->name }}
 
-
+                            </button>
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -94,38 +84,22 @@
             <section class="category_content" id="available">
                 <div class="category_entry_list" data-category="available">
                     <h3 class="category_identifier">Dostupnosť</h3>
-                    <div class="checkbox_entry" data-value="skladom">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Iba skladom</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Bratislava">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Na predajni v Bratislave</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Praha">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Na predajni v Prahe</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Košice">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Na predajni v Košiciach</span>
-                        </label>
-                    </div>
-                </div>
+                    @foreach(['Skladom', 'Bratislava', 'Praha', 'Brno'] as $availability)
+                        <div class="checkbox_entry" data-value="{{ $availability }}">
+                            <label class="custom_checkbox">
+                                <input type="checkbox"
+                                       @if(in_array($availability, $appliedFilters['available'] ?? [])) checked @endif />
+                                <span class="checkmark @if(in_array($availability, $appliedFilters['available'] ?? [])) clicked @endif"></span>
+                                <span class="category_text">
+                                    @if($availability === 'Skladom')
+                                        Iba skladom
+                                    @else
+                                        Na predajni v {{ $availability }}
+                                    @endif
+                                </span>
+                            </label>
+                        </div>
+                @endforeach
             </section>
 
 
@@ -137,12 +111,12 @@
                         <div class="min_max_filter">
 
                             <div class="input_wrapper">
-                                <input type="number" class="min_price" value="0" min="10" max="1000"/>
+                                <input type="number" class="min_price" value="{{ $appliedFilters['price'][0] ?? 0 }}" min="10" max="1000"/>
                                 <span class="currency">€</span>
                             </div>
 
                             <div class="input_wrapper" >
-                                <input type="number" class="max_price" value="1000" min="10" max="1000"/>
+                                <input type="number" class="max_price" value="{{ $appliedFilters['price'][1] ?? 1000 }}" min="10" max="1000"/>
                                 <span class="currency">€</span>
                             </div>
 
@@ -151,8 +125,8 @@
                         <div class="slider_container">
                             <span class="slider_track"></span>
                             <div class="filled_track" id="filled_track"></div>
-                            <input type="range" class="min_slider" min="0" max="1000" value="0" step="20">
-                            <input type="range" class="max_slider" min="0" max="1000" value="1000" step="20">
+                            <input type="range" class="min_slider" min="0" max="1000" value="{{ $appliedFilters['price'][0] ?? 0 }}" step="20">
+                            <input type="range" class="max_slider" min="0" max="1000" value="{{ $appliedFilters['price'][1] ?? 1000 }}" step="20">
                         </div>
                     </div>
 
@@ -163,32 +137,32 @@
 
                         <div class="checkbox_entry" data-op="do" data-value="20">
                             <label class="custom_checkbox">
-                                <input type="checkbox" />
-                                <span class="checkmark"></span>
+                                <input type="checkbox" @if(($appliedFilters['sale']['do'] ?? null) == 20) checked @endif />
+                                <span class="checkmark @if(($appliedFilters['sale']['do'] ?? null) == 20) clicked @endif"></span>
                                 <span class="category_text">do 20%</span>
                             </label>
                         </div>
 
                         <div class="checkbox_entry" data-op="od" data-value="20">
                             <label class="custom_checkbox">
-                                <input type="checkbox" />
-                                <span class="checkmark"></span>
+                                <input type="checkbox" @if(($appliedFilters['sale']['od'] ?? null) == 20) checked @endif />
+                                <span class="checkmark @if(($appliedFilters['sale']['od'] ?? null) == 20) clicked @endif"></span>
                                 <span class="category_text">od 20%</span>
                             </label>
                         </div>
 
                         <div class="checkbox_entry" data-op="do" data-value="40">
                             <label class="custom_checkbox">
-                                <input type="checkbox" />
-                                <span class="checkmark"></span>
+                                <input type="checkbox" @if(($appliedFilters['sale']['do'] ?? null) == 40) checked @endif />
+                                <span class="checkmark @if(($appliedFilters['sale']['do'] ?? null) == 40) clicked @endif"></span>
                                 <span class="category_text">do 40%</span>
                             </label>
                         </div>
 
                         <div class="checkbox_entry" data-op="do" data-value="100">
                             <label class="custom_checkbox">
-                                <input type="checkbox" />
-                                <span class="checkmark"></span>
+                                <input type="checkbox" @if(($appliedFilters['sale']['do'] ?? null) == 100) checked @endif />
+                                <span class="checkmark @if(($appliedFilters['sale']['do'] ?? null) == 100) clicked @endif"></span>
                                 <span class="category_text">Všetky zľavy</span>
                             </label>
                         </div>
@@ -202,33 +176,25 @@
                     <h3 class="category_identifier">Pohlavie</h3>
                     <div class="checkbox_entry" data-value="Pánske">
                         <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
+                            <input type="checkbox" @if(in_array('Pánske', $appliedFilters['gender'] ?? [])) checked @endif />
+                            <span class="checkmark @if(in_array('Pánske', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
                             <span class="category_text">Pánske</span>
                         </label>
                     </div>
 
                     <div class="checkbox_entry" data-value="Dámske">
                         <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
+                            <input type="checkbox" @if(in_array('Dámske', $appliedFilters['gender'] ?? [])) checked @endif />
+                            <span class="checkmark @if(in_array('Dámske', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
                             <span class="category_text">Dámske</span>
                         </label>
                     </div>
 
                     <div class="checkbox_entry" data-value="Unisex">
                         <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
+                            <input type="checkbox" @if(in_array('Unisex', $appliedFilters['gender'] ?? [])) checked @endif />
+                            <span class="checkmark @if(in_array('Unisex', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
                             <span class="category_text">Unisex</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox_entry" data-value="Detské">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" />
-                            <span class="checkmark"></span>
-                            <span class="category_text">Detské</span>
                         </label>
                     </div>
                 </div>
@@ -246,3 +212,21 @@
         </div>
     </div>
 </div>
+
+
+<!-- FILTRUJEME -->
+<!--
+
+treba mi specificky:
+BRAND, COLOR, GENDER, SEASON, kolko ich je, IN_STOCK
+
+-zmenim in_stock na [je, nie je, predajna x,y,z]
+
+necham všeobecne:
+PRICE, DISCOUNT,
+
+
+
+
+-->
+

@@ -24,12 +24,13 @@ class Product extends Model
         'category_id',
         'supplier_id',
         'stock_quantity',
-        'brand',
+        'brand_id',
 
-        'in_stock',    // boolean (na sklade / vypredané)
+        'available',    // boolean (na sklade / vypredané)
         'gender',      // string (napr. 'Pánske', 'Dámske', 'Unisex')
-        'color',       // string (napr. 'Biela', 'Čierna'...)
+        'color_id',       // string (napr. 'Biela', 'Čierna'...)
         'type',        // string (napr. 'Tenisky', 'Tričko'...)
+        'season_id',
     ];  // :contentReference[oaicite:0]{index=0}
 
     /**
@@ -41,9 +42,8 @@ class Product extends Model
         'price'          => 'decimal:2',
         'discount'       => 'decimal:2',
         'stock_quantity' => 'integer',
-        'in_stock'       => 'boolean',
     ];  // :contentReference[oaicite:1]{index=1}
-    
+
     public const UPDATED_AT = null;
 
     /**
@@ -54,6 +54,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }  // :contentReference[oaicite:2]{index=2}
 
+    public function season()
+    {
+        return $this->belongsTo(Season::class);
+    }
+
+
     /**
      * Vzťah na dodávateľa – každý produkt má jedného dodávateľa.
      */
@@ -61,26 +67,34 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class);
     }  // :contentReference[oaicite:3]{index=3}
-    
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
-    
-    
+
+
     public function productSizes()
     {
         return $this->hasMany(ProductSize::class);
     }
 
-    // (Voliteľne môžeš nechať aj sizes(), ak chceš obe aliasy)
+    public function color()
+    {
+        return $this->belongsTo(Color::class);  // každý produkt patrí k jednej farbe
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function sizes()
     {
         return $this->hasMany(ProductSize::class);
     }
-    /**
-     * Pole dostupných US veľkostí (napr. ["8","10","12"]).
-     */
+
+
     public function availableSizes(): array
     {
         return $this->productSizes()
