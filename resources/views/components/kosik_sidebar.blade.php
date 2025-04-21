@@ -20,7 +20,7 @@
       : collect();
     }  
 @endphp
-
+<p>{{ auth()->user() ?? 'ne'}}</p>
     @forelse($cartItems as $item)
         <div class="kosik_sidebar_item">
             <!-- 1) Obrázok produktu -->

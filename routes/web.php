@@ -70,9 +70,7 @@ Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->nam
 
 
 Route::view('/kosik', 'kosik')->name('kosik');
-Route::get('/kosik', [KosikController::class, 'index'])
-     ->name('kosik')
-     ->middleware('auth');
+Route::get('/kosik', [KosikController::class, 'index'])->name('kosik');
 
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');
