@@ -11,20 +11,34 @@ class KosikController extends Controller
 {
     public function index(Request $request)
     {
+        // Vždy získame aktuálnu session ID
+        $sessionId = $request->session()->getId();
+        // Pokúsi sa vrátiť prihláseného používateľa, ak neexistuje -> null
         $user = auth()->user();
-        $items = Auth::user()
-                    ->cartItems()
-                    ->with('product')
-                    ->get();
-
-        // voliteľne: získať shipping adresu
-        $shipping = $user->address
-                          ->firstWhere('address_type', 'shipping');
-
+    
+        if ($user) {
+            // prihlásený
+            $items = $user
+                ->cartItems()
+                ->with('product')
+                ->get();
+    
+            $shipping = $user
+                ->address
+                ->firstWhere('address_type', 'shipping');
+        } else {
+            // hosť
+            $items = CartItem::with('product')
+                ->where('session_id', $sessionId)
+                ->get();
+    
+            $shipping = null;
+        }
+    
         return view('kosik', [
             'user'     => $user,
             'shipping' => $shipping,
-            'items' => $items
+            'items'    => $items,
         ]);
     }
 }

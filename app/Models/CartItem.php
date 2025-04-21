@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CartItem extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['user_id', 'product_id', 'quantity', 'size'];
+    protected $fillable = ['user_id', 'session_id', 'product_id', 'quantity', 'size'];
 
     public function user(): BelongsTo
     {
@@ -18,5 +18,9 @@ class CartItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function session()
+    {
+        return $this->belongsTo(Session::class, 'session_id', 'id');
     }
 }
