@@ -67,9 +67,8 @@
                     </div>
 
                     
-                    <form action="{{ route('cart.store') }}" method="POST" class="pridavanie-do-kosika-form">
+<form action="{{ route('cart.store') }}" method="POST" class="pridavanie-do-kosika-form">
     @csrf
-
     {{-- Skryté políčko s ID produktu --}}
     <input type="hidden" name="product_id" value="{{ $product->id }}">
 

@@ -154,9 +154,16 @@ return new class extends Migration
 
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-            ->constrained('users', 'user_id')
-            ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->string('session_id')->nullable();
+            
+            // tu pridáme index a FK na sessions.id
+            $table->string('session_id')->nullable()->index();
+            $table->foreign('session_id')
+                ->references('id')
+                ->on('sessions')
+                ->onDelete('cascade');
+
             $table->foreignId('product_id')
                   ->constrained()
                   ->onDelete('cascade');  // ak sa zmaže produkt, položka sa vymaže

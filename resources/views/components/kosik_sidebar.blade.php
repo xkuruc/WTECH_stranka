@@ -9,6 +9,18 @@
 
 
 <div class="kosik_sidebar_items_container">
+
+
+@php
+  use App\Models\Session as SessionModel;
+  if(! auth()->check() ){
+    $sessionModel = SessionModel::find(session()->getId());
+  $cartItems = $sessionModel
+      ? $sessionModel->cartItems()->with('product')->get()
+      : collect();
+    }  
+@endphp
+
     @forelse($cartItems as $item)
         <div class="kosik_sidebar_item">
             <!-- 1) Obrázok produktu -->

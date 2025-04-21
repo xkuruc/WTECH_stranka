@@ -16,8 +16,7 @@ class KosikController extends Controller
                     ->cartItems()
                     ->with('product')
                     ->get();
-
-        // voliteľne: získať shipping adresu
+        
         $shipping = $user->address
                           ->firstWhere('address_type', 'shipping');
 

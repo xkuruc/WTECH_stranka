@@ -52,12 +52,16 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
 });
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
-    Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
+//     Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
+//     Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');
+//     Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
+// });
+Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
+Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 
 Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');

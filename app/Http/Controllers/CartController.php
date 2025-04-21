@@ -9,15 +9,48 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function index()
-    {
-        $items = Auth::user()
-                    ->cartItems()
-                    ->with('product')
-                    ->get();
+//     public function index()
+// {
+//     $query = CartItem::with('product');
+    
+//     if ( auth()->id() === null ) {
+//         $query->where('session_id', session()->getId());
+        
+//     } else {
+        
+//         $query->where('user_id', Auth::id())
+//               ->orWhere('session_id', session()->getId());
+//     }
 
-        return view('cart.index', compact('items'));
-    }
+//     $items = $query->get();
+
+//     return view('cart.index', compact('items'));
+// }
+public function index()
+{
+    $sessionId = session()->getId();
+
+    $items = CartItem::with('product')
+        ->when(
+            auth()->check(),
+            // ak je prihlásený
+            function ($query) use ($sessionId) {
+                $userId = auth()->id();
+                // zoskupíme OR podmienky do jednej zátvorky
+                $query->where(function ($q) use ($userId, $sessionId) {
+                    $q->where('user_id', $userId)
+                      ->orWhere('session_id', $sessionId);
+                });
+            },
+            // ak nie je prihlásený
+            function ($query) use ($sessionId) {
+                $query->where('session_id', $sessionId);
+            }
+        )
+        ->get();
+
+    return view('cart.index', compact('items'));
+}
 
     /**
      * Pridá (alebo navýši) položku v košíku.
@@ -26,32 +59,48 @@ class CartController extends Controller
      */
     public function store(Request $request)
 {
+    // 1. Validácia vstupu
     $data = $request->validate([
         'product_id' => 'required|exists:products,id',
         'quantity'   => 'nullable|integer|min:1',
         'size'       => 'required|string',
     ]);
 
-    // teraz bude $request->user() vždy objekt User
-    $user = $request->user();
-    $qty  = $data['quantity'] ?? 1;
+    // 2. Zisti, či je používateľ prihlásený, inak použij session ID
+    $user      = $request->user();               // null, ak hosť
+    $sessionId = $request->session()->getId();
 
-    // položky sa kombinujú podľa user_id + product_id + size
+    $ownerKey   = $user ? 'user_id' : 'session_id';
+    $ownerValue = $user ? $user->user_id : $sessionId;
+
+    $qty = $data['quantity'] ?? 1;
+
+    // 3. Nájde existujúcu alebo vytvorí novú položku podľa vlastníka + produktu + veľkosti
     $item = CartItem::firstOrNew([
-        'user_id'    => $user->user_id,
         'product_id' => $data['product_id'],
         'size'       => $data['size'],
+        $ownerKey    => $ownerValue,
     ]);
+    if ($item->exists) {
+        $item->quantity += $qty;// ak už je v košíku, pridáme k existujúcemu množstvu
+    } else {
+        $item->quantity = $qty; // ak je novo vytvorený, nastavíme množstvo
+    }
 
-    $item->quantity = ($item->exists ? $item->quantity : 0) + $qty;
-    $item->size     = $data['size'];
-
+    if ($user) {
+        $item->user_id    = $user->user_id;
+        $item->session_id = null;
+    } else {
+        $item->user_id    = null;
+        $item->session_id = $sessionId;
+    }
     $item->save();
 
     return redirect()
         ->back()
         ->with('success', "Pridané do košíka: {$item->product->name} (Veľkosť: {$item->size}, Množstvo: {$item->quantity}).");
 }
+
 
 
     /**
