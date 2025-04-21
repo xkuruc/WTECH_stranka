@@ -157,4 +157,28 @@ public function index()
 
         return back()->with('toggle_sidebar', true);
     }
+    public function submit(Request $request)
+    {
+        // 1) Validácia vstupov
+        $data = $request->validate([
+            'meno'     => 'required|string|max:255',
+            'email'    => 'required|email',
+            // ... ďalšie pravidlá podľa polí
+        ]);
+
+
+        $sessionId = $request->session()->getId();
+
+        if (auth()->check()) {
+            // prihlásený používateľ – vymaž jeho všetky položky
+            CartItem::where('user_id', auth()->id())->delete();
+        } else {
+            // hosť – vymaž všetko viazané na session_id
+            CartItem::where('session_id', $sessionId)->delete();
+        }
+        
+
+        // 3) Redirect späť s úspešnou správou
+        return redirect('/')->with('success', 'Všetko prebehlo v poriadku!');
+    }
 }

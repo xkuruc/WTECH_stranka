@@ -68,6 +68,7 @@ Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->nam
 Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
 
 
+Route::post('/submit', [CartController::class, 'submit'])->name('cart.submit');
 
 Route::view('/kosik', 'kosik')->name('kosik');
 Route::get('/kosik', [KosikController::class, 'index'])->name('kosik');

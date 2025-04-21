@@ -40,69 +40,52 @@
                             <div class="element_napis"> Dodacia adresa</div>
                             <div class="emial_container">
                                 <label for="input_email"> E-mail adresa <span class="hviezdicka">*</span></label>
-                                <!-- <input class="pokladna_input" id="input_email" type="text" name="email"  placeholder="Email*" required> -->
-                                <input class="pokladna_input" id="input_email" type="email" name="email" placeholder="Email*" required 
-                                @if(auth()->check())
-    value="{{ old('email', auth()->user()->email) }}"
-        @endif>
+                                <input class="pokladna_input" id="input_email" type="email" name="email" placeholder="Email*" required  value="{{ old('email', optional(auth()->user())->email) }}" >
                                 
                                 
                             </div>
                             <div class="dalsie_info_container">
                                 <div class="dalsie_info_div1">
                                     <label for="meno_input"> Meno <span class="hviezdicka">*</span></label>
-                                    <!-- <input class="pokladna_input" id="meno_input" type="text" name="meno"  placeholder="Meno*" required> -->
-                                    <input class="pokladna_input" id="meno_input" type="text" name="meno" placeholder="Meno*" required 
-                                    @if(auth()->check())
-    value="{{ old('meno', auth()->user()->meno) }}"
-        @endif>
+                                    <input class="pokladna_input" id="meno_input" type="text" name="meno" placeholder="Meno*" value="{{ old('meno', optional(auth()->user())->meno) }}" required>
                                 </div>
 
                                 <div class="dalsie_info_div2">
                                     <label for="priezvisko_input"> Priezvisko <span class="hviezdicka">*</span></label>
-                                    <!-- <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko"  placeholder="Priezvisko*" required> -->
-                                    <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko" placeholder="Priezvisko*" required 
-                                    @if(auth()->check())
-    value="{{ old('priezvisko', auth()->user()->priezvisko) }}"
-        @endif >
+                                    <input class="pokladna_input" id="priezvisko_input" type="text" name="priezvisko" placeholder="Priezvisko*"  value="{{ old('priezvisko', optional(auth()->user())->priezvisko) }}" required>
                                 </div>
 
 
                                 <div class="dalsie_info_div3">
-                                    <label for="tel_cislo_input"> Telefónne číslo <span class="hviezdicka">*</span></label>
-                                    <!-- <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo"  placeholder="Tel číslo*" required> -->
-                                    <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo" placeholder="Tel číslo*" required 
-                                    @if(auth()->check())
-    value="{{ old('tel', auth()->user()->telephone) }}"
-        @endif >
+                                    <label for="tel_cislo_input"> Telefónne číslo <span class="hviezdicka">*</span></label> 
+                                    <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo" placeholder="Tel číslo*"  value="{{ old('tel', optional(auth()->user())->telephone) }}" required>
                                 </div>
 
 
                                 <div class="dalsie_info_div4">
                                     <label for="adresa_input"> Adresa <span class="hviezdicka">*</span></label>
-                                    <!-- <input class="pokladna_input" id="adresa_input" type="text" name="adresa"  placeholder="Adresa*" required> -->
-                                    <input class="pokladna_input" id="adresa_input" type="text" name="adresa" placeholder="Adresa*" required value="{{ old('adresa', optional($shipping)->ulica) }}" >
+                                    <input class="pokladna_input" id="adresa_input" type="text" name="adresa" placeholder="Adresa*" value="{{ old('adresa', optional($shipping)->ulica) }}"  required>
                                 </div>
 
 
                                 <div class="dalsie_info_div5">
                                     <label for="cislo_input"> Číslo <span class="hviezdicka">*</span></label>
                                     <!-- <input class="pokladna_input" id="cislo_input" type="text" name="cislo"  placeholder="Číslo*" required> -->
-                                    <input class="pokladna_input" id="cislo_input" type="text" name="cislo" placeholder="Číslo*" required value="{{ old('cislo', optional($shipping)->cisloDomu) }}" >
+                                    <input class="pokladna_input" id="cislo_input" type="text" name="cislo" placeholder="Číslo*"  value="{{ old('cislo', optional($shipping)->cisloDomu) }}" required>
                                 </div>
 
 
                                 <div class="dalsie_info_div6">
                                     <label for="mesto_input"> Mesto <span class="hviezdicka">*</span></label>
                                     <!-- <input class="pokladna_input" id="mesto_input" type="text" name="mesto"  placeholder="Mesto*" required> -->
-                                    <input class="pokladna_input" id="mesto_input" type="text" name="mesto" placeholder="Mesto*" required value="{{ old('mesto', optional($shipping)->mesto) }}" >
+                                    <input class="pokladna_input" id="mesto_input" type="text" name="mesto" placeholder="Mesto*"  value="{{ old('mesto', optional($shipping)->mesto) }}" required>
                                 </div>
 
 
                                 <div class="dalsie_info_div7">
                                     <label for="psc_input"> PSČ <span class="hviezdicka">*</span></label>
                                     <!-- <input class="pokladna_input" id="psc_input" type="text" name="psc"  placeholder="PSČ*" required required pattern="[0-9]{5}"> -->
-                                    <input class="pokladna_input" id="psc_input" type="text" name="psc" placeholder="PSČ*" value="{{ old('psc', optional($shipping)->psc) }}" >
+                                    <input class="pokladna_input" id="psc_input" type="text" name="psc" placeholder="PSČ*" value="{{ old('psc', optional($shipping)->psc) }}" required>
                                 </div>
 
 
@@ -254,7 +237,8 @@
                                     <span id="celkom_bez_dph_specified"> {{ number_format($total, 2) }}</span>
                                 </div>
                             </div>
-                            <button type="submit" class="objednat_button" onclick="window.location.href='{{ url('/') }}'"> OBJEDNAŤ </button>
+                            <!-- onclick="window.location.href='{{ url('/') }}' -->
+                            <button type="submit" class="objednat_button"> OBJEDNAŤ </button>
                         </div>
                     </div>
                 </div>
