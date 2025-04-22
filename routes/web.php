@@ -33,6 +33,7 @@ Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])-
 Route::get('/polozka-produktu/{product}', [ProductController::class, 'show'])->name('products.show');
 
 
+
 Route::prefix('/polozka-produktu/{product}')->group(function(){
     Route::get('sizes',       [ProductSizeController::class, 'index'])
          ->name('products.sizes.index');
@@ -71,3 +72,4 @@ Route::get('/kosik', [KosikController::class, 'index'])->name('kosik');
 
 require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');
+

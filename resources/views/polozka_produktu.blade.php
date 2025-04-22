@@ -199,17 +199,17 @@
                 </div>
             </section>
 
-            <div class="label"> Naposledy pozreté</div>
+            <div class="label"> Todays pick</div>
             <section class="product_slider">
                 <div class="slider-container">
-
-                    <div class="owl-carousel owl-carouselBRATU ">
-                        <div class="itemBRATU">1</div>
-                        <div class="itemBRATU">2</div>
-                        <div class="itemBRATU">3</div>
-                        <div class="itemBRATU">4</div>
-                        <div class="itemBRATU">5</div>
-                        <div class="itemBRATU">6</div>
+                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
+                    <div class="owl-carousel owl-carouselBRATU">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6.jpg') }}" alt="">
                     </div>
                 </div>
             </section>
