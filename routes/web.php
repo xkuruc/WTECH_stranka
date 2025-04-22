@@ -55,6 +55,12 @@ Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.upd
 Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 
+/* full text search */
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+
+
+
+/* košík */
 Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
 

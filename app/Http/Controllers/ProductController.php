@@ -201,6 +201,100 @@ class ProductController extends Controller
         return view('polozka_produktu', compact('product', 'discountedImages'));
     }
 
+    public function search(Request $request)
+    {
+
+        /** SPRACOVANIE VSTUPU  **/
+        $query = $request->input('query', '');
+
+        /* odstránime čiarky a rozdelíme vstup tam, kde sú medzery napr. "pánske lopty" -> ["pánske","lopty"]*/
+        $query = str_replace(',', '', $query);
+        $words = explode(' ', $query);
+        $type = null;
+
+        /* query builder */
+        $productsQuery = Product::query();
+
+        /* pre každé slovo zistíme, či nepatrí do nejakej kategórie a výsledky spojíme cez AND */
+        foreach ($words as $word) {
+            if (Product::where('type', 'ILIKE', '%' . $word . '%')->exists()) {
+                $type = $word;
+            }
+
+            $productsQuery->where(function($q) use ($word) {
+                $q->whereRaw("to_tsvector('simple', coalesce(name, '') || ' ' || coalesce(description, '')) @@ to_tsquery('simple', ?)", [$word]) /* názov, popis produktu*/
+                    ->orWhere('gender', 'ILIKE', '%' . $word . '%') /* pohlavie */
+                    ->orWhere('type', 'ILIKE', '%' . $word . '%') /* typ produktu */
+                    ->orWhereHas('color', function ($colorQuery) use ($word) { /* farba */
+                        $colorQuery->where('name', 'ILIKE', '%' . $word . '%');
+                    })
+                    ->orWhereHas('brand', function ($brandQuery) use ($word) { /* značku nájde aj name aj display_name*/
+                        $brandQuery->whereRaw("to_tsvector('simple', coalesce(name, '') || ' ' || coalesce(display_name, '')) @@ to_tsquery('simple', ?)", [$word])
+                            ->orWhere('name', 'ILIKE', '%' . $word . '%');
+                    })
+                    ->orWhereHas('season', function ($seasonQuery) use ($word) { /* sezóna */
+                        $seasonQuery->where('name', 'ILIKE', '%' . $word . '%');
+                    });
+            });
+        }
+
+        $products = $productsQuery->paginate(12);
+
+
+        echo $type;
+
+
+
+
+
+
+        /** UDAJE DO VELKEHO FILTRA **/
+        /* značky pre ten typ produktu */
+        $brands = Product::join('brands', 'products.brand_id', '=', 'brands.id')
+            ->when($type && $type !== 'Vypredaj', function ($query) use ($type) {
+                return $query->where('products.type', $type);
+            })
+            ->distinct()
+            ->select('brands.name', 'brands.display_name')
+            ->orderBy('brands.display_name')
+            ->get();
+
+
+        /* farby pre ten typ produktu */
+        $colors = Product::join('colors', 'products.color_id', '=', 'colors.id')
+            ->distinct()
+            ->distinct('colors.name') /* len unikátne farby */
+            ->select('colors.name', 'colors.hex')
+            ->get();
+
+
+        /* zoradenie farieb */
+        $colors = $colors->sortBy(function($color) {
+            return strpos($color->name, 'Viacfarebný') === false ? 0 : 1;
+        });
+
+
+        /* velkosti pre ten typ produktu */
+        $sizes = \DB::table('product_sizes')
+            ->join('products', 'products.id', '=', 'product_sizes.product_id')
+            ->where('product_sizes.pocet', '>', 0)
+            ->distinct() /* len unikátne */
+            ->orderBy('product_sizes.us_velkost') /* zoradí podľa veľkosti */
+            ->pluck('product_sizes.us_velkost');
+
+
+
+
+        /** ZLAVNENE OBRAZKY **/
+        $discountedImages = $products->where('discount', '>', 0)
+            ->pluck('images')
+            ->flatten();
+
+        // Vrátime view s produktami a hľadaným textom
+        return view('search_results', compact('products', 'query', 'brands', 'colors', 'sizes'));
+
+    }
+
 
     /* todo
     - opraviť cesty k tým typom

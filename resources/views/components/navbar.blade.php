@@ -144,7 +144,10 @@
 
     </div>
     <div class="right_part">
-        <input class="vyhladaj_input"/>
+        <form action="{{ route('search') }}" method="GET">
+            <input class="vyhladaj_input" type="text" name="query" placeholder="Vyhľadajte produkt..." value="{{ request()->query('query') }}">
+            <button type="submit">Hľadať</button>
+        </form>
         <!-- <a href="prihlasenie.blade.php" class="logo_link"><div class="profil">PROFIL </div></a> -->
 
         <ul>

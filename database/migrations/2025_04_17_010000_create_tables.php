@@ -146,6 +146,7 @@ return new class extends Migration
             $table->foreignId('brand_id')
                 ->constrained('brands')
                 ->onDelete('set null'); /* brand */
+            $table->text('search_vector')->nullable(); /* pre full-text */
         });
 
 
@@ -193,6 +194,32 @@ return new class extends Migration
             $table->string('size')->after('quantity');
         });
 
+
+
+
+        /* full text vyhladavanie */
+        // Vytvoríme GIN index pre efektívne vyhľadávanie
+
+
+        // Naplníme existujúce produkty dátami
+        DB::statement("
+            UPDATE products
+            SET search_vector = to_tsvector('simple', coalesce(products.name, '') || ' ' ||
+                                                 coalesce(products.description, '') || ' ' ||
+                                                 coalesce(products.gender, '') || ' ' ||
+                                                 coalesce((SELECT display_name FROM brands WHERE brands.id = products.brand_id), '') || ' ' ||
+                                                 coalesce(brands.name, '') || ' ' ||
+                                                 coalesce(colors.name, '') || ' ' ||
+                                                 coalesce(seasons.name, '') || ' ' ||  -- Pridáme season (názov sezóny)
+                                                 coalesce(products.type, '')         -- Pridáme type (string)
+            )
+            FROM brands, colors, seasons
+            WHERE products.brand_id = brands.id
+            AND products.color_id = colors.id
+            AND products.season_id = seasons.id;
+        ");
+
+        DB::statement('CREATE INDEX products_search_vector_index ON products USING GIN (search_vector gin_trgm_ops)');
     }
 
     public function down(): void
@@ -205,12 +232,17 @@ return new class extends Migration
         Schema::dropIfExists('shippings');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('order_items');
-        Schema::dropIfExists('orders');
         Schema::dropIfExists('colors');
         Schema::dropIfExists('brands');
         Schema::dropIfExists('product_reviews');
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('products');
+
+        DB::statement('DROP INDEX IF EXISTS products_search_vector_index');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('search_vector');
+        });
+
         Schema::dropIfExists('categories');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('sessions');
