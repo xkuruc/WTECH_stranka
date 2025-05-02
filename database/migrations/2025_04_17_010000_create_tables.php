@@ -77,6 +77,7 @@ return new class extends Migration
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Názov farby (Červená, Modrá, ...)
+            $table->string('sklon_name'); /* pre sklonovanie */
             $table->string('hex'); // Hex kód alebo linear gradient
             $table->timestamps();
         });

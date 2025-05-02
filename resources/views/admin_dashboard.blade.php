@@ -48,11 +48,11 @@
             <!-- zoradiť podľa menučko -->
             <div class="orderby_menu">
                 <p>Zoradiť podľa: </p>
-                <select id="Najnovšie" name="ovocie">
-                  <option value="Najnovšie">Najnovšie</option>
-                  <option value="Najlacnejšie">Najlacnejšie</option>
-                  <option value="Najdrahšie">Najdrahšie</option>
-                  <option value="Najpredávanejšie">Najpredávanejšie</option>
+                <select id="sort">
+                    <option value="" disabled selected hidden>Vyber zoradenie</option>
+                    <option value="price~asc" {{ request()->query('orderby') === 'price~asc' ? 'selected' : '' }}>Najlacnejšie</option>
+                    <option value="price~desc" {{ request()->query('orderby') === 'price~desc' ? 'selected' : '' }}>Najdrahšie</option>
+                    <option value="latest" {{ request()->query('orderby') === 'latest' ? 'selected' : '' }}>Najnovšie</option>
                 </select>
             </div>
 
@@ -60,282 +60,93 @@
             <!-- obrázky a info/ceny k nim pochádzajú zo stránky https://www.thestreets.sk/ -->
             <!-- zoznam produktov -->
             <div class="product_list">
-                <article class="product_item_relative" id="add_product">
-                    <div class="item_img"></div>
+                @foreach($products as $product)
+                    <a href="{{ route('products.show', $product) }}" class="product_link">
+                        <article class="product_item_relative">
+                            <div class="item_img">
+                                <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
+                            </div>
+                            <div class="product_info">
+                                <p class="product_label">{{ $product->name }}</p>
 
-                    <div class="product_info">
-                        <p>Pridať nový produkt</p>
-                        <p><strong>0,00 €</strong></p>
-                    </div>
+                                @if($product->discount > 0)
+                                    <div class="discounted_price">
+                                        <strong>
+                                            {{ number_format($product->price * (1 - $product->discount / 100), 2) }} €
+                                        </strong>
 
-                    <div class="sale_placeholder">-??%</div>
-                </article>
+                                        <span class="old_price" style="text-decoration: line-through; color: #888;">
+                                        {{ number_format($product->price, 2) }} €
+                                    </span>
+                                    </div>
+                                    <!-- zlava -->
+                                    <div class="sale_placeholder">
+                                        -{{ round($product->discount) }}%
+                                    </div>
+                                @else
+                                    <strong>
+                                        {{ number_format($product->price), 2}} €
+                                    </strong>
+                            @endif
 
+                        </article>
+                    </a>
+                @endforeach
 
-                <article class="product_item_relative" data-product-id="1">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-20%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="2">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-30%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="3">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-50%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-
-                <article class="product_item_relative" data-product-id="4">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka4.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Foamposite One "Black Volt"</p>
-                        <p><strong>230,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-10%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-
-                <article class="product_item_relative" data-product-id="5">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka5.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
-                        <p><strong>200,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-15%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="6">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka6.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>New Balance U327SKC</p>
-                        <p><strong>120,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-80%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="1">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-20%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="2">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-30%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="3">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-50%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-
-                <article class="product_item_relative" data-product-id="4">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka4.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Foamposite One "Black Volt"</p>
-                        <p><strong>230,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-10%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-
-                <article class="product_item_relative" data-product-id="5">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka5.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Nike Air Zoom G.T. Cut 3 "Blue Fury"</p>
-                        <p><strong>200,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-15%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="6">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka6.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>New Balance U327SKC</p>
-                        <p><strong>120,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-80%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="1">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>NIKE SABRINA 2 “FRESH MINT” WMNS</p>
-                        <p><strong>130,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-20%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="2">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka2.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball MB.04 "Creativity Pack"</p>
-                        <p><strong>135,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-30%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
-
-                <article class="product_item_relative" data-product-id="3">
-                    <div class="item_img">
-                        <img src="./images/sample_topanka3.jpg">
-                    </div>
-
-                    <div class="product_info">
-                        <p>Puma x LaMelo Ball La France "Chrome Silver"</p>
-                        <p><strong>110,00 €</strong></p>
-                    </div>
-
-                    <div class="sale_placeholder">-50%</div>
-                    <button class="trash_can">
-                        <img src="./icons/kos_icon.png">
-                    </button>
-                </article>
+                @if($products->isEmpty())
+                    <p>Žiadne produkty na zobrazenie.</p>
+                @endif
             </div>
 
 
 
             <!-- stránkovanie -->
             <nav class="page_number_list">
-                <button id="prev_page_btn"><img src="./icons/filter_sipka.svg"></button>
+                {{-- Predchadzajuca stranka --}}
+                @if($products->onFirstPage())
+                    <button id="prev_page_btn" disabled>
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Predchádzajúca">
+                    </button>
+                @else
+                    <button id="prev_page_btn"
+                            onclick="location.href='{{ $products->previousPageUrl() }}'">
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Predchádzajúca">
+                    </button>
+                @endif
+
                 <div id="page_list">
-                    <button class="page_number active",id="page1">1</button>
-                    <button class="page_number",id="page2">2</button>
-                    <button class="page_number",id="page3">3</button>
-                    <button class="page_number",id="page4">4</button>
+                    {{-- Dynamicky generovane cisla stranok --}}
+                    @for ($page = 1; $page <= $products->lastPage(); $page++)
+                        <button class="page_number {{ $page == $products->currentPage() ? 'active' : '' }}"
+                                onclick="location.href='{{ $products->url($page) }}'">
+                            {{ $page }}
+                        </button>
+                    @endfor
                 </div>
-                <button id="next_page_btn"><img src="./icons/filter_sipka.svg"></button>
-                <script src="./javascript/page_number.js"></script>
+
+                {{-- dalsia stranka --}}
+                @if($products->hasMorePages())
+                    <button id="next_page_btn"
+                            onclick="location.href='{{ $products->nextPageUrl() }}'">
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Ďalšia">
+                    </button>
+                @else
+                    <button id="next_page_btn" disabled>
+                        <img src="{{ asset('icons/filter_sipka.svg') }}" alt="Ďalšia">
+                    </button>
+                @endif
             </nav>
         </section>
 
 
         <!-- filter overlay -->
-        @include('components.big_filter')
+        @include('components.big_filter', [
+            'brands' => $brands,
+            'colors' => $colors,
+            'sizes' => $sizes,
+            'filters' => $appliedFilters
+        ])
+
 
         <!-- popup okno -->
         @include('components.popup')

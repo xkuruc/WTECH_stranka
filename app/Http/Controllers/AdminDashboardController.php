@@ -37,8 +37,8 @@ class AdminDashboardController
     public function dashboard()
     {
         if (session('visited_admin_dashboard')) {
-            $produkty = Product::all(); // alebo s paginate()
-            return view('admin_dashboard', compact('produkty'));
+            $products = Product::paginate(12); // alebo s paginate()
+            return view('admin_dashboard', compact('products'));
         }
         else {
             return view('admin_dash_login');

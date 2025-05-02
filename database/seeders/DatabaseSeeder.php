@@ -38,14 +38,14 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $colors = [
-            ['name' => 'Červená', 'hex' => 'red'],
-            ['name' => 'Modrá', 'hex' => 'blue'],
-            ['name' => 'Zelená', 'hex' => 'green'],
-            ['name' => 'Oranžová', 'hex' => 'orange'],
-            ['name' => 'Fialová', 'hex' => 'purple'],
-            ['name' => 'Biela', 'hex' => 'white'],
-            ['name' => 'Čierna', 'hex' => 'black'],
-            ['name' => 'Viacfarebný', 'hex' => 'linear-gradient(90deg, rgb(20, 190, 130) 0%, rgb(193, 255, 0) 33%, rgb(255, 85, 85) 67%, rgb(0, 92, 198) 100%)']
+            ['name' => 'Červená', 'sklon_name' => 'Červené', 'hex' => 'red'],
+            ['name' => 'Modrá', 'sklon_name' => 'Modré', 'hex' => 'blue'],
+            ['name' => 'Zelená', 'sklon_name' => 'Zelené', 'hex' => 'green'],
+            ['name' => 'Oranžová', 'sklon_name' => 'Oranžové', 'hex' => 'orange'],
+            ['name' => 'Fialová', 'sklon_name' => 'Fialové', 'hex' => 'purple'],
+            ['name' => 'Biela', 'sklon_name' => 'Biele', 'hex' => 'white'],
+            ['name' => 'Čierna', 'sklon_name' => 'Čierne', 'hex' => 'black'],
+            ['name' => 'Viacfarebný', 'sklon_name' => 'Viacfarebné', 'hex' => 'linear-gradient(90deg, rgb(20, 190, 130) 0%, rgb(193, 255, 0) 33%, rgb(255, 85, 85) 67%, rgb(0, 92, 198) 100%)']
         ];
 
         foreach ($colors as $color) {

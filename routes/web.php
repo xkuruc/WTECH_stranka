@@ -50,6 +50,16 @@ Route::get('{type}/{filters?}', [ProductController::class, 'index'])
     ->where('filters', '.*')
     ->name('products.index');
 
+
+/* search produktov */
+Route::get('search', [ProductController::class, 'search'])
+    ->name('products.search')
+    ->where('query', '.*')  // Akceptuje akúkoľvek hodnotu pre `query`
+    ->where('filters', '.*');
+
+
+
+
 Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');

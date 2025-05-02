@@ -31,7 +31,7 @@
 
     <main>
         <!-- filter menu -->
-        @include('components.filter_menu', ['title' => $type ? ucfirst($type) : 'Výpredaj'])
+        @include('components.filter_menu', ['title' => isset($query) ? 'Search pre: ' . $query : ($type ? ucfirst($type) : 'Výpredaj')])
 
 
         <section class="produkty_kontajner">
