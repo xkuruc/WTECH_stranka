@@ -396,7 +396,7 @@ added_filters.addEventListener('click', (event) => {
 
 /* event pre všetky tlačidlá filter slideru */
 filter_menu.addEventListener('click', (event) => {
-  if (event.target.matches('.filter_menu_item')) { /* ak som klikol na menu_item, tak sa otvorí požadovaný tab */
+  if (event.target.matches('.filter_menu_item') && event.target.id != 'filter_open_btn') { /* ak som klikol na menu_item, tak sa otvorí požadovaný tab */
     const currentSelected = document.querySelector('.category_content.selected'); //aktívny filter content
     const targetId = event.target.dataset.category;
     const newSelected = document.getElementById(`${targetId}`); /* ktorý tab/filter content sa má otvoriť */

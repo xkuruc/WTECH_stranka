@@ -19,7 +19,7 @@
 
 }
 
-.product_images, .product_information {
+.product_information {
     /* background-color: #d9d9d9; */
     width: 600px;
     height: 700px;
@@ -53,7 +53,7 @@
 
 .velkost_input {
     display: block;
-    width: 90%;
+    width: 100%;
     height: 40px;
     border: 1px solid rgb(169, 98, 255);
     outline: none; /* Vypne modrý obrys */
@@ -62,7 +62,7 @@
 
 
 .pridat_do_kosika_button {
-    width: 90%;
+    width: 100%;
     height: 40px;
     font-size: 15px;
     background-color: black;
@@ -96,19 +96,6 @@
 .cena {
     font-size: 30px;
     font-weight: bold;
-}
-
-.product_images_container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.product_images {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: margin-bottom 0.2s ease-in-out,height 0.25s ease-in-out;
 }
 
 

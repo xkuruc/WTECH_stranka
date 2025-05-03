@@ -31,29 +31,43 @@
             <div class="product_main_info_container">
                 <div class="product_images">
                     <div class="product_images_kontajner">
-                        {{-- Veľké obrázky --}}
+                        @php
+                            /* hlavný obrázok */
+                            $mainImage = $product->images->firstWhere('is_main', true);
+
+                            /* vedľajšie obrázky */
+                            $sideImages = $product->images->where('is_main', false)->sortBy(function($image) { /* zoradíme podľa čísla v názve */
+                                preg_match('/side(\d+)/', $image->image_path, $matches); /* vyberie číslo z sideX v názve cesty */
+                                return $matches[1] ?? 0;
+                            });
+                        @endphp
+
                         <div class="big_images" id="sliding_container">
-                            @foreach($product->images as $img)
-                                <div class="big_img {{ $loop->first ? 'selected' : '' }}"
-                                     data-img-id="{{ $loop->iteration }}">
-                                    <img draggable="false"
-                                         src="{{ asset('images/'. $product->main_image) }}"
-                                         alt="{{ $product->name }}">
+                            <div class="big_img selected" data-img-id=1>
+                                <img draggable="false" src="{{ asset('images/'.$mainImage->image_path) }}" alt="{{ $product->name }}">
+                            </div>
+
+
+                            @foreach($sideImages as $image)
+                                <div class="big_img" data-img-id="{{ $loop->iteration + 1 }}">
+                                    <img src="{{ asset('images/'.$image->image_path) }}" alt="{{ $product->name }}">
                                 </div>
                             @endforeach
                         </div>
 
-                        {{-- Mini obrázky --}}
                         <div class="small_images" id="small_slider">
-                            @foreach($product->images as $img)
-                                <div class="small_img {{ $loop->first ? 'selected' : '' }}"
-                                     data-img-id="{{ $loop->iteration }}">
-                                    <img src="{{ asset('images/'.$img->image_path) }}"
-                                         alt="{{ $product->name }}">
+                            <div class="small_img selected" data-img-id=1>
+                                <img draggable="false" src="{{ asset('images/'.$mainImage->image_path) }}" alt="{{ $product->name }}">
+                            </div>
+
+
+
+                            @foreach($sideImages as $image)
+                                <div class="small_img" data-img-id="{{ $loop->iteration + 1 }}">
+                                    <img src="{{ asset('images/'.$image->image_path) }}" alt="{{ $product->name }}">
                                 </div>
                             @endforeach
                         </div>
-
                     </div>
                 </div>
 
@@ -145,7 +159,7 @@
             </div>
         </section>
 
-        {{-- Sekcie so súvisiacimi kategóriami a slidermi ponechaj, stačí ich vložiť odtiaľ, kde máš statický HTML --}}
+
         <section class="suvisiacie_kategorie_section">
             <div class="suvisiacie_kategorie_container">
                 <div class="label_container">
@@ -192,7 +206,7 @@
                     <div class="owl-carousel owl-carouselBRATU ">
                     @foreach($discountedImages as $img)
 
-                            <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">
+                            <!-- <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">-->
 
                     @endforeach
                     </div>
@@ -204,12 +218,12 @@
                 <div class="slider-container">
                     <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
+                    <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
                     </div>
                 </div>
             </section>
@@ -230,6 +244,6 @@
     <script src="{{ asset('javascript/polozka.js') }}"></script>
     <script src="{{ asset('javascript/product_slider.js') }}"></script>
     <script src="{{ asset('javascript/kosik_sidebar.js') }}"></script>
-    <script src="{{ asset('javascript/drag_polozka.js') }}"></script>
+    <script src="{{ asset('javascript/drag_polozka.js') }}" defer></script>
 </body>
 </html>

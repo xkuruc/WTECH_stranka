@@ -58,17 +58,20 @@
                             </ul>
                         </section>
 
-                        <section class="personalizacia">
-                            <h1>Personalizované údaje</h1>
+                        @if ($user->personalizacia)
+                            <section class="personalizacia">
+                                    <h1>Personalizované údaje</h1>
 
-                            <ul class="info_ul">
-                                <li>Výška: {{ $user->personalizacia->vyska }} cm</li>
-                                <li>Hmotnosť: {{ $user->personalizacia->hmotnost }} kg</li>
-                                <li>Veľkosť topánok: {{ $user->personalizacia->velkost_topanok }}</li>
-                                <li>Značka: {{ $user->personalizacia->znacka }}</li>
-                            </ul>
+                                    <ul class="info_ul">
+                                        <li>Výška: {{ $user->personalizacia->vyska ?? null }} cm</li>
+                                        <li>Hmotnosť: {{ $user->personalizacia->hmotnost ?? null }} kg</li>
+                                        <li>Veľkosť topánok: {{ $user->personalizacia->velkost_topanok ?? null }}</li>
+                                        <li>Značka: {{ $user->personalizacia->znacka ?? null }}</li>
+                                    </ul>
 
-                        </section>
+
+                            </section>
+                        @endif
                     </section>
 
                     <section class="adresa_dorucenia">

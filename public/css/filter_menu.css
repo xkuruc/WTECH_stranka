@@ -26,7 +26,7 @@
 .filter_kategorie {
 	display: flex;
 	width: 100%;
-	justify-content: space-around;
+	justify-content: space-between;
 	gap: clamp(5px, 2vw, 2px);
 	overflow: auto;
 	scrollbar-width: none; /* skryje scrollbar vo Firefoxe */
@@ -40,7 +40,7 @@
 
 .filter_menu_item {
 	min-width: 160px;
-	
+
 	background-color: white;
 	line-height: 170%;
 	border: 1px solid #D9D9D9;
@@ -63,7 +63,7 @@
 
 
 .filter_menu_item:hover { /* hover pre menu item */
-	color: black; 
+	color: black;
 	border-color: black;
 }
 
@@ -78,7 +78,7 @@
     .filter_menu_item.special {
     	width: calc(100% - 40px);
     	margin-left: 20px;
-    } 
+    }
 
 
     .filter_menu {

@@ -54,7 +54,7 @@
                 <a href="{{ route('products.show', $product) }}" class="product_link">
                     <article class="product_item_relative">
                         <div class="item_img">
-                            <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
+                            <img src="{{ asset('images/' . ($product->images->firstWhere('is_main', true)?->image_path ?? 'default.jpg')) }}" alt="{{ $product->name }}">
                         </div>
                         <div class="product_info">
                             <p class="product_label">{{ $product->name }}</p>
@@ -130,11 +130,14 @@
 
     <!-- filter overlay -->
     @include('components.big_filter', [
-        'brands' => $brands,
-        'colors' => $colors,
-        'sizes' => $sizes,
-
-    ])
+            'brands' => $brands,
+            'colors' => $colors,
+            'sizes' => $sizes,
+            'seasons' => $seasons,
+            'genders' => $genders,
+            'available' => $available,
+            'filters' => $appliedFilters
+        ])
 </main>
 
 <!-- footer -->

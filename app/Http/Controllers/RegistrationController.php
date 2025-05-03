@@ -56,13 +56,14 @@ class RegistrationController extends Controller
 
 
         // Personalizácia
-        $personalizacia = $user->personalizacia()->create([
-            'vyska' => $request->vyska ?? null,
-            'hmotnost' => $request->hmotnost ?? null,
-            'velkost_topanok' => $request->velkost_topanok ?? null,
-            'znacka' => $request->znacka ?? null,
-        ]);
-
+        if ($request->filled(['vyska', 'hmotnost', 'velkost_topanok', 'znacka'])) {
+            $user->personalizacia()->create([
+                'vyska' => $request->vyska,
+                'hmotnost' => $request->hmotnost,
+                'velkost_topanok' => $request->velkost_topanok,
+                'znacka' => $request->znacka,
+            ]);
+        }
 
 
         return redirect()->route('login')->with('success', 'Účet bol úspešne vytvorený!');

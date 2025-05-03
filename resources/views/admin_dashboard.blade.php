@@ -75,7 +75,7 @@
                     <article class="product_item_relative" data-product-id={{ $product->id }}>
                         <a href="{{ route('products.show', $product) }}" class="product_link">
                             <div class="item_img">
-                                <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('images/' . ($product->images->firstWhere('is_main', true)?->image_path ?? 'default.jpg')) }}" alt="{{ $product->name }}">
                             </div>
                             <div class="product_info">
                                 <p class="product_label">{{ $product->name }}</p>
@@ -160,6 +160,9 @@
             'brands' => $brands,
             'colors' => $colors,
             'sizes' => $sizes,
+            'seasons' => $seasons,
+            'genders' => $genders,
+            'available' => $available,
             'filters' => $appliedFilters
         ])
 

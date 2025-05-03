@@ -51,6 +51,7 @@ class ProductController extends Controller
             ->pluck('product_sizes.us_velkost');
 
 
+
         /* dostupné sezóny pre produkty */
         $seasons = (clone $query)
             ->when(
@@ -89,6 +90,11 @@ class ProductController extends Controller
             /* oddelí na &, dostaneme orderby=price... */
             $orderby = explode('&', $orderby)[1];
 
+            /* ak je tam ? z ?page=.. , tak sa to zase oddelí, aby pstal čistý orderby */
+            if (strpos($orderby, '?page') !== false) {
+                $orderby = explode('?', $orderby)[0];
+            }
+
             /* rozdelí to na 'orderby' => 'price...' */
             parse_str($orderby, $order_params);
 
@@ -96,7 +102,7 @@ class ProductController extends Controller
             $orderby = $order_params['orderby'];
         }
         else {
-            $orderby = 'price~asc';
+            $orderby = 'price~asc'; /* default */
         }
 
 
@@ -206,8 +212,6 @@ class ProductController extends Controller
 
 
 
-
-
     /**
      * Zobrazí stránkovaný zoznam produktov.
      */
@@ -278,6 +282,9 @@ class ProductController extends Controller
         $discountedImages  = Product::with('images')->get()->where('discount', '>', 0)
                                   ->pluck('images')
                                   ->flatten();
+
+
+
 
 
         // Vrátime view 'polozka_produktu' s atribútom $product

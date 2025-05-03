@@ -6,6 +6,9 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\ProductImage;
 use App\Models\Brand;
+use App\Models\Season;
+use App\Models\Color;
+use App\Models\Supplier;
 
 class ProductFactory extends Factory
 {
@@ -45,7 +48,7 @@ class ProductFactory extends Factory
 
 
         $types = ['Tenisky','Kopacky','Lopty'];
-        $available_miesta = ['Bratislava', 'Praha','Brno', 'Skladom'];
+        $available_miesta = ['Bratislava', 'Praha','Košice', 'Skladom'];
         $stock_quantity =  $this->faker->numberBetween(0, 100);
 
         if ($stock_quantity == 0) {
@@ -61,29 +64,45 @@ class ProductFactory extends Factory
             'price'          => $this->faker->randomFloat(2, 1, 500),            // desaťinné číslo s dvoma des. miestami
             'discount'       => rand(0, 1) ? $this->faker->randomFloat(2, 0.01, 30) : 0.00,  // 50% bude mať zlavu
             'SKU'            => strtoupper($this->faker->bothify('???###')),     // kombinácia písmen a čísiel
-            'supplier_id'    => \App\Models\Supplier::factory(),                 // vytvorí aj dodávateľa cez jeho továrničku
+            'supplier_id'    => Supplier::factory(),                 // vytvorí aj dodávateľa cez jeho továrničku
             'stock_quantity' => $stock_quantity,                                 // náhodný počet kusov na sklade
-            'brand_id'       => Brand::factory(),                    // názov firmy ako značka produktu
+            'brand_id'       => Brand::inRandomOrder()->first()?->id ?? Brand::factory(),                                // názov firmy ako značka produktu
 
 
             // Tu vyberieme obrázok zo zoznamu
-            'main_image'     => $this->faker->randomElement($images),
             'available'      => $available,
             'gender'         => $this->faker->randomElement($genders),           // náhodný gender
-            'color_id'          => \App\Models\Color::inRandomOrder()->first()->id,            // náhodná farba
+            'color_id'       => Color::inRandomOrder()->first()->id,            // náhodná farba
             'type'           => $this->faker->randomElement($types),             // náhodný typ produktu
-            'season_id'      => \App\Models\Season::factory(),                   // sezóna
-            'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now'),
+            'season_id'      => Season::inRandomOrder()->first()->id, // sezóna
+            'created_at'     => $this->faker->dateTimeBetween('-1 years', 'now'),
 
         ];
     }
     public function configure()
     {
         return $this->afterCreating(function (Product $product) {
-            // pre každý produkt vytvor 3–5 obrázkov
-            ProductImage::factory()
-                ->count(rand(3,5))
-                ->create(['product_id' => $product->id]);
+            $sampleSets = ['sample_topanka1', 'sample_topanka2', 'sample_topanka3', 'sample_topanka4', 'sample_topanka5', 'sample_topanka6'];
+
+            // Vyber náhodnú sadu obrázkov
+            $chosenSet = $sampleSets[array_rand($sampleSets)];
+
+            // Vytvor hlavný obrázok v `product_images` so značkou 'is_main'
+            $product->images()->create([
+                'image_path' => "{$chosenSet}/{$chosenSet}_main.jpg",
+                'is_main' => true, // Tento obrázok je hlavný
+            ]);
+
+            // Vytvor vedľajšie obrázky v `product_images` (ak existujú)
+            for ($i = 1; $i <= 4; $i++) {
+                $filename = public_path("images/{$chosenSet}/{$chosenSet}_side{$i}.jpg");
+                if (file_exists($filename)) {
+                    $product->images()->create([
+                        'image_path' => "{$chosenSet}/{$chosenSet}_side{$i}.jpg",
+                        'is_main' => false, // Vedľajší obrázok
+                    ]);
+                }
+            }
         });
     }
 }

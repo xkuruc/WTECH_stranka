@@ -29,6 +29,10 @@
 	justify-content: center;
 }
 
+.product_list p {
+    text-align: center;
+}
+
 .product_link {
 	color: inherit;
 	text-decoration: none;

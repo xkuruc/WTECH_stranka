@@ -134,7 +134,6 @@ return new class extends Migration
                   ->onDelete('cascade');
             $table->unsignedInteger('stock_quantity')->default(0);   // Počet kusov na sklade
             $table->timestamps();  // timestampy created_at a updated_at
-            $table->text('main_image')->nullable();
             $table->string('available');
             $table->string('gender');
             $table->string('type'); //tenisky, kopačky, lopty
@@ -159,6 +158,7 @@ return new class extends Migration
                   ->onDelete('cascade');
             // cesta k obrázku
             $table->string('image_path');
+            $table->boolean('is_main')->default(false); /* či je to hlavný obrázok */
             $table->timestamps();
         });
 
@@ -238,6 +238,7 @@ return new class extends Migration
         Schema::dropIfExists('product_reviews');
         Schema::dropIfExists('product_images');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('seasons');
 
         DB::statement('DROP INDEX IF EXISTS products_search_vector_index');
         Schema::table('products', function (Blueprint $table) {
