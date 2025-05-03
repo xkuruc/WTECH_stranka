@@ -25,71 +25,14 @@ let filters = { /* aktívne filtre */
   available: [],
   price: { min: min_price, max: max_price},
   sale: [],
-  gender: []
+  gender: [],
+  season: []
 };
 
 
 
 
 /* funkcie */
-function render_filter_sizes() { /* vykreslí záložku veľkosti */
-  if (!size_rendered) {
-    const btn_container = document.querySelector(`.cat_btn_container_sizes`);
-    for (let i = 5; i <= 13; i++) {
-      const button = document.createElement("button");
-      button.textContent = i;
-
-      button.classList.add("cat_entry_btn_size");
-      button.setAttribute("data-value", i);
-
-      btn_container.appendChild(button);
-    }
-    size_rendered = true;
-  }
-}
-
-
-/* vykreslí záložku farby */
-function render_filter_color_content() {
-  if (!color_rendered) {
-    const colors = [
-      { name: "Červená", hex: "red" },
-      { name: "Modrá", hex: "blue" },
-      { name: "Zelená", hex: "green" },
-      { name: "Oranžová", hex: "orange" },
-      { name: "Fialová", hex: "purple" },
-      { name: "Biela", hex: "white" },
-      { name: "Čierna", hex: "black" },
-      { name: "Viacfarebný", hex: "linear-gradient(90deg, rgb(20, 190, 130) 0%, rgb(193, 255, 0) 33%, rgb(255, 85, 85) 67%, rgb(0, 92, 198) 100%)"}
-    ];
-
-
-    /* pridám farby do kontajnera */
-    const newTab = document.querySelector(`.cat_btn_container`);
-    colors.forEach(color => {
-        const button = document.createElement("button");
-
-        /* pri tom viacfarebnom ak chcem lin. gradient, tak musím použiť background */
-        const property_to_add = (color.name.includes("Viacfarebný")) ? 'background: ' : 'background-color: ';
-
-
-        /* atribúty a trieda */
-        button.classList.add("cat_entry_btn");
-        button.setAttribute("data-value", color.name);
-
-        /* do buttonu sa pridá span - farebný štvorček */
-        button.innerHTML = `
-            <span class="color-box" style="${property_to_add} ${color.hex};"></span>
-            ${color.name}
-        `;
-
-        newTab.appendChild(button);
-    });
-    color_rendered = true;
-  }
-}
-
-
 //keď stlačím ESC, tak sa zatvorí filter menu
 function handle_ESC () {
   if (event.key === "Escape") {
@@ -124,8 +67,6 @@ function toggle_filter(open) {
     document.addEventListener("keydown", handle_ESC); /* keď je otvorený filter, tak je to aktívne */
   }
 }
-
-
 
 
 /* pridať filter */
@@ -298,13 +239,29 @@ function remove_filter(btn, cat, value, price_arg = "min", operator = "od") {
 }
 
 
+function parse_url(url) {
+    const parsedUrl = new URL(url);
+
+    /* ak to je search, obsahuje namiesto typu search?query= */
+    if (parsedUrl.pathname === '/search' && parsedUrl.searchParams.has('query')) {
+        return `search?query=${parsedUrl.searchParams.get('query').split('/')[0]}`;
+    }
+
+    /* ak nie, tak vráť len prvý segment cesty: tenisky, lopty, kopacky, ... */
+    const pathParts = parsedUrl.pathname.split('/').filter(part => part);
+    return pathParts[0] || '';
+}
+
+
+
 /** BACKEND QUERY STAVANIE **/
 function build_query(filters) {
 
 
     /*** STAVANIE QUERY ***/
     /** TYP PRODUKTOV **/
-    let url = type.textContent + '/'; // Začiatok URL
+    const current_url = window.location.href;
+    let url = parse_url(current_url) + '/';
 
 
     /** FILTER **/
@@ -338,6 +295,10 @@ function build_query(filters) {
         filterParts.push('gender-' + filters.gender.join('-'));
     }
 
+    if (filters.season.length > 0) {
+        filterParts.push('season-' + filters.season.join('-'));
+    }
+
     /* spojenie s url */
     url += filterParts.join('_');
 
@@ -345,7 +306,8 @@ function build_query(filters) {
     /** ZORADENIE **/
     const sortSelect = document.getElementById('sort');
     let orderby = select_sort.value || 'price~asc'; // Default to 'price~asc' if no value is selected
-    url += orderby ? `?orderby=${orderby}` : '';
+    url += orderby ? `&orderby=${orderby}` : '';
+
 
     return url;
 }
@@ -410,7 +372,8 @@ clear_filter.addEventListener('click', (event) => {
     available: [],
     price: { min: min_price, max: max_price},
     sale: [],
-    gender: []
+    gender: [],
+    season: []
   };
 
 });

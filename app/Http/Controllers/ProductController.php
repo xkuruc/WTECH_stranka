@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use function Laravel\Prompts\select;
 
 
 class ProductController extends Controller
 {
 
-    public function fill_filter($query,$type) {
+    public function fill_filter($query) {
         /* na základe products vyplní filter */
         /** UDAJE DO VELKEHO FILTRA **/
         /* značky pre tie produkty */
-
-
         $brands = (clone $query)
             ->when(!collect($query->getQuery()->joins)->contains('table', 'brands'),
                 fn($q) => $q->join('brands', 'products.brand_id', '=', 'brands.id')
@@ -54,13 +51,54 @@ class ProductController extends Controller
             ->pluck('product_sizes.us_velkost');
 
 
-        return [$brands, $colors, $sizes];
+        /* dostupné sezóny pre produkty */
+        $seasons = (clone $query)
+            ->when(
+                !collect($query->getQuery()->joins)->contains('table', 'seasons'),
+                fn($q) => $q->join('seasons', 'products.season_id', '=', 'seasons.id')
+            )
+            ->select('seasons.name')
+            ->distinct()
+            ->pluck('seasons.name');
+
+
+        /* pohlavie, zoberie sa rovno z products */
+        $genders = (clone $query)
+            ->distinct('gender')
+            ->pluck('gender');
+
+
+        /* dostupnosť, zoberie sa rovno z products */
+        $available = (clone $query)
+            ->distinct('available')
+            ->pluck('available');
+
+
+
+        return [$brands, $colors, $sizes, $seasons, $genders, $available];
     }
 
 
     public function order_products($request, $query) {
         /** ZORADENIE **/ /* funguje */
-        $orderby = $request->query('orderby', 'price~asc'); // Default to price ascending
+
+        /* url adresa requestu */
+        $orderby = request()->getRequestUri();
+
+        if (strpos($orderby, '&orderby=') !== false) { /* url obsahuje orderby */
+            /* oddelí na &, dostaneme orderby=price... */
+            $orderby = explode('&', $orderby)[1];
+
+            /* rozdelí to na 'orderby' => 'price...' */
+            parse_str($orderby, $order_params);
+
+            /* vyberieme obsah orderby */
+            $orderby = $order_params['orderby'];
+        }
+        else {
+            $orderby = 'price~asc';
+        }
+
 
         /* rozdelíme na menšie časti */
         $parts = explode('~', $orderby);
@@ -69,7 +107,7 @@ class ProductController extends Controller
 
         /* buď latest alebo podľa ceny */
         if ($sortField === 'latest') {
-            $query->orderBy('created_at', 'desc'); // Same as latest()
+            $query->orderBy('created_at', 'desc');
         } else {
             $query->orderByRaw('(price * (1 - discount / 100)) ' . $sortDirection); // price~asc or price~desc
         }
@@ -190,6 +228,9 @@ class ProductController extends Controller
         }
 
 
+        /* oddelíme orderby ak tam je, aby sme mali čisté filtre */
+        $filters = explode('&', $filters)[0];
+
 
 
         /** HANDLOVANIE FILTROV AK SU **/
@@ -198,7 +239,7 @@ class ProductController extends Controller
 
 
         /** VYPLNENIE FILTRA **/
-        [$brands, $colors, $sizes] = $this->fill_filter($query, $type);
+        [$brands, $colors, $sizes, $seasons, $genders, $available] = $this->fill_filter($query);
 
 
 
@@ -219,7 +260,7 @@ class ProductController extends Controller
 
 
         /* uložíme dáta do pola a posunieme buď do view alebo do search funkcie */
-        $data = compact('products', 'discountedImages', 'type', 'brands', 'colors', 'sizes', 'appliedFilters');
+        $data = compact('products', 'discountedImages', 'type', 'brands', 'colors', 'sizes', 'seasons', 'genders', 'available', 'appliedFilters');
         return $isSearch ? $data : view('zoznam_produktov', $data); /* ak je to search, vráti len dáta, ináč vráti view */
     }
 
@@ -261,7 +302,7 @@ class ProductController extends Controller
 
 
         /* oddelí orderby ak tam je */
-        $filters = explode('?', $filters)[0];
+        $filters = explode('&', $filters)[0];
 
 
         /* odstránime čiarky a rozdelíme vstup tam, kde sú medzery napr. "pánske lopty" -> ["pánske","lopty"]*/
@@ -287,18 +328,18 @@ class ProductController extends Controller
                 $word = strtolower($word);
 
                 $q->whereRaw("to_tsvector('simple', coalesce(products.name, '') || ' ' || coalesce(products.description, '')) @@ to_tsquery('simple', unaccent(?))", [$word]) /* názov, popis produktu */
-                    ->orWhereRaw("unaccent(gender) ILIKE ?", ['%' . $word . '%']) /* pohlavie */
-                    ->orWhereRaw("unaccent(type) ILIKE ?", ['%' . $word . '%']) /* typ produktu */
+                    ->orWhereRaw("unaccent(gender) ILIKE unaccent(?)", ['%' . $word . '%']) /* pohlavie */
+                    ->orWhereRaw("unaccent(type) ILIKE unaccent(?)", ['%' . $word . '%']) /* typ produktu */
                     ->orWhereHas('color', function ($colorQuery) use ($word) { /* farba */
-                    $colorQuery->whereRaw("unaccent(name) ILIKE ?", ['%' . $word . '%'])
-                        ->orWhereRaw("unaccent(sklon_name) ILIKE ?", ['%' . $word . '%']);
+                    $colorQuery->whereRaw("unaccent(name) ILIKE unaccent(?)", ['%' . $word . '%'])
+                        ->orWhereRaw("unaccent(sklon_name) ILIKE unaccent(?)", ['%' . $word . '%']);
                     })
                     ->orWhereHas('brand', function ($brandQuery) use ($word) { /* značku nájde aj name aj display_name */
                         $brandQuery->whereRaw("to_tsvector('simple', coalesce(brands.name, '') || ' ' || coalesce(brands.display_name, '')) @@ to_tsquery('simple', unaccent(?))", [$word])
-                            ->orWhereRaw("unaccent(brands.name) ILIKE ?", ['%' . $word . '%']);
+                            ->orWhereRaw("unaccent(brands.name) ILIKE unaccent(?)", ['%' . $word . '%']);
                     })
                     ->orWhereHas('season', function ($seasonQuery) use ($word) { /* sezóna */
-                        $seasonQuery->whereRaw("unaccent(name) ILIKE ?", ['%' . $word . '%']);
+                        $seasonQuery->whereRaw("unaccent(name) ILIKE unaccent(?)", ['%' . $word . '%']);
                     });
             });
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProductController;
 use App\Models\Product;
 
 
@@ -34,11 +35,17 @@ class AdminDashboardController
         return redirect('/profil'); // Presmeruje na domovskú stránku po odhlásení
     }
 
-    public function dashboard()
+    public function dashboard(Request $request, $filters = null)
     {
+
         if (session('visited_admin_dashboard')) {
-            $products = Product::paginate(12); // alebo s paginate()
-            return view('admin_dashboard', compact('products'));
+            $query = Product::query();
+
+            $controller = new ProductController();
+            $data = $controller->index($request, null, $filters, $query, true);
+
+
+            return view('admin_dashboard', $data);
         }
         else {
             return view('admin_dash_login');

@@ -20,7 +20,7 @@ Sú v routes/
 ## Controllery 
 Sú v app/Http/Controllers
 
-## Potrebne db extensions - bez nich nepôjde databáza
+## Potrebné db extensions - bez nich nepôjde databáza
 1. unaccent - na odstránenie diakritiky pri full-text search
 - príkaz: CREATE EXTENSION IF NOT EXISTS unaccent;
 

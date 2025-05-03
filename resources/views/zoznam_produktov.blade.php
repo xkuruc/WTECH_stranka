@@ -61,9 +61,12 @@
 
                             @if($product->discount > 0)
                                 <div class="discounted_price">
-                                    <strong>
-                                        {{ number_format($product->price * (1 - $product->discount / 100), 2) }} €
-                                    </strong>
+                                    <p>
+                                        <strong>
+                                            {{ number_format($product->price * (1 - $product->discount / 100), 2) }} €
+                                        </strong>
+                                    </p>
+
 
                                     <span class="old_price" style="text-decoration: line-through; color: #888;">
                                         {{ number_format($product->price, 2) }} €
@@ -74,9 +77,11 @@
                                     -{{ round($product->discount) }}%
                                 </div>
                             @else
-                                <strong>
-                                    {{ number_format($product->price), 2}} €
-                                </strong>
+                                <p>
+                                    <strong>
+                                        {{ number_format($product->price), 2}} €
+                                    </strong>
+                                </p>
                             @endif
 
                     </article>
@@ -128,11 +133,15 @@
             </nav>
         </section>
 
+
         <!-- filter overlay -->
         @include('components.big_filter', [
             'brands' => $brands,
             'colors' => $colors,
             'sizes' => $sizes,
+            'seasons' => $seasons,
+            'genders' => $genders,
+            'available' => $available,
             'filters' => $appliedFilters
         ])
     </main>

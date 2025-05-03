@@ -11,10 +11,17 @@ Route::post('/newsletter/edit', [NewsletterController::class, 'update'])->name('
 
 
 /* admin dashboard */
-Route::middleware(['auth', 'is_admin'])->get('/admin_dashboard', [App\Http\Controllers\AdminDashboardController::class, 'dashboard'])->name('admin_dashboard');
+Route::middleware(['auth', 'is_admin'])->get('/admin_dashboard/{filters?}', [App\Http\Controllers\AdminDashboardController::class, 'dashboard'])->name('admin_dashboard');
 
-Route::get('/admin_dash_login', [AdminDashboardController::class, 'showSablona'])->name('admin_login_sablona');
-Route::post('/admin_dash_login', [AdminDashboardController::class, 'admin_login'])->name('admin_login');
+
+Route::get('/admin_dash_login', [AdminDashboardController::class, 'showSablona'])
+    ->middleware('auth')
+    ->name('admin_login_sablona');
+
+Route::post('/admin_dash_login', [AdminDashboardController::class, 'admin_login'])
+    ->middleware('auth')
+    ->name('admin_login');
+
 
 Route::post('/admin_dash_logout', [App\Http\Controllers\AdminDashboardController::class, 'admin_leave_dash'])->name('admin_leave_dash');
 

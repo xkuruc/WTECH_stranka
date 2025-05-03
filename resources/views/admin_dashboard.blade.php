@@ -33,7 +33,7 @@
 
     <main>
         <!-- filter menu -->
-        @include('components.filter_menu')
+        @include('components.filter_menu', ['title' => ''])
 
         <section class="produkty_kontajner">
             <section class="text_divider"> <!-- text admin dashboard a potom oddelovať čiara -->
@@ -60,9 +60,20 @@
             <!-- obrázky a info/ceny k nim pochádzajú zo stránky https://www.thestreets.sk/ -->
             <!-- zoznam produktov -->
             <div class="product_list">
+                <article class="product_item_relative" id="add_product">
+                    <div class="item_img"></div>
+
+                    <div class="product_info">
+                        <p>Pridať nový produkt</p>
+                        <p><strong>0,00 €</strong></p>
+                    </div>
+
+                    <div class="sale_placeholder">-??%</div>
+                </article>
+
                 @foreach($products as $product)
-                    <a href="{{ route('products.show', $product) }}" class="product_link">
-                        <article class="product_item_relative">
+                    <article class="product_item_relative" data-product-id={{ $product->id }}>
+                        <a href="{{ route('products.show', $product) }}" class="product_link">
                             <div class="item_img">
                                 <img src="{{ asset('images/' . ($product->main_image ?? 'default.jpg')) }}" alt="{{ $product->name }}">
                             </div>
@@ -87,10 +98,15 @@
                                     <strong>
                                         {{ number_format($product->price), 2}} €
                                     </strong>
-                            @endif
+                                @endif
+                            </div>
+                        </a>
 
-                        </article>
-                    </a>
+                        <button class="trash_can">
+                            <img src="{{ asset('./icons/kos_icon.png') }}" alt="kos">
+                        </button>
+
+                    </article>
                 @endforeach
 
                 @if($products->isEmpty())

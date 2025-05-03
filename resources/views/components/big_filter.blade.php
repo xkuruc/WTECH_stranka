@@ -27,6 +27,7 @@
                 <button class="fil_cat" data-category="available">Dostupnosť</button>
                 <button class="fil_cat" data-category="price_sale">Cena</button>
                 <button class="fil_cat" data-category="gender">Pohlavie</button>
+                <button class="fil_cat" data-category="season">Sezóna</button>
             </aside>
 
 
@@ -82,9 +83,22 @@
 
 
             <section class="category_content" id="available">
+                @php
+                    /* poradie prvkov */
+                    $poradie_available = ['Skladom', 'Bratislava', 'Praha', 'Košice'];
+
+                    /* načítam kolekciu */
+                    $availables = collect($available ?? []);
+
+                    /* usporiadam podľa poradia */
+                    $usporiadane_available = collect($poradie_available)
+                        ->filter(fn($value) => $availables->contains($value));
+                @endphp
+
+
                 <div class="category_entry_list" data-category="available">
                     <h3 class="category_identifier">Dostupnosť</h3>
-                    @foreach(['Skladom', 'Bratislava', 'Praha', 'Brno'] as $availability)
+                    @foreach($usporiadane_available as $availability)
                         <div class="checkbox_entry" data-value="{{ $availability }}">
                             <label class="custom_checkbox">
                                 <input type="checkbox"
@@ -172,33 +186,68 @@
 
 
             <section class="category_content" id="gender">
+                @php
+                    /* chcem mať takéto poradie, ak by nejaké chýbali */
+                    $poradie = ['Pánske', 'Dámske', 'Unisex'];
+
+                    $genders = collect($genders ?? []);
+
+                    /* usporiada podľa môjho poradia */
+                    $usporiadane_genders = collect($poradie)
+                        ->filter(fn($gender) => $genders->contains($gender));
+                @endphp
+
+
                 <div class="category_entry_list" data-category="gender">
                     <h3 class="category_identifier">Pohlavie</h3>
-                    <div class="checkbox_entry" data-value="Pánske">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" @if(in_array('Pánske', $appliedFilters['gender'] ?? [])) checked @endif />
-                            <span class="checkmark @if(in_array('Pánske', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
-                            <span class="category_text">Pánske</span>
-                        </label>
-                    </div>
 
-                    <div class="checkbox_entry" data-value="Dámske">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" @if(in_array('Dámske', $appliedFilters['gender'] ?? [])) checked @endif />
-                            <span class="checkmark @if(in_array('Dámske', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
-                            <span class="category_text">Dámske</span>
-                        </label>
-                    </div>
 
-                    <div class="checkbox_entry" data-value="Unisex">
-                        <label class="custom_checkbox">
-                            <input type="checkbox" @if(in_array('Unisex', $appliedFilters['gender'] ?? [])) checked @endif />
-                            <span class="checkmark @if(in_array('Unisex', $appliedFilters['gender'] ?? [])) clicked @endif"></span>
-                            <span class="category_text">Unisex</span>
-                        </label>
-                    </div>
+                    @foreach($usporiadane_genders as $gender)
+                        <div class="checkbox_entry" data-value="{{ $gender }}">
+                            <label class="custom_checkbox">
+                                <input type="checkbox" name="gender[]" value="{{ $gender }}"
+                                       @if(in_array($gender, $appliedFilters['gender'] ?? [])) checked @endif />
+                                <span class="checkmark @if(in_array($gender, $appliedFilters['gender'] ?? [])) clicked @endif"></span>
+                                <span class="category_text">{{ $gender }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+
                 </div>
             </section>
+
+
+            <section class="category_content" id="season">
+                @php
+                    /* chcem mať takéto poradie, ak by nejaké chýbali */
+                    $poradie_sezony = ['Jarné', 'Letné', 'Jesenné', 'Zimné', 'Celoročné', 'Športové', 'Štýlové'];;
+
+                    $seasons = collect($seasons ?? []);
+
+                    /* usporiada podľa môjho poradia */
+                    $usporiadane_sezony = collect($poradie_sezony)
+                        ->filter(fn($season) => $seasons->contains($season));
+                @endphp
+
+
+                <div class="category_entry_list" data-category="season">
+                    <h3 class="category_identifier">Sezóna</h3>
+
+
+                    @foreach($usporiadane_sezony as $sezona)
+                        <div class="checkbox_entry" data-value="{{ $sezona }}">
+                            <label class="custom_checkbox">
+                                <input type="checkbox" name="season[]" value="{{ $sezona }}"
+                                       @if(in_array($sezona, $appliedFilters['season'] ?? [])) checked @endif />
+                                <span class="checkmark @if(in_array($sezona, $appliedFilters['season'] ?? [])) clicked @endif"></span>
+                                <span class="category_text">{{ $sezona }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+
+                </div>
+            </section>
+
 
             <section class="category_content" id="no_filter">
                 <h3 class="category_identifier">No filter selected.</h3>

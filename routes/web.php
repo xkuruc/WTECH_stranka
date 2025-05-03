@@ -45,6 +45,10 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
          ->name('products.sizes.destroy');
 });
 
+
+require base_path('routes/routes1.php');
+
+
 Route::get('{type}/{filters?}', [ProductController::class, 'index'])
     ->where('type', 'Tenisky|Kopacky|Lopty|Vypredaj') // Restrict type to specific values
     ->where('filters', '.*')
@@ -80,6 +84,5 @@ Route::post('/submit', [CartController::class, 'submit'])->name('cart.submit');
 Route::view('/kosik', 'kosik')->name('kosik');
 Route::get('/kosik', [KosikController::class, 'index'])->name('kosik');
 
-require base_path('routes/routes1.php');
 require base_path('routes/routes2.php');
 

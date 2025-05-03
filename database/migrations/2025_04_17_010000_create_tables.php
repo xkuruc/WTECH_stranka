@@ -136,8 +136,8 @@ return new class extends Migration
             $table->timestamps();  // timestampy created_at a updated_at
             $table->text('main_image')->nullable();
             $table->string('available');
-            $table->string('gender')->nullable();
-            $table->string('type')->nullable(); //tenisky, kopačky, lopty
+            $table->string('gender');
+            $table->string('type'); //tenisky, kopačky, lopty
             $table->foreignId('season_id')
                 ->constrained()
                 ->onDelete('cascade'); //leto, zima, jar, ...

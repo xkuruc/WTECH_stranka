@@ -21,7 +21,7 @@ class SeasonFactory extends Factory
      */
     public function definition(): array
     {
-        $moznosti = ['Športové', 'štýlové', 'Zimné', 'Jarné', 'Celorocne'];
+        $moznosti = ['Jarné', 'Letné', 'Jesenné', 'Zimné', 'Celoročné', 'Športové', 'Štýlové'];
         return [
             // Napríklad jednoslovný názov kategórie
             'name' => $this->faker->randomElement($moznosti),
