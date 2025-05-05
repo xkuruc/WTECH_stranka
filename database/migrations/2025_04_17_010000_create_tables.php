@@ -146,6 +146,7 @@ return new class extends Migration
             $table->foreignId('brand_id')
                 ->constrained('brands')
                 ->onDelete('set null'); /* brand */
+            $table->string('image_basename')->nullable();
             $table->text('search_vector')->nullable(); /* pre full-text */
         });
 

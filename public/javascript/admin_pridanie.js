@@ -34,7 +34,6 @@ function input_change(event) {
         /* vloží obrázky do placeholderov */
         reader.onload = function (e) {
 
-
             /* každému klonu sa nastaví obrázok tiež */
             velke_a_cloned.forEach(div => {
                 const img = div.querySelector('img');
@@ -356,32 +355,67 @@ async function event_handle_img(event) {
 
 
 /* form na posielanie obrázkov */
-document.getElementById('upload_images').addEventListener('submit', function (e) {
+const form = document.getElementById('upload_images');
+form.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    const isEdit = form.dataset.action === 'edit';
+    const pr_id = form.dataset.productId;
+
+
+    /* náhodný názov súboru */
     const timestamp = Date.now();
     const base_name = `product_${timestamp}`;
     const formData = new FormData();
 
-    // === Obrázky ===
-    const bigImages = document.querySelectorAll('.big_img:not(.add):not(.cloned)');
-    let imageIndex = 0;
 
-    bigImages.forEach(imgDiv => {
+    /* obrázky čo chceme poslať */
+    const bigImages = document.querySelectorAll('.big_img:not(.add):not(.cloned)');
+    const big_container = document.querySelector('.big_images');
+
+
+    const big_children = Array.from(big_container.children);
+    const filtered_children = big_children.filter(el =>
+        !el.classList.contains('cloned') &&
+        !el.classList.contains('add')
+    );
+
+
+
+    let origin_images = [];
+    let to_add = [];
+
+
+
+    filtered_children.forEach(imgDiv => {
         const input = imgDiv.querySelector('input[type="file"]');
+        const img = imgDiv.querySelector('img');
+
         if (input && input.files.length > 0) {
             const file = input.files[0];
 
             // Pridanie obrázku do FormData
             formData.append('images[]', file); // Posielame obrázok ako pole
 
+
+            const img_index = filtered_children.indexOf(imgDiv);
+            console.log(img_index);
+
             // Ak je prvý obrázok, označujeme ho ako hlavný
-            formData.append('image_types[]', imageIndex === 0 ? 'main' : `side${imageIndex}`);
-            imageIndex++;
+            formData.append('image_types[]', img_index === 0 ? 'main' : `side${img_index}`);
+
+
+            to_add.push(file);
+        }
+        else {
+            origin_images.push(img.src);
+            formData.append('origin_images[]', img.src);
         }
     });
 
-    // === Textové polia ===
+    console.log(origin_images);
+
+    /* form data do requestu */
     formData.append('name', document.querySelector('input[name="name"]').value);
     formData.append('description', document.querySelector('textarea[name="description"]').value);
     formData.append('price', document.querySelector('input[name="price"]').value);
@@ -391,16 +425,16 @@ document.getElementById('upload_images').addEventListener('submit', function (e)
     formData.append('color_id', document.querySelector('select[name="color_id"]').value);
     formData.append('type', document.querySelector('select[name="type"]').value);
     formData.append('sizes', document.querySelector('input[name="sizes"]').value);
+    formData.append('product_id',pr_id);
     formData.append('base_name', base_name);
 
 
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-    }
+
+    const url = isEdit ? `/produkty/${pr_id}/update` : '/produkty';
 
 
-    // === Fetch ===
-    fetch('/produkty', {
+    /* poslanie požiadavky */
+    fetch(url, {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -437,6 +471,7 @@ function toggleDropdown(dropdownId) {
     let dropdown = document.getElementById(dropdownId);
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
+
 
 function selectOption(type, option) {
     let input = document.getElementById(`selected${capitalizeFirstLetter(type)}`);

@@ -29,7 +29,7 @@
 
     <main>
         <form action="/submit" method="post">
-            <section class="pokladna_section">              
+            <section class="pokladna_section">
                 <div class="pokladna_container">
                     <div class="pokladna_nadpis">
                         <h1>Pokladňa</h1>
@@ -41,8 +41,8 @@
                             <div class="emial_container">
                                 <label for="input_email"> E-mail adresa <span class="hviezdicka">*</span></label>
                                 <input class="pokladna_input" id="input_email" type="email" name="email" placeholder="Email*" required  value="{{ old('email', optional(auth()->user())->email) }}" >
-                                
-                                
+
+
                             </div>
                             <div class="dalsie_info_container">
                                 <div class="dalsie_info_div1">
@@ -57,7 +57,7 @@
 
 
                                 <div class="dalsie_info_div3">
-                                    <label for="tel_cislo_input"> Telefónne číslo <span class="hviezdicka">*</span></label> 
+                                    <label for="tel_cislo_input"> Telefónne číslo <span class="hviezdicka">*</span></label>
                                     <input class="pokladna_input" id="tel_cislo_input" type="tel" name="tel_cislo" placeholder="Tel číslo*"  value="{{ old('tel', optional(auth()->user())->telephone) }}" required>
                                 </div>
 
@@ -147,7 +147,7 @@
                                     </label>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                         <div class="suhrn_objednavky">
@@ -155,14 +155,14 @@
                             <div class="element_napis2"> Položky vo košíku </div>
                             <div class="polozky_vo_kosiku">
 
-                                    
+
                 @forelse($items as $item)
                     <div class="polozky_vo_kosiku_item">
                         <!-- 1) Obrázok produktu -->
                         <div class="cast1">
                             <img class="item_image"
-                                src="{{ asset('images/' . $item->product->main_image) }}"
-                                alt="{{ $item->product->name }}">
+                                 src="{{ asset('images/'. $item->product->images->firstWhere('is_main', true)->image_path) }}"
+                                 alt="{{ $item->product->name }}">
                         </div>
 
                         <!-- 2) Popis, cena, veľkosť, množstvo -->
@@ -209,7 +209,7 @@
                                 </form>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 @empty

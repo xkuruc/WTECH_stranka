@@ -39,9 +39,9 @@
              <div class="main_image_placeholder">
              <img src="{{ asset('images/o.jpg') }}">
              </div>
-                
+
         </section>
-        
+
         <section class="brand_slider_section">
                 <div class="slider-containerBRAND">
                     <div class="owl-carouselBRAND">
@@ -61,13 +61,13 @@
         <section class="banner_hlavna_ponuka">
             <div class="banner_hlavna_ponuka_container">
                 <a href="{{ url('/Tenisky') }}" class="tenisky_banner">
-                    <img src="{{ asset('images/sample_topanka.jpg') }}">
+                    <img src="{{ asset('images/sample_topanka1/sample_topanka1_main.jpg') }}">
                 </a>
                 <a href="{{ url('/Kopacky') }}" class="kopacky_banner">
-                    <img src="{{ asset('images/sample_topanka2.jpg') }}">
+                    <img src="{{ asset('images/sample_topanka2/sample_topanka2_main.jpg') }}">
                 </a>
                 <a href="{{ url('/Lopty') }}" class="lopty_banner">
-                    <img src="{{ asset('images/sample_topanka3.jpg') }}">
+                    <img src="{{ asset('images/sample_topanka3/sample_topanka3_main.jpg') }}">
                 </a>
             </div>
         </section>
@@ -78,12 +78,12 @@
                 <div class="slider-container">
                     <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka1/sample_topanka1_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2/sample_topanka2_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3/sample_topanka3_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
                     </div>
                 </div>
             </section>
@@ -93,15 +93,15 @@
                 <div class="slider-container">
                     <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka1/sample_topanka1_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2/sample_topanka2_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3/sample_topanka3_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
                     </div>
                 </div>
             </section>
@@ -111,12 +111,12 @@
                 <div class="slider-container">
                     <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
+                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
                     </div>
                 </div>
             </section>
@@ -139,7 +139,7 @@
                     <img class="obr" src="{{ asset('images/daco2.jpeg') }}" alt="">
                     <img class="obr" src="{{ asset('images/daco3.jpeg') }}" alt="">
                     <img class="obr" src="{{ asset('images/daco4.jpeg') }}" alt="">
-                    
+
                 </div>
             </div>
 

@@ -83,6 +83,7 @@
     width: calc((100% - 20px)/3); /* aby boli 3 a medzi nimi boli 2 medzery po 10px */
     box-sizing: border-box;
 
+
     aspect-ratio: 1/1;
     flex-shrink: 0;
     transition: 0.1s border ease-in-out;
@@ -137,17 +138,10 @@
 
     .product_information {
         overflow: hidden;
-        max-height: 0;
         transition: max-height 0.5s ease;
-
         width: calc(100% - 20px);
         margin-left: 10px;
     }
-
-    .product_information.expanded {
-        max-height: 2000px; /* musí byť dosť veľké, aby pokrylo celý obsah */
-    }
-
 
 }
 

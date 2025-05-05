@@ -5,7 +5,11 @@ body {
     background-color: white;
     margin-top: 80px; /* Posunies vsetko, aby obsah nebol zakryty navbarom */
 }
-  
+
+img {
+    object-fit: cover;
+}
+
 .navbar {
     display: flex;
     /* justify-content: flex-start; */
@@ -18,7 +22,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
     z-index: 99;
     padding: 0;
 }
@@ -37,7 +41,7 @@ body {
     display: flex;
     gap: min(10vw, 50px);
     align-items:end;
-    padding: 0 5vw; 
+    padding: 0 5vw;
 }
 
 .right_part {
@@ -46,7 +50,7 @@ body {
     /* justify-content: flex-start; */
     gap: 20px;
      /* Posunie túto sekciu na pravú stranu */
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 .nav a , .right-items a {
@@ -88,13 +92,13 @@ body {
 @media (max-width: 990px) {
     .nav{
         display: none;
-    }    
+    }
     .menu_icon{
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .vyhladaj_input{
         display: none;
     }

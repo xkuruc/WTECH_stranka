@@ -25,7 +25,7 @@ class Product extends Model
         'supplier_id',
         'stock_quantity',
         'brand_id',
-
+        'image_basename',
         'available',    // boolean (na sklade / vypredané)
         'gender',      // string (napr. 'Pánske', 'Dámske', 'Unisex')
         'color_id',       // string (napr. 'Biela', 'Čierna'...)

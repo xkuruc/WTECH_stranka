@@ -12,6 +12,8 @@ use App\Models\ProductImage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+
 
 class ProductController extends Controller
 {
@@ -381,7 +383,6 @@ class ProductController extends Controller
 
 
         $faker = Faker::create();
-        Log::info('Požiadavka obsahuje obrázky:', ['images' => $validated['images']]);
 
 
         $stock_quantity =  $faker->numberBetween(0, 100);
@@ -409,8 +410,10 @@ class ProductController extends Controller
             'color_id' => $validated['color_id'],
             'type' => $validated['type'],
             'season_id' => Season::inRandomOrder()->first()->id,
+            'image_basename' => $validated['base_name'],
             'created_at' => $faker->dateTimeBetween('-1 years', 'now'),
         ]);
+
 
         $base_name = $validated['base_name'];
 
@@ -421,9 +424,6 @@ class ProductController extends Controller
 
         $storedPaths = [];
 
-        // Spracovanie obrázkov, ak nejaké existujú
-
-
 
         if ($request->hasFile('images')) {
             $imageIndex = 0;
@@ -431,23 +431,14 @@ class ProductController extends Controller
                 Log::debug('Image types:', $request->input('image_types'));  // Toto vypíše celé pole
             }
             foreach ($request->file('images') as $key => $image) {
-
                 $imageType = $request->input('image_types')[$imageIndex];
 
-
-
-
                 if ($image) {
-
-                    // Extrahujeme názov obrázku (napr. base_name_main alebo base_name_side1)
-
-
                     $isMain = strpos($imageType, 'main') !== false; // Určujeme, či je hlavný obrázok
 
                     // Generovanie názvu súboru
                     $filename = $base_name . $imageType . '.' . $image->getClientOriginalExtension();
 
-                    Log::debug('Ukladám obrázok na cestu: ' . $dir . '/' . $filename);
 
                     // Uloženie obrázku do priečinka 'public/images/base_name'
                     $image->move($dir, $filename);
@@ -455,7 +446,6 @@ class ProductController extends Controller
                     // Uloženie cesty k obrázku
                     $storedPaths[$base_name] = $base_name . '/' . $filename;
 
-                    Log::debug("som tu " . 'images/' . $base_name . '/' . $filename);
 
                     // Uloženie obrázka do tabuľky `product_images`
                     $imageRecord = new ProductImage();
@@ -495,6 +485,170 @@ class ProductController extends Controller
     }
 
 
+    public function update(Request $request, $id) {
+
+        $product = Product::findOrFail($id);
+
+
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'gender' => 'required|string',
+            'type' => 'required|string',
+            'brand_id' => 'required|exists:brands,id',
+            'color_id' => 'required|exists:colors,id',
+        ]);
+
+
+        $validated2 = $request->validate([
+            'images.*' => 'required|image|max:2048',
+            'image_types.*' => 'required|string',
+            'base_name' => 'required|string',
+            'sizes' => 'required|string',
+        ]);
+
+
+
+
+
+        $product->update($validated);
+
+
+        /* product sizes */
+        if (!empty($validated2['sizes'])) {
+            $product->sizes()->delete();
+
+            $sizes = explode(';', $validated2['sizes']);
+            foreach ($sizes as $size) {
+                $trimmedSize = trim($size); // odstráni medzery
+
+                ProductSize::create([
+                    'product_id' => $product->id,
+                    'us_velkost' => floatval($trimmedSize), // prevedie na číslo, napr. 5.0
+                    'pocet' => rand(0, 50), // náhodne 0–50 kusov
+                ]);
+            }
+        }
+
+
+
+        $origin_images = $request->input('origin_images', []);
+        $origin_images_trimmed = array_map(fn($url) => Str::after($url, 'images/'), $origin_images);
+
+        $base_name = $product->image_basename;
+
+
+
+
+
+        $directory = public_path("images/$base_name");
+
+        $product->images()
+            ->whereNotIn('image_path', $origin_images_trimmed)
+            ->delete(); /* odstráni záznamy z db */
+
+
+
+        if (File::exists($directory)) {
+            $allFiles = File::files($directory);
+
+            // Získať len názvy súborov z pôvodných ciest
+            $allowedFiles = collect($origin_images)->map(function ($path) {
+                return basename($path); // napr. 'product_123main.png'
+            })->toArray();
+
+            foreach ($allFiles as $file) {
+                $filename = $file->getFilename();
+                if (!in_array($filename, $allowedFiles)) {
+                    File::delete($file->getPathname());
+                }
+            }
+
+
+
+            $index = 0;
+            $allFiles = File::files($directory); /* nový stav */
+            /* test či sa nevymazal main image */
+            $mainImage = $product->images()->where('is_main', true)->first();
+
+            foreach ($allFiles as $file) {
+                $filename = $file->getFilename();
+                $old_filename = $base_name . '/' . $filename;
+                $newFilename = '';
+
+
+                Log::info("main image " .$mainImage);
+                if ($index === 0) { /* nemá v názve main */
+                    if (strpos($file->getFilename(), 'main') === false) {
+                        $newFilename = "{$base_name}main.png";
+                        $newFileRecord = $base_name . '/' . $newFilename;
+                        $newFilePath = $directory . '/' . $newFilename;
+                        File::move($file->getPathname(), $newFilePath);
+
+                        $product->images()->where('image_path', $old_filename)->update(['image_path' => $newFileRecord]);
+                    }
+                    $index++;
+                    continue;
+                }
+
+
+                $newFilename = "{$base_name}side{$index}.png";
+                $newFilePath = $directory . '/' . $newFilename;
+                $newFileRecord = $base_name . '/' . $newFilename;
+                File::move($file->getPathname(), $newFilePath);
+
+
+                // Aktualizujeme názov obrázku v databáze
+                $product->images()->where('image_path', $old_filename)->update(['image_path' => $newFileRecord]);
+                $index++;
+            }
+
+
+
+            if (!$mainImage) {
+                // Ak neexistuje žiadny obrázok "main", priradíme prvý dostupný obrázok ako "main"
+                $firstImage = $product->images()->first();
+
+                if ($firstImage) {
+                    $firstImage->update(['is_main' => true]);
+                }
+            }
+
+
+        }
+        else {
+            File::makeDirectory($directory);
+        }
+
+
+
+        /* spracovanie obrázkov */
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+
+                $type = $request->input("image_types.$index") ?? "side$index";
+
+                $filename = "{$base_name}{$type}." . $image->getClientOriginalExtension();
+                $relativePath = "$base_name/$filename";
+                $image->move(public_path("images/$base_name"), $filename);
+
+                Log::info('Tu som baby: ' . $base_name . " " . $filename . $type);
+
+                $product->images()->create([
+                    'image_path' => $relativePath,
+                    'is_main' => $type === 'main',
+                ]);
+            }
+        }
+
+
+
+
+        return redirect()->route('admin_dashboard')->with('success', 'Produkt bol úspešne upravený.');
+    }
 
 
     public function destroy($id)

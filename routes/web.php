@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSizeController;
+use App\Http\Controllers\AdminUpravaController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\KosikController;
 
@@ -45,6 +46,11 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
 
 
 
+/* zobraz edit šablonu */
+Route::get('/produkty/{id}/edit', [AdminUpravaController::class, 'showSablona'])->name('products.edit_show');
+
+
+
 /* pridanie produktu */
 Route::post('/produkty', [ProductController::class, 'create']);
 
@@ -52,6 +58,9 @@ Route::post('/produkty', [ProductController::class, 'create']);
 /* delete produktu */
 Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
 
+
+/* edit produktu */
+Route::post('/produkty/{id}/update', [ProductController::class, 'update'])->name('products.update');
 
 
 

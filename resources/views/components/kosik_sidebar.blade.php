@@ -18,7 +18,7 @@
   $cartItems = $sessionModel
       ? $sessionModel->cartItems()->with('product')->get()
       : collect();
-    }  
+    }
 @endphp
 
     @forelse($cartItems as $item)
@@ -26,8 +26,8 @@
             <!-- 1) Obrázok produktu -->
             <div >
                 <img  id="kosik_sidebar_item_photo"
-                    src="{{ asset('images/'. $item->product->main_image) }}"
-                    alt="{{ $item->product->name }}" 
+                    src="{{ asset('images/'. $item->product->images->firstWhere('is_main', true)->image_path) }}"
+                    alt="{{ $item->product->name }}"
                 >
             </div>
 
@@ -41,7 +41,7 @@
                 </div>
                 <!-- Veľkosť -->
                 <div class="kosik_sidebar_item_size">
-                    US: 
+                    US:
                     <span id="kosik_sidebar_item_size_specified">
                         {{ $item->size }}
                     </span>
@@ -88,7 +88,7 @@
             <div class="kosik_sidebar_zaverecne_info_medzisucet2"><span id="kosik_sidebar_zaverecne_info_medzisucet_specified">{{ number_format($total, 2) }}</span> </div>
 
         </div>
-        
+
         <a href="{{ route('kosik') }}" class="prejst_do_pokladne_button"> Prejsť do pokladne </a>
     </div>
 </div>
