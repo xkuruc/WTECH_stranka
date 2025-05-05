@@ -136,6 +136,7 @@
     font-size: 25px;
     border-bottom: 1px solid rgb(179, 179, 179);
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .info_mininadpis {

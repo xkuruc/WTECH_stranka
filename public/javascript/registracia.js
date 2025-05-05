@@ -37,7 +37,7 @@ function selectOption(type, option) {
     let input = document.getElementById(`selected${capitalizeFirstLetter(type)}`);
     let hiddenInput = document.getElementById(`${type}Hidden`);
 
-    let selected = input.value ? input.value.split(", ") : [];
+    let selected = input.value ? input.value.split("; ") : [];
 
     if (!selected.includes(option)) {
         selected.push(option);
@@ -45,7 +45,7 @@ function selectOption(type, option) {
         selected = selected.filter(s => s !== option);
     }
 
-    const value = selected.join(", ");
+    const value = selected.join("; ");
     input.value = value;
     hiddenInput.value = value;
 }

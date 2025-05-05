@@ -112,10 +112,11 @@
                             <input type="hidden" name="znacka" id="brandsHidden">
 
                             <div id="brandsDropdown" class="dropdown-content">
-                                <div onclick="selectOption('brands', 'Nike')">Nike</div>
-                                <div onclick="selectOption('brands', 'Adidas')">Adidas</div>
-                                <div onclick="selectOption('brands', 'Puma')">Puma</div>
-                                <div onclick="selectOption('brands', 'Reebok')">Reebok</div>
+                                @foreach ($brands as $brand)
+                                    <div onclick="selectOption('brands', '{{ $brand->display_name }}')">
+                                        {{ $brand->display_name }}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

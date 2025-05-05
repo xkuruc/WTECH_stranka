@@ -15,9 +15,8 @@ Route::get('/', function () {
 
 
 
-Route::get('/register', function () {
-    return view('registracia');
-});
+
+Route::get('/register', [RegistrationController::class, 'show']);
 
 
 Route::get('/login', [LoginController::class, 'showSablona'])->name('login');
@@ -33,7 +32,6 @@ Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])-
 Route::get('/polozka-produktu/{product}', [ProductController::class, 'show'])->name('products.show');
 
 
-
 Route::prefix('/polozka-produktu/{product}')->group(function(){
     Route::get('sizes',       [ProductSizeController::class, 'index'])
          ->name('products.sizes.index');
@@ -46,13 +44,23 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
 });
 
 
-require base_path('routes/routes1.php');
+
+/* pridanie produktu */
+Route::post('/produkty', [ProductController::class, 'create']);
 
 
+/* delete produktu */
+Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
+
+
+
+
+/* filtrovanie + zoznam produktov */
 Route::get('{type}/{filters?}', [ProductController::class, 'index'])
     ->where('type', 'Tenisky|Kopacky|Lopty|Vypredaj') // Restrict type to specific values
     ->where('filters', '.*')
     ->name('products.index');
+
 
 
 /* search produktov */
@@ -64,6 +72,7 @@ Route::get('search', [ProductController::class, 'search'])
 
 
 
+/* košík sidebar */
 Route::get('/cart',           [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart',          [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{item}',    [CartController::class, 'update'])->name('cart.update');
@@ -84,5 +93,6 @@ Route::post('/submit', [CartController::class, 'submit'])->name('cart.submit');
 Route::view('/kosik', 'kosik')->name('kosik');
 Route::get('/kosik', [KosikController::class, 'index'])->name('kosik');
 
-require base_path('routes/routes2.php');
 
+require base_path('routes/routes1.php');
+require base_path('routes/routes2.php');

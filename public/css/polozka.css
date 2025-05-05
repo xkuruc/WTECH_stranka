@@ -5,24 +5,29 @@
     align-items: center;
     margin: 100px auto;
     background-color: rgb(247, 247, 247);
-    padding: 20px 20px 50px;
 
+    padding: 0px 20px;
+    box-sizing: border-box;
+
+    transition: width 0.3s ease-in-out;
 }
 
 .product_main_info_container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    column-gap: clamp(20px,5vw, 60px);
 
-    column-gap: 60px;
+    margin: 20px 20px 30px 20px;
     width: 100%;
+    height: auto;
 
 }
 
 .product_information {
     /* background-color: #d9d9d9; */
     width: 600px;
-    height: 700px;
+    height: auto;
 
 }
 
@@ -30,6 +35,8 @@
 .product_information h1{
     font-weight: bold;
     font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 .specified {
@@ -80,7 +87,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .fa-globe{

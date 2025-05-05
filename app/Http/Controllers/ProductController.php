@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Faker\Factory as Faker;
+use App\Models\Supplier;
+use App\Models\Season;
+use App\Models\ProductSize;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-
     public function fill_filter($query) {
         /* na základe products vyplní filter */
         /** UDAJE DO VELKEHO FILTRA **/
@@ -260,41 +266,14 @@ class ProductController extends Controller
         /** ZLAVNENE OBRAZKY **/
         $discountedImages = $products->where('discount', '>', 0)
             ->pluck('images')
-            ->flatten();
+            ->flatten()
+            ->where('is_main', true);
 
 
         /* uložíme dáta do pola a posunieme buď do view alebo do search funkcie */
         $data = compact('products', 'discountedImages', 'type', 'brands', 'colors', 'sizes', 'seasons', 'genders', 'available', 'appliedFilters');
         return $isSearch ? $data : view('zoznam_produktov', $data); /* ak je to search, vráti len dáta, ináč vráti view */
     }
-
-
-
-
-
-
-
-    public function show(Product $product)
-    {
-        // Eager‑load vzťahy, napr. galériu obrázkov
-        $product->load(['images', 'category', 'color', 'brand']);
-
-        $discountedImages  = Product::with('images')->get()->where('discount', '>', 0)
-                                  ->pluck('images')
-                                  ->flatten();
-
-
-
-
-
-        // Vrátime view 'polozka_produktu' s atribútom $product
-        return view('polozka_produktu', compact('product', 'discountedImages'));
-    }
-
-
-
-
-
 
 
 
@@ -359,5 +338,175 @@ class ProductController extends Controller
 
         // Vrátime view s produktami a hľadaným textom
         return view('search_results', $data);
+    }
+
+
+
+    public function show(Product $product)
+    {
+        // Eager‑load vzťahy, napr. galériu obrázkov
+        $product->load(['images', 'category', 'color', 'brand']);
+
+        $discountedImages  = Product::with('images')->get()->where('discount', '>', 0)
+            ->pluck('images')
+            ->flatten()
+            ->where('is_main', true);
+
+
+        // Vrátime view 'polozka_produktu' s atribútom $product
+        return view('polozka_produktu', compact('product', 'discountedImages'));
+    }
+
+
+
+    /*** ADMIN VECI - VYTVORENIE, MAZANIE, UPRAVA PRODUKTOV ***/
+    /** VYTVORENIE **/
+    public function create(Request $request)
+    {
+        // Validácia dát z formulára
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'gender' => 'required|string',
+            'type' => 'required|string',
+            'brand_id' => 'required|exists:brands,id',
+            'color_id' => 'required|exists:colors,id',
+            'sizes' => 'required|string',
+            'images.*' => 'required|image|max:2048',
+            'image_types.*' => 'required|string',
+            'base_name' => 'required|string',
+        ]);
+
+
+        $faker = Faker::create();
+        Log::info('Požiadavka obsahuje obrázky:', ['images' => $validated['images']]);
+
+
+        $stock_quantity =  $faker->numberBetween(0, 100);
+        $available_miesta = ['Bratislava', 'Praha','Košice', 'Skladom'];
+        if ($stock_quantity == 0) {
+            $available = 'Momentálne vypredané';
+        } else {
+            //ak je, tak si vyberie náhodne či je na sklade alebo na predajni
+            $available = $faker->randomElement($available_miesta);
+        }
+
+
+        // Vytvorenie nového produktu
+        $product = Product::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'discount' => $validated['discount'],
+            'SKU' => strtoupper($faker->bothify('???###')), /* SKU náhodné */
+            'supplier_id' => $faker->randomElement(Supplier::pluck('id')->toArray()) ?? Supplier::factory(), /* dodávateľ */
+            'stock_quantity' => $stock_quantity,
+            'brand_id' => $validated['brand_id'],
+            'available' => $validated['available'] ?? $available,
+            'gender' => $validated['gender'],
+            'color_id' => $validated['color_id'],
+            'type' => $validated['type'],
+            'season_id' => Season::inRandomOrder()->first()->id,
+            'created_at' => $faker->dateTimeBetween('-1 years', 'now'),
+        ]);
+
+        $base_name = $validated['base_name'];
+
+        $dir = public_path('images/' . $base_name);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        $storedPaths = [];
+
+        // Spracovanie obrázkov, ak nejaké existujú
+
+
+
+        if ($request->hasFile('images')) {
+            $imageIndex = 0;
+            if ($request->has('image_types')) {
+                Log::debug('Image types:', $request->input('image_types'));  // Toto vypíše celé pole
+            }
+            foreach ($request->file('images') as $key => $image) {
+
+                $imageType = $request->input('image_types')[$imageIndex];
+
+
+
+
+                if ($image) {
+
+                    // Extrahujeme názov obrázku (napr. base_name_main alebo base_name_side1)
+
+
+                    $isMain = strpos($imageType, 'main') !== false; // Určujeme, či je hlavný obrázok
+
+                    // Generovanie názvu súboru
+                    $filename = $base_name . $imageType . '.' . $image->getClientOriginalExtension();
+
+                    Log::debug('Ukladám obrázok na cestu: ' . $dir . '/' . $filename);
+
+                    // Uloženie obrázku do priečinka 'public/images/base_name'
+                    $image->move($dir, $filename);
+
+                    // Uloženie cesty k obrázku
+                    $storedPaths[$base_name] = $base_name . '/' . $filename;
+
+                    Log::debug("som tu " . 'images/' . $base_name . '/' . $filename);
+
+                    // Uloženie obrázka do tabuľky `product_images`
+                    $imageRecord = new ProductImage();
+                    $imageRecord->product_id = $product->id; // ID nového produktu
+                    $imageRecord->image_path = $storedPaths[$base_name]; // Cesta k obrázku
+                    $imageRecord->is_main = $isMain; // Určujeme, či je hlavný obrázok
+                    $imageRecord->save();
+
+                    $imageIndex += 1;
+                }
+            }
+        }
+        else {
+            return response()->json(['messaage' => 'nie su obrazky', 'images' => $validated['images'] ?? []]);
+        }
+
+        if (!empty($validated['sizes'])) {
+            $sizes = explode(';', $validated['sizes']);
+
+            foreach ($sizes as $size) {
+                $trimmedSize = trim($size); // odstráni medzery
+
+                ProductSize::create([
+                    'product_id' => $product->id,
+                    'us_velkost' => floatval($trimmedSize), // prevedie na číslo, napr. 5.0
+                    'pocet' => rand(0, 50), // náhodne 0–50 kusov
+                ]);
+            }
+        }
+
+
+        return response()->json([
+            'message' => 'Produkt úspešne vytvorený a obrázky nahrané.',
+            'product' => $product,
+            'paths' => $storedPaths,
+        ]);
+    }
+
+
+
+
+    public function destroy($id)
+    {
+        $produkt = Product::find($id);
+
+        if (!$produkt) {
+            return response()->json(['message' => 'Produkt nenájdený.'], 404);
+        }
+
+        $produkt->delete();
+
+        return response()->json(['message' => 'Produkt bol úspešne zmazaný.']);
     }
 }

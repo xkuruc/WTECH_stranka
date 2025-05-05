@@ -205,9 +205,7 @@
                 <div class="slider-container">
                     <div class="owl-carousel owl-carouselBRATU ">
                     @foreach($discountedImages as $img)
-
-                            <!-- <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">-->
-
+                        <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">
                     @endforeach
                     </div>
                 </div>

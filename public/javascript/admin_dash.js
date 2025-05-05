@@ -14,7 +14,19 @@ product_container.addEventListener('click', async function(event)  {
 
 		const confirmed = await show_popup(`Chcete vymazať produkt s ID: ${pr_id}`); /* čaká sa na odpoved, skript čaká */
 		if (confirmed) { /* ak je odpoveď true (môže byť true/false) */
+            fetch(`/produkty/${pr_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Chyba:', error));
+
+
             target.parentElement.remove();
+
         }
     }
     else if (event.target.closest(".product_item_relative")) {

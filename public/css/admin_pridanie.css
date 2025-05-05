@@ -1,10 +1,10 @@
-
 .big_img {
 	position: relative;
 	z-index: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    background-color: white;
 }
 
 .small_img {
@@ -13,7 +13,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    background-color: white;
 }
+
+img[src=""] {
+    display: none;
+}
+
 
 .file-input {
     display: none;
@@ -21,6 +27,7 @@
 }
 
 
+/** PLUSKO **/
 .plusko {
 	display: flex;
     position: absolute;
@@ -62,31 +69,49 @@
 }
 
 
+/* farba pluska */
 .small_img.add .plusko::before, .small_img.add .plusko::after {
     background-color: #cccccc;
 }
+
 
 .big_img.add .plusko::before, .big_img.add .plusko::after {
     background-color: #cccccc;
 }
 
 
-
-
+/** číselníky a spol **/
 .produkt_information {
 	max-width: 100%;
 	min-width: 320px;
 	width: 480px;
-
 	height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
     box-sizing: border-box;
-	padding-top: 19px;
 	gap: 10px;
+
 }
+
+#selectedSizes {
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: 3px 0 0 14px;
+}
+
+
+
+.dropdown-content {
+    top: 100%;
+}
+
+
+
+
+
+
 
 
 .label_edit {
@@ -145,10 +170,10 @@
 	color: #808080;
 	font-size: 15px;
 	padding-top: 2px;
-
 }
 
 
+/* spojený input cena a zlava */
 .joined_input {
 	display: flex;
 	justify-content: space-between;
@@ -190,6 +215,7 @@
 }
 
 
+/* koš na vymazanie obrázka */
 .trash_can_right {
     position: absolute;
     top: 18px;
@@ -203,6 +229,8 @@
 
 
 .trash_can_right img {
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     background-color: transparent;
 }
@@ -224,63 +252,14 @@
 /* media querička */
 @media (max-width: 1050px) {
     .product_main_info_container{
-        flex-direction: column;
-
+        gap: 50px;
     }
-
-    .product_images {
-        justify-content: flex-start;
-
-    }
-
-    .product_images, .produkt_information{
-        max-width: 80%;
-
-    }
-
-
-
-
-    .product_images {
-        height: 600px;
-        margin-bottom: 50px;
-
-    }
-
-
 
     .produkt_information {
-        width: 600px;
-
+        width: 100%;
     }
-
 
     .joined_input, .button_pridat, .select_label, .custom_input {
         width: 100%;
     }
-
-
 }
-
-
-
-
-
-@media (max-width: 600px) {
-
-	.product_images {
-		height: 350px;
-		margin-bottom: 0px;
-		padding-bottom: 30px;
-
-	}
-
-    .joined_input, .button_pridat, .select_label, .custom_input {
-    	width: 100%;
-    }
-
-}
-
-
-
-

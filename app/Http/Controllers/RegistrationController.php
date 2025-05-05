@@ -7,10 +7,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Address;
 use App\Models\Personalizacia;
-
+use App\Models\Brand;
 
 class RegistrationController extends Controller
 {
+    public function show() {
+
+        $brands = Brand::all();
+
+        return view('registracia', compact('brands'));
+    }
+
 
     public function store(Request $request)
     {
