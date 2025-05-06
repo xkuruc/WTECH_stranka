@@ -56,19 +56,19 @@
                 <div class="kosik_sidebar_item_quantity">
                 <span class="item_category">Qty</span>: {{ $item->quantity }}
                 <!-- Množstvo + ovládacie tlačidlá -->
-<div class="kosik_sidebar_item_quantity">
-    <form action="{{ route('cart.decrement', $item->id) }}" method="POST" style="display:inline">
-        @csrf
-        <button type="submit" class="quantity-btn">-</button>
-    </form>
+                    <div class="kosik_sidebar_item_quantity">
+                        <form action="{{ route('cart.decrement', $item->id) }}" method="POST" style="display:inline">
+                            @csrf
+                            <button type="submit" class="quantity-btn">-</button>
+                        </form>
 
-    <span class="quantity-value">{{ $item->quantity }}</span>
+                        <span class="quantity-value">{{ $item->quantity }}</span>
 
-    <form action="{{ route('cart.increment', $item->id) }}" method="POST" style="display:inline">
-        @csrf
-        <button type="submit" class="quantity-btn">+</button>
-    </form>
-</div>
+                        <form action="{{ route('cart.increment', $item->id) }}" method="POST" style="display:inline">
+                            @csrf
+                            <button type="submit" class="quantity-btn">+</button>
+                        </form>
+                    </div>
                 </div>
 
             </div>

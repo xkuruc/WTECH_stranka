@@ -1,15 +1,18 @@
 /* CSS */
 .menu {
+  display: flex;
+  gap: 4.5px;
+  flex-wrap: nowrap;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-  
+
 .menu li {
   display: inline-block;
   position: relative;
 }
-  
+
 .menu .main_category {
   font-weight: bold;
   color: #333;
@@ -34,17 +37,18 @@
 #tenisky {
   color: black;
 }
-  
-.dropdown-menu li a {
+
+.inside_category_name a {
   padding: 10px 15px;
   white-space: nowrap;
-  color: #333;
+  color: #333 !important;
   height: auto;
 }
 
 .dropdown-menu li a:hover {
   background-color: transparent;
 }
+
 
 .main_category:hover .dropdown-menu {
   display: flex;
@@ -61,7 +65,7 @@
 .dropdown-menuDOPLNKY .inside_category {
   margin: 20px 5px;
 }
-  
+
 .dropdown-menu .inside_category {
   display: flex;
   justify-items: center;
@@ -128,13 +132,10 @@
   }
 }
 
-.dropdown-menuTENISKY, .dropdown-menuDOPLNKY {
+.dropdown-menuTENISKY, .dropdown-menuKOPACKY, .dropdown-menuLOPTY {
   height: auto;
 }
 
-.dropdown-menuOBLECENIE {
-  height: auto;
-}
 
 .inside_category_Doplnky a {
   font-size: 20px;

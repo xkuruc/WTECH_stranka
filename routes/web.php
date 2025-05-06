@@ -46,22 +46,20 @@ Route::prefix('/polozka-produktu/{product}')->group(function(){
 
 
 
-/* zobraz edit šablonu */
-Route::get('/produkty/{id}/edit', [AdminUpravaController::class, 'showSablona'])->name('products.edit_show');
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    /* zobraz edit šablonu */
+    Route::get('/produkty/{id}/edit', [AdminUpravaController::class, 'showSablona'])->name('products.edit_show');
 
+    /* pridanie produktu */
+    Route::post('/produkty', [ProductController::class, 'create']);
 
+    /* delete produktu */
+    Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
 
-/* pridanie produktu */
-Route::post('/produkty', [ProductController::class, 'create']);
+    /* edit produktu */
+    Route::post('/produkty/{id}/update', [ProductController::class, 'update'])->name('products.update');
 
-
-/* delete produktu */
-Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
-
-
-/* edit produktu */
-Route::post('/produkty/{id}/update', [ProductController::class, 'update'])->name('products.update');
-
+});
 
 
 /* filtrovanie + zoznam produktov */

@@ -9,111 +9,80 @@
                 <a href="{{ url('/Tenisky') }}">Tenisky</a>
                 <ul class="dropdown-menu dropdown-menuTENISKY">
                     <li class="inside_category">
-                        <span class="inside_category_name"><a href="#panskeTenisky"> Pánske tenisky </a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Pánske']) }}"> Pánske tenisky </a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Pánske sportove tenisky </span>
-                            <span class="konkretna_moznost" >Pánske livestyle tenisky</span>
-                            <span class="konkretna_moznost">Nike</span>
-                            <span class="konkretna_moznost">Jordan</span>
-                            <span class="konkretna_moznost">Adidas</span>
-                            <span class="konkretna_moznost">Converse</span>
-                            <span class="konkretna_moznost">New balance</span>
-                            <span class="konkretna_moznost">Reebok</span>
-                            <span class="konkretna_moznost">Puma</span>
-                            <span class="konkretna_moznost">Vans</span>
+                            @foreach($tenisky_pack['Pánske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Pánske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category">
-                        <span class="inside_category_name"><a href="#damskeTenisky"> Dámske tenisky</a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Dámske']) }}"> Dámske tenisky</a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Dámske sportove tenisky </span>
-                            <span class="konkretna_moznost">Dámske livestyle tenisky</span>
-                            <span class="konkretna_moznost">Nike</span>
-                            <span class="konkretna_moznost">Jordan</span>
-                            <span class="konkretna_moznost">Adidas</span>
-                            <span class="konkretna_moznost">Converse</span>
-                            <span class="konkretna_moznost">New balance</span>
-                            <span class="konkretna_moznost">Reebok</span>
-                            <span class="konkretna_moznost">Puma</span>
-                            <span class="konkretna_moznost">Vans</span>
+                            @foreach($tenisky_pack['Dámske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Dámske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category">
-                        <span class="inside_category_name"> Značky</span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Unisex']) }}"> Unisex tenisky</a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Nike</span>
-                            <span class="konkretna_moznost">Jordan</span>
-                            <span class="konkretna_moznost">Adidas</span>
-                            <span class="konkretna_moznost">Converse</span>
-                            <span class="konkretna_moznost">New balance</span>
-                            <span class="konkretna_moznost">Reebok</span>
-                            <span class="konkretna_moznost">Puma</span>
-                            <span class="konkretna_moznost">Vans</span>
+                            @foreach($tenisky_pack['Unisex'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => 'gender-Unisex_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category inside_category_posledny">
-                        <span class="inside_category_name"><a href="#detskeTenisky"> Tenisky detské </a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Tenisky', 'filters' => '&orderby=latest']) }}"> Najnovšie tenisky </a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Tenisky detské - bábätká (TD) </span>
-                            <span class="konkretna_moznost">Tenisky detské - mladšie deti (PS) </span>
-                            <span class="konkretna_moznost">Tenisky detské - staršie deti (GS) </span>
-                            <span class="konkretna_moznost">Nike</span>
-                            <span class="konkretna_moznost">Jordan</span>
-                            <span class="konkretna_moznost">Adidas</span>
+                            @foreach($tenisky_pack['latest'] as $product)
+                                <a href="{{ route('products.show', ['product' => $product->id]) }}" > <span class="konkretna_moznost">{{ $product->name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                 </ul>
             </li>
             <li class="main_category">
                 <a href="{{ url('/Kopacky') }}">Kopačky</a>
-                <ul class="dropdown-menu dropdown-menuOBLECENIE">
+                <ul class="dropdown-menu dropdown-menuKOPACKY">
                     <li class="inside_category">
-                        <span class="inside_category_name"><a href="#panskeTenisky"> MUŽI </a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Pánske']) }}"> Pánske kopačky </a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Pánske tričká </span>
-                            <span class="konkretna_moznost">Pánske mikiny </span>
-                            <span class="konkretna_moznost">Pánske bundy </span>
-                            <span class="konkretna_moznost">Pánske nohavice </span>
-                            <span class="konkretna_moznost">Pánske kraťasy </span>
-
+                            @foreach($kopacky_pack['Pánske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Pánske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category">
-                        <span class="inside_category_name"><a href="#damskeTenisky"> ŽENY </a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Dámske']) }}"> Dámske kopačky</a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Dámske tričká </span>
-                            <span class="konkretna_moznost">Dámske mikiny </span>
-                            <span class="konkretna_moznost">Dámske bundy </span>
-                            <span class="konkretna_moznost">Dámske nohavice </span>
-                            <span class="konkretna_moznost">Dámske kraťasy </span>
+                            @foreach($kopacky_pack['Dámske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Dámske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category">
-                        <span class="inside_category_name"> Značky</span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Unisex']) }}"> Unisex kopačky</a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Nike</span>
-                            <span class="konkretna_moznost">Jordan</span>
-                            <span class="konkretna_moznost">Adidas</span>
-                            <span class="konkretna_moznost">Adidas originals</span>
-                            <span class="konkretna_moznost">Puma</span>
-                            <span class="konkretna_moznost">Pleasures</span>
+                            @foreach($kopacky_pack['Unisex'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => 'gender-Unisex_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="inside_category inside_category_posledny">
-                        <span class="inside_category_name"><a href="#detskeTenisky"> DETI </a></span>
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Kopacky', 'filters' => '&orderby=latest']) }}"> Najnovšie kopačky </a></span>
                         <div class="inside_category_moznosti">
-                            <span class="konkretna_moznost">Tričká </span>
-                            <span class="konkretna_moznost">Detské mikiny </span>
-                            <span class="konkretna_moznost">Detské bundy </span>
-                            <span class="konkretna_moznost">Detské kraťasy</span>
-                            <span class="konkretna_moznost">Detské súpravy </span>
+                            @foreach($kopacky_pack['latest'] as $product)
+                                <a href="{{ route('products.show', ['product' => $product->id]) }}" > <span class="konkretna_moznost">{{ $product->name }}</span></a>
+                            @endforeach
                         </div>
                     </li>
                 </ul>
             </li>
             <li class="main_category">
                 <a href="{{ url('/Lopty') }}">Lopty</a>
-                <ul class="dropdown-menu dropdown-menuDOPLNKY">
+                <ul class="dropdown-menu dropdown-menuLOPTY">
+                    <!--
                     <div class="doplnky_placeholder">
                         <li class="inside_category">
                             <span class="inside_category_Doplnky"><a href="#LOPTY"> LOPTY </a></span>
@@ -137,6 +106,40 @@
                             <span class="inside_category_Doplnky"><a href="#OSTATNE"> OSTATNÉ </a></span>
                         </li>
                     </div>
+                    -->
+                    <li class="inside_category">
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'gender-Pánske']) }}"> Pánske lopty </a></span>
+                        <div class="inside_category_moznosti">
+                            @foreach($lopty_pack['Pánske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'gender-Pánske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li class="inside_category">
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'gender-Dámske']) }}"> Dámske lopty</a></span>
+                        <div class="inside_category_moznosti">
+                            @foreach($lopty_pack['Dámske'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'gender-Dámske_' . 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li class="inside_category">
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'gender-Unisex']) }}"> Unisex lopty</a></span>
+                        <div class="inside_category_moznosti">
+                            @foreach($lopty_pack['Unisex'] as $brand)
+                                <a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => 'brand-' . $brand->name]) }}" > <span class="konkretna_moznost">{{ $brand->display_name }}</span></a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li class="inside_category inside_category_posledny">
+                        <span class="inside_category_name"><a href="{{ route('products.index', ['type' => 'Lopty', 'filters' => '&orderby=latest']) }}"> Najnovšie lopty </a></span>
+                        <div class="inside_category_moznosti">
+                            @foreach($lopty_pack['latest'] as $product)
+                                <a href="{{ route('products.show', ['product' => $product->id]) }}" > <span class="konkretna_moznost">{{ $product->name }}</span></a>
+                            @endforeach
+                        </div>
+                    </li>
+
                 </ul>
             </li>
             <li class="main_category"><a href="{{ url('/Vypredaj') }}">Výpredaj</a></li>
@@ -146,7 +149,6 @@
     <div class="right_part">
         <form action="{{ route('search') }}" method="GET">
             <input class="vyhladaj_input" type="text" name="query" placeholder="Vyhľadajte produkt..." value="{{ explode('/', request()->query('query'))[0] }}">
-            <button type="submit">Hľadať</button>
         </form>
 
 

@@ -200,10 +200,6 @@ return new class extends Migration
 
 
         /* full text vyhladavanie */
-        // Vytvoríme GIN index pre efektívne vyhľadávanie
-
-
-        // Naplníme existujúce produkty dátami
         DB::statement("
             UPDATE products
             SET search_vector = to_tsvector('simple', coalesce(products.name, '') || ' ' ||
