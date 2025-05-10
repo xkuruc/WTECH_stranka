@@ -24,8 +24,10 @@
 
 .owl-carousel .itemBRATU{
     /* margin: 3px; */
-    color: #ff0000;
-    background-color: #616161;
+    /* color: #ff0000; */
+    /* background-color: #616161; */
+    background-color: transparent;
+    color: black;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px; 
@@ -36,6 +38,10 @@
     min-width: 280px;
     width: 20vw;
     aspect-ratio: 1 / 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 

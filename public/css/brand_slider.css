@@ -103,8 +103,13 @@
 .owl-carouselBRAND .itemBRAND {
     /* ak to má byť presne 20px medzi obrázkami, dáme margin */
     margin: 0 10px;
-    /* prípadne nastaviť aj šírku/nastavenie box-sizing */
     box-sizing: border-box;
+    width: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+
 }
 .customNavigation a{
     -webkit-user-select: none;

@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
+    
+    <link rel="stylesheet" href="{{ asset('css/product_list.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/product_item.css') }}">
+    
     <!--
     dizajn stránky je inšpirovaný stránkou thestreets.sk a filter je inšpirovaný filtrom stránky https://www.footshop.sk/
     -->
@@ -45,15 +49,24 @@
         <section class="brand_slider_section">
                 <div class="slider-containerBRAND">
                     <div class="owl-carouselBRAND">
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
-                        <div class="itemBRAND"><img src="{{ asset('images/n.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/n.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/a.jpg') }}"></div>
+                        <div class="itemBRAND"><img width="130" src="{{ asset('images/f.webp') }}"></div>
+                        <div class="itemBRAND"><img width="80" src="{{ asset('images/c.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/p.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/r.webp') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/n.gif') }}"></div>
+                        <div class="itemBRAND"><img width="120" src="{{ asset('images/c.svg') }}"></div>
+                        <div class="itemBRAND"><img width="120" src="{{ asset('images/v.jpg') }}"></div>
+                        <div class="itemBRAND"><img width="120" src="{{ asset('images/co.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/s.png') }}"></div>
+                        <div class="itemBRAND"><img width="100" src="{{ asset('images/jo.jpeg') }}"></div>
+                        <div class="itemBRAND"><img width="150" src="{{ asset('images/ua2.png') }}"></div>
+                        <div class="itemBRAND"><img width="130" src="{{ asset('images/columbia.png') }}"></div>
+                        <div class="itemBRAND"><img width="130" src="{{ asset('images/tnf.png') }}"></div>
+                        <div class="itemBRAND"><img width="90" src="{{ asset('images/dc.png') }}"></div>
+                        <div class="itemBRAND"><img width="120" src="{{ asset('images/h.jpg') }}"></div>
+                        <div class="itemBRAND"><img width="90" src="{{ asset('images/asics.jpg') }}"></div>
                     </div>
                 </div>
         </section>
@@ -72,54 +85,138 @@
             </div>
         </section>
 
+
+        @php
+            // nacitame vsetky produkty so zlavou 
+            $discountedProducts = \App\Models\Product::with('images')
+                ->where('discount', '>', 0)
+                ->get();
+        @endphp
         <section class="product_sliders">
             <div class="label"> Zlavy</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka1/sample_topanka1_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2/sample_topanka2_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3/sample_topanka3_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
+                        @foreach($discountedProducts as $product)
+                            @php
+                                // vyberieme hlavný obrázok (is_main = true)
+                                $mainImage = $product->images->firstWhere('is_main', true);
+                            @endphp
+
+                            @if($mainImage)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                        <img class="itemBRATU" 
+                                        src="{{ asset('images/' . $mainImage->image_path) }}" 
+                                        alt="{{ $product->name }}"
+                                        >
+                                        <div class="sale_placeholder">
+                                            -{{ round($product->discount) }}%
+                                        </div>
+                                    </a>
+                                    
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
+
+
+                @php
+                // nacita n nahodnych produktov
+                $randomProducts = \App\Models\Product::with('images')
+                    ->inRandomOrder()
+                    ->take(10)
+                    ->get();
+            @endphp
 
             <div class="label"> Todays pick</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka1/sample_topanka1_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka2/sample_topanka2_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka3/sample_topanka3_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
+                        @foreach($randomProducts as $product)
+                            @php
+                                // vyberieme hlavný obrázok
+                                $mainImage = $product->images->firstWhere('is_main', true);
+                            @endphp
+
+                            @if($mainImage)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                        <img class="itemBRATU"
+                                        src="{{ asset('images/' . $mainImage->image_path) }}" 
+                                        alt="{{ $product->name }}"
+                                        >
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
 
-            <div class="label"> Adidas botaski</div>
+            
+            @php
+                // nahodne vyberieme jeden produkt
+                $randomProduct = \App\Models\Product::has('images')
+                    ->inRandomOrder()
+                    ->with('brand', 'images')
+                    ->first();
+
+                // ziskame jej znacku a jej ID
+                $brand = $randomProduct->brand;
+                $brandName = $brand->display_name ?? $brand->name;
+
+                // nacitame n dalsich produktov tej znacky (okrem toho nahodneho)
+                $brandProducts = \App\Models\Product::with('images')
+                    ->where('brand_id', $brand->id)
+                    ->where('id', '!=', $randomProduct->id)
+                    ->inRandomOrder()
+                    ->take(10)
+                    ->get();
+            @endphp
+
+            <div class="label">{{ $brandName }} botaski </div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
-                        <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
+                        {{-- zobrazi najprv prvy prodkut --}}
+                        @php
+                            $mainImage = $randomProduct->images->firstWhere('is_main', true);
+                        @endphp
+                        @if($mainImage)
+                            <div>
+                                <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                    <img
+                                        class="itemBRATU"
+                                        src="{{ asset('images/' . $mainImage->image_path) }}"
+                                        alt="{{ $randomProduct->name }}">
+                                </a>
+                            </div>
+                        @endif
+
+                        {{-- potom dalsie produkty tej istej znacky --}}
+                        @foreach($brandProducts as $product)
+                            @php
+                                $main = $product->images->firstWhere('is_main', true);
+                            @endphp
+                            @if($main)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                        <img class="itemBRATU" 
+                                            src="{{ asset('images/' . $main->image_path) }}"
+                                            alt="{{ $product->name }}">
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
+
+
+
         </section>
 
         @include('components.newsletter')

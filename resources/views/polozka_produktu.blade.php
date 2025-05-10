@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{{ asset('css/polozka_produktu.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    
+    <link rel="stylesheet" href="{{ asset('css/product_list.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/product_item.css') }}">
 </head>
 <body>
     <header>
@@ -199,32 +202,112 @@
             </div>
         </section>
 
-        <section class="product_sliders">
-            <div class="label"> Zlavy</div>
+        @php
+                $brand = $product->brand;
+                $brandName = $brand->display_name ?? $brand->name;
+
+                // nacitame n dalsich produktov tej znacky (okrem toho nahodneho)
+                $brandProducts = \App\Models\Product::with('images')
+                    ->where('brand_id', $brand->id)
+                    ->where('id', '!=', $product->id)
+                    ->inRandomOrder()
+                    ->take(10)
+                    ->get();
+            @endphp
+
+            <div class="label">{{ $brandName }} botaski </div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <div class="owl-carousel owl-carouselBRATU ">
-                    @foreach($discountedImages as $img)
-                        <img class="itemBRATU" src="{{ asset('images/'.$img->image_path) }}" alt="">
-                    @endforeach
+                    <div class="owl-carousel owl-carouselBRATU">
+                        {{-- potom dalsie produkty tej istej znacky --}}
+                        @foreach($brandProducts as $product)
+                            @php
+                                $main = $product->images->firstWhere('is_main', true);
+                            @endphp
+                            @if($main)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                        <img class="itemBRATU" 
+                                            src="{{ asset('images/' . $main->image_path) }}"
+                                            alt="{{ $product->name }}">
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
 
-            <div class="label"> Todays pick</div>
+        @php
+            // nacitame vsetky produkty so zlavou 
+            $discountedProducts = \App\Models\Product::with('images')
+                ->where('discount', '>', 0)
+                ->get();
+        @endphp
+        <section class="product_sliders">
+            <div class="label"> Zlavy</div>
             <section class="product_slider">
                 <div class="slider-container">
-                    <!-- <div class="customNavigation"><a class="btn prev"><i class="fa fa-caret-left"></i></a><a class="btn next"><i class="fa fa-caret-right"></i></a></div> -->
                     <div class="owl-carousel owl-carouselBRATU">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka4/sample_topanka4_main.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka5/sample_topanka5_main.jpg') }}" alt="">
-                    <img class="itemBRATU" src="{{ asset('images/sample_topanka6/sample_topanka6_main.jpg') }}" alt="">
+                        @foreach($discountedProducts as $productt)
+                            @php
+                                // vyberieme hlavný obrázok (is_main = true)
+                                $mainImage = $productt->images->firstWhere('is_main', true);
+                            @endphp
+
+                            @if($mainImage)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
+                                        <img class="itemBRATU" 
+                                        src="{{ asset('images/' . $mainImage->image_path) }}" 
+                                        alt="{{ $productt->name }}"
+                                        >
+                                        <div class="sale_placeholder">
+                                            -{{ round($productt->discount) }}%
+                                        </div>
+                                    </a>
+                                    
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
+
+
+                @php
+                // nacita n nahodnych produktov
+                $randomProducts = \App\Models\Product::with('images')
+                    ->inRandomOrder()
+                    ->take(10)
+                    ->get();
+            @endphp
+
+            <div class="label"> Todays pick</div>
+            <section class="product_slider">
+                <div class="slider-container">
+                    <div class="owl-carousel owl-carouselBRATU">
+                        @foreach($randomProducts as $productt)
+                            @php
+                                // vyberieme hlavný obrázok
+                                $mainImage = $productt->images->firstWhere('is_main', true);
+                            @endphp
+
+                            @if($mainImage)
+                                <div>
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
+                                        <img class="itemBRATU"
+                                        src="{{ asset('images/' . $mainImage->image_path) }}" 
+                                        alt="{{ $productt->name }}"
+                                        >
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+
         </section>
     </main>
 

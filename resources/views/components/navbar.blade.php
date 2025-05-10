@@ -1,5 +1,12 @@
 <nav class="navbar">
-    <a href="/" class="logo_link"> <div class="logo main_category" >Logo </div> </a>
+    
+    <div class="logoMain">
+        <a href="/"> 
+            <!-- <div class="" >Logo </div> -->
+            <i class="fa-solid fa-basketball"></i>
+        </a>    
+    </div>
+    
     <div class="menu_icon" onclick="toggleSidebar()">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -163,12 +170,15 @@
             <!-- Ak používateľ nie je prihlásený, zobrazí sa Login -->
             @guest
                 <a href="{{ route('login') }}" class="logo_link">
-                    <div class="profil">LOGIN</div>
+                    <!-- <div class="profil">LOGIN</div> -->
+                    <i class="fa-regular fa-user"></i>
                 </a>
             @endguest
         </ul>
 
 
-        <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div>
+        <!-- <div class="kosik last" onclick="toggleSidebarKosik()">KOSIK </div> -->
+        <div class="kosik last" onclick="toggleSidebarKosik()"><i class="fa-solid fa-cart-shopping"></i> </div>
+        
     </div>
 </nav>
