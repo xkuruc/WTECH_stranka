@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\UserOrder;
+use App\Models\OrderItem;
+
 
 class CartController extends Controller
 {
@@ -160,11 +162,6 @@ public function index()
     }
     public function submit(Request $request)
     {
-        // $data = $request->validate([
-        //     'meno'     => 'required|string|max:255',
-        //     'email'    => 'required|email',
-        // ]);
-
         $sessionId = $request->session()->getId();
 
         if (auth()->check()) {
@@ -179,12 +176,22 @@ public function index()
                 return $price * $qty;
             });
             // Vytvorime  zaznam v user_orders
-            UserOrder::create([
+            $order = UserOrder::create([
                 'user_id'    => $userId,
                 'price'      => $totalPrice,
                 'status'     => 'pending',       // alebo iný default
                 'created_at' => now(),
             ]);
+            foreach ($items as $item) {
+                OrderItem::create([
+                    'order_id'   => $order->id,
+                    'product_id' => $item->product_id,
+                    'quantity'   => $item->quantity ?? 1,
+                    'price'      => $item->product->price ?? 0,
+                ]);
+                
+                
+            }
             // prihlaseny pouzivatel – vymaze jeho vsetky polozky
             CartItem::where('user_id', auth()->id())->delete();
         } else {

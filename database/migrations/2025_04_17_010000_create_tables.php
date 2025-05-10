@@ -204,6 +204,22 @@ return new class extends Migration
             $table->string('status');
         });
 
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->id();
+            
+            $table->foreignId('order_id')
+                  ->constrained('user_orders')
+                  ->onDelete('cascade');
+            
+            $table->foreignId('product_id')
+                  ->constrained('products')
+                  ->onDelete('restrict');
+            $table->integer('quantity')->default(1);
+            
+            $table->decimal('price', 8, 2);
+        });
+
+
 
 
 

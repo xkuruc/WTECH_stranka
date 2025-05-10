@@ -130,8 +130,9 @@
                         <h1>Moje objednávky</h1>
                         @auth
                             @php
-                                // Načítame všetky objednávky prihláseného, zoradené zostupne
-                                $orders = \App\Models\UserOrder::where('user_id', auth()->id())
+                                // Eager load objednávky + položky + produkt
+                                $orders = \App\Models\UserOrder::with('items.product')
+                                            ->where('user_id', auth()->id())
                                             ->orderByDesc('created_at')
                                             ->get();
                             @endphp
@@ -150,15 +151,73 @@
                                     </thead>
                                     <tbody>
                                         @foreach($orders as $order)
-                                            <tr>
+                                            <tr class="order-row" data-order-id="{{ $order->id }}">
                                                 <td>{{ $order->id }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
                                                 <td>{{ number_format($order->price, 2, ',', ' ') }}</td>
                                                 <td>{{ ucfirst($order->status) }}</td>
                                             </tr>
+                                            <tr id="items-{{ $order->id }}" class="order-items-row">
+                                                <td colspan="4">
+                                                    @if($order->items->isEmpty())
+                                                        <em>Žiadne položky.</em>
+                                                    @else
+                                                        <table class="items-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Obrázok</th>
+                                                                    <th>Produkt</th>
+                                                                    <th>Množstvo</th>
+                                                                    <th>Cena za ks (€)</th>
+                                                                    <th>Spolu (€)</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($order->items as $item)
+                                                                    <tr>
+                                                                        <td>
+                                                                        @php
+                                                                            // získame prvý obrázok z hasMany vzťahu
+                                                                            $firstImage = $item->product->images->first();
+                                                                        @endphp
+
+                                                                        @if($firstImage)
+                                                                            <a href="/polozka-produktu/{{ $item->product_id }}" >
+                                                                                <img
+                                                                                src="{{ asset('images/' . $firstImage->image_path) }}"
+                                                                                alt="{{ $item->product->name }}"
+                                                                                class="product-image"
+                                                                                />
+                                                                            </a>
+                                                                        @else
+                                                                            <span class="no-image">bez obrázka</span>
+                                                                        @endif
+                                                                        </td>
+                                                                        <td>{{ $item->product->name }}</td>
+                                                                        <td>{{ $item->quantity }}</td>
+                                                                        <td>{{ number_format($item->price, 2, ',', ' ') }}</td>
+                                                                        <td>{{ number_format($item->price * $item->quantity, 2, ',', ' ') }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                {{-- Toggle detailov objednávky --}}
+                                <script>
+                                    document.querySelectorAll('.order-row').forEach(row => {
+                                        row.style.cursor = 'pointer';
+                                        row.addEventListener('click', () => {
+                                            const detail = document.getElementById(`items-${row.dataset.orderId}`);
+                                            detail.style.display = detail.style.display === 'table-row' ? 'none' : 'table-row';
+                                        });
+                                    });
+                                </script>
                             @endif
 
                         @else
@@ -167,6 +226,7 @@
                             </p>
                         @endauth
                     </section>
+
                 </div>
 
             </div>

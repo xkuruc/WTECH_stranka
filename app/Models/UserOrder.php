@@ -18,4 +18,8 @@ class UserOrder extends Model
     protected $casts = [
         'created_at' => 'datetime',
     ];
+    public function items()
+    {
+        return $this->hasMany(\App\Models\OrderItem::class, 'order_id');
+    }
 }
