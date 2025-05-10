@@ -382,3 +382,12 @@ input[type="radio"]:checked {
 .cast2 div {
     min-width: 150%;
 }
+
+
+.mnozstvo_div a {
+    all: unset;              /* odstráni všetky prednastavené štýly */
+  cursor: pointer;         /* pridaj len to, čo chceš mať */
+  display: inline-block;   /* podľa potreby inline alebo block-level */
+  color: inherit;          /* dedenie farby rodiča */
+  text-decoration: none;   /* žiadne podčiarknutie */
+}

@@ -94,6 +94,8 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 /* košík */
 Route::post('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::post('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+Route::get('/cart/{item}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+Route::get('/cart/{item}/increment', [CartController::class, 'increment'])->name('cart.increment');
 
 Route::post('/submit', [CartController::class, 'submit'])->name('cart.submit');
 Route::get('/finalize', [CartController::class, 'finalize'])->name('cart.finalize');

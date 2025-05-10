@@ -188,7 +188,7 @@
                             </div>
 
                             <!-- Množstvo s + / – tlačidlami -->
-                            <div class="mnozstvo_div">
+                            <!-- <div class="mnozstvo_div">
                                 <span class="item_category">Množstvo:</span>
                                 <form action="{{ route('cart.decrement', $item->id) }}"
                                     method="POST"
@@ -207,6 +207,23 @@
                                     @csrf
                                     <button type="submit" class="quantity-btn">+</button>
                                 </form>
+                            </div> -->
+                            @csrf
+                            <div class="mnozstvo_div">  
+                                <span class="item_category">Množstvo:</span>
+                                <a
+                                    href="{{ route('cart.decrement', $item->id) }}"
+                                    class="quantity-btn"
+                                    title="Znížiť množstvo"
+                                >-</a>
+
+                                <span class="quantity-value">{{ $item->quantity }}</span>
+
+                                <a
+                                    href="{{ route('cart.increment', $item->id) }}"
+                                    class="quantity-btn"
+                                    title="Zvýšiť množstvo"
+                                >+</a>
                             </div>
 
 
