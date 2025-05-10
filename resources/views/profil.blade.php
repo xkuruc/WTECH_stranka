@@ -126,11 +126,47 @@
                         <a href="{{ route('newsletter.edit') }}">Upraviť</a>
                     </section>
 
-                    <!-- <section class="objednavky">
+                    <section class="objednavky">
                         <h1>Moje objednávky</h1>
-                        <span>Tu sa nachádza podrobný prehľad vašich objednávok.</span>
-                        <a href="zoznam_objednavok.blade.php">Zobraziť moje objednávky</a>
-                    </section> -->
+                        @auth
+                            @php
+                                // Načítame všetky objednávky prihláseného, zoradené zostupne
+                                $orders = \App\Models\UserOrder::where('user_id', auth()->id())
+                                            ->orderByDesc('created_at')
+                                            ->get();
+                            @endphp
+
+                            @if($orders->isEmpty())
+                                <p>Zatiaľ nemáte žiadne objednávky.</p>
+                            @else
+                                <table class="orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Číslo objednávky</th>
+                                            <th>Dátum</th>
+                                            <th>Cena (€)</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($orders as $order)
+                                            <tr>
+                                                <td>{{ $order->id }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
+                                                <td>{{ number_format($order->price, 2, ',', ' ') }}</td>
+                                                <td>{{ ucfirst($order->status) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+
+                        @else
+                            <p class="text-center text-muted">
+                                Pre zobrazenie objednávok sa prosím prihláste.
+                            </p>
+                        @endauth
+                    </section>
                 </div>
 
             </div>

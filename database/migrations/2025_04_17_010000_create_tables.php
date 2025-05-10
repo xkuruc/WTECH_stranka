@@ -196,6 +196,15 @@ return new class extends Migration
             $table->string('size')->after('quantity');
         });
 
+        Schema::create('user_orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
+            $table->decimal('price', 8, 2);  // Základná cena s dvoma desatinnými miestami
+            $table->timestamp('created_at')->nullable(); // Dátum vytvorenia tokenu
+            $table->string('status');
+        });
+
+
 
 
 

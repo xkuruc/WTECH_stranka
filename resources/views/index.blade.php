@@ -89,51 +89,63 @@
         
         <section class="product_sliders">
             @auth
+                @php
+                    // Načítame personalizáciu (môže byť null)
+                    $personalizacia = \App\Models\Personalizacia::where('user_id', auth()->id())->first();
+                @endphp
+
+                @if($personalizacia)
                     @php
-                        $personalizacia = \App\Models\Personalizacia::where('user_id', auth()->id())->first();
+                        // Rozparsujeme značky
                         $znacky = array_filter(array_map('trim', explode(';', $personalizacia->znacka)));
                         $nahodnyKey = array_rand($znacky);
                         $personalizovanaZnacka = $znacky[$nahodnyKey] ?? null;
-                        
-                        
-                        // ziskame jej znacku a jej ID
-                        $brand = \App\Models\Brand::where('display_name', $personalizovanaZnacka)->first();
-                        $brandName = $personalizovanaZnacka;
 
-                        // nacitame n dalsich produktov tej znacky (okrem toho nahodneho)
-                        $brandProducts = \App\Models\Product::with('images')
-                            ->where('brand_id', $brand->id)
-                            ->inRandomOrder()
-                            ->take(10)
-                            ->get();
-                    @endphp    
-                    <div class="label">Tvoje oblubene {{ $personalizovanaZnacka }} botaski </div>
-                    <section class="product_slider">
-                        <div class="slider-container">
-                            <div class="owl-carousel owl-carouselBRATU">
-                                @foreach($brandProducts as $productt)
-                                    @php
-                                        $main = $productt->images->firstWhere('is_main', true);
-                                    @endphp
-                                    @if($main)
-                                        <div>
-                                            <a href="{{ url('polozka-produktu/' . $productt->id) }}">
-                                                <img class="itemBRATU" 
-                                                    src="{{ asset('images/' . $main->image_path) }}"
-                                                    alt="{{ $productt->name }}">
+                        // Ak sme nevybrali žiadnu značku, preskočíme
+                        if (! $personalizovanaZnacka) {
+                            $brandProducts = collect();
+                        } else {
+                            // Načítame Brand model a produkty
+                            $brand = \App\Models\Brand::where('display_name', $personalizovanaZnacka)->first();
+                            $brandProducts = $brand
+                                ? \App\Models\Product::with('images')
+                                    ->where('brand_id', $brand->id)
+                                    ->inRandomOrder()
+                                    ->take(10)
+                                    ->get()
+                                : collect();
+                        }
+                    @endphp
+
+                    @if($brandProducts->isNotEmpty())
+                        <div class="label">Tvoje obľúbené {{ $personalizovanaZnacka }} botasky</div>
+                        <section class="product_slider">
+                            <div class="slider-container">
+                                <div class="owl-carousel owl-carouselBRATU">
+                                    @foreach($brandProducts as $productt)
+                                        @php $main = $productt->images->firstWhere('is_main', true); @endphp
+                                        @if($main)
+                                            <div>
+                                                <a href="{{ url('polozka-produktu/' . $productt->id) }}">
+                                                    <img class="itemBRATU"
+                                                        src="{{ asset('images/' . $main->image_path) }}"
+                                                        alt="{{ $productt->name }}">
                                                     @if($productt->discount > 1)
                                                         <div class="sale_placeholder">
                                                             -{{ round($productt->discount) }}%
                                                         </div>
                                                     @endif
-                                            </a>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    @endif
+                @endif
             @endauth
+
 
             @php
                 // nacitame vsetky produkty so zlavou 
