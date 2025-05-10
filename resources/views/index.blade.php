@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stranka</title>
+    <title>Botaski.sk</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="{{ asset('css/menu_bar.css') }}">
@@ -86,32 +86,80 @@
         </section>
 
 
-        @php
-            // nacitame vsetky produkty so zlavou 
-            $discountedProducts = \App\Models\Product::with('images')
-                ->where('discount', '>', 0)
-                ->get();
-        @endphp
+        
         <section class="product_sliders">
+            @auth
+                    @php
+                        $personalizacia = \App\Models\Personalizacia::where('user_id', auth()->id())->first();
+                        $znacky = array_filter(array_map('trim', explode(';', $personalizacia->znacka)));
+                        $nahodnyKey = array_rand($znacky);
+                        $personalizovanaZnacka = $znacky[$nahodnyKey] ?? null;
+                        
+                        
+                        // ziskame jej znacku a jej ID
+                        $brand = \App\Models\Brand::where('display_name', $personalizovanaZnacka)->first();
+                        $brandName = $personalizovanaZnacka;
+
+                        // nacitame n dalsich produktov tej znacky (okrem toho nahodneho)
+                        $brandProducts = \App\Models\Product::with('images')
+                            ->where('brand_id', $brand->id)
+                            ->inRandomOrder()
+                            ->take(10)
+                            ->get();
+                    @endphp    
+                    <div class="label">Tvoje oblubene {{ $personalizovanaZnacka }} botaski </div>
+                    <section class="product_slider">
+                        <div class="slider-container">
+                            <div class="owl-carousel owl-carouselBRATU">
+                                @foreach($brandProducts as $productt)
+                                    @php
+                                        $main = $productt->images->firstWhere('is_main', true);
+                                    @endphp
+                                    @if($main)
+                                        <div>
+                                            <a href="{{ url('polozka-produktu/' . $productt->id) }}">
+                                                <img class="itemBRATU" 
+                                                    src="{{ asset('images/' . $main->image_path) }}"
+                                                    alt="{{ $productt->name }}">
+                                                    @if($productt->discount > 1)
+                                                        <div class="sale_placeholder">
+                                                            -{{ round($productt->discount) }}%
+                                                        </div>
+                                                    @endif
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </section>
+            @endauth
+
+            @php
+                // nacitame vsetky produkty so zlavou 
+                $discountedProducts = \App\Models\Product::with('images')
+                    ->where('discount', '>', 0)
+                    ->get();
+            @endphp
             <div class="label"> Zlavy</div>
             <section class="product_slider">
                 <div class="slider-container">
                     <div class="owl-carousel owl-carouselBRATU">
-                        @foreach($discountedProducts as $product)
+                        @foreach($discountedProducts as $productt)
                             @php
                                 // vyberieme hlavný obrázok (is_main = true)
-                                $mainImage = $product->images->firstWhere('is_main', true);
+                                $mainImage = $productt->images->firstWhere('is_main', true);
                             @endphp
 
                             @if($mainImage)
                                 <div>
-                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
                                         <img class="itemBRATU" 
                                         src="{{ asset('images/' . $mainImage->image_path) }}" 
-                                        alt="{{ $product->name }}"
+                                        alt="{{ $productt->name }}"
                                         >
                                         <div class="sale_placeholder">
-                                            -{{ round($product->discount) }}%
+                                            -{{ round($productt->discount) }}%
                                         </div>
                                     </a>
                                     
@@ -123,31 +171,35 @@
             </section>
 
 
-                @php
+            @php
                 // nacita n nahodnych produktov
                 $randomProducts = \App\Models\Product::with('images')
                     ->inRandomOrder()
                     ->take(10)
                     ->get();
             @endphp
-
             <div class="label"> Todays pick</div>
             <section class="product_slider">
                 <div class="slider-container">
                     <div class="owl-carousel owl-carouselBRATU">
-                        @foreach($randomProducts as $product)
+                        @foreach($randomProducts as $productt)
                             @php
                                 // vyberieme hlavný obrázok
-                                $mainImage = $product->images->firstWhere('is_main', true);
+                                $mainImage = $productt->images->firstWhere('is_main', true);
                             @endphp
 
                             @if($mainImage)
                                 <div>
-                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
                                         <img class="itemBRATU"
                                         src="{{ asset('images/' . $mainImage->image_path) }}" 
-                                        alt="{{ $product->name }}"
+                                        alt="{{ $productt->name }}"
                                         >
+                                        @if($productt->discount > 1)
+                                            <div class="sale_placeholder">
+                                                -{{ round($productt->discount) }}%
+                                            </div>
+                                        @endif
                                     </a>
                                 </div>
                             @endif
@@ -157,6 +209,7 @@
             </section>
 
             
+            @guest
             @php
                 // nahodne vyberieme jeden produkt
                 $randomProduct = \App\Models\Product::has('images')
@@ -176,7 +229,6 @@
                     ->take(10)
                     ->get();
             @endphp
-
             <div class="label">{{ $brandName }} botaski </div>
             <section class="product_slider">
                 <div class="slider-container">
@@ -187,26 +239,36 @@
                         @endphp
                         @if($mainImage)
                             <div>
-                                <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                <a href="{{ url('polozka-produktu/' . $randomProduct->id) }}">
                                     <img
                                         class="itemBRATU"
                                         src="{{ asset('images/' . $mainImage->image_path) }}"
                                         alt="{{ $randomProduct->name }}">
+                                    @if($randomProduct->discount > 1)
+                                        <div class="sale_placeholder">
+                                            -{{ round($randomProduct->discount) }}%
+                                        </div>
+                                    @endif
                                 </a>
                             </div>
                         @endif
 
                         {{-- potom dalsie produkty tej istej znacky --}}
-                        @foreach($brandProducts as $product)
+                        @foreach($brandProducts as $productt)
                             @php
-                                $main = $product->images->firstWhere('is_main', true);
+                                $main = $productt->images->firstWhere('is_main', true);
                             @endphp
                             @if($main)
                                 <div>
-                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
                                         <img class="itemBRATU" 
                                             src="{{ asset('images/' . $main->image_path) }}"
-                                            alt="{{ $product->name }}">
+                                            alt="{{ $productt->name }}">
+                                        @if($productt->discount > 1)
+                                            <div class="sale_placeholder">
+                                                -{{ round($productt->discount) }}%
+                                            </div>
+                                        @endif
                                     </a>
                                 </div>
                             @endif
@@ -214,8 +276,7 @@
                     </div>
                 </div>
             </section>
-
-
+            @endguest
 
         </section>
 

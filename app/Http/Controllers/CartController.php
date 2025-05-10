@@ -159,26 +159,29 @@ public function index()
     }
     public function submit(Request $request)
     {
-        // 1) Validácia vstupov
-        $data = $request->validate([
-            'meno'     => 'required|string|max:255',
-            'email'    => 'required|email',
-            // ... ďalšie pravidlá podľa polí
-        ]);
-
+        // $data = $request->validate([
+        //     'meno'     => 'required|string|max:255',
+        //     'email'    => 'required|email',
+        // ]);
 
         $sessionId = $request->session()->getId();
 
         if (auth()->check()) {
-            // prihlásený používateľ – vymaž jeho všetky položky
+            // prihlaseny pouzivatel – vymaze jeho vsetky polozky
             CartItem::where('user_id', auth()->id())->delete();
         } else {
-            // hosť – vymaž všetko viazané na session_id
+            // host – vymaze vsetko viazana na session_id
             CartItem::where('session_id', $sessionId)->delete();
         }
         
 
-        // 3) Redirect späť s úspešnou správou
-        return redirect('/')->with('success', 'Všetko prebehlo v poriadku!');
+        // 3) Redirect so uspesnou spravou
+        // return redirect('/')->with('success', 'Všetko prebehlo v poriadku!');
+        return redirect()
+           ->route('cart.finalize')->with('success', 'Všetko prebehlo v poriadku!');
+    }
+    public function finalize()
+    {
+        return view('finalize');
     }
 }

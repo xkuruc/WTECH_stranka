@@ -163,7 +163,8 @@
             <!-- Ak je používateľ prihlásený, zobrazí sa Profil -->
             @auth
                 <a href="{{ route('profil') }}" class="logo_link">
-                    <div class="profil">PROFIL</div>
+                    <!-- <div class="profil">PROFIL</div> -->
+                    <i class="fa-regular fa-user"></i>
                 </a>
             @endauth
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Stranka</title>
+    <title>Botaski</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="{{ asset('css/menu_bar.css') }}">
@@ -126,11 +126,11 @@
                         <a href="{{ route('newsletter.edit') }}">Upraviť</a>
                     </section>
 
-                    <section class="objednavky">
+                    <!-- <section class="objednavky">
                         <h1>Moje objednávky</h1>
                         <span>Tu sa nachádza podrobný prehľad vašich objednávok.</span>
                         <a href="zoznam_objednavok.blade.php">Zobraziť moje objednávky</a>
-                    </section>
+                    </section> -->
                 </div>
 
             </div>

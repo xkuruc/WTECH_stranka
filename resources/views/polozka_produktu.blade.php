@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Botaski</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="{{ asset('css/menu_bar.css') }}">
@@ -220,16 +220,21 @@
                 <div class="slider-container">
                     <div class="owl-carousel owl-carouselBRATU">
                         {{-- potom dalsie produkty tej istej znacky --}}
-                        @foreach($brandProducts as $product)
+                        @foreach($brandProducts as $productt)
                             @php
-                                $main = $product->images->firstWhere('is_main', true);
+                                $main = $productt->images->firstWhere('is_main', true);
                             @endphp
                             @if($main)
                                 <div>
-                                    <a href="{{ url('polozka-produktu/' . $product->id) }}">
+                                    <a href="{{ url('polozka-produktu/' . $productt->id) }}">
                                         <img class="itemBRATU" 
                                             src="{{ asset('images/' . $main->image_path) }}"
-                                            alt="{{ $product->name }}">
+                                            alt="{{ $productt->name }}">
+                                            @if($productt->discount > 1)
+                                            <div class="sale_placeholder">
+                                                -{{ round($productt->discount) }}%
+                                            </div>
+                                        @endif
                                     </a>
                                 </div>
                             @endif
@@ -300,6 +305,11 @@
                                         src="{{ asset('images/' . $mainImage->image_path) }}" 
                                         alt="{{ $productt->name }}"
                                         >
+                                        @if($productt->discount > 1)
+                                            <div class="sale_placeholder">
+                                                -{{ round($productt->discount) }}%
+                                            </div>
+                                        @endif
                                     </a>
                                 </div>
                             @endif

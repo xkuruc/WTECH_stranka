@@ -1,0 +1,19 @@
+
+
+.finalize_section{
+    /* width: 90%; */
+    margin-top: 100px;
+    padding: 50px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finalize_section_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto auto;
+}
